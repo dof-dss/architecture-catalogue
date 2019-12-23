@@ -32,7 +32,17 @@ valet install
 
 git clone https://github.com/dof-dss/architecture-catalogue.git
 
+composer install
+
 npm install
+
+### Create env file
+
+cp .env.example .env
+
+### Generate application key
+
+php artisan key:generate
 
 ## Deployment
 
@@ -44,8 +54,12 @@ npm run dev
 
 Change into the architecture-catalogue directory.
 
-valet park
+valet link catalogue
 
-### Local browser
+#### Enable local HTTPS
+
+valet secure catalogue
+
+#### Local browser
 
 https://catalogue.test
