@@ -15,10 +15,11 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('href')->nullable();
             $table->string('name');
             $table->string('description');
             $table->string('category');
-            $table->string('sub-category');
+            $table->string('sub_category');
             $table->timestamps();
         });
     }

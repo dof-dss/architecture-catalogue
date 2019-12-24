@@ -76,18 +76,18 @@
         <nav>
           <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
             <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
-              <a class="govuk-header__link" href="#1">
+              <a class="govuk-header__link" href="/">
                 Home
               </a>
             </li>
             <li class="govuk-header__navigation-item">
-              <a class="govuk-header__link" href="#2">
-                Application components
+              <a class="govuk-header__link" href="/entries">
+                Applications catalogue
               </a>
             </li>
             <li class="govuk-header__navigation-item">
-              <a class="govuk-header__link" href="#3">
-                Technology components
+              <a class="govuk-header__link" href="/entries">
+                Technology catalogue
               </a>
             </li>
           </ul>
