@@ -150,7 +150,7 @@ class EntriesController extends Controller
     }
 
     /**
-     * Delete the entire catalogue
+     * Choose a file to upload and import into the catalogue
      *
      * @return \Illuminate\Http\Response
      */
@@ -160,29 +160,30 @@ class EntriesController extends Controller
     }
 
     /**
-     * Delete the entire catalogue
+     * Import the catalogue from a JSON file
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function importCatalogue(Request $request)
     {
         // validation - check for file, type and size
 
-        $request->file_upload_1->store('uploads');
+        $path = $request->file_upload_1->store('uploads');
 
         // load the file into memory
-        $json = json_decode(Storage::disk('local')->get('uploads/catalogue.json'));
+        $json = json_decode(Storage::disk('local')->get($path));
 
         // loop through all the entries and store in the database
         foreach ($json->technology_applications_catalogue->entries as $json_entry) {
-          // store the entry
-          $entry = new Entry;
-          $entry->name = $json_entry->name;
-          $entry->description = $json_entry->description;
-          $entry->href = isset($json_entry->href) ? $json_entry->href : null;
-          $entry->category = $json_entry->category;
-          $entry->sub_category = $json_entry->sub_category;
-          $entry->save();
+            // store the entry
+            $entry = new Entry;
+            $entry->name = $json_entry->name;
+            $entry->description = $json_entry->description;
+            $entry->href = isset($json_entry->href) ? $json_entry->href : null;
+            $entry->category = $json_entry->category;
+            $entry->sub_category = $json_entry->sub_category;
+            $entry->save();
         }
 
         return redirect('/entries');
