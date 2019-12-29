@@ -101,30 +101,30 @@ class EntriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $entry = Entry::findOrFail($id);
+        $entry = Entry::findOrFail($id);
 
-      // perform validation (should change to a form request)
-      $request->validate([
-        'name' => 'required',
-        'href' => 'url|nullable',
-        'description' => 'required',
-        'category' => 'required|',
-        'sub_category' => 'required'
-      ], [
-        'name.required' => 'The name of the component is required.',
-        'href.url' => 'The associated URL is invalid.'
-      ]);
+        // perform validation (should change to a form request)
+        $request->validate([
+          'name' => 'required',
+          'href' => 'url|nullable',
+          'description' => 'required',
+          'category' => 'required|',
+          'sub_category' => 'required'
+        ], [
+          'name.required' => 'The name of the component is required.',
+          'href.url' => 'The associated URL is invalid.'
+        ]);
 
-      // update the entry
-      $entry->name = $request->name;
-      $entry->description = $request->description;
-      $entry->href = $request->href;
-      $entry->category = $request->category;
-      $entry->sub_category = $request->sub_category;
-      $entry->save();
+        // update the entry
+        $entry->name = $request->name;
+        $entry->description = $request->description;
+        $entry->href = $request->href;
+        $entry->category = $request->category;
+        $entry->sub_category = $request->sub_category;
+        $entry->save();
 
-      // now redirect back to the index page
-      return redirect('/entries');
+        // now redirect back to the index page
+        return redirect('/entries');
     }
 
     /**
@@ -187,5 +187,20 @@ class EntriesController extends Controller
         }
 
         return redirect('/entries');
+    }
+
+    /**
+     * Export the catalogue to a JSON file
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportCatalogue(Request $request)
+    {
+        // need to name the array 'entries' to work with the architecture portal
+        $data = json_encode(array('entries' => Entry::all()));
+        $fileName = 'downloads/catalogue_' . time() . '.json';
+        Storage::put($fileName, $data);
+        return Storage::download($fileName, 'catalogue_' . time() . '.json');
     }
 }

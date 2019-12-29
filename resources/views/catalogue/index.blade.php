@@ -7,6 +7,9 @@
 
       <!-- only show features in local development -->
       @if (env('APP_ENV') == 'local')
+      <a class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" href="/catalogue/export">
+        Export catalogue
+      </a>
       <a class="govuk-button govuk-button--secondary govuk-!-margin-right-1" data-module="govuk-button" href="/catalogue/upload">
         Import catalogue
       </a>

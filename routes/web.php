@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 if (App::environment('local')) {
+    Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
     Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
     Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
     Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
