@@ -1,31 +1,30 @@
 @if ($paginator->hasPages())
-    <nav class="govuk-body">
-        <ul>
+    <nav class="govuk-body" role="navigation" aria-label="Pagination">
+        <div class="pagination__summary">
+          Showing {{ $paginator->firstItem() }} - {{ $paginator->lastItem() }} of {{ $paginator->total() }} entries
+        </div>
+        <ul class="pagination">
+
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <li class="govuk-button govuk-button--secondary govuk-button--disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                    <span aria-hidden="true">&lsaquo;</span>
+                <li class="pagination__item" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                    <span class="pagination__link" aria-hidden="true">&lt; Previous</span>
                 </li>
             @else
-                <li>
-                    <a class="govuk-button govuk-button--secondary" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                <li class="pagination__item">
+                    <a class="pagination__link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&laquo; Previous</a>
                 </li>
             @endif
 
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
-                @if (is_string($element))
-                    <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
-                @endif
-
                 {{-- Array Of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <li class="govuk-button govuk-button--secondary" aria-current="page"><span>{{ $page }}</span></li>
+                            <li class="pagination__item" aria-current="page"><span class="pagination__link current">{{ $page }}</span></li>
                         @else
-                            <li><a class="govuk-button govuk-button--secondary" href="{{ $url }}">{{ $page }}</a></li>
+                            <li class="pagination__item"><a class="pagination__link" href="{{ $url }}">{{ $page }}</a></li>
                         @endif
                     @endforeach
                 @endif
@@ -33,12 +32,12 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li>
-                    <a class="govuk-button govuk-button--secondary" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                <li class="pagination__item">
+                    <a class="pagination__link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">Next &gt;</a>
                 </li>
             @else
-                <li class="govuk-button govuk-button--secondary govuk-button--disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <span aria-hidden="true">&rsaquo;</span>
+                <li class="pagination__item" aria-disabled="true" aria-label="@lang('pagination.next')">
+                    <span class="pagination__link" aria-hidden="true">Next &raquo;</span>
                 </li>
             @endif
         </ul>

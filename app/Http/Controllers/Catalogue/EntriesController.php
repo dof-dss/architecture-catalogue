@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 // models
 use App\Entry;
 
-
 class EntriesController extends Controller
 {
     /**
@@ -20,11 +19,14 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
-        // replace this with an API call
-        $entries = Entry::Paginate(15);
+        // calculate page size to ensure there is a maximum of 5 pages
+        $num_rows = Entry::count();
+        $num_pages = 5;
+        $page_size = ceil($num_rows / $num_pages);
+
+        $entries = Entry::Paginate($page_size);
 
         return view('catalogue.index', compact('entries'));
-
     }
 
     /**
