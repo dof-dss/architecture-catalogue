@@ -19,12 +19,8 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
-        // calculate page size to ensure there is a maximum of 5 pages
-        $num_rows = Entry::count();
-        $num_pages = 5;
-        $page_size = ceil($num_rows / $num_pages);
-
-        $entries = Entry::Paginate($page_size);
+        $page_size = $this->calculatePageSize(Entry::count());
+        $entries = Entry::orderBy('name')->Paginate($page_size);
 
         return view('catalogue.index', compact('entries'));
     }
@@ -204,5 +200,47 @@ class EntriesController extends Controller
         $fileName = 'downloads/catalogue_' . time() . '.json';
         Storage::put($fileName, $data);
         return Storage::download($fileName, 'catalogue_' . time() . '.json');
+    }
+
+    /**
+     * Search the catalogue and return the results
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchCatalogue(Request $request)
+    {
+        $entry = (new Entry)->newQuery();
+
+        // search for an entry based on its name
+        if ($request->has('name')) {
+            $entry->where('name', 'like', '%'. $request->input('name') . '%');
+        }
+
+        // search for an entry based on its description
+        if ($request->has('description')) {
+            $entry->where('description', 'like', '%'. $request->input('description') . '%');
+        }
+
+        $page_size = $this->calculatePageSize($entry->count());
+        $entries = $entry->orderBy('name')->Paginate($page_size);
+
+        return view('catalogue.results', compact('entries'));
+    }
+
+    /**
+     *  Calculate page size to ensure there is a maximum of 5 pages
+     *
+     * @param Integer $num_rows
+     * @return Integer
+     */
+    private function calculatePageSize($num_rows)
+    {
+        $page_size = config('app.page_size');
+        $num_pages = ceil($num_rows / $page_size);
+        if ($num_pages > config('app.max_pages')) {
+            $page_size = ceil($num_rows / $num_pages);
+        }
+        return $page_size;
     }
 }

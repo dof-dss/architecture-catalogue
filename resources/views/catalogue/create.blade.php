@@ -5,7 +5,7 @@
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <h1 class="govuk-heading-xl">Applications catalogue</h1>
 
-    <h2 class="govuk-heading-m">New catalogue entry</h2>
+    <h2 class="govuk-heading-l">New catalogue entry</h2>
 
     @if ($errors->any())
       <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
@@ -123,8 +123,11 @@
       @enderror
 
       <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
-        Save and continue
+        Save new entry
       </button>
+      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries">
+        Cancel and return to catalogue
+      </a>
     </form>
   </main>
 </div>

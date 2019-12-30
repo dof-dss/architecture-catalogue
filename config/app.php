@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Architecture Catalogue'),
 
     /*
     |--------------------------------------------------------------------------
@@ -227,5 +227,17 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pagination configuration
+    |--------------------------------------------------------------------------
+    |
+    | The number of results displayed per page will vary to ensure the number
+    | of pages displayed does not exceed the max.
+    |
+    */
+    'page_size' => env('APP_PAGINATION_PAGE_SIZE', 50),
+    'max_pages' => env('APP_PAGINATION_MAX_PAGES', 5),
 
 ];

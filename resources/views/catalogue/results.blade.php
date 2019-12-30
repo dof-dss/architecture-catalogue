@@ -3,11 +3,11 @@
 @section('content')
   <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-      <h1 class="govuk-heading-xl">Applications catalogue</h1>
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">Search results</h1>
+      <span class="govuk-caption-l govuk-!-margin-bottom-2">Your search returned {{ $entries->total() }} catalogue entries.</span>
 
       @if ($entries->count() > 0)
         <table class="govuk-table">
-          <caption class="govuk-table__caption govuk-!-margin-bottom-2">This catalogue contains {{ $entries->total() }} entries.</caption>
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
               <th scope="col" class="govuk-table__header">Physical component</th>
@@ -42,13 +42,12 @@
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
             <span class="govuk-warning-text__assistive">Warning</span>
-            There are no entries in the catalogue.
+            There are no entries in the catalogue matching your search criteria.
           </strong>
         </div>
       @endif
-
-      <a class="govuk-button govuk-!-margin-right-2" data-module="govuk-button" href="/entries/create">
-        Add a new catalogue entry
+      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/">
+        Start a new search
       </a>
 
     </main>

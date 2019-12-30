@@ -8,7 +8,7 @@
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="pagination__item" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                    <span class="pagination__link" aria-hidden="true">&lt; Previous</span>
+                    <span class="pagination__link" aria-hidden="true">&laquo; Previous</span>
                 </li>
             @else
                 <li class="pagination__item">

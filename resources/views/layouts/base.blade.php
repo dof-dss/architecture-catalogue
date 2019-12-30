@@ -75,19 +75,14 @@
         <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
         <nav>
           <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
-            <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
+            <li class="govuk-header__navigation-item {{ url()->current() == url('/') ? 'govuk-header__navigation-item--active' : '' }}">
               <a class="govuk-header__link" href="/">
                 Home
               </a>
             </li>
-            <li class="govuk-header__navigation-item">
+            <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
               <a class="govuk-header__link" href="/entries">
-                Applications catalogue
-              </a>
-            </li>
-            <li class="govuk-header__navigation-item">
-              <a class="govuk-header__link" href="/entries">
-                Technology catalogue
+                Catalogue
               </a>
             </li>
           </ul>
