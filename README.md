@@ -1,5 +1,7 @@
 # NICS Architecture Catalogue
 
+![screen shot of application home page](screenshot.png)
+
 ## Installation
 
 ### Pre-requisites (Mac)
