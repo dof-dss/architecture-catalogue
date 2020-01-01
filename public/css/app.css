@@ -6408,3 +6408,100 @@
   }
 }
 
+.panel {
+  box-sizing: border-box;
+  clear: both;
+  border-left-style: solid;
+  border-color: #bfc1c3;
+  padding: 0.2em 0.7em;
+  margin-bottom: 0.78947em;
+}
+
+h2.govuk-heading-s {
+  font-size: 22px;
+  margin-bottom: 0.6em;
+  margin-top: 0.6em;
+}
+
+.panel-border-wide {
+  border-left-width: 10px;
+}
+
+.panel-border-wide.alert-default {
+  border-color: #2b8cc4;
+  background-color: #dbeff9;
+}
+
+.panel-border-wide.alert-success {
+  border-color: #28a197;
+  background-color: #c6ece9;
+}
+
+.panel-border-wide.alert-error {
+  border-color: #c42b2b;
+  background-color: #f3dede;
+}
+
+.label {
+  background: #6F777B;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.label--white {
+  background: #FFF;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #0B0C0C;
+  border: 1px solid #CBCBCB;
+}
+
+.label--blue {
+  background: #005EA5;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.label--red {
+  background: #B10E1E;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+@media (max-width: 641px) {
+  .label,
+  .label--white,
+  .label--blue,
+  .label--red {
+    font-size: 0.85rem;
+  }
+}
+

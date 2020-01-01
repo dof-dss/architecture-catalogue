@@ -13,15 +13,15 @@
     font-weight: normal;
 }
 .label {
-    @include label(#6F777B, #0B0C0C)
+    @include label(#6F777B, #0B0C0C);
 }
 .label--white {
-    @include label(#FFF)
+    @include label(#FFF);
     color: #0B0C0C;
     border: 1px solid #CBCBCB;
 }
 .label--blue {
-    @include label(#005EA5, #005EA5)
+    @include label(#005EA5, #005EA5);
 }
 
 .label--red {

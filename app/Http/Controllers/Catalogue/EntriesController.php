@@ -19,10 +19,13 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
-        $page_size = $this->calculatePageSize(Entry::count());
-        $entries = Entry::orderBy('name')->Paginate($page_size);
-
-        return view('catalogue.index', compact('entries'));
+        if ($request->is('api/*')) {
+            return array('entries' => Entry::all());
+        } else {
+            $page_size = $this->calculatePageSize(Entry::count());
+            $entries = Entry::orderBy('name')->Paginate($page_size);
+            return view('catalogue.index', compact('entries'));
+        }
     }
 
     /**
