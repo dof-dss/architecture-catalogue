@@ -38,6 +38,7 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
+        $catalogue_size = Entry::count();
         if ($request->is('api/*')) {
             return array(
               'href' => url()->current(),
@@ -48,7 +49,7 @@ class EntriesController extends Controller
             $entries = Entry::orderBy('name')->Paginate($page_size);
             $statuses = $this->statuses;
             $labels = $this->labels;
-            return view('catalogue.index', compact('entries', 'statuses', 'labels'));
+            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size'));
         }
     }
 
@@ -86,15 +87,7 @@ class EntriesController extends Controller
         ]);
 
         // store the entry
-        $entry = new Entry;
-        $entry->name = $request->name;
-        $entry->version = $request->version;
-        $entry->description = $request->description;
-        $entry->href = $request->href;
-        $entry->category = $request->category;
-        $entry->sub_category = $request->sub_category;
-        $entry->status = $request->status;
-        $entry->save();
+        Entry::create(request(['name', 'version', 'description', 'href', 'category', 'sub_category', 'status']));
 
         // now redirect back to the index page
         return redirect('/entries');
@@ -106,9 +99,10 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Entry $entry)
     {
-        //
+        $labels = $this->labels;
+        return view('catalogue.view', compact('entry', 'labels'));
     }
 
     /**
@@ -130,10 +124,8 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
-
         // perform validation (should change to a form request)
         $request->validate([
           'name' => 'required',
@@ -149,14 +141,7 @@ class EntriesController extends Controller
         ]);
 
         // update the entry
-        $entry->name = $request->name;
-        $entry->version = $request->version;
-        $entry->description = $request->description;
-        $entry->href = $request->href;
-        $entry->category = $request->category;
-        $entry->sub_category = $request->sub_category;
-        $entry->status = $request->status;
-        $entry->save();
+        $entry->update(request(['name', 'version', 'description', 'href', 'category', 'sub_category', 'status']));
 
         // now redirect back to the index page
         return redirect('/entries');
@@ -168,9 +153,10 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Entry $entry)
     {
-        //
+        $entry->delete();
+        return redirect('/entries');
     }
 
     /**
@@ -244,6 +230,19 @@ class EntriesController extends Controller
         return Storage::download($fileName, 'catalogue_' . time() . '.json');
     }
 
+
+    /**
+     * Display the search page
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        return view('catalogue.search');
+    }
+
+
     /**
      * Search the catalogue and return the results
      *
@@ -252,6 +251,9 @@ class EntriesController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
+
+        $catalogue_size = Entry::count();
+
         $entry = (new Entry)->newQuery();
 
         // search for an entry based on its name
@@ -268,7 +270,7 @@ class EntriesController extends Controller
         $entries = $entry->orderBy('name')->Paginate($page_size);
 
         $labels = $this->labels;
-        return view('catalogue.results', compact('entries', 'labels'));
+        return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 
     /**
@@ -277,14 +279,13 @@ class EntriesController extends Controller
      * @param Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function copy($id)
+    public function copy(Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
         $copy = $entry->replicate();
         $copy->name = $copy->name . ' [COPY]';
         $copy->status = 'prohibited';
         $copy->save();
-        return back();
+        return redirect('/entries');
     }
 
     /**

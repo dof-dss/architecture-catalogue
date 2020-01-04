@@ -3,9 +3,7 @@
 @section('content')
 <div class="govuk-width-container ">
   <main class="govuk-main-wrapper " id="main-content" role="main">
-    <h1 class="govuk-heading-xl">Applications catalogue</h1>
-
-    <h2 class="govuk-heading-l">Edit catalogue entry</h2>
+    <h1 class="govuk-heading-l">Edit catalogue entry</h1>
 
     @include ('partials.errors')
 
@@ -16,7 +14,7 @@
       @error('name')
       <div class="govuk-form-group govuk-form-group--error">
         <label class="govuk-label" for="name">
-          Physical component
+          Name
         </label>
         <span id="name-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
@@ -26,7 +24,7 @@
       @else
       <div class="govuk-form-group">
         <label class="govuk-label" for="name">
-          Physical component
+          Name
         </label>
         <input class="govuk-input govuk-!-width-one-half" id="name" name="name" type="text" value="{{ $entry->name }}">
       </div>

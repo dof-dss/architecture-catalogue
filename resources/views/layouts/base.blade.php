@@ -65,6 +65,11 @@
                 Home
               </a>
             </li>
+            <li class="govuk-header__navigation-item {{ url()->current() == url('/entries/search') ? 'govuk-header__navigation-item--active' : '' }}">
+              <a class="govuk-header__link" href="/entries/search">
+                Search
+              </a>
+            </li>
             <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
               <a class="govuk-header__link" href="/entries">
                 Browse
@@ -88,6 +93,7 @@
           </span>
         </p>
       </div>
+      @yield('custom')
       @yield('content')
     </main>
   </div>

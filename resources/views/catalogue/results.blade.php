@@ -16,7 +16,7 @@
             </strong>
         </div>
       @endif
-      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/">
+      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries/search">
           Start a new search
       </a>
     </main>

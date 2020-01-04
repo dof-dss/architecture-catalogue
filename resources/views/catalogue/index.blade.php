@@ -3,7 +3,7 @@
 @section('content')
   <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-      <h1 class="govuk-heading-xl">Applications catalogue</h1>
+      <h1 class="govuk-heading-xl">Catalogue entries</h1>
       @if ($entries->count() > 0)
           @include('partials.entries-table')
       @else

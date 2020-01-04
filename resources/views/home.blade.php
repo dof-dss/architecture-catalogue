@@ -8,26 +8,6 @@
           <p class="govuk-body">
             This architecture catalogue contains all of the solution building blocks (physical components) used by the NICS. This list is used to populate the NICS Architecture Portal which provides a publically accessible reference for architects designing solutions for the NICS.
           </p>
-
-          <h2 class="govuk-heading-l">Search catalogue</h2>
-          <form action="/catalogue/search" method="get">
-            {{ csrf_field() }}
-
-            <div class="govuk-form-group">
-              <label class="govuk-label" for="name">
-                Enter the name of an entry (e.g. GOV.UK Notify)
-              </label>
-              <input class="govuk-input govuk-!-width-two-thirds" id="name" name="name" type="text">
-            </div>
-            <div class="govuk-form-group">
-              <label class="govuk-label" for="description">
-                Enter the description of an entry (e.g. Notifications)
-              </label>
-              <input class="govuk-input govuk-!-width-two-thirds" id="description" name="description" type="text">
-            </div>
-
-            <button class="govuk-button govuk-!-margin-right-2" href="/entries" type="submtt">Search</button>
-          </form>
       </div>
 
       <!-- only show features in local development -->
