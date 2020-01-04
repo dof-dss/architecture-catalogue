@@ -20,6 +20,7 @@ class CreateEntriesTable extends Migration
             $table->string('description');
             $table->string('category');
             $table->string('sub_category');
+            $table->string('status')->default('approved');
             $table->timestamps();
         });
     }

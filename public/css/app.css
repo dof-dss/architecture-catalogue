@@ -6449,10 +6449,12 @@ h2.govuk-heading-s {
   line-height: 1;
   padding: 4px 5px 3px 5px;
   margin: 0 calc(2 * 5px) 5px 5px;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
+  text-transform: lowercase;
   font-size: 1rem;
   font-weight: normal;
+  width: 90px;
 }
 
 .label--white {
@@ -6462,12 +6464,29 @@ h2.govuk-heading-s {
   line-height: 1;
   padding: 4px 5px 3px 5px;
   margin: 0 calc(2 * 5px) 5px 5px;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
+  text-transform: lowercase;
   font-size: 1rem;
   font-weight: normal;
+  width: 90px;
   color: #0B0C0C;
   border: 1px solid #CBCBCB;
+}
+
+.label--black {
+  background: #0b0c0c;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 1rem;
+  font-weight: normal;
+  width: 90px;
 }
 
 .label--blue {
@@ -6477,10 +6496,12 @@ h2.govuk-heading-s {
   line-height: 1;
   padding: 4px 5px 3px 5px;
   margin: 0 calc(2 * 5px) 5px 5px;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
+  text-transform: lowercase;
   font-size: 1rem;
   font-weight: normal;
+  width: 90px;
 }
 
 .label--red {
@@ -6490,10 +6511,42 @@ h2.govuk-heading-s {
   line-height: 1;
   padding: 4px 5px 3px 5px;
   margin: 0 calc(2 * 5px) 5px 5px;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
+  text-transform: lowercase;
   font-size: 1rem;
   font-weight: normal;
+  width: 90px;
+}
+
+.label--green {
+  background: #00703c;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 1rem;
+  font-weight: normal;
+  width: 90px;
+}
+
+.label--orange {
+  background: #F47738;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1;
+  padding: 4px 5px 3px 5px;
+  margin: 0 calc(2 * 5px) 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 1rem;
+  font-weight: normal;
+  width: 90px;
 }
 
 @media (max-width: 641px) {

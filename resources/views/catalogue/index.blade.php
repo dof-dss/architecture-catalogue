@@ -11,7 +11,8 @@
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
               <th scope="col" class="govuk-table__header">Physical component</th>
-              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header govuk-!-width-one-half">Description</th>
+              <th scope="col" class="govuk-table__header">Status</th>
               <th scope="col" class="govuk-table__header">Action</th>
             </tr>
           </thead>
@@ -28,6 +29,9 @@
                   <td class="govuk-table__cell">{{ $entry->name }}</td>
                 @endif
                 <td class="govuk-table__cell">{{ $entry->description }}</td>
+                <td class="govuk-table__cell">
+                    <span class="{{ $labels[$entry->status] }}">{{ $entry->status }}</span>
+                </td>
                 <td class="govuk-table__cell">
                   <a class="govuk-link" href="/entries/{{ $entry->id }}/edit">Edit</a>
                 </td>

@@ -14,6 +14,23 @@ use App\Entry;
 
 class EntriesController extends Controller
 {
+
+    protected $statuses = [
+      'approved',
+      'unapproved',
+      'prohibited',
+      'retiring',
+      'evaluating'
+    ];
+
+    protected $labels = [
+      'approved' => 'label--green',
+      'unapproved' => 'label--black',
+      'prohibited'=> 'label--red',
+      'retiring' => 'label--orange',
+      'evaluating' => 'label--blue'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +46,9 @@ class EntriesController extends Controller
         } else {
             $page_size = $this->calculatePageSize(Entry::count());
             $entries = Entry::orderBy('name')->Paginate($page_size);
-            return view('catalogue.index', compact('entries'));
+            $statuses = $this->statuses;
+            $labels = $this->labels;
+            return view('catalogue.index', compact('entries', 'statuses', 'labels'));
         }
     }
 
@@ -40,7 +59,8 @@ class EntriesController extends Controller
      */
     public function create()
     {
-        return view('catalogue.create');
+        $statuses = $this->statuses;
+        return view('catalogue.create', compact('statuses'));
     }
 
     /**
@@ -97,7 +117,8 @@ class EntriesController extends Controller
      */
     public function edit(Entry $entry)
     {
-        return view('catalogue.edit', compact('entry'));
+        $statuses = $this->statuses;
+        return view('catalogue.edit', compact('entry', 'statuses'));
     }
 
     /**
@@ -242,7 +263,8 @@ class EntriesController extends Controller
         $page_size = $this->calculatePageSize($entry->count());
         $entries = $entry->orderBy('name')->Paginate($page_size);
 
-        return view('catalogue.results', compact('entries'));
+        $labels = $this->labels;
+        return view('catalogue.results', compact('entries', 'labels'));
     }
 
     /**

@@ -35,7 +35,7 @@
         <span id="name-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="name" name="name" type="text"   value="{{ old('name') }}">
+        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="name" name="name" type="text" value="{{ old('name') }}">
       </div>
       @else
       <div class="govuk-form-group">
@@ -54,7 +54,7 @@
         <span id="description-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input govuk-input--error" id="description" name="description" type="text">
+        <input class="govuk-input govuk-input--error" id="description" name="description" type="text" value="{{ old('description') }}">
       </div>
       @else
       <div class="govuk-form-group">
@@ -92,7 +92,7 @@
         <span id="category-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="category" name="category" type="text">
+        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="category" name="category" type="text" value="{{ old('category') }}">
       </div>
       @else
       <div class="govuk-form-group">
@@ -111,7 +111,7 @@
         <span id="sub_category-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="sub_category" name="sub_category" type="text">
+        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="sub_category" name="sub_category" type="text" value="{{ old('sub_category') }}">
       </div>
       @else
       <div class="govuk-form-group">
@@ -119,6 +119,33 @@
           Sub-category
         </label>
         <input class="govuk-input govuk-!-width-one-half" id="sub_category" name="sub_category" type="text">
+      </div>
+      @enderror
+
+      @error('status')
+      <div class="govuk-form-group govuk-form-group-error">
+          <label class="govuk-label" for="Status">
+            Status
+          </label>
+          <span id="status-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ $message }}
+          </span>
+          <select class="govuk-select govuk-input--error" id="status" name="status">
+          @foreach ($statuses as $status)
+              <option value="{{ $status }}">{{ $status }}</option>
+          @endforeach
+          </select>
+      </div>
+      @else
+      <div class="govuk-form-group">
+          <label class="govuk-label" for="Status">
+            Status
+          </label>
+          <select class="govuk-select govuk-input--error" id="status" name="status">
+          @foreach ($statuses as $status)
+              <option value="{{ $status }}">{{ $status }}</option>
+          @endforeach
+          </select>
       </div>
       @enderror
 

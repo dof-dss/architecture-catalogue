@@ -123,6 +123,33 @@
       </div>
       @enderror
 
+      @error('status')
+      <div class="govuk-form-group govuk-form-group-error">
+          <label class="govuk-label" for="Status">
+            Status
+          </label>
+          <span id="status-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{ $message }}
+          </span>
+          <select class="govuk-select" id="status" name="status">
+            @foreach ($statuses as $status)
+                <option value="{{ $status }}" {{ ($status == $entry->status) ? 'selected' : '' }}>{{ $status }}</option>
+            @endforeach
+          </select>
+      </div>
+      @else
+      <div class="govuk-form-group">
+          <label class="govuk-label" for="Status">
+            Status
+          </label>
+          <select class="govuk-select" id="status" name="status">
+            @foreach ($statuses as $status)
+                <option value="{{ $status }}" {{ ($status == $entry->status) ? 'selected' : '' }}>{{ $status }}</option>
+            @endforeach
+          </select>
+      </div>
+      @enderror
+
       <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
         Save changes
       </button>
