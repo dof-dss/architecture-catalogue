@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 
+use Carbon\Carbon;
+
 // models
 use App\Entry;
 
@@ -20,7 +22,10 @@ class EntriesController extends Controller
     public function index(Request $request)
     {
         if ($request->is('api/*')) {
-            return array('entries' => Entry::all());
+            return array(
+              'href' => url()->current(),
+              'timestamp' => Carbon::now(),
+              'entries' => Entry::all());
         } else {
             $page_size = $this->calculatePageSize(Entry::count());
             $entries = Entry::orderBy('name')->Paginate($page_size);

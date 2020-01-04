@@ -18,5 +18,5 @@ use Illuminate\Http\Request;
 // });
 
 Route::group(['middleware' => ['api']], function() {
-  Route::resource('entries', 'Catalogue\EntriesController', ['only' => ['index']]);
+  Route::resource('v1/entries', 'Catalogue\EntriesController', ['only' => ['index']]);
 });
