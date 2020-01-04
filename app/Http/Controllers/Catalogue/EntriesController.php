@@ -144,7 +144,7 @@ class EntriesController extends Controller
         $entry->update(request(['name', 'version', 'description', 'href', 'category', 'sub_category', 'status']));
 
         // now redirect back to the index page
-        return redirect('/entries');
+        return redirect('/entries/' . $entry->id);
     }
 
     /**
@@ -239,7 +239,8 @@ class EntriesController extends Controller
      */
     public function search(Request $request)
     {
-        return view('catalogue.search');
+        $statuses = $this->statuses;
+        return view('catalogue.search', compact('statuses'));
     }
 
 
@@ -251,8 +252,7 @@ class EntriesController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
-
-        $catalogue_size = Entry::count();
+        //  validation ?
 
         $entry = (new Entry)->newQuery();
 
@@ -266,10 +266,17 @@ class EntriesController extends Controller
             $entry->where('description', 'like', '%'. $request->input('description') . '%');
         }
 
+        // search for an entry based on its status
+        if ($request->has('status')) {
+            if ($request->input('status') != "") {
+                $entry->where('status', $request->input('status'));
+            }
+        }
+
         $page_size = $this->calculatePageSize($entry->count());
         $entries = $entry->orderBy('name')->Paginate($page_size);
-
         $labels = $this->labels;
+        $catalogue_size = Entry::count();
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 

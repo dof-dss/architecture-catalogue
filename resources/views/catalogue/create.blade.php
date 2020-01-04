@@ -143,7 +143,7 @@
           <label class="govuk-label" for="Status">
             Status
           </label>
-          <select class="govuk-select govuk-input--error" id="status" name="status">
+          <select class="govuk-select" id="status" name="status">
           @foreach ($statuses as $status)
               <option value="{{ $status }}">{{ $status }}</option>
           @endforeach

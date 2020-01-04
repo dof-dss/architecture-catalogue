@@ -1,9 +1,5 @@
 @extends('layouts.base')
 
-@section('custom')
-    <a href="{{ url()->previous() }}" class="govuk-back-link">Back</a>
-@endsection
-
 @section('content')
 <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
