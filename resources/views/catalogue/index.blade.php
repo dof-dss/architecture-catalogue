@@ -22,11 +22,11 @@
                 @if ($entry->href)
                   <td class="govuk-table__cell">
                     <a class="govuk-link" href="{{ $entry->href }}">
-                      {{ $entry->name }}
+                      {{ $entry->name }} {{ $entry->version ? '(' . $entry->version . ')' : '' }}
                     </a>
                   </td>
                 @else
-                  <td class="govuk-table__cell">{{ $entry->name }}</td>
+                  <td class="govuk-table__cell">{{ $entry->name }} {{ $entry->version ? '(' . $entry->version . ')' : '' }}</td>
                 @endif
                 <td class="govuk-table__cell">{{ $entry->description }}</td>
                 <td class="govuk-table__cell">

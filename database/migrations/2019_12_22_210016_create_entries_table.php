@@ -17,6 +17,7 @@ class CreateEntriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('href')->nullable();
             $table->string('name');
+            $table->string('version')->nullable();
             $table->string('description');
             $table->string('category');
             $table->string('sub_category');

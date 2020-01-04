@@ -74,6 +74,7 @@ class EntriesController extends Controller
         // perform validation (should change to a form request)
         $request->validate([
           'name' => 'required',
+          'version' => 'required',
           'href' => 'url|nullable',
           'description' => 'required',
           'category' => 'required',
@@ -87,6 +88,7 @@ class EntriesController extends Controller
         // store the entry
         $entry = new Entry;
         $entry->name = $request->name;
+        $entry->version = $request->version;
         $entry->description = $request->description;
         $entry->href = $request->href;
         $entry->category = $request->category;
@@ -135,6 +137,7 @@ class EntriesController extends Controller
         // perform validation (should change to a form request)
         $request->validate([
           'name' => 'required',
+          'version' => 'required',
           'href' => 'url|nullable',
           'description' => 'required',
           'category' => 'required|',
@@ -147,6 +150,7 @@ class EntriesController extends Controller
 
         // update the entry
         $entry->name = $request->name;
+        $entry->version = $request->version;
         $entry->description = $request->description;
         $entry->href = $request->href;
         $entry->category = $request->category;

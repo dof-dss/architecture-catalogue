@@ -36,7 +36,7 @@
         <span id="name-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input  govuk-!-width-one-half govuk-!-width-one-halfgovuk-input--error" id="name" name="name" type="text" value="{{ $entry->name }}">
+        <input class="govuk-input  govuk-!-width-one-half govuk-!-width-one-half govuk-input--error" id="name" name="name" type="text" value="{{ $entry->name }}">
       </div>
       @else
       <div class="govuk-form-group">
@@ -44,6 +44,25 @@
           Physical component
         </label>
         <input class="govuk-input govuk-!-width-one-half" id="name" name="name" type="text" value="{{ $entry->name }}">
+      </div>
+      @enderror
+
+      @error('version')
+      <div class="govuk-form-group govuk-form-group--error">
+        <label class="govuk-label" for="version">
+          Version
+        </label>
+        <span id="version-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
+        </span>
+        <input class="govuk-input  govuk-!-width-one-half govuk-!-width-one-quarter govuk-input--error" id="version" name="version" type="text" value="{{ $entry->version }}">
+      </div>
+      @else
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="version">
+          Version
+        </label>
+        <input class="govuk-input govuk-!-width-one-quarter" id="version" name="version" type="text" value="{{ $entry->version }}">
       </div>
       @enderror
 

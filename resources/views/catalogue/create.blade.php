@@ -46,6 +46,25 @@
       </div>
       @enderror
 
+      @error('version')
+      <div class="govuk-form-group govuk-form-group--error">
+        <label class="govuk-label" for="version">
+          Version
+        </label>
+        <span id="name-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
+        </span>
+        <input class="govuk-input govuk-!-width-one-quarterf govuk-input--error" id="version" name="version" type="text" value="{{ old('version') }}">
+      </div>
+      @else
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="version">
+          Version
+        </label>
+        <input class="govuk-input govuk-!-width-one-quarter" id="version" name="version" type="text">
+      </div>
+      @enderror
+
       @error('description')
       <div class="govuk-form-group govuk-form-group--error">
         <label class="govuk-label" for="description">
