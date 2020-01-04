@@ -23,6 +23,8 @@ if (App::environment('local')) {
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
 }
 
+Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
+
 Route::resource(
     'entries',
     'Catalogue\EntriesController',

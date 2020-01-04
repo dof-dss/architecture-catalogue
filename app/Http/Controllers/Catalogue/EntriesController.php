@@ -272,6 +272,22 @@ class EntriesController extends Controller
     }
 
     /**
+     * Copy a catalogue entry
+     *
+     * @param Integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function copy($id)
+    {
+        $entry = Entry::findOrFail($id);
+        $copy = $entry->replicate();
+        $copy->name = $copy->name . ' [COPY]';
+        $copy->status = 'prohibited';
+        $copy->save();
+        return back();
+    }
+
+    /**
      *  Calculate page size to ensure there is a maximum of 5 pages
      *
      * @param Integer $num_rows
@@ -286,4 +302,5 @@ class EntriesController extends Controller
         }
         return $page_size;
     }
+
 }
