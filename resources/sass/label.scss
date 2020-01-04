@@ -7,11 +7,10 @@
     line-height: 1;
     padding: 4px 5px 3px 5px;
     margin: 0 calc(2 * #{5px}) 5px 5px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     font-size: 1rem;
     font-weight: normal;
-    width: 90px;
 }
 .label {
     @include label(#6F777B, #0B0C0C);
