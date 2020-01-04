@@ -52,7 +52,8 @@ class EntriesController extends Controller
           'href' => 'url|nullable',
           'description' => 'required',
           'category' => 'required',
-          'sub_category' => 'required'
+          'sub_category' => 'required',
+          'status' => 'required'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
@@ -65,6 +66,7 @@ class EntriesController extends Controller
         $entry->href = $request->href;
         $entry->category = $request->category;
         $entry->sub_category = $request->sub_category;
+        $entry->status = $request->status;
         $entry->save();
 
         // now redirect back to the index page
@@ -110,7 +112,8 @@ class EntriesController extends Controller
           'href' => 'url|nullable',
           'description' => 'required',
           'category' => 'required|',
-          'sub_category' => 'required'
+          'sub_category' => 'required',
+          'status' => 'required'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
@@ -122,6 +125,7 @@ class EntriesController extends Controller
         $entry->href = $request->href;
         $entry->category = $request->category;
         $entry->sub_category = $request->sub_category;
+        $entry->status = $request->status;
         $entry->save();
 
         // now redirect back to the index page
@@ -169,6 +173,11 @@ class EntriesController extends Controller
     public function importCatalogue(Request $request)
     {
         // validation - check for file, type and size
+        $request->validate([
+          'file_upload_1' => 'required|file'
+        ], [
+          'file_upload_1.required' => "Please select a JSON file to import"
+        ]);
 
         $path = $request->file_upload_1->store('uploads');
 
