@@ -67,7 +67,7 @@
             </li>
             <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
               <a class="govuk-header__link" href="/entries">
-                Catalogue
+                Browse
               </a>
             </li>
           </ul>
