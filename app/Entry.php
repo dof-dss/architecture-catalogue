@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entry extends Model
 {
+    // mass assignable attributes
     protected $fillable = [
         'name',
         'version',
@@ -13,6 +14,10 @@ class Entry extends Model
         'href',
         'sub_category',
         'category',
-        'status'
+        'status',
+        'functionality',
+        'service_levels',
+        'interfaces',
+        'related_sbbs'
     ];
 }

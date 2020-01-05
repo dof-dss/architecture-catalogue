@@ -8,149 +8,85 @@
     @include ('partials.errors')
 
     <form action="/entries/{{ $entry->id }}" method="post">
-      {{ csrf_field() }}
-      <input type="hidden" name="_method" value="PUT">
+        {{ csrf_field() }}
+        <input type="hidden" name="_method" value="PUT">
 
-      @error('name')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="name">
-          Name
-        </label>
-        <span id="name-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input  govuk-!-width-one-half govuk-!-width-one-half govuk-input--error" id="name" name="name" type="text" value="{{ $entry->name }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="name">
-          Name
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="name" name="name" type="text" value="{{ $entry->name }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'name',
+            'label' => 'Name',
+            'width' => 'govuk-!-width-one-half',
+            'value' => $entry->name
+        ])
+        @endcomponent
 
-      @error('version')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="version">
-          Version
-        </label>
-        <span id="version-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input  govuk-!-width-one-half govuk-!-width-one-quarter govuk-input--error" id="version" name="version" type="text" value="{{ $entry->version }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="version">
-          Version
-        </label>
-        <input class="govuk-input govuk-!-width-one-quarter" id="version" name="version" type="text" value="{{ $entry->version }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'version',
+            'label' => 'Version',
+            'width' => 'govuk-!-width-one-quarter',
+            'value' => $entry->version
+        ])
+        @endcomponent
 
-      @error('description')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="description">
-          Description
-        </label>
-        <span id="description-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-input--error" id="description" name="description" type="text" value="{{ $entry->description }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="description">
-          Description
-        </label>
-        <input class="govuk-input" id="description" name="description" type="text" value="{{ $entry->description }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'description',
+            'label' => 'Description',
+            'value' => $entry->description
+        ])
+        @endcomponent
 
-      @error('href')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="href">
-          Associated URL
-        </label>
-        <span id="href-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-input--error" id="href" name="href" type="text" value="{{ $entry->href }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="href">
-          Associated URL
-        </label>
-        <input class="govuk-input" id="href" name="href" type="text" value="{{ $entry->href }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'href',
+            'label' => 'Vendor URL',
+            'value' => $entry->href
+        ])
+        @endcomponent
 
-      @error('category')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="category">
-          Category
-        </label>
-        <span id="category-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="category" name="category" type="text" value="{{ $entry->category}}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="category">
-          Category
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="category" name="category" type="text" value="{{ $entry->category}}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'category',
+            'label' => 'Category',
+            'width' => 'govuk-!-width-one-half',
+            'value' => $entry->category
+        ])
+        @endcomponent
 
-      @error('sub_category')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="sub-category">
-          Sub-category
-        </label>
-        <span id="sub_category-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="sub_category" name="sub_category" type="text" value="{{ $entry->sub_category }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="sub-category">
-          Sub-category
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="sub_category" name="sub_category" type="text" value="{{ $entry->sub_category }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'sub_category',
+            'label' => 'Sub category',
+            'width' => 'govuk-!-width-one-half',
+            'value' => $entry->sub_category
+        ])
+        @endcomponent
 
-      @error('status')
-      <div class="govuk-form-group govuk-form-group-error">
-          <label class="govuk-label" for="Status">
-            Status
-          </label>
-          <span id="status-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-          </span>
-          <select class="govuk-select" id="status" name="status">
-            @foreach ($statuses as $status)
-                <option value="{{ $status }}" {{ ($status == $entry->status) ? 'selected' : '' }}>{{ $status }}</option>
-            @endforeach
-          </select>
-      </div>
-      @else
-      <div class="govuk-form-group">
-          <label class="govuk-label" for="Status">
-            Status
-          </label>
-          <select class="govuk-select" id="status" name="status">
-            @foreach ($statuses as $status)
-                <option value="{{ $status }}" {{ ($status == $entry->status) ? 'selected' : '' }}>{{ $status }}</option>
-            @endforeach
-          </select>
-      </div>
-      @enderror
+        @component('components.select', [
+            'name' => 'status',
+            'label' => 'Status',
+            'values' => $statuses,
+            'value' => $entry->status
+        ])
+        @endcomponent
+
+        @component('components.textarea', [
+            'name' => 'functionality',
+            'label' => 'Supported functionality',
+            'value' => $entry->functionality
+        ])
+        @endcomponent
+
+        @component('components.textarea', [
+            'name' => 'service_levels',
+            'label' => 'Service levels',
+            'value' => $entry->service_levels
+        ])
+        @endcomponent
+
+        @component('components.textarea', [
+            'name' => 'interfaces',
+            'label' => 'Interfaces',
+            'value' => $entry->interfaces
+        ])
+        @endcomponent
+
+        <!-- related sbbs will be updated in a different way -->
 
       <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
         Save changes

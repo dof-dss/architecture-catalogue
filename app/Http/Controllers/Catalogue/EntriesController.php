@@ -80,14 +80,20 @@ class EntriesController extends Controller
           'description' => 'required',
           'category' => 'required',
           'sub_category' => 'required',
-          'status' => 'required'
+          'status' => 'required',
+          'functionality' => 'nullable',
+          'service_levels' => 'nullable',
+          'interfaces' => 'nullable',
+          'related_sbbs' => 'nullable'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
         ]);
 
         // store the entry
-        Entry::create(request(['name', 'version', 'description', 'href', 'category', 'sub_category', 'status']));
+        Entry::create(request([
+          'name', 'version', 'description', 'href', 'category', 'sub_category', 'status', 'functionality', 'service_levels', 'interfaces', 'related_sbbs'
+        ]));
 
         // now redirect back to the index page
         return redirect('/entries');
@@ -134,14 +140,20 @@ class EntriesController extends Controller
           'description' => 'required',
           'category' => 'required|',
           'sub_category' => 'required',
-          'status' => 'required'
+          'status' => 'required',
+          'functionality' => 'nullable',
+          'service_levels' => 'nullable',
+          'interfaces' => 'nullable',
+          'related_sbbs' => 'nullable'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
         ]);
 
         // update the entry
-        $entry->update(request(['name', 'version', 'description', 'href', 'category', 'sub_category', 'status']));
+        $entry->update(request([
+          'name', 'version', 'description', 'href', 'category', 'sub_category', 'status', 'functionality','service_levels', 'interfaces', 'related_sbbs'
+        ]));
 
         // now redirect back to the index page
         return redirect('/entries/' . $entry->id);

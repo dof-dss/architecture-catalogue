@@ -8,155 +8,81 @@
     @include ('partials.errors')
 
     <form action="/entries" method="post">
-      {{ csrf_field() }}
+        {{ csrf_field() }}
 
-      @error('name')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="name">
-          Name
-        </label>
-        <span id="name-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="name" name="name" type="text" value="{{ old('name') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="name">
-          Name
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="name" name="name" type="text">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'name',
+            'label' => 'Name',
+            'width' => 'govuk-!-width-one-half'
+        ])
+        @endcomponent
 
-      @error('version')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="version">
-          Version
-        </label>
-        <span id="name-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-quarterf govuk-input--error" id="version" name="version" type="text" value="{{ old('version') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="version">
-          Version
-        </label>
-        <input class="govuk-input govuk-!-width-one-quarter" id="version" name="version" type="text">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'version',
+            'label' => 'Version',
+            'width' => 'govuk-!-width-one-quarter'
+        ])
+        @endcomponent
 
-      @error('description')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="description">
-          Description
-        </label>
-        <span id="description-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-input--error" id="description" name="description" type="text" value="{{ old('description') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="description">
-          Description
-        </label>
-        <input class="govuk-input" id="description" name="description" type="text">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'description',
+            'label' => 'Description'
+        ])
+        @endcomponent
 
-      @error('href')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="href">
-          Associated URL
-        </label>
-        <span id="href-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-input--error" id="href" name="href" type="text" value="{{ old('href') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="href">
-          Associated URL
-        </label>
-        <input class="govuk-input" id="href" name="href" type="text" value="{{ old('href') }}">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'href',
+            'label' => 'Associated URL'
+        ])
+        @endcomponent
 
-      @error('category')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="category">
-          Category
-        </label>
-        <span id="category-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="category" name="category" type="text" value="{{ old('category') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="category">
-          Category
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="category" name="category" type="text">
-      </div>
-      @endif
+        @component('components.text-input', [
+            'name' => 'category',
+            'label' => 'Category',
+            'width' => 'govuk-!-width-one-half'
+        ])
+        @endcomponent
 
-      @error('sub_category')
-      <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="sub-category">
-          Sub-category
-        </label>
-        <span id="sub_category-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-        </span>
-        <input class="govuk-input govuk-!-width-one-half govuk-input--error" id="sub_category" name="sub_category" type="text" value="{{ old('sub_category') }}">
-      </div>
-      @else
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="sub-category">
-          Sub-category
-        </label>
-        <input class="govuk-input govuk-!-width-one-half" id="sub_category" name="sub_category" type="text">
-      </div>
-      @enderror
+        @component('components.text-input', [
+            'name' => 'sub_category',
+            'label' => 'Sub category',
+            'width' => 'govuk-!-width-one-half'
+        ])
+        @endcomponent
 
-      @error('status')
-      <div class="govuk-form-group govuk-form-group-error">
-          <label class="govuk-label" for="Status">
-            Status
-          </label>
-          <span id="status-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> {{ $message }}
-          </span>
-          <select class="govuk-select govuk-input--error" id="status" name="status">
-          @foreach ($statuses as $status)
-              <option value="{{ $status }}">{{ $status }}</option>
-          @endforeach
-          </select>
-      </div>
-      @else
-      <div class="govuk-form-group">
-          <label class="govuk-label" for="Status">
-            Status
-          </label>
-          <select class="govuk-select" id="status" name="status">
-          @foreach ($statuses as $status)
-              <option value="{{ $status }}">{{ $status }}</option>
-          @endforeach
-          </select>
-      </div>
-      @enderror
+        @component('components.select', [
+            'name' => 'status',
+            'label' => 'Status',
+            'values' => $statuses
+        ])
+        @endcomponent
 
-      <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
-        Save new entry
-      </button>
-      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries">
-        Cancel and return to catalogue
-      </a>
+        @component('components.textarea', [
+            'name' => 'functionality',
+            'label' => 'Supported functionality'
+        ])
+        @endcomponent
+
+        @component('components.textarea', [
+            'name' => 'service_levels',
+            'label' => 'Service levels'
+        ])
+        @endcomponent
+
+        @component('components.textarea', [
+            'name' => 'interfaces',
+            'label' => 'Interfaces'
+        ])
+        @endcomponent
+
+        <!-- related sbbs will be captured in a different way once the main entry is created -->
+
+        <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
+          Save new entry
+        </button>
+        <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries">
+          Cancel and return to catalogue
+        </a>
     </form>
   </main>
 </div>

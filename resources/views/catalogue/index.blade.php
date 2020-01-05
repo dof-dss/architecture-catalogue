@@ -15,7 +15,7 @@
               </strong>
           </div>
       @endif
-      <a class="govuk-button govuk-!-margin-right-2" data-module="govuk-button" href="/entries/create">
+      <a class="govuk-button" data-module="govuk-button" href="/entries/create">
           Add a new catalogue entry
       </a>
 

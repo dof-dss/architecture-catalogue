@@ -32,7 +32,7 @@
             @endcomponent
             @component('components.summary-list-row')
               @slot('attribute')
-                Associated URL
+                Vendor URL
               @endslot
               @slot('value')
                 @if ($entry->href)
@@ -68,6 +68,45 @@
               @endslot
               @slot('value')
                 <span class="{{ $labels[$entry->status] }}">{{ $entry->status }}</span>
+              @endslot
+            @endcomponent
+            @component('components.summary-list-row')
+              @slot('attribute')
+                Functionality
+              @endslot
+              @slot('value')
+                {{ $entry->functionality }}
+              @endslot
+            @endcomponent
+            @component('components.summary-list-row')
+              @slot('attribute')
+                Service levels
+              @endslot
+              @slot('value')
+                {{ $entry->service_levels }}
+              @endslot
+            @endcomponent
+            @component('components.summary-list-row')
+              @slot('attribute')
+                Interfaces
+              @endslot
+              @slot('value')
+                {{ $entry->interfaces }}
+              @endslot
+            @endcomponent
+            @component('components.summary-list-row')
+              @slot('attribute')
+                Related entries
+              @endslot
+              @slot('value')
+                <p class="govuk-body">Related entry 1</p>
+                <p class="govuk-body">Related entry 2</p>
+                <p class="govuk-body">{{ $entry->related_sbbs }}</p>
+              @endslot
+              @slot('action')
+                <a class="govuk-link" href="#">
+                  Change<span class="govuk-visually-hidden"> contact details</span>
+                </a>
               @endslot
             @endcomponent
         </dl>

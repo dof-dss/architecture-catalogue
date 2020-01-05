@@ -22,6 +22,10 @@ class CreateEntriesTable extends Migration
             $table->string('category');
             $table->string('sub_category');
             $table->string('status')->default('approved');
+            $table->text('functionality')->nullable();
+            $table->text('service_levels')->nullable();
+            $table->text('interfaces')->nullable();
+            $table->text('related_sbbs')->nullable();
             $table->timestamps();
         });
     }
