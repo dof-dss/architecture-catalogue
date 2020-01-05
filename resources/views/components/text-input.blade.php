@@ -11,7 +11,7 @@
         <span id="{{ $name }}-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input {{ $width }} govuk-input--error" id="{{ $name }}" name="{{ $name }}" type="text" value="{{ old($name) }}">
+        <input class="govuk-input {{ $value ?? '' }} govuk-input--error" id="{{ $name }}" name="{{ $name }}" type="text" value="{{ old($name) }}">
     </div>
 @else
     <div class="govuk-form-group">

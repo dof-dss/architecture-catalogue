@@ -7,29 +7,28 @@
         <form action="/catalogue/search" method="get">
             {{ csrf_field() }}
 
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="name">
-                  Enter the name of an entry (e.g. GOV.UK Notify)
-                </label>
-                <input class="govuk-input govuk-!-width-two-thirds" id="name" name="name" type="text">
-            </div>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="description">
-                  Enter the description of an entry (e.g. Notifications)
-                </label>
-                <input class="govuk-input govuk-!-width-two-thirds" id="description" name="description" type="text">
-            </div>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="status">
-                  Status
-                </label>
-                <select class="govuk-select" id="status" name="status">
-                <option value="" selected></option>
-                @foreach ($statuses as $status)
-                    <option value="{{ $status }}">{{ $status }}</option>
-                @endforeach
-                </select>
-            </div>
+            @component('components.text-input', [
+                'name' => 'name',
+                'label' => 'Enter the name of an entry (e.g. GOV.UK Notify)',
+                'width' => 'govuk-!-width-two-thirds'
+            ])
+            @endcomponent
+
+            @component('components.text-input', [
+                'name' => 'description',
+                'label' => 'Enter the description of an entry (e.g. Notifications)',
+                'width' => 'govuk-!-width-two-thirds'
+            ])
+            @endcomponent
+
+            <!-- custom version of the component to include the blank entry -->
+            @component('components.select', [
+                'name' => 'status',
+                'label' => 'Status',
+                'values' => $statuses,
+                'blank' => true
+            ])
+            @endcomponent
 
             <button class="govuk-button govuk-!-margin-right-2" href="/entries" type="submtt">Search</button>
         </form>

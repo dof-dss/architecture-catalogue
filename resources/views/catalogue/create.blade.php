@@ -53,7 +53,8 @@
         @component('components.select', [
             'name' => 'status',
             'label' => 'Status',
-            'values' => $statuses
+            'values' => $statuses,
+            'blank' => true
         ])
         @endcomponent
 
