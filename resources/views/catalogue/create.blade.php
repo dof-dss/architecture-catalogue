@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="govuk-width-container ">
+<div class="govuk-width-container">
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <h1 class="govuk-heading-l">New catalogue entry</h1>
 
@@ -81,8 +81,8 @@
         <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
           Save new entry
         </button>
-        <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries">
-          Cancel and return to catalogue
+        <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="{{ url()->previous() }}">
+          Cancel
         </a>
     </form>
   </main>

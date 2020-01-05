@@ -3,7 +3,7 @@
 @section('content')
 <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-        <h1 class="govuk-heading-l">Search catalogue</h1>
+        <h1 class="govuk-heading-xl">Search catalogue</h1>
         <form action="/catalogue/search" method="get">
             {{ csrf_field() }}
 
