@@ -12,22 +12,33 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    if (Auth::guest()) {
+        return Redirect::to('login');
+    }
+    if (Auth::check()) {
+        return Redirect::to('home');
+    }
 });
 
-if (App::environment('local')) {
-    Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
-    Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
-    Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
-    Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
-    Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
-}
+Auth::routes();
 
-Route::get('entries/search', 'Catalogue\EntriesController@search');
-Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
+Route::group(['middleware' => ['auth']], function () {
+    if (App::environment('local')) {
+        Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
+        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
+        Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
+        Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
+        Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
+    }
 
-Route::resource(
-    'entries',
-    'Catalogue\EntriesController',
-    ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
-);
+    Route::get('entries/search', 'Catalogue\EntriesController@search');
+    Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
+
+    Route::resource(
+        'entries',
+        'Catalogue\EntriesController',
+        ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
+    );
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});

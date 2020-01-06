@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="govuk-width-container ">
-    <main class="govuk-main-wrapper " id="main-content" role="main">
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content" role="main">
         <h1 class="govuk-heading-xl">View cataloge entry</h1>
 
         <dl class="govuk-summary-list">

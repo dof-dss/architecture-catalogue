@@ -59,23 +59,31 @@
         </a>
         <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
         <nav>
-          <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
-            <li class="govuk-header__navigation-item {{ url()->current() == url('/') ? 'govuk-header__navigation-item--active' : '' }}">
-              <a class="govuk-header__link" href="/">
-                Home
-              </a>
-            </li>
-            <li class="govuk-header__navigation-item {{ url()->current() == url('/entries/search') ? 'govuk-header__navigation-item--active' : '' }}">
-              <a class="govuk-header__link" href="/entries/search">
-                Search
-              </a>
-            </li>
-            <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
-              <a class="govuk-header__link" href="/entries">
-                Browse
-              </a>
-            </li>
-          </ul>
+            <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
+                @if (Auth::check())
+                    <li class="govuk-header__navigation-item {{ url()->current() == url('/home') ? 'govuk-header__navigation-item--active' : '' }}">
+                      <a class="govuk-header__link" href="/home">
+                        Home
+                      </a>
+                    </li>
+                    <li class="govuk-header__navigation-item {{ url()->current() == url('/entries/search') ? 'govuk-header__navigation-item--active' : '' }}">
+                      <a class="govuk-header__link" href="/entries/search">
+                        Search
+                      </a>
+                    </li>
+                    <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
+                      <a class="govuk-header__link" href="/entries">
+                        Browse
+                      </a>
+                    </li>
+                    <li class="govuk-header__navigation-item">
+                      <form method="POST" id="logout" action="{{ route('logout') }}">
+                          {{ csrf_field() }}
+                          <a class="govuk-header__link" href="javascript:{}" onclick="document.getElementById('logout').submit();">Sign out</a>
+                      </form>
+                    </li>
+                @endif
+            </ul>
         </nav>
       </div>
     </div>

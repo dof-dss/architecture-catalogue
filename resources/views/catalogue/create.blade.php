@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="govuk-width-container">
-  <main class="govuk-main-wrapper " id="main-content" role="main">
+  <main class="govuk-main-wrapper" id="main-content" role="main">
     <h1 class="govuk-heading-l">New catalogue entry</h1>
 
     @include ('partials.errors')

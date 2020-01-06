@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-  <div class="govuk-width-container ">
-    <main class="govuk-main-wrapper " id="main-content" role="main">
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content" role="main">
       <h1 class="govuk-heading-xl govuk-!-margin-bottom-1">Search results</h1>
       <span class="govuk-caption-l govuk-!-margin-bottom-2">Your search returned {{ $entries->total() }} catalogue entries.</span>
       @if ($entries->count() > 0)
