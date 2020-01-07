@@ -41,9 +41,9 @@
           ])
           @endcomponent
 
-          <button class="govuk-button" data-module="govuk-button" type="submit">Create account</button>
+          <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
 
-          <h2 class="govuk-heading-m">Already have an account</h2>
+          <h2 class="govuk-heading-m">Already have an account?</h2>
           <p class="govuk-body">
               <a class="govuk-link" href="{{ route('login') }}">
                   Login using account details
