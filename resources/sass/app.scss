@@ -4,5 +4,7 @@
 @import "panel";
 @import "label";
 
-// push last navigation item to the right (for sign out)
-nav ul li:last-child { float: right }
+// push last navigation item to the right of the navigation (for sign out)
+header nav {
+  ul li:last-child { float: right }
+}

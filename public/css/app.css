@@ -6544,7 +6544,7 @@ h2.govuk-heading-s {
   }
 }
 
-nav ul li:last-child {
+header nav ul li:last-child {
   float: right;
 }
 
