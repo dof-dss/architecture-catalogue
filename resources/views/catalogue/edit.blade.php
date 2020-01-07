@@ -91,8 +91,8 @@
       <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
         Save changes
       </button>
-      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="{{ url()->previous() }}">
-        Cancel and return to previous page
+      <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries/{{ $entry->id }}">
+        Cancel
       </a>
     </form>
   </main>
