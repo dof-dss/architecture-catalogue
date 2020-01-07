@@ -8,14 +8,15 @@
 
         @include ('partials.errors')
 
-        <form action="{{ route('login') }}" method="post">
+        <form id="login" action="{{ route('login') }}" method="post">
             {{ csrf_field() }}
 
             @component('components.text-input', [
                 'type' => 'email',
                 'name' => 'email',
                 'label' => 'E-mail address',
-                'width' => 'govuk-!-width-one-half'
+                'width' => 'govuk-!-width-one-half',
+                'autocomplete' => 'username'
             ])
             @endcomponent
 
@@ -23,18 +24,12 @@
                 'type' => 'password',
                 'name' => 'password',
                 'label' => 'Password',
-                'width' => 'govuk-!-width-one-half'
+                'width' => 'govuk-!-width-one-half',
+                'autocomplete' => 'off'
             ])
             @endcomponent
 
-            <div class="govuk-form-group">
-                <div class="govuk-checkboxes__item">
-                    <input class="govuk-checkboxes__input" id="remember" name="remember" type="checkbox" value="mines" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="govuk-label govuk-checkboxes__label" for="remember">Remember me</label>
-                </div>
-            </div>
-
-            <button class="govuk-button" data-module="govuk-button" type="submit">Sign in</button>
+            <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
         </form>
 
         <p class="govuk-body">
