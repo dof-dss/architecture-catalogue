@@ -4,7 +4,15 @@
 @import "panel";
 @import "label";
 
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
 // push last navigation item to the right of the navigation (for sign out)
 header nav {
-  ul li:last-child { float: right }
+  ul li:last-child { float: right; }
+}
+
+.govuk-header__navigation-user {
+  font-weight: normal;
+  padding-top: 8px;
+  float: right;
 }

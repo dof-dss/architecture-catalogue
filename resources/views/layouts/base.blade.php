@@ -57,6 +57,10 @@
         <a href="/" class="govuk-header__link govuk-header__link--service-name">
           Architecture Catalogue
         </a>
+        <span class="govuk-header__navigation-user">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            {{ Auth::user()->name ?? '' }}
+        </span>
         <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
         <nav>
             <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
