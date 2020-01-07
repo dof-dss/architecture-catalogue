@@ -35,7 +35,7 @@
 
           @component('components.text-input', [
               'type' => 'password',
-              'name' => 'password-confirmation',
+              'name' => 'password_confirmation',
               'label' => 'Confirm password',
               'width' => 'govuk-!-width-one-half'
           ])
