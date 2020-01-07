@@ -19,6 +19,6 @@
           {{ $label }}
         </label>
         <input class="govuk-input {{ $width ?? '' }}" id="{{ $name }}" name="{{ $name }}" type="{{ $type ?? 'text' }}"
-          value="{{ $value ?? '' }}">
+          value="{{ $value ?? old($name) }}">
     </div>
 @enderror

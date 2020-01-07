@@ -20,6 +20,6 @@
         <label class="govuk-label" for="{{ $name }}">
             {{ $label }}
         </label>
-        <textarea class="govuk-textarea govuk-input--error" id="{{ $name }}" name="{{ $name }}" rows="5">{{ $value ?? '' }}</textarea>
+        <textarea class="govuk-textarea govuk-input--error" id="{{ $name }}" name="{{ $name }}" rows="5">{{ $value ?? old($name) }}</textarea>
     </div>
 @enderror
