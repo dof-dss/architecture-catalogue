@@ -1,65 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content" role="main">
+        <h1 class="govuk-heading-l">Change your password</h1>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+        @include ('partials.errors')
+        <form method="POST" action="{{ route('password.update') }}">
+            {{ csrf_field() }}
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            @component('components.text-input', [
+                'type' => 'email',
+                'name' => 'email',
+                'label' => 'Enter your e-mail address',
+                'hint' => 'An email will be sent to this address with a password reset link',
+                'width' => 'govuk-!-width-two-thirds',
+                'autocomplete' => 'email'
+            ])
+            @endcomponent
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+            @component('components.text-input', [
+                'type' => 'password',
+                'name' => 'password',
+                'label' => 'Create a password',
+                'width' => 'govuk-!-width-one-half'
+            ])
+            @endcomponent
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            @component('components.text-input', [
+                'type' => 'password',
+                'name' => 'password_confirmation',
+                'label' => 'Confirm password',
+                'width' => 'govuk-!-width-one-half'
+            ])
+            @endcomponent
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+            <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+        </form>
+    </main>
 </div>
 @endsection
