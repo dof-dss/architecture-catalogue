@@ -54,7 +54,7 @@
         </a>
       </div>
       <div class="govuk-header__content">
-        <a href="#" class="govuk-header__link govuk-header__link--service-name">
+        <a href="/" class="govuk-header__link govuk-header__link--service-name">
           Architecture Catalogue
         </a>
         <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
