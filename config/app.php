@@ -175,6 +175,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //
+        // custom providers to cope with CloudFoundry environment
+        //
+        App\Providers\CloudFoundryServiceProvider::class,
+        App\Providers\DatabaseServiceProvider::class,
+
     ],
 
     /*

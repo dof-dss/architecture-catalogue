@@ -1,0 +1,22 @@
+---
+# Environment Variables
+APP_DEBUG: true
+APP_ENV: staging
+APP_KEY: base64:Xcgob5jVt38Jc6R3ZZfeq7aZ+FRw4kJmX3CLI42Rq88=
+APP_URL: architecture-catalogue.london.cloudapps.digital
+APP_NAME: architecture-catalogue
+MAIL_DRIVER: smtp
+MAIL_HOST: smtp.mailtrap.io
+MAIL_PORT: 2525
+MAIL_USERNAME: 09c38161fae03c
+MAIL_PASSWORD: 11cc8b8b7b8e79
+MAIL_ENCRYPTION: null
+MAIL_FROM_ADDRESS: ea-team@ea.finance-ni.gov.uk
+MAIL_FROM_NAME: DSS Architecture Team
+DB_CONNECTION: mysql
+DB_CERT_PATH: /etc/ssl/certs
+BROADCAST_DRIVER: log
+CACHE_DRIVER: file
+QUEUE_CONNECTION: sync
+SESSION_DRIVER: file
+SESSION_LIFETIME: 120
