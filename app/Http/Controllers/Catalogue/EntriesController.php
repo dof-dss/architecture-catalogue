@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
+use Illuminate\Support\Str;
 
 use Carbon\Carbon;
 
@@ -291,6 +294,7 @@ class EntriesController extends Controller
 
         $page_size = $this->calculatePageSize($entry->count());
         $entries = $entry->orderBy('name')->Paginate($page_size);
+        Log::debug('Catalogue search returned ' . $entries->count() . ' ' . Str::plural('result', $entries->count()) . '.');
         $labels = $this->labels;
         $catalogue_size = Entry::count();
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
