@@ -270,12 +270,16 @@ class EntriesController extends Controller
 
         // search for an entry based on its name
         if ($request->has('name')) {
-            $entry->where('name', 'like', '%'. $request->input('name') . '%');
+            if ($request->input('name') != "") {
+                $entry->where('name', 'like', '%'. $request->input('name') . '%');
+            }
         }
 
         // search for an entry based on its description
         if ($request->has('description')) {
-            $entry->where('description', 'like', '%'. $request->input('description') . '%');
+            if ($request->input('description') != "") {
+                $entry->where('description', 'like', '%'. $request->input('description') . '%');
+            }
         }
 
         // search for an entry based on its status
