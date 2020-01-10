@@ -29,17 +29,15 @@
     <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
 </form>
 
-<p class="govuk-body">
-    <a class="govuk-link" href="{{ route('register') }}">
-        Create sign in details
-    </a>
-</p>
-
 @if (Route::has('password.request'))
-    <h2 class="govuk-heading-m">Problems signing in</h2>
     <p class="govuk-body">
         <a class="govuk-link" href="{{ route('password.request') }}">
-            I have forgotten my password
+            Forgotten your password?
+        </a>
+    </p>
+    <p class="govuk-body">
+        <a class="govuk-link" href="/user/request">
+            Request an account
         </a>
     </p>
 @endif

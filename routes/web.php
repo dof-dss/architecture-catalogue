@@ -22,6 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/user/request', 'Auth\UserController@request');
+});
+
 Route::group(['middleware' => ['auth']], function () {
     if (App::environment('local')) {
         Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
@@ -39,6 +43,9 @@ Route::group(['middleware' => ['auth']], function () {
         'Catalogue\EntriesController',
         ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
     );
+
+    // Route::get('/admin/user', 'Auth\UserController@create');
+    // Route::post('/admin/user', 'Auth\UserController@store');
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

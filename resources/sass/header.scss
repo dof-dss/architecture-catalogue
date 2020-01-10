@@ -1,0 +1,21 @@
+
+// push last navigation item to the right of the navigation (for sign out)
+// header nav {
+//   ul li:last-child { float: right; }
+// }
+//
+// .govuk-header__navigation-user {
+//   font-weight: normal;
+//   padding-top: 8px;
+//   float: right;
+// }
+
+/* GOV.UK Architecture-Catalogue is too long */
+.govuk-header__logo {
+  width: 50%;
+}
+
+.govuk-header__content {
+  width: 50%;
+  text-align: right;
+}
