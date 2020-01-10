@@ -14,8 +14,8 @@
       </div>
 
       <!-- only show features in local development -->
-      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
       @if (env('APP_ENV') == 'local')
+          <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
           <h2 class="govuk-heading-l">Administration</h2>
           <a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/export">
             Export catalogue
