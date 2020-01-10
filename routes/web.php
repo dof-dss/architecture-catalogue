@@ -25,13 +25,13 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     if (App::environment('local')) {
         Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
-        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
         Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
         Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
-        Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
+        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
     }
 
     Route::get('entries/search', 'Catalogue\EntriesController@search');
+    Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
     Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
 
     Route::resource(
