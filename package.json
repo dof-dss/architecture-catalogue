@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "font-awesome": "^4.7.0",
-        "govuk-frontend": "^3.4.0"
+        "govuk-frontend": "^3.4.0",
+        "inter-ui": "^3.11.0"
     }
 }

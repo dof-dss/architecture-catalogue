@@ -72,8 +72,8 @@
                         Browse
                       </a>
                     </li>
-                    <li class="govuk-header__navigation-item {{ url()->current() == url('/entries') ? 'govuk-header__navigation-item--active' : '' }}">
-                      <a class="govuk-header__link" href="/admin/user/create">
+                    <li class="govuk-header__navigation-item {{ url()->current() == url('/admin') ? 'govuk-header__navigation-item--active' : '' }}">
+                      <a class="govuk-header__link" href="/admin">
                         Admin
                       </a>
                     </li>

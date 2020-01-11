@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
     );
 
+    Route::get('/admin', 'Auth\UserController@create');
     // Route::get('/admin/user', 'Auth\UserController@create');
     // Route::post('/admin/user', 'Auth\UserController@store');
 

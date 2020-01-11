@@ -10,4 +10,10 @@ class UserController extends Controller
     {
         return view('admin.request');
     }
+
+    public function create()
+    {
+        // not implemented so just show page not found
+        abort(404);
+    }
 }
