@@ -43,7 +43,7 @@
       <div class="govuk-header__logo">
         <a href="/" class="govuk-header__link govuk-header__link--homepage">
           <span class="govuk-header__logotype">
-            <svg role="presentation" focusable="false" class="govuk-header__logotype-crown" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="10 25 150 170">
+            <svg role="presentation" focusable="false" class="govuk-header__logotype-crown" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="10 25 150 170">
                  <g>
                    <polygon points="85.1,134.4 70.9,126.2 70.9,109.6 85.1,101.3 99.3,109.6 99.3,126.2 	"></polygon>
                    <polygon points="85.1,167.5 70.9,159.3 70.9,142.7 85.1,134.4 99.3,142.7 99.3,159.3 	"></polygon>
@@ -110,10 +110,10 @@
     <div class="govuk-phase-banner">
       <p class="govuk-phase-banner__content">
         <strong class="govuk-tag govuk-phase-banner__content__tag">
-      beta
+      alpha
     </strong>
         <span class="govuk-phase-banner__text">
-          This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+          This is a prototype service – your <a class="govuk-link" href="mailto:ea-team@ea.finance-ni.gov.uk?subject=Architecture Catalogue Enquiry">feedback</a> will help us to improve it.
         </span>
       </p>
     </div>
