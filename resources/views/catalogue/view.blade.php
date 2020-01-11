@@ -94,16 +94,20 @@
     @endcomponent
     @component('components.summary-list-row')
       @slot('attribute')
-        Related entries
+        Depends on
       @endslot
       @slot('value')
-        <p class="govuk-body">Related entry 1</p>
-        <p class="govuk-body">Related entry 2</p>
-        <p class="govuk-body">{{ $entry->related_sbbs }}</p>
+        @foreach ($entry->children as $item)
+            <p class="govuk-body">
+                <a class="govuk-link" href="/entries/{{ $item->parent->id}}">
+                    {{ $item->parent->name }} {{ $item->parent->version }}
+                </a>
+            </p>
+        @endforeach
       @endslot
       @slot('action')
         <a class="govuk-link" href="#">
-          Change<span class="govuk-visually-hidden"> contact details</span>
+          Change<span class="govuk-visually-hidden"> change related entries</span>
         </a>
       @endslot
     @endcomponent

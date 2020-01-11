@@ -20,4 +20,9 @@ class Entry extends Model
         'interfaces',
         'related_sbbs'
     ];
+
+    public function children()
+    {
+        return $this->hasMany('App\Link', 'item1_id');
+    }
 }
