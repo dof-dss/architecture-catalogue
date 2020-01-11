@@ -246,4 +246,16 @@ return [
     'page_size' => env('APP_PAGINATION_PAGE_SIZE', 50),
     'max_pages' => env('APP_PAGINATION_MAX_PAGES', 5),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Associated URLs
+    |--------------------------------------------------------------------------
+    |
+    | The number of results displayed per page will vary to ensure the number
+    | of pages displayed does not exceed the max.
+    |
+    */
+    'architecture_portal_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://dss-architecture-portal.london.cloudapps.digital/'),
+    'ea_principles_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://nics-ea-principles.london.cloudapps.digital'),
+    'citizen_services_architecture_url' => env('APP_URL_CITIZEN_SERVICES_ARCHITECTURE', 'https://docs.ea.digitalni.gov.uk'),
 ];
