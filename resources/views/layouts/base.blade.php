@@ -117,6 +117,7 @@
         </span>
       </p>
     </div>
+    @yield('back')
     <main class="govuk-main-wrapper" id="main-content" role="main">
       @yield('content')
     </main>

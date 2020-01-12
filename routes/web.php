@@ -44,6 +44,12 @@ Route::group(['middleware' => ['auth']], function () {
         ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
     );
 
+    Route::get('entries/{entry}/links', 'Catalogue\LinksController@index');
+    Route::get('entries/{entry}/links/create', 'Catalogue\LinksController@create');
+    Route::get('entries/{entry}/links/search', 'Catalogue\LinksController@searchCatalogue');
+    Route::post('entries/{entry}/links', 'Catalogue\LinksController@store');
+    Route::delete('entries/{entry}/links/{link}', 'Catalogue\LinksController@destroy');
+
     Route::get('/admin', 'Auth\UserController@create');
     // Route::get('/admin/user', 'Auth\UserController@create');
     // Route::post('/admin/user', 'Auth\UserController@store');

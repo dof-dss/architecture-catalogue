@@ -106,7 +106,7 @@
         @endforeach
       @endslot
       @slot('action')
-        <a class="govuk-link" href="#">
+        <a class="govuk-link" href="/entries/{{ $entry->id }}/links">
           Change<span class="govuk-visually-hidden"> change related entries</span>
         </a>
       @endslot

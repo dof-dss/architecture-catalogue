@@ -1,9 +1,16 @@
 @extends('layouts.base')
 
+@section('back')
+<a href="/entries/{{ $entry->id }}/links" class="govuk-back-link">Back to entry dependencies</a>
+@endsection
+
 @section('content')
-<h1 class="govuk-heading-xl">Search catalogue</h1>
-<form action="/catalogue/search" method="get">
+<h1 class="govuk-heading-xl">Add {{ $entry->name }} dependency</h1>
+<h2 class="govuk-heading-l">Search catalogue</h2>
+<form action="/entries/{{ $entry->id }}/links/search" method="get">
     {{ csrf_field() }}
+
+    <input type="hidden" name="entry_id" value="{{ $entry->id }}"
 
     @component('components.text-input', [
         'name' => 'name',
@@ -28,6 +35,6 @@
     ])
     @endcomponent
 
-    <button class="govuk-button govuk-!-margin-right-2" type="submit">Search</button>
+    <button class="govuk-button" type="submit">Search</button>
 </form>
 @endsection

@@ -1,5 +1,5 @@
 <table class="govuk-table">
-  <caption class="govuk-table__caption govuk-!-margin-bottom-2">This catalogue contains {{ $catalogue_size }} entries.</caption>
+  <!-- <caption class="govuk-table__caption govuk-!-margin-bottom-2">This catalogue contains {{ $catalogue_size }} entries.</caption> -->
   <thead class="govuk-table__head">
       <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Name (version)</th>

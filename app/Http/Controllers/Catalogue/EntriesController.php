@@ -18,6 +18,8 @@ use App\Entry;
 class EntriesController extends Controller
 {
 
+    // this should be an include file
+
     protected $statuses = [
       'approved',
       'unapproved',
@@ -270,21 +272,18 @@ class EntriesController extends Controller
         //  validation ?
 
         $entry = (new Entry)->newQuery();
-
         // search for an entry based on its name
         if ($request->has('name')) {
             if ($request->input('name') != "") {
                 $entry->where('name', 'like', '%'. $request->input('name') . '%');
             }
         }
-
         // search for an entry based on its description
         if ($request->has('description')) {
             if ($request->input('description') != "") {
                 $entry->where('description', 'like', '%'. $request->input('description') . '%');
             }
         }
-
         // search for an entry based on its status
         if ($request->has('status')) {
             if ($request->input('status') != "") {
