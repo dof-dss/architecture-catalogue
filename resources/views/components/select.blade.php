@@ -5,13 +5,15 @@
 -->
 @error($name)
     <div class="govuk-form-group govuk-form-group--error">
-        <label class="govuk-label" for="{{ $name }}">
-            {{ $label }}
-        </label>
+        @if (isset($lable))
+            <label class="govuk-label" for="{{ $name }}">
+                {{ $label }}
+            </label>
+        @endif
         <span id="{{ $name }}-error" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <select class="govuk-select govuk-input--error" id="{{ $name }}" name="{{ $name }}">
+        <select class="govuk-select {{ $width ?? '' }} govuk-input--error" id="{{ $name }}" name="{{ $name }}">
             @if (isset($blank))
                 <option value="" selected></option>
             @endif
@@ -26,10 +28,12 @@
     </div>
 @else
     <div class="govuk-form-group">
-        <label class="govuk-label" for="{{ $name }}">
-            {{ $label }}
-        </label>
-        <select class="govuk-select" id="{{ $name }}" name="{{ $name }}">
+        @if (isset($lable))
+            <label class="govuk-label" for="{{ $name }}">
+                {{ $label }}
+            </label>
+        @endif
+        <select class="govuk-select {{ $width ?? '' }}" id="{{ $name }}" name="{{ $name }}">
             @if (isset($blank))
                 <option value="" selected></option>
             @endif

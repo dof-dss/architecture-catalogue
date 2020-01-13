@@ -50,11 +50,20 @@ class EntriesController extends Controller
               'timestamp' => Carbon::now(),
               'entries' => Entry::all());
         } else {
-            $page_size = $this->calculatePageSize(Entry::count());
-            $entries = Entry::orderBy('name')->Paginate($page_size);
+            $status = null;
+            $entry = (new Entry)->newQuery();
+            // search for an entry based on its status
+            if ($request->has('status')) {
+                $status = $request->input('status');
+                if ($request->input('status') != "") {
+                    $entry->where('status', $request->input('status'));
+                }
+            }
+            $page_size = $this->calculatePageSize($entry->count());
+            $entries = $entry->orderBy('name')->Paginate($page_size);
             $statuses = $this->statuses;
             $labels = $this->labels;
-            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size'));
+            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size', 'status'));
         }
     }
 

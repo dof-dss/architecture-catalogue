@@ -1,0 +1,42 @@
+.filter-section {
+  button {
+    margin-bottom: 5px;
+  }
+}
+
+.filter-text-regular {
+  font-weight: 500;
+}
+
+.filter-heading {
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  width: 23%;
+
+  .govuk-button {
+    width: 100%;
+  }
+}
+
+.filter-filters {
+  @include govuk-responsive-padding(6);
+  background-color: govuk-colour("light-grey");
+  border-collapse: separate;
+
+  .govuk-table__header,
+  .govuk-table__cell {
+    border-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0.32632em
+  }
+
+  .govuk-table__header {
+    @include govuk-font($size: 16, $weight: bold);
+  }
+}
+
+.filter-table {
+  font-size: 1rem;
+}

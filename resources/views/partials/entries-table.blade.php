@@ -1,4 +1,4 @@
-<table class="govuk-table">
+<table class="govuk-table filter-table">
   <!-- <caption class="govuk-table__caption govuk-!-margin-bottom-2">This catalogue contains {{ $catalogue_size }} entries.</caption> -->
   <thead class="govuk-table__head">
       <tr class="govuk-table__row">

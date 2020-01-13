@@ -6537,6 +6537,80 @@ h2.govuk-heading-s {
   text-align: right;
 }
 
+.filter-section button {
+  margin-bottom: 5px;
+}
+
+.filter-text-regular {
+  font-weight: 500;
+}
+
+.filter-heading {
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  width: 23%;
+}
+
+.filter-button .govuk-button {
+  width: 100%;
+}
+
+.filter-filters {
+  padding: 20px;
+  background-color: #f3f2f1;
+  border-collapse: separate;
+}
+
+@media (min-width: 40.0625em) {
+  .filter-filters {
+    padding: 30px;
+  }
+}
+
+.filter-filters .govuk-table__header,
+.filter-filters .govuk-table__cell {
+  border-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 0.32632em;
+}
+
+.filter-filters .govuk-table__header {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+}
+
+@media print {
+  .filter-filters .govuk-table__header {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .filter-filters .govuk-table__header {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .filter-filters .govuk-table__header {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.filter-table {
+  font-size: 1rem;
+}
+
 @font-face {
   font-family: "Inter";
   font-style: normal;
