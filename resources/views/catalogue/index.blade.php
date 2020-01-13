@@ -24,6 +24,7 @@
                                 'name' => 'status',
                                 'values' => $statuses,
                                 'blank' => true,
+                                'blank_label' => 'any',
                                 'width' => 'govuk-!-width-one-half',
                                 'value' => $status
                             ])

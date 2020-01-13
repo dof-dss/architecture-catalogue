@@ -14,7 +14,7 @@
         <input type="hidden" name="entry_id" value="{{ $entry_id }}">
         <div class="govuk-form-group">
             <fieldset class="govuk-fieldset" aria-describedby="dependency-hint">
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                   <h2 class="govuk-fieldset__heading">
                       Which entries are dependencies?
                   </h2>

@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<h1 class="govuk-heading-xl">Add {{ $entry->name }} dependency</h1>
-<h2 class="govuk-heading-l">Search catalogue</h2>
+<h1 class="govuk-heading-l">Add {{ $entry->name }} dependency</h1>
+<h2 class="govuk-heading-m">Search catalogue</h2>
 <form action="/entries/{{ $entry->id }}/links/search" method="get">
     {{ csrf_field() }}
 

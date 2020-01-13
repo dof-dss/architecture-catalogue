@@ -15,7 +15,7 @@
         </span>
         <select class="govuk-select {{ $width ?? '' }} govuk-input--error" id="{{ $name }}" name="{{ $name }}">
             @if (isset($blank))
-                <option value="" selected></option>
+                <option value="" selected>{{ $blank_label ?? '' }}</option>
             @endif
             @foreach ($values as $v)
                 @if (isset($value) && ($value == $v))
@@ -35,7 +35,7 @@
         @endif
         <select class="govuk-select {{ $width ?? '' }}" id="{{ $name }}" name="{{ $name }}">
             @if (isset($blank))
-                <option value="" selected></option>
+                <option value="" selected>{{ $blank_label ?? '' }}</option>
             @endif
             @foreach ($values as $v)
                 @if (isset($value) && ($value == $v))
