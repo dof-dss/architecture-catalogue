@@ -5,7 +5,7 @@
 -->
 @error($name)
     <div class="govuk-form-group govuk-form-group--error">
-        @if (isset($lable))
+        @if (isset($label))
             <label class="govuk-label" for="{{ $name }}">
                 {{ $label }}
             </label>
@@ -28,7 +28,7 @@
     </div>
 @else
     <div class="govuk-form-group">
-        @if (isset($lable))
+        @if (isset($label))
             <label class="govuk-label" for="{{ $name }}">
                 {{ $label }}
             </label>
