@@ -23,6 +23,7 @@
     @component('components.select', [
         'name' => 'status',
         'label' => 'Status',
+        'width' => 'govuk-!-width-one-third',
         'values' => $statuses,
         'blank' => true
     ])
