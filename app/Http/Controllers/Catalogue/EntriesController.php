@@ -21,20 +21,59 @@ class EntriesController extends Controller
     // this should be an include file
 
     protected $statuses = [
-      'approved',
-      'unapproved',
-      'prohibited',
-      'retiring',
-      'evaluating'
+        'approved',
+        'unapproved',
+        'prohibited',
+        'retiring',
+        'evaluating'
     ];
 
     protected $labels = [
-      'approved' => 'label--green',
-      'unapproved' => 'label--black',
-      'prohibited'=> 'label--red',
-      'retiring' => 'label--orange',
-      'evaluating' => 'label--blue'
+        'approved' => 'label--green',
+        'unapproved' => 'label--black',
+        'prohibited'=> 'label--red',
+        'retiring' => 'label--orange',
+        'evaluating' => 'label--blue'
     ];
+
+    protected $categories = array(
+        'Business Applications' => array(
+            'Information Consumer Applications',
+            'Brokering Applications',
+            'Information Provider Applications',
+            'Shared Services Applications'
+        ),
+        'Infrastructure Applications' => array(
+            'Productivity',
+            'Brokering Applications',
+            'Information Provider Applications',
+            'Shared Services Applications'
+        ),
+        'Application Platform' => array(
+            'Software Engineering Services',
+            'Operating System Services',
+            'Security Services',
+            'Human Interaction Services',
+            'Data Interchange Services',
+            'Data Management Services',
+            'Network Services'
+        ),
+        'Technology Platforms' => array(
+            'Hosting Services',
+            'Infrastructure as a Service',
+            'Platform as a Service',
+            'Software as a Service'
+        ),
+        'Physical Infrastructure' => array(
+            'Data Centres',
+            'Data Networks',
+            'End User Devices',
+            'Server Devices'
+        ),
+        'Other' => array(
+            'Not categorised'
+        )
+    );
 
     /**
      * Display a listing of the resource.
@@ -75,7 +114,8 @@ class EntriesController extends Controller
     public function create()
     {
         $statuses = $this->statuses;
-        return view('catalogue.create', compact('statuses'));
+        $categories = $this->categories;
+        return view('catalogue.create', compact('statuses', 'categories'));
     }
 
     /**

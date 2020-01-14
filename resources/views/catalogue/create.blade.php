@@ -74,6 +74,21 @@
     ])
     @endcomponent
 
+    <div class="govuk-form-group">
+        <label class="govuk-label">
+            Category and sub-category
+        </label>
+        <select class="govuk-select">
+            <option value=""></option>
+            @foreach ($categories as $key => $value)
+                <optgroup label="{{ $key }}"</optgroup>
+                @foreach ($value as $item)
+                    <option value="{{ $key }}-{{ $item }}">{{ $item }}</option>
+                @endforeach
+            @endforeach
+        </select>
+    </div>
+
     <!-- related sbbs will be captured in a different way once the main entry is created -->
 
     <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
