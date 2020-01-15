@@ -11,10 +11,13 @@
                 <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <th class="govuk-table__header" scope="column">
-                          Status
+                            Status
+                        </th>
+                        <th class="govuk-table__header" scope="column">
+                            Category / sub-category
                         </th>
                         <th class="govuk-table__header govuk-visually-hidden" scope="column">
-                          Filter
+                            Filter
                         </th>
                     </tr>
                     <tr>
@@ -25,8 +28,17 @@
                                 'values' => $statuses,
                                 'blank' => true,
                                 'blank_label' => 'any',
-                                'width' => 'govuk-!-width-one-half',
                                 'value' => $status
+                            ])
+                            @endcomponent
+                        </td>
+                        <td class="govuk-table__cell">
+                            @component('components.group-select', [
+                                'name' => 'category_subcategory',
+                                'values' => $categories,
+                                'blank' => true,
+                                'blank_label' => 'any',
+                                'value' => $sub_category
                             ])
                             @endcomponent
                         </td>
@@ -39,9 +51,11 @@
                 </tbody>
             </table>
         </form>
-        <p class="govuk-body">
-            <a href="#" class="govuk-link">Download a spreadsheet of these entries</a>
-        </p>
+        @if ($entries->count() > 0)
+            <p class="govuk-body">
+                <a href="#" class="govuk-link">Download a spreadsheet of these entries</a>
+            </p>
+        @endif
     </div>
 </div>
 

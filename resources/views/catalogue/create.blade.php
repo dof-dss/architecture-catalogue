@@ -8,6 +8,8 @@
 <form action="/entries" method="post">
     {{ csrf_field() }}
 
+    <h2 class="govuk-heading-m">Core information</h2>
+
     @component('components.text-input', [
         'name' => 'name',
         'label' => 'Name',
@@ -34,27 +36,25 @@
     ])
     @endcomponent
 
-    @component('components.text-input', [
-        'name' => 'category',
-        'label' => 'Category',
-        'width' => 'govuk-!-width-one-half'
-    ])
-    @endcomponent
-
-    @component('components.text-input', [
-        'name' => 'sub_category',
-        'label' => 'Sub category',
-        'width' => 'govuk-!-width-one-half'
+    @component('components.group-select', [
+        'name' => 'category_subcategory',
+        'label' => 'Category and sub-category',
+        'width' => 'govuk-!-width-one-half',
+        'values' => $categories,
+        'blank' => true
     ])
     @endcomponent
 
     @component('components.select', [
         'name' => 'status',
         'label' => 'Status',
+        'width' => 'govuk-!-width-one-half',
         'values' => $statuses,
         'blank' => true
     ])
     @endcomponent
+
+    <h2 class="govuk-heading-m">Additional information</h2>
 
     @component('components.textarea', [
         'name' => 'functionality',
@@ -73,21 +73,6 @@
         'label' => 'Interfaces'
     ])
     @endcomponent
-
-    <div class="govuk-form-group">
-        <label class="govuk-label">
-            Category and sub-category
-        </label>
-        <select class="govuk-select">
-            <option value=""></option>
-            @foreach ($categories as $key => $value)
-                <optgroup label="{{ $key }}"</optgroup>
-                @foreach ($value as $item)
-                    <option value="{{ $key }}-{{ $item }}">{{ $item }}</option>
-                @endforeach
-            @endforeach
-        </select>
-    </div>
 
     <!-- related sbbs will be captured in a different way once the main entry is created -->
 

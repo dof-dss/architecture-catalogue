@@ -9,6 +9,8 @@
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
 
+    <h2 class="govuk-heading-m">Core information</h2>
+
     @component('components.text-input', [
         'name' => 'name',
         'label' => 'Name',
@@ -39,19 +41,13 @@
     ])
     @endcomponent
 
-    @component('components.text-input', [
-        'name' => 'category',
-        'label' => 'Category',
+    @component('components.group-select', [
+        'name' => 'category_subcategory',
+        'label' => 'Category and sub-category',
         'width' => 'govuk-!-width-one-half',
-        'value' => $entry->category
-    ])
-    @endcomponent
-
-    @component('components.text-input', [
-        'name' => 'sub_category',
-        'label' => 'Sub category',
-        'width' => 'govuk-!-width-one-half',
-        'value' => $entry->sub_category
+        'values' => $categories,
+        'value' => $entry->sub_category,
+        'blank' => true
     ])
     @endcomponent
 
@@ -62,6 +58,8 @@
         'value' => $entry->status
     ])
     @endcomponent
+
+    <h2 class="govuk-heading-m">Additional information</h2>
 
     @component('components.textarea', [
         'name' => 'functionality',

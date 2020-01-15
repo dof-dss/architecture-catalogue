@@ -45,9 +45,10 @@ class EntriesController extends Controller
         ),
         'Infrastructure Applications' => array(
             'Productivity',
-            'Brokering Applications',
-            'Information Provider Applications',
-            'Shared Services Applications'
+            'Development Tools',
+            'Libraries',
+            'Management Utilities',
+            'Storage Management Utilities'
         ),
         'Application Platform' => array(
             'Software Engineering Services',
@@ -98,11 +99,28 @@ class EntriesController extends Controller
                     $entry->where('status', $request->input('status'));
                 }
             }
+            // search for an entry based on its category / sub-category
+            $category_subcategory = null;
+            $category = null;
+            $sub_category = null;
+            if ($request->has('category_subcategory')) {
+                $category_subcategory = $request->input('category_subcategory');
+                if ($category_subcategory != "") {
+                  // need to split category_subcategory into its component parts which are separated by a '-'
+                  $parts = explode("-", $category_subcategory);
+                  // validate the two parts against the acceptable values
+                  $category = $parts[0];
+                  $sub_category = $parts[1];
+                  $entry->where('category', $category);
+                  $entry->where('sub_category', $sub_category);
+                }
+            }
             $page_size = $this->calculatePageSize($entry->count());
             $entries = $entry->orderBy('name')->Paginate($page_size);
             $statuses = $this->statuses;
             $labels = $this->labels;
-            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size', 'status'));
+            $categories = $this->categories;
+            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size', 'status', 'categories', 'sub_category'));
         }
     }
 
@@ -132,22 +150,34 @@ class EntriesController extends Controller
           'version' => 'required',
           'href' => 'url|nullable',
           'description' => 'required',
-          'category' => 'required',
-          'sub_category' => 'required',
+          // 'category' => 'required',
+          // 'sub_category' => 'required',
+          'category_subcategory' => 'required',
           'status' => 'required',
           'functionality' => 'nullable',
           'service_levels' => 'nullable',
-          'interfaces' => 'nullable',
-          'related_sbbs' => 'nullable'
+          'interfaces' => 'nullable'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
         ]);
 
-        // store the entry
-        Entry::create(request([
-          'name', 'version', 'description', 'href', 'category', 'sub_category', 'status', 'functionality', 'service_levels', 'interfaces', 'related_sbbs'
-        ]));
+        // need to split category_subcategory into its component parts which are separated by a '-'
+        $parts = explode("-", $request->category_subcategory);
+        // validate the two parts against the acceptable values
+
+        $entry = new Entry;
+        $entry->name = $request->name;
+        $entry->version = $request->version;
+        $entry->description = $request->description;
+        $entry->href = $request->href;
+        $entry->category = $parts[0];
+        $entry->sub_category = $parts[1];
+        $entry->status = $request->status;
+        $entry->functionality = $request->functionality;
+        $entry->service_levels = $request->service_levels;
+        $entry->interfaces = $request->inerfaces;
+        $entry->save();
 
         // now redirect back to the index page
         return redirect('/entries');
@@ -174,7 +204,8 @@ class EntriesController extends Controller
     public function edit(Entry $entry)
     {
         $statuses = $this->statuses;
-        return view('catalogue.edit', compact('entry', 'statuses'));
+        $categories = $this->categories;
+        return view('catalogue.edit', compact('entry', 'statuses', 'categories'));
     }
 
     /**
@@ -192,22 +223,34 @@ class EntriesController extends Controller
           'version' => 'required',
           'href' => 'url|nullable',
           'description' => 'required',
-          'category' => 'required|',
-          'sub_category' => 'required',
+          // 'category' => 'required|',
+          // 'sub_category' => 'required',
+          'category_subcategory' => 'required',
           'status' => 'required',
           'functionality' => 'nullable',
           'service_levels' => 'nullable',
-          'interfaces' => 'nullable',
-          'related_sbbs' => 'nullable'
+          'interfaces' => 'nullable'
         ], [
           'name.required' => 'The name of the component is required.',
           'href.url' => 'The associated URL is invalid.'
         ]);
 
+        // need to split category_subcategory into its component parts which are separated by a '-'
+        $parts = explode("-", $request->category_subcategory);
+        // validate the two parts against the acceptable values
+
         // update the entry
-        $entry->update(request([
-          'name', 'version', 'description', 'href', 'category', 'sub_category', 'status', 'functionality','service_levels', 'interfaces', 'related_sbbs'
-        ]));
+        $entry->name = $request->name;
+        $entry->version = $request->version;
+        $entry->description = $request->description;
+        $entry->href = $request->href;
+        $entry->category = $parts[0];
+        $entry->sub_category = $parts[1];
+        $entry->status = $request->status;
+        $entry->functionality = $request->functionality;
+        $entry->service_levels = $request->service_levels;
+        $entry->interfaces = $request->inerfaces;
+        $entry->save();
 
         // now redirect back to the index page
         return redirect('/entries/' . $entry->id);
