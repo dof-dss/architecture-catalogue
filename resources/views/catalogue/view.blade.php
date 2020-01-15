@@ -3,6 +3,7 @@
 @section('content')
 <h1 class="govuk-heading-l">View cataloge entry</h1>
 
+<h2 class="govuk-heading-m">Core information</h2>
 <dl class="govuk-summary-list">
     @component('components.summary-list-row')
       @slot('attribute')
@@ -68,6 +69,10 @@
         <span class="{{ $labels[$entry->status] }}">{{ $entry->status }}</span>
       @endslot
     @endcomponent
+</dl>
+
+<h2 class="govuk-heading-m">Additional information</h2>
+<dl class="govuk-summary-list">
     @component('components.summary-list-row')
       @slot('attribute')
         Functionality
