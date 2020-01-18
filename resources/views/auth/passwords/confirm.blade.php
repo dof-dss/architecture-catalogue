@@ -1,49 +1,30 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+<h1 class="govuk-heading-l">Password confirmation required</h1>
 
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
+<p class="govuk-body">Please confirm your password before continuing with the requested action.</p>
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
+@include ('partials.errors')
+<form method="POST" action="{{ route('password.confirm') }}">
+    {{ csrf_field() }}
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+    @component('components.text-input', [
+        'type' => 'password',
+        'name' => 'password',
+        'label' => 'Enter your current password',
+        'width' => 'govuk-!-width-one-half'
+    ])
+    @endcomponent
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+    <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm Password') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    @if (Route::has('password.request'))
+        <p class="govuk-body">
+            <a class="govuk-link" href="{{ route('password.request') }}">
+                Forgotten your password?
+            </a>
+        </p>
+    @endif
+</form>
 @endsection

@@ -20,13 +20,13 @@ Route::get('/', function () {
     }
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/user/request', 'Auth\UserController@request');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     if (App::environment('local')) {
         Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
         Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('entries/{entry}/links', 'Catalogue\LinksController@store');
     Route::delete('entries/{entry}/links/{link}', 'Catalogue\LinksController@destroy');
 
-    Route::get('/admin', 'Auth\UserController@create');
+    Route::get('/admin', 'Auth\UserController@create')->middleware('password.confirm');
     // Route::get('/admin/user', 'Auth\UserController@create');
     // Route::post('/admin/user', 'Auth\UserController@store');
 

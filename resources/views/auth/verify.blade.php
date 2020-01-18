@@ -1,28 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+<h1 class="govuk-heading-l">Verify your e-mail address</h1>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
+@if (session('resent'))
+    <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">
+          Verfication link sent
+        </h1>
+        <div class="govuk-panel__body">
+          A new verification link has been sent to your e-mail address.
         </div>
     </div>
-</div>
+@endif
+
+<p class="govuk-body">Before proceeding, please check your email for a verification link.</p>
+<p class="govuk-body">If you did not receive the email</p>
+
+<form id="login" action="{{ route('verification.resend') }}" method="post">
+    {{ csrf_field() }}
+    <button class="govuk-button" type="submit">Request another verification link</button>
+</form>
 @endsection
