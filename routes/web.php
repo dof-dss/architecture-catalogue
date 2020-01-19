@@ -38,10 +38,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
     Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
 
+    Route::delete('/entries/{entry}', 'Catalogue\EntriesController@destroy')->middleware('password.confirm');
     Route::resource(
         'entries',
         'Catalogue\EntriesController',
-        ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
+        ['only' => ['index', 'show', 'create', 'store', 'edit', 'update']]
     );
 
     //
