@@ -44,12 +44,26 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]
     );
 
+    //
+    // dependencies (links)
+    //
     Route::get('entries/{entry}/links', 'Catalogue\LinksController@index');
     Route::get('entries/{entry}/links/create', 'Catalogue\LinksController@create');
     Route::get('entries/{entry}/links/search', 'Catalogue\LinksController@searchCatalogue');
     Route::post('entries/{entry}/links', 'Catalogue\LinksController@store');
     Route::delete('entries/{entry}/links/{link}', 'Catalogue\LinksController@destroy');
 
+    //
+    // user defined tags
+    //
+    Route::get('entries/{entry}/tags', 'Catalogue\TagsController@index');
+    Route::post('entries/{entry}/tags', 'Catalogue\TagsController@store');
+    Route::delete('entries/{entry}/tags/{tag}', 'Catalogue\TagsController@destroy');
+    Route::post('tags', 'Catalogue\TagsController@createAndStore');
+
+    //
+    // admin routes
+    //
     Route::get('/admin', 'Auth\UserController@create')->middleware('password.confirm');
     // Route::get('/admin/user', 'Auth\UserController@create');
     // Route::post('/admin/user', 'Auth\UserController@store');

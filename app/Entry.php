@@ -25,4 +25,9 @@ class Entry extends Model
     {
         return $this->hasMany('App\Link', 'item1_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

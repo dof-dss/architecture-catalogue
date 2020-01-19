@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h1 class="govuk-heading-l">{{ $entry->name }} {{ $entry->version ? $entry->version : '' }} dependencies</h1>
+<h1 class="govuk-heading-l">Dependencies for {{ $entry->name }} {{ $entry->version ? $entry->version : '' }} </h1>
 
 @if ($entry->children->count() > 0)
     <table class="govuk-table">
