@@ -400,10 +400,10 @@ class EntriesController extends Controller
     public function copy(Entry $entry)
     {
         $copy = $entry->replicate();
-        $copy->name = $copy->name . ' [COPY]';
+        $copy->name = $copy->name . ' - COPY';
         $copy->status = 'prohibited';
         $copy->save();
-        return redirect('/entries');
+        return redirect('/entries/' . $copy->id);
     }
 
     /**
