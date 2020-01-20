@@ -106,13 +106,13 @@ class EntriesController extends Controller
             if ($request->has('category_subcategory')) {
                 $category_subcategory = $request->input('category_subcategory');
                 if ($category_subcategory != "") {
-                  // need to split category_subcategory into its component parts which are separated by a '-'
-                  $parts = explode("-", $category_subcategory);
-                  // validate the two parts against the acceptable values
-                  $category = $parts[0];
-                  $sub_category = $parts[1];
-                  $entry->where('category', $category);
-                  $entry->where('sub_category', $sub_category);
+                    // need to split category_subcategory into its component parts which are separated by a '-'
+                    $parts = explode("-", $category_subcategory);
+                    // validate the two parts against the acceptable values
+                    $category = $parts[0];
+                    $sub_category = $parts[1];
+                    $entry->where('category', $category);
+                    $entry->where('sub_category', $sub_category);
                 }
             }
             $page_size = $this->calculatePageSize($entry->count());
@@ -180,7 +180,7 @@ class EntriesController extends Controller
         $entry->save();
 
         // now redirect back to the index page
-        return redirect('/entries');
+        return redirect('/entries/' . $entry->id);
     }
 
     /**
