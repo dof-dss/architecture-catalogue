@@ -17,7 +17,7 @@ class LogRoute
      */
     public function handle($request, Closure $next)
     {
-        Log::info($request->fullUrl());
+        Log::info($request->method() . ": " . $request->fullUrl());
 
         return $next($request);
     }
