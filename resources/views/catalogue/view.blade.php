@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<h1 class="govuk-heading-l">View cataloge entry</h1>
+<h1 class="govuk-heading-l">View catalogue entry</h1>
 
 <h2 class="govuk-heading-m">Core information</h2>
 <dl class="govuk-summary-list">
