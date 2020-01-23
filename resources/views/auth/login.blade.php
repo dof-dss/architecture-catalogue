@@ -1,12 +1,18 @@
 @extends('layouts.base')
 
 @section('content')
-<h1 class="govuk-heading-l">Sign in using username and password</h1>
+<h1 class="govuk-heading-l">Sign in</h1>
 
 
-<a class="govuk-button govuk-button--secondary" href="/login/github">Sign in with GitHub</a>
+
 
 @include ('partials.errors')
+
+<a class="govuk-button" href="/login/github">Sign in with GitHub <i class="fa fa-github" aria-hidden="true"></i></a>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<h2 class="govuk-heading-m">Sign in using your account</h2>
 
 <form id="login" action="{{ route('login') }}" method="post">
     {{ csrf_field() }}
@@ -29,7 +35,7 @@
     ])
     @endcomponent
 
-    <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="submit">Sign in</button>
 </form>
 
 @if (Route::has('password.request'))
@@ -38,6 +44,9 @@
             Forgotten your password?
         </a>
     </p>
+
+    <h3 class="govuk-heading-m">Don't have an account?</h3>
+
     <p class="govuk-body">
         <a class="govuk-link" href="/register">
             Create an account

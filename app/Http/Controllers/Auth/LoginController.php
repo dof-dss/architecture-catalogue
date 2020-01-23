@@ -10,6 +10,10 @@ use Auth;
 use Socialite;
 use Carbon\Carbon;
 
+use App\User;
+
+use Illuminate\Database\QueryException;
+
 class LoginController extends Controller
 {
     /*
@@ -60,39 +64,56 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-      try {
-          $user = Socialite::driver('github')->user();
-      } catch (Exception $e) {
-          return redirect::to('/login')->withErrors(['msg', 'Unable to sign in using GitHub']);
-      }
+        try {
+            $user = Socialite::driver('github')->user();
+        } catch (Exception $e) {
+            return redirect::to('/login')->withErrors(['msg', 'Unable to sign in using GitHub']);
+        }
 
-      return $user->name;
+        // check that the user does not already exist - this is WRONG
+        if (!User::where('email', $user->email)->where('provider_id', '!=', $user->id)) {
+            return redirect('/login')->withErrors(['Login', 'A user with this ']);
+        }
 
-      $authUser = $this->findOrCreateUser($user);
+        // if no name found then use the nickname
+        if (!$user->name) {
+            $user->name = $user->nickname;
+        }
 
-      Auth::login($authUser, true);
+        $authUser = $this->findOrCreateUser($user);
 
-      return redirect($this->redirectTo);
+        Auth::login($authUser, true);
+
+        return redirect($this->redirectTo);
     }
 
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $githubUser
+     * @param $guser
      * @return User
      */
-    private function findOrCreateUser($githubUser)
+    private function findOrCreateUser($user)
     {
-        if ($authUser = User::where('github_id', $githubUser->id)->first()) {
+        if ($authUser = User::where('provider_id', $user->id)->where('provider_name', 'GitHub')->first()) {
             return $authUser;
         }
 
-        return User::create([
-            'name' => $githubUser->name,
-            'email' => $githubUser->email,
-            'email_verified_at' => Cabon::now(),
-            'provider_name' => 'GitHub',
-            'provider_id' => $githubUser->id
-        ]);
+        // we may collide with an existing email address
+        try {
+            $user = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => Carbon::now(),
+                'provider_name' => 'GitHub',
+                'provider_id' => $user->id
+            ]);
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                abort(403, 'A user already exists with this identity');
+            };
+        }
+
+        return $user;
     }
 }

@@ -13,9 +13,10 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {
-          Schema::table('entry_tag', function (Blueprint $table) {
-              $table->string('provider_name');
-              $table->string('provider_id');
+          Schema::table('users', function (Blueprint $table) {
+              $table->string('password')->nullable()->change();
+              $table->string('provider_name', 30)->after('remember_token');
+              $table->string('provider_id', 100)->after('provider_name');
           });
     }
 
@@ -26,7 +27,8 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('entry_tag', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('password')->nullable(false)->change();
             $table->dropColumn('provider_name');
             $table->dropColumn('provider_id');
         });
