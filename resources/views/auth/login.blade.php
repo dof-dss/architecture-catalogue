@@ -3,6 +3,9 @@
 @section('content')
 <h1 class="govuk-heading-l">Sign in using username and password</h1>
 
+
+<a class="govuk-button govuk-button--secondary" href="/login/github">Sign in with GitHub</a>
+
 @include ('partials.errors')
 
 <form id="login" action="{{ route('login') }}" method="post">

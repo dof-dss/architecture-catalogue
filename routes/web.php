@@ -20,6 +20,15 @@ Route::get('/', function () {
     }
 });
 
+//
+// GitHub authentication
+//
+Route::get('/login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('/login/github/callback', 'Auth\LoginController@handleProviderCallback');
+
+//
+// email verification
+//
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['guest']], function () {
