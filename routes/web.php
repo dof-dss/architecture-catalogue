@@ -39,15 +39,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     if (App::environment('local')) {
         Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
         Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
-        Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue')->middleware('password.confirm');
-        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue')->middleware('password.confirm');
+        Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
+        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
     }
 
     Route::get('entries/search', 'Catalogue\EntriesController@search');
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
     Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
 
-    Route::delete('/entries/{entry}', 'Catalogue\EntriesController@destroy')->middleware('password.confirm');
+    Route::delete('/entries/{entry}', 'Catalogue\EntriesController@destroy');
     Route::resource(
         'entries',
         'Catalogue\EntriesController',
