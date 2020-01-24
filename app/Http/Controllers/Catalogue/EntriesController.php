@@ -78,9 +78,9 @@ class EntriesController extends Controller
 
     protected $rules = [
         'name' => 'required|between:3,40',
-        'version' => 'required|alpha_numeric_spaces|between:1,20',
+        'version' => 'required|alpha_numeric_spaces_punctuation|between:1,20',
         'href' => 'nullable|url|max:250',
-        'description' => 'required|alpha_numeric_spaces|between:3,80',
+        'description' => 'required|alpha_numeric_spaces_punctuation|between:3,80',
         'category_subcategory' => 'required|alpha_numeric_spaces_punctuation|between:8,80',
         'status' => 'required|alpha|max:10',
         'functionality' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
