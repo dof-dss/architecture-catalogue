@@ -52,10 +52,10 @@
             Create an account
         </a>
     </p>
-    <p class="govuk-body">
+    <!-- <p class="govuk-body">
         <a class="govuk-link" href="/user/request">
             Request an account
         </a>
-    </p>
+    </p> -->
 @endif
 @endsection
