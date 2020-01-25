@@ -98,11 +98,13 @@
                         Browse
                       </a>
                     </li>
+                    @if (auth()->user()->isAdmin())
                     <li class="govuk-header__navigation-item {{ url()->current() == url('/admin') ? 'govuk-header__navigation-item--active' : '' }}">
                       <a class="govuk-header__link" href="/admin">
                         Admin
                       </a>
                     </li>
+                    @endif
                     <li class="govuk-header__navigation-item">
                       <form method="POST" id="logout" action="{{ route('logout') }}">
                           {{ csrf_field() }}

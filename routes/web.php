@@ -49,12 +49,6 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    if (App::environment('local')) {
-        Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
-        Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
-        Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
-        Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
-    }
 
     Route::get('entries/search', 'Catalogue\EntriesController@search');
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
@@ -87,9 +81,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //
     // admin routes
     //
-    Route::get('/admin', 'Auth\UserController@create');
-    // Route::get('/admin/user', 'Auth\UserController@create');
-    // Route::post('/admin/user', 'Auth\UserController@store');
+    Route::group(['middleware' => ['is_admin']], function () {
+        Route::get('/admin', 'AdminController@menu');
+        // Route::get('/admin/user', 'Auth\UserController@create');
+        // Route::post('/admin/user', 'Auth\UserController@store');
+        if (App::environment('local')) {
+            Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
+            Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
+            Route::get('catalogue/delete', 'Catalogue\EntriesController@deleteCatalogue');
+            Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
+        }
+    });
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

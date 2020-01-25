@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'email_verified_at', 'password', 'provider_name', 'provider_id',
+        'name', 'email', 'email_verified_at', 'password', 'provider_name', 'provider_id', 'admin',
     ];
 
     /**
@@ -36,4 +36,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        return $this->admin == 1;
+    }
 }
