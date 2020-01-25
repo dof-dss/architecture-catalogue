@@ -61,6 +61,10 @@
         <p class="govuk-body">
             If you come to the NICS Architecture Catalogue from another website, we may receive information from the other website. We do not use this data. You should read the privacy policy of the website you came from to find out more about this.
         </p>
+        <h2 class="govuk-heading-l">Data collected during alpha</h3>
+        <p class="govuk-body">
+            All personal data collected during the <strong class="govuk-tag govuk-phase-banner__content__tag">ALPHA</strong> phase of a project will be permanently erased at the end of that phase. Data collected for Google Analytics will not be erased.
+        </p>
     </div>
   </div>
 </div>
