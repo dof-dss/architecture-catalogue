@@ -37,8 +37,33 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Check if the user is an admin.
+     *
+     * @return boolean
+     */
     public function isAdmin()
     {
         return $this->admin == 1;
+    }
+
+    /**
+     * Check if the user is in the reader role.
+     *
+     * @return boolean
+     */
+    public function isReader()
+    {
+        return $this->role == 'reader';
+    }
+
+    /**
+     * Check if the user is in the contributor role.
+     *
+     * @return boolean
+     */
+    public function isContributor()
+    {
+        return $this->role == 'contributor';
     }
 }

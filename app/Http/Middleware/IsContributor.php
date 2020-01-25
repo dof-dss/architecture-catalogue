@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class IsAdmin
+class IsContributor
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->isAdmin()) {
+        if (auth()->user()->isContributor()) {
             return $next($request);
         }
         abort(403, 'You are not authorised to perform this action.');

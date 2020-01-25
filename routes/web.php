@@ -23,21 +23,21 @@ Route::get('/', function () {
 //
 // support links
 //
-Route::get('/accessibility', function () {
+Route::get('accessibility', function () {
     return view('support.accessibility');
 });
-Route::get('/cookies', function () {
+Route::get('cookies', function () {
     return view('support.cookies');
 });
-Route::get('/privacy-policy', function () {
+Route::get('privacy-policy', function () {
     return view('support.privacy-policy');
 });
 
 //
 // GitHub authentication
 //
-Route::get('/login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('/login/github/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
 
 //
 // email verification
@@ -45,39 +45,48 @@ Route::get('/login/github/callback', 'Auth\LoginController@handleProviderCallbac
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['guest']], function () {
-    Route::get('/user/request', 'Auth\UserController@request');
+    Route::get('user/request', 'Auth\UserController@request');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-
-    Route::get('entries/search', 'Catalogue\EntriesController@search');
+    Route::get('entries/search', 'Catalogue\EntriesController@search')->name('entry.find');
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
-    Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy');
 
-    Route::delete('/entries/{entry}', 'Catalogue\EntriesController@destroy');
-    Route::resource(
-        'entries',
-        'Catalogue\EntriesController',
-        ['only' => ['index', 'show', 'create', 'store', 'edit', 'update']]
-    );
-
+    Route::get('entries', 'Catalogue\EntriesController@index');
+    // contributor role required to add or update entries
+    Route::group(['middleware' => ['is_contributor']], function () {
+        Route::get('entries/create', 'Catalogue\EntriesController@create')->name('entry.create');
+        Route::post('entries', 'Catalogue\EntriesController@store')->name('entry.store');
+        Route::get('entries/{entry}/edit', 'Catalogue\EntriesController@edit')->name('entry.edit');
+        Route::put('entries/{entry}', 'Catalogue\EntriesController@update')->name('entry.update');
+        Route::delete('entries/{entry}', 'Catalogue\EntriesController@destroy')->name('entry.delete');
+        Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy')->name('entry.copy');
+    });
+    //
+    // this route is here because it will stop 'entries/something-else' working
+    //
+    Route::get('entries/{entry}', 'Catalogue\EntriesController@show')->name('entry.show');
     //
     // dependencies (links)
     //
     Route::get('entries/{entry}/links', 'Catalogue\LinksController@index');
-    Route::get('entries/{entry}/links/create', 'Catalogue\LinksController@create');
-    Route::get('entries/{entry}/links/search', 'Catalogue\LinksController@searchCatalogue');
-    Route::post('entries/{entry}/links', 'Catalogue\LinksController@store');
-    Route::delete('entries/{entry}/links/{link}', 'Catalogue\LinksController@destroy');
-
+    // contributor role required to add or update links
+    Route::group(['middleware' => ['is_contributor']], function () {
+        Route::get('entries/{entry}/links/create', 'Catalogue\LinksController@create');
+        Route::get('entries/{entry}/links/search', 'Catalogue\LinksController@searchCatalogue');
+        Route::post('entries/{entry}/links', 'Catalogue\LinksController@store');
+        Route::delete('entries/{entry}/links/{link}', 'Catalogue\LinksController@destroy');
+    });
     //
     // user defined tags
     //
     Route::get('entries/{entry}/tags', 'Catalogue\TagsController@index');
-    Route::post('entries/{entry}/tags', 'Catalogue\TagsController@store');
-    Route::delete('entries/{entry}/tags/{tag}', 'Catalogue\TagsController@destroy');
-    Route::post('tags', 'Catalogue\TagsController@createAndStore');
-
+    // contributor role required to add or update tags
+    Route::group(['middleware' => ['is_contributor']], function () {
+        Route::post('entries/{entry}/tags', 'Catalogue\TagsController@store');
+        Route::delete('entries/{entry}/tags/{tag}', 'Catalogue\TagsController@destroy');
+        Route::post('tags', 'Catalogue\TagsController@createAndStore');
+    });
     //
     // admin routes
     //
