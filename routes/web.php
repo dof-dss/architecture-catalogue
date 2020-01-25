@@ -21,6 +21,19 @@ Route::get('/', function () {
 });
 
 //
+// support links
+//
+Route::get('/accessibility', function () {
+    return view('support.accessibility');
+});
+Route::get('/cookies', function () {
+    return view('support.cookies');
+});
+Route::get('/privacy-policy', function () {
+    return view('support.privacy-policy');
+});
+
+//
 // GitHub authentication
 //
 Route::get('/login/github', 'Auth\LoginController@redirectToProvider');
