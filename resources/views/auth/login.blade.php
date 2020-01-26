@@ -8,7 +8,9 @@
 
 @include ('partials.errors')
 
-<a class="govuk-button" href="/login/github">Sign in with GitHub <i class="fa fa-github" aria-hidden="true"></i></a>
+<a class="govuk-button govuk-!-margin-right-2" href="/login/github"><i class="fa fa-github govuk-!-margin-right-1" aria-hidden="true"></i> Sign in with GitHub</a>
+
+<a class="govuk-button" href="/login/microsoft"><i class="fa fa-windows govuk-!-margin-right-1" aria-hidden="true"></i> Sign in with Microsoft</a>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 

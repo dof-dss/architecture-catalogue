@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e493c005cb0bb3b1bb8c571070bbdc38",
+    "content-hash": "4e774734de3bea11443c663b19ef30d9",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1326,6 +1326,51 @@
                 "twitter"
             ],
             "time": "2016-08-17T00:36:58+00:00"
+        },
+        {
+            "name": "metrogistics/laravel-azure-ad-oauth",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metrogistics/laravel-azure-ad-oauth.git",
+                "reference": "6f6aa2db484fac0453ac646c5b3d0db5cda7dcad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metrogistics/laravel-azure-ad-oauth/zipball/6f6aa2db484fac0453ac646c5b3d0db5cda7dcad",
+                "reference": "6f6aa2db484fac0453ac646c5b3d0db5cda7dcad",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "laravel/framework": ">5.4",
+                "laravel/socialite": ">3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Metrogistics\\AzureSocialite\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "AzureUser": "Metrogistics\\AzureSocialite\\AzureUserFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Metrogistics\\AzureSocialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Patrick Stephan",
+                    "email": "patrick.stephan@metrogistics.com"
+                }
+            ],
+            "description": "Provides single-sign-on ability to Microsoft Azure Active Directory enabled apps.",
+            "time": "2018-01-19T17:09:16+00:00"
         },
         {
             "name": "monolog/monolog",
