@@ -1,63 +1,69 @@
 @extends('layouts.base')
 
 @section('content')
-<h1 class="govuk-heading-l">Sign in</h1>
-
-
-
 
 @include ('partials.errors')
 
-<a class="govuk-button govuk-!-margin-right-2" href="/login/github"><i class="fa fa-github govuk-!-margin-right-1" aria-hidden="true"></i> Sign in with GitHub</a>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <h2 class="govuk-heading-l">Sign in</h2>
 
-<a class="govuk-button" href="/login/microsoft"><i class="fa fa-windows govuk-!-margin-right-1" aria-hidden="true"></i> Sign in with Microsoft</a>
+    <form id="login" action="{{ route('login') }}" method="post">
+        {{ csrf_field() }}
 
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        @component('components.text-input', [
+            'type' => 'email',
+            'name' => 'email',
+            'label' => 'Email address',
+            'autocomplete' => 'username'
+        ])
+        @endcomponent
 
-<h2 class="govuk-heading-m">Sign in using your account</h2>
+        @component('components.text-input', [
+            'type' => 'password',
+            'name' => 'password',
+            'label' => 'Password',
+            'autocomplete' => 'off'
+        ])
+        @endcomponent
 
-<form id="login" action="{{ route('login') }}" method="post">
-    {{ csrf_field() }}
+        <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
+      </form>
 
-    @component('components.text-input', [
-        'type' => 'email',
-        'name' => 'email',
-        'label' => 'E-mail address',
-        'width' => 'govuk-!-width-one-half',
-        'autocomplete' => 'username'
-    ])
-    @endcomponent
+      @if (Route::has('password.request'))
+          <p class="govuk-body">
+              <a class="govuk-link" href="{{ route('password.request') }}">
+                  Forgotten your password?
+              </a>
+          </p>
 
-    @component('components.text-input', [
-        'type' => 'password',
-        'name' => 'password',
-        'label' => 'Password',
-        'width' => 'govuk-!-width-one-half',
-        'autocomplete' => 'off'
-    ])
-    @endcomponent
+          <p class="govuk-body">
+              <a class="govuk-link" href="/register">
+                  Create an account
+              </a>
+          </p>
+          <!-- <p class="govuk-body">
+              <a class="govuk-link" href="/user/request">
+                  Request an account
+              </a>
+          </p> -->
+      @endif
 
-    <button class="govuk-button govuk-button--secondary" data-module="govuk-button" type="submit">Sign in</button>
-</form>
 
-@if (Route::has('password.request'))
-    <p class="govuk-body">
-        <a class="govuk-link" href="{{ route('password.request') }}">
-            Forgotten your password?
-        </a>
-    </p>
 
-    <h3 class="govuk-heading-m">Don't have an account?</h3>
+        <h2 class="govuk-heading-l">Use single sign-on</h2>
+        <h3 class="govuk-heading-m">GitHub</h3>
+        <p class="govuk-body">
+            This option is open to anyone who has registered as a team member with our GitHub organisation.
+        </p>
+        <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
 
-    <p class="govuk-body">
-        <a class="govuk-link" href="/register">
-            Create an account
-        </a>
-    </p>
-    <!-- <p class="govuk-body">
-        <a class="govuk-link" href="/user/request">
-            Request an account
-        </a>
-    </p> -->
-@endif
+        <!-- <h3 class="govuk-heading-m">Microsoft</h3>
+        <p class="govuk-body">
+            This option is open to anyone has has an account on the NIGOV domain.
+        </p>
+        <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a> -->
+    </div>
+</div>
+
 @endsection
