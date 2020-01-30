@@ -54,7 +54,7 @@
         <h2 class="govuk-heading-l">Use single sign-on</h2>
         <h3 class="govuk-heading-m">GitHub</h3>
         <p class="govuk-body">
-            This option is open to anyone who has registered as a team member with our GitHub organisation.
+            This option is open to anyone who has a GitHub account.
         </p>
         <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
 

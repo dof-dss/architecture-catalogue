@@ -9,12 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "alphagov/notifications-php-client": "^2.1",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
-        "metrogistics/laravel-azure-ad-oauth": "^1.2"
+        "metrogistics/laravel-azure-ad-oauth": "^1.2",
+        "php-http/guzzle6-adapter": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
