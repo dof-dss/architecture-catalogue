@@ -92,8 +92,9 @@ Route::group(['middleware' => ['auth']], function () {
     //
     Route::group(['middleware' => ['is_admin']], function () {
         Route::get('/admin', 'AdminController@menu');
-        // Route::get('/admin/user', 'Auth\UserController@create');
-        // Route::post('/admin/user', 'Auth\UserController@store');
+        Route::get('/users', 'UserController@index');
+        Route::get('/users/{user}/edit', 'UserController@edit');
+        Route::put('/users/{user}', 'UserController@update');
         if (App::environment('local')) {
             Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
             Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');

@@ -3,6 +3,14 @@
 @section('content')
 <h1 class="govuk-heading-xl filter-heading">Administration</h1>
 
+<h2 class="govuk-heading-l">Users</h2>
+
+<a class="govuk-link" data-module="govuk-button" href="/users">
+    View and manage users
+</a>
+
+<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
 <h2 class="govuk-heading-l">Catalogue</h2>
 <a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/export">
     Export catalogue

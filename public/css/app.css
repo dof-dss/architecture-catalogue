@@ -6611,6 +6611,16 @@ h2.govuk-heading-s {
   font-size: 1rem;
 }
 
+table.permissions th.name {
+  min-width: 280px;
+  width: 35%;
+}
+
+table.permissions td label span {
+  font-size: 0;
+  visibility: hidden;
+}
+
 @font-face {
   font-family: "Inter";
   font-style: normal;
