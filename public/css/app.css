@@ -6621,6 +6621,104 @@ table.permissions td label span {
   visibility: hidden;
 }
 
+.user-roles h3 {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+@media print {
+  .user-roles h3 {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .user-roles h3 {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+}
+
+@media print {
+  .user-roles h3 {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+
+.user-roles p {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+@media print {
+  .user-roles p {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .user-roles p {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+}
+
+@media print {
+  .user-roles p {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+
+table.user-list .name {
+  min-width: 280px;
+  width: 20%;
+}
+
+table.user-list .authentication {
+  width: 15%;
+}
+
+table.user-list th.is-billing-manager {
+  width: 15%;
+}
+
+table.user-list th.is-org-manager {
+  width: 15%;
+}
+
+table.user-list th.is-org-auditor {
+  width: 15%;
+}
+
+table.user-list th.spaces {
+  width: 20%;
+}
+
+table.user-list img.tick {
+  height: 20px;
+  width: 20px;
+}
+
+.paas-remove-user button + a {
+  display: inline-block;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+
 @font-face {
   font-family: "Inter";
   font-style: normal;

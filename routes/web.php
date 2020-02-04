@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/users', 'UserController@index');
         Route::get('/users/{user}/edit', 'UserController@edit');
         Route::put('/users/{user}', 'UserController@update');
+        Route::get('/users/{user}/delete', 'UserController@delete');
+        Route::delete('/users/{user}', 'UserController@destroy');
         if (App::environment('local')) {
             Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
             Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');

@@ -21716,8 +21716,8 @@ window.GOVUKFrontend = __webpack_require__(/*! ../../node_modules/govuk-frontend
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/stephenpatterson/dev-local/sites/architecture-catalogue/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/stephenpatterson/dev-local/sites/architecture-catalogue/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patterson/dev-local/sites/architecture-catalogue/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patterson/dev-local/sites/architecture-catalogue/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

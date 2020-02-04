@@ -59,7 +59,7 @@
             </table>
             <button class="govuk-button" type="submit">Save role changes</button>
             <p class="govuk-body">
-                <a class="govuk-link" href="#">Remove user</a>
+                <a class="govuk-link" href="/users/{{ $user->id }}/delete">Remove user</a>
             </p>
         </form>
     </div>

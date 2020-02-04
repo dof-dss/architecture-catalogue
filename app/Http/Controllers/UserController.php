@@ -37,4 +37,15 @@ class UserController extends Controller
         $user->save();
         return redirect('/users');
     }
+
+    public function delete(User $user)
+    {
+        return view('admin.users.delete', compact('user'));
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect('/users');
+    }
 }
