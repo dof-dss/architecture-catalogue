@@ -99,6 +99,7 @@ class EntriesController extends Controller
         'href.max' => 'The associated URL must be 250 characters or fewer',
         'description.required' => 'Enter a description.',
         'description.alpha_numeric_spaces' => 'Description must only include letters, digits and spaces.',
+        'description.alpha_numeric_spaces_punctuation' => 'Description must only include letters, digits, spaces and punctuation.',
         'description.between' => 'Description must be between 3 and 80 characters',
         'category_subcategory.required' => 'Enter a category and subcategory.',
         'category_subcategory.alpha_numeric_spaces_punctuation' => 'Category and subcategory must only include letters, digits, spaces and punctuation.',
