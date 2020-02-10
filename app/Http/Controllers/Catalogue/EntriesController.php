@@ -395,20 +395,22 @@ class EntriesController extends Controller
           'phrase.min' => 'Enter at least 3 characters'
         ]);
         // elastic search
-        $results = Entry::searchByQuery([
-            'multi_match' => [
-                'query' => $request->phrase,
-                'fields' => [
-                    'name',
-                    'description',
-                    'category',
-                    'sub_category',
-                    'functionality',
-                    'service_levels',
-                    'interfaces'
-                ],
-                'fuzziness' => 'auto'
-            ]],
+        $results = Entry::searchByQuery(
+            [
+                'multi_match' => [
+                    'query' => $request->phrase,
+                    'fields' => [
+                        'name',
+                        'description',
+                        'category',
+                        'sub_category',
+                        'functionality',
+                        'service_levels',
+                        'interfaces'
+                    ],
+                    'fuzziness' => 'auto'
+                ]
+            ],
             null,
             ['name', 'description', 'status']
         );
@@ -450,5 +452,4 @@ class EntriesController extends Controller
         }
         return $page_size;
     }
-
 }
