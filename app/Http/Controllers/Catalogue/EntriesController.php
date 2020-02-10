@@ -412,7 +412,7 @@ class EntriesController extends Controller
                 ]
             ],
             null,
-            ['name', 'description', 'status']
+            ['name', 'version', 'description', 'status']
         );
         Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->labels;
