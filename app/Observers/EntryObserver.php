@@ -27,7 +27,7 @@ class EntryObserver
     public function updated(Entry $entry)
     {
         // update the elasticsearch index
-        $entry->updateIndex();
+        $entry->reIndex();
     }
 
     /**
