@@ -91,12 +91,16 @@ Route::group(['middleware' => ['auth']], function () {
     // admin routes
     //
     Route::group(['middleware' => ['is_admin']], function () {
+        // menu
         Route::get('/admin', 'AdminController@menu');
+        // users
         Route::get('/users', 'UserController@index');
         Route::get('/users/{user}/edit', 'UserController@edit');
         Route::put('/users/{user}', 'UserController@update');
         Route::get('/users/{user}/delete', 'UserController@delete');
         Route::delete('/users/{user}', 'UserController@destroy');
+        // catalogues
+        Route::get('/catalogue/index', 'Catalogue\EntriesController@indexCatalogue');
         if (App::environment('local')) {
             Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
             Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');

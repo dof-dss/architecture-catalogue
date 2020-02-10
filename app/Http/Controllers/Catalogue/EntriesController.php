@@ -278,6 +278,17 @@ class EntriesController extends Controller
     }
 
     /**
+     * Index the entire catalogue using elasticsearch
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexCatalogue()
+    {
+        Entry::addAllToIndex();
+        return redirect()->back()->with('status', 'successful');
+    }
+
+    /**
      * Delete the entire catalogue
      *
      * @return \Illuminate\Http\Response
@@ -370,33 +381,42 @@ class EntriesController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
-        //  validation ?
-
-        $entry = (new Entry)->newQuery();
-        // search for an entry based on its name
-        if ($request->has('name')) {
-            if ($request->input('name') != "") {
-                $entry->where('name', 'like', '%'. $request->input('name') . '%');
-            }
-        }
-        // search for an entry based on its description
-        if ($request->has('description')) {
-            if ($request->input('description') != "") {
-                $entry->where('description', 'like', '%'. $request->input('description') . '%');
-            }
-        }
-        // search for an entry based on its status
-        if ($request->has('status')) {
-            if ($request->input('status') != "") {
-                $entry->where('status', $request->input('status'));
-            }
+        // check that an index exists
+        if (!Entry::indexExists()) {
+            abort(500);
+            // could fall back to a SQL search?
         }
 
-        $page_size = $this->calculatePageSize($entry->count());
-        $entries = $entry->orderBy('name')->Paginate($page_size);
-        Log::debug('Catalogue search returned ' . $entries->count() . ' ' . Str::plural('result', $entries->count()) . '.');
+        // validation
+        $request->validate([
+          'phrase' => 'required|min:3'
+        ], [
+          'phrase.required' => 'Enter a word or phrase',
+          'phrase.min' => 'Enter at least 3 characters'
+        ]);
+        // elastic search
+        $results = Entry::searchByQuery([
+            'multi_match' => [
+                'query' => $request->phrase,
+                'fields' => [
+                    'name',
+                    'description',
+                    'category',
+                    'sub_category',
+                    'functionality',
+                    'service_levels',
+                    'interfaces'
+                ],
+                'fuzziness' => 'auto'
+            ]],
+            null,
+            ['name', 'description', 'status']
+        );
+        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->labels;
         $catalogue_size = Entry::count();
+        $page_size = $this->calculatePageSize($results->count());
+        $entries = $results->sortBy('name')->Paginate($page_size);
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 

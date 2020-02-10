@@ -181,6 +181,11 @@ return [
         App\Providers\CloudFoundryServiceProvider::class,
         App\Providers\DatabaseServiceProvider::class,
 
+        //
+        // custom provider for elasticsearch
+        //
+        Elasticquent\ElasticquentServiceProvider::class,
+
     ],
 
     /*
@@ -231,6 +236,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
     ],
 
@@ -251,8 +257,7 @@ return [
     | Associated URLs
     |--------------------------------------------------------------------------
     |
-    | The number of results displayed per page will vary to ensure the number
-    | of pages displayed does not exceed the max.
+    | Links to other resources
     |
     */
     'architecture_portal_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://dss-architecture-portal.london.cloudapps.digital/'),

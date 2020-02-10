@@ -10,6 +10,11 @@ use Illuminate\Pagination\Paginator;
 // used for custom validation
 use Illuminate\Support\Facades\Validator;
 
+// models
+use App\Entry;
+
+// observers
+use App\Observers\EntryObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,5 +61,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('vendor.pagination.govuk');
 
         Paginator::defaultSimpleView('view-name');
+
+        //
+        // register our observers
+        //
+        Entry::observe(EntryObserver::class);
     }
 }

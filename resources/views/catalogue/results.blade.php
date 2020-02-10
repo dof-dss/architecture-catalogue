@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="govuk-heading-l govuk-!-margin-bottom-1">Search results</h1>
-<span class="govuk-caption-m govuk-!-margin-bottom-2">Your search returned {{ $entries->total() }} catalogue entries.</span>
+<span class="govuk-caption-m govuk-!-margin-bottom-2">Your search returned {{ $entries->count() . ' catalogue '. Str::plural('entry', $entries->count()) }}.</span>
 @if ($entries->count() > 0)
   @include('partials.entries-table')
 @else
