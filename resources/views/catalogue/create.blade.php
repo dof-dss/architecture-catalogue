@@ -24,9 +24,10 @@
     ])
     @endcomponent
 
-    @component('components.text-input', [
+    @component('components.textarea', [
         'name' => 'description',
-        'label' => 'Description'
+        'label' => 'Description',
+        'rows' => 2
     ])
     @endcomponent
 

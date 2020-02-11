@@ -27,10 +27,11 @@
     ])
     @endcomponent
 
-    @component('components.text-input', [
+    @component('components.textarea', [
         'name' => 'description',
         'label' => 'Description',
-        'value' => $entry->description
+        'value' => $entry->description,
+        'rows' => 2
     ])
     @endcomponent
 
