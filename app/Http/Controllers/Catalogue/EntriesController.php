@@ -15,6 +15,9 @@ use Carbon\Carbon;
 // models
 use App\Entry;
 
+// form requests
+use App\Http\Requests\StoreEntry;
+
 class EntriesController extends Controller
 {
 
@@ -75,45 +78,6 @@ class EntriesController extends Controller
             'Not categorised'
         )
     );
-
-    protected $rules = [
-        'name' => 'required|between:3,40',
-        'version' => 'required|alpha_numeric_spaces_punctuation|between:1,20',
-        'href' => 'nullable|url|max:250',
-        'description' => 'required|alpha_numeric_spaces_punctuation|between:3,80',
-        'category_subcategory' => 'required|alpha_numeric_spaces_punctuation|between:8,80',
-        'status' => 'required|alpha|max:10',
-        'functionality' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
-        'service_levels' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
-        'interfaces' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
-    ];
-
-    protected $messages = [
-        'name.required' => 'Enter the component name.',
-        'name.alpha_numeric_spaces' => 'Name must only include letters, digits and spaces.',
-        'name.between' => 'Name must be between 3 and 40 characters',
-        'version.required' => 'Enter a version.',
-        'version.alpha_numeric_spaces' => 'Version must only include letters, digits and spaces.',
-        'version.between' => 'Name must be between 1 and 20 characters',
-        'href.url' => 'The associated URL is invalid.',
-        'href.max' => 'The associated URL must be 250 characters or fewer',
-        'description.required' => 'Enter a description.',
-        'description.alpha_numeric_spaces' => 'Description must only include letters, digits and spaces.',
-        'description.alpha_numeric_spaces_punctuation' => 'Description must only include letters, digits, spaces and punctuation.',
-        'description.between' => 'Description must be between 3 and 80 characters',
-        'category_subcategory.required' => 'Enter a category and subcategory.',
-        'category_subcategory.alpha_numeric_spaces_punctuation' => 'Category and subcategory must only include letters, digits, spaces and punctuation.',
-        'category_subcategory.max' => 'Category and subcategory must be between 8 and 80 characters',
-        'status.required' => 'Enter a status.',
-        'status.alpha' => 'Status must only include letters',
-        'status.max' => 'Status must 10 characters or fewer.',
-        'functionality.alpha_numeric_spaces_punctuation' => 'Supported functionality must only include letters, digits, spaces and punctuation.',
-        'functionality.max' => 'Supported functionality must 300 characters or fewer',
-        'service_levels.alpha_numeric_spaces_punctuation' => 'Service levels must only include letters, digits, spaces and punctuation.',
-        'service_levels.max' => 'Service levels must be 300 characters or fewer',
-        'interfaces.alpha_numeric_spaces_punctuation' => 'Interfaces must only include letters, digits, spaces and punctuation.',
-        'interfaces.max' => 'Interfaces must be 300 characters or fewer',
-    ];
 
     /**
      * Display a listing of the resource.
@@ -181,11 +145,8 @@ class EntriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEntry $request)
     {
-        // perform validation (should change to a form request)
-        $request->validate($this->rules, $this->messages);
-
         // need to split category_subcategory into its component parts which are separated by a '-'
         $parts = explode("-", $request->category_subcategory);
         // validate the two parts against the acceptable values
@@ -239,11 +200,8 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Entry $entry)
+    public function update(StoreEntry $request, Entry $entry)
     {
-        // perform validation (should change to a form request)
-        $request->validate($this->rules, $this->messages);
-
         // need to split category_subcategory into its component parts which are separated by a '-'
         $parts = explode("-", $request->category_subcategory);
         // validate the two parts against the acceptable values
