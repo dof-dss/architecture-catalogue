@@ -43,7 +43,7 @@
             @foreach ($values as $key => $items)
                 <optgroup label="{{ $key }}"</optgroup>
                 @foreach ($items as $item)
-                    @if (isset($value) && ($value == $item))
+                    @if (isset($value) && ($value == $item) || old($name) == ($key . '-' . $item) )
                         <option value="{{ $key }}-{{ $item }}" selected>{{ $item }}</option>
                     @else
                         <option value="{{ $key }}-{{ $item }}">{{ $item }}</option>

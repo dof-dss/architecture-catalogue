@@ -38,7 +38,7 @@
                 <option value="" selected>{{ $blank_label ?? '' }}</option>
             @endif
             @foreach ($values as $v)
-                @if (isset($value) && ($value == $v))
+                @if (isset($value) && ($value == $v) || old($name) == $v )
                     <option value="{{ $v }}" selected>{{ $v }}</option>
                 @else
                     <option value="{{ $v }}">{{ $v }}</option>
