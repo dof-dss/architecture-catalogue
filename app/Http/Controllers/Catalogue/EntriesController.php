@@ -352,7 +352,9 @@ class EntriesController extends Controller
           'phrase.required' => 'Enter a word or phrase',
           'phrase.min' => 'Enter at least 3 characters'
         ]);
+
         // elastic search
+        $limit = 500;
         $results = Entry::searchByQuery(
             [
                 'multi_match' => [
@@ -366,11 +368,12 @@ class EntriesController extends Controller
                         'service_levels',
                         'interfaces'
                     ],
-                    'fuzziness' => 'auto'
+                    'fuzziness' => 'auto',
                 ]
             ],
             null,
-            ['name', 'version', 'description', 'status']
+            ['name', 'version', 'description', 'status'],
+            $limit
         );
         Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->labels;
