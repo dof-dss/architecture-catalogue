@@ -86,6 +86,14 @@
             @endslot
         @endif
     @endcomponent
+    @component('components.summary-list-row')
+        @slot('attribute')
+          Last updated on
+        @endslot
+        @slot('value')
+          {{ $entry->updated_at->format('jS F Y') }}
+        @endslot
+    @endcomponent
 </dl>
 
 <h2 class="govuk-heading-m">Additional information</h2>

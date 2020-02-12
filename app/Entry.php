@@ -27,6 +27,11 @@ class Entry extends Model
         'related_sbbs'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
     // elasticquent mappings
     protected $mappingProperties = array (
         'name' => [
