@@ -59,7 +59,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('entries', 'Catalogue\EntriesController@store')->name('entry.store');
         Route::get('entries/{entry}/edit', 'Catalogue\EntriesController@edit')->name('entry.edit');
         Route::put('entries/{entry}', 'Catalogue\EntriesController@update')->name('entry.update');
-        Route::delete('entries/{entry}', 'Catalogue\EntriesController@destroy')->name('entry.delete');
+        Route::get('entries/{entry}/delete', 'Catalogue\EntriesController@delete')->name('delete');
+        Route::delete('entries/{entry}', 'Catalogue\EntriesController@destroy')->name('entry.destrogy');
         Route::get('entries/{entry}/copy', 'Catalogue\EntriesController@copy')->name('entry.copy');
     });
     //

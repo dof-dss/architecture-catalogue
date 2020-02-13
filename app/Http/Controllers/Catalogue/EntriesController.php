@@ -224,6 +224,17 @@ class EntriesController extends Controller
     }
 
     /**
+    * Confirm the deletion of the catalogue entry.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function delete(Entry $entry)
+    {
+        return view('catalogue.delete', compact('entry'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
