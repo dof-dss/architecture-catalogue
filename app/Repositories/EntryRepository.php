@@ -13,7 +13,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  Return a specific entry
      *  @param $id
      */
-    public function get($id)
+    public function get($id): object
     {
         return Entry::findOrFail($id);
     }
@@ -21,7 +21,7 @@ class EntryRepository implements EntryRepositoryInterface
     /**
      *
      */
-    public function all()
+    public function all(): array
     {
         return array(
             'href' => url()->current(),
@@ -35,7 +35,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  @param Array $criteria
      *  @return Collection
      */
-    public function filter(array $criteria)
+    public function filter(array $criteria): object
     {
         $entry = (new Entry)->newQuery();
         // search for an entry based on its status
@@ -76,7 +76,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  @param array $data
      *  @return int
      */
-    public function create(array $data)
+    public function create(array $data): int
     {
         $entry = Entry::create($data);
         return $entry->id;
@@ -88,7 +88,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  @param $id
      *  @param array $data
      */
-    public function update($id, array $data)
+    public function update($id, array $data): void
     {
         $entry = Entry::findOrFail($id);
         $entry->update($data);
@@ -100,7 +100,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  @param $id
      *  @param array $data
      */
-    public function delete($id)
+    public function delete($id): void
     {
         $entry = Entry::findOrFail($id);
         $entry->delete();
@@ -113,7 +113,7 @@ class EntryRepository implements EntryRepositoryInterface
      *  @param array $data
      *  @return int
      */
-    public function copy($id)
+    public function copy($id): int
     {
         $entry = Entry::findOrFail($id);
         $copy = $entry->replicate();
@@ -126,7 +126,7 @@ class EntryRepository implements EntryRepositoryInterface
     /**
      *  Delete all entries
      */
-    public function deleteAll()
+    public function deleteAll(): void
     {
         Entry::query()->delete();
     }
@@ -134,7 +134,7 @@ class EntryRepository implements EntryRepositoryInterface
     /**
      *  Index using eleasticsearch
      */
-    public function index()
+    public function index(): void
     {
         Entry::addAllToIndex();
     }
@@ -142,7 +142,7 @@ class EntryRepository implements EntryRepositoryInterface
     /**
      *  Index using eleasticsearch
      */
-    public function indexExists()
+    public function indexExists(): int
     {
         return Entry::indexExists();
     }
@@ -152,7 +152,7 @@ class EntryRepository implements EntryRepositoryInterface
      *
      *  @param string $query
      */
-    public function search($query)
+    public function search($query): object
     {
         $limit = 500;
         return Entry::searchByQuery(

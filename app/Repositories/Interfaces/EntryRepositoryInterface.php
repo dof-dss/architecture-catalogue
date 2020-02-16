@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 
 interface EntryRepositoryInterface
 {
-    public function all();
-    public function get($id);
-    public function filter(array $criteria);
-    public function create(array $data);
-    public function update($id, array $data);
-    public function delete($id);
-    public function copy($id);
-    public function deleteAll();
+    public function all(): array;
+    public function get($id): object;
+    public function filter(array $criteria): object;
+    public function create(array $data): int;
+    public function update($id, array $data): void;
+    public function delete($id): void;
+    public function copy($id): int;
+    public function deleteAll(): void;
     // eleasticsearch functions
-    public function index();
-    public function indexExists();
-    public function search($query);
+    public function index(): void;
+    public function indexExists(): int;
+    public function search($query): object;
 }
