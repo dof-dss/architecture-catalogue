@@ -9,75 +9,31 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
-
 use Carbon\Carbon;
-
-// models
-use App\Entry;
 
 // form requests
 use App\Http\Requests\StoreEntry;
 
+// repositories
+use App\Repositories\Interfaces\EntryRepositoryInterface as EntryRepository;
+use App\Repositories\Interfaces\StatusRepositoryInterface as StatusRepository;
+use App\Repositories\Interfaces\CategoriesRepositoryInterface as CategoriesRepository;
+
 class EntriesController extends Controller
 {
+    protected $entryRepository;
+    protected $statusRepository;
+    protected $categoriesRepository;
 
-    // this should be an include file
-
-    protected $statuses = [
-        'approved',
-        'unapproved',
-        'prohibited',
-        'retiring',
-        'evaluating'
-    ];
-
-    protected $labels = [
-        'approved' => 'label--green',
-        'unapproved' => 'label--black',
-        'prohibited'=> 'label--red',
-        'retiring' => 'label--orange',
-        'evaluating' => 'label--blue'
-    ];
-
-    protected $categories = array(
-        'Business Applications' => array(
-            'Information Consumer Applications',
-            'Brokering Applications',
-            'Information Provider Applications',
-            'Shared Services Applications'
-        ),
-        'Infrastructure Applications' => array(
-            'Productivity',
-            'Development Tools',
-            'Libraries',
-            'Management Utilities',
-            'Storage Management Utilities'
-        ),
-        'Application Platform' => array(
-            'Software Engineering Services',
-            'Operating System Services',
-            'Security Services',
-            'Human Interaction Services',
-            'Data Interchange Services',
-            'Data Management Services',
-            'Network Services'
-        ),
-        'Technology Platforms' => array(
-            'Hosting Services',
-            'Infrastructure as a Service',
-            'Platform as a Service',
-            'Software as a Service'
-        ),
-        'Physical Infrastructure' => array(
-            'Data Centres',
-            'Data Networks',
-            'End User Devices',
-            'Server Devices'
-        ),
-        'Other' => array(
-            'Not categorised'
-        )
-    );
+    public function __construct(
+        EntryRepository $entryRepository,
+        StatusRepository $statusRepository,
+        CategoriesRepository $categoriesRepository
+    ) {
+        $this->entryRepository = $entryRepository;
+        $this->statusRepository = $statusRepository;
+        $this->categoriesRepository = $categoriesRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -86,44 +42,41 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
-        $catalogue_size = Entry::count();
+        $catalogue_size = count($this->entryRepository->all());
         if ($request->is('api/*')) {
-            return array(
-              'href' => url()->current(),
-              'timestamp' => Carbon::now(),
-              'entries' => Entry::all());
+            return $this->entryRepository->all();
         } else {
-            $status = null;
-            $entry = (new Entry)->newQuery();
+            // build up the filter criteria
+            $criteria = [];
             // search for an entry based on its status
             if ($request->has('status')) {
-                $status = $request->input('status');
-                if ($request->input('status') != "") {
-                    $entry->where('status', $request->input('status'));
+                $status = $request->status;
+                if ($status != "") {
+                    $criteria['status'] = $status;
                 }
             }
             // search for an entry based on its category / sub-category
             $category_subcategory = null;
-            $category = null;
-            $sub_category = null;
             if ($request->has('category_subcategory')) {
-                $category_subcategory = $request->input('category_subcategory');
+                $category_subcategory = $request->category_subcategory;
                 if ($category_subcategory != "") {
                     // need to split category_subcategory into its component parts which are separated by a '-'
                     $parts = explode("-", $category_subcategory);
                     // validate the two parts against the acceptable values
-                    $category = $parts[0];
-                    $sub_category = $parts[1];
-                    $entry->where('category', $category);
-                    $entry->where('sub_category', $sub_category);
+                    $criteria['category'] = $parts[0];
+                    $criteria['sub_category'] = $parts[1];
                 }
             }
-            $page_size = $this->calculatePageSize($entry->count());
-            $entries = $entry->orderBy('name')->Paginate($page_size);
-            $statuses = $this->statuses;
-            $labels = $this->labels;
-            $categories = $this->categories;
-            return view('catalogue.index', compact('entries', 'statuses', 'labels', 'catalogue_size', 'status', 'categories', 'sub_category'));
+            $entries = $this->entryRepository->filter($criteria);
+            $statuses = $this->statusRepository->all();
+            $labels = $this->statusRepository->labels();
+            $categories = $this->categoriesRepository->all();
+            $status = $criteria['status'] ?? null;
+            $sub_category = $criteria['sub_category'] ?? null;
+            return view(
+                'catalogue.index',
+                compact('entries', 'statuses', 'labels', 'catalogue_size', 'status', 'categories', 'sub_category')
+            );
         }
     }
 
@@ -134,8 +87,8 @@ class EntriesController extends Controller
      */
     public function create()
     {
-        $statuses = $this->statuses;
-        $categories = $this->categories;
+        $statuses = $this->statusRepository->all();
+        $categories = $this->categoriesRepository->all();
         return view('catalogue.create', compact('statuses', 'categories'));
     }
 
@@ -151,21 +104,21 @@ class EntriesController extends Controller
         $parts = explode("-", $request->category_subcategory);
         // validate the two parts against the acceptable values
 
-        $entry = new Entry;
-        $entry->name = $request->name;
-        $entry->version = $request->version;
-        $entry->description = $request->description;
-        $entry->href = $request->href;
-        $entry->category = $parts[0];
-        $entry->sub_category = $parts[1];
-        $entry->status = $request->status;
-        $entry->functionality = $request->functionality;
-        $entry->service_levels = $request->service_levels;
-        $entry->interfaces = $request->interfaces;
-        $entry->save();
+        $entry = [];
+        $entry['name'] = $request->name;
+        $entry['version'] = $request->version;
+        $entry['description'] = $request->description;
+        $entry['href'] = $request->href;
+        $entry['category'] = $parts[0];
+        $entry['sub_category'] = $parts[1];
+        $entry['status'] = $request->status;
+        $entry['functionality'] = $request->functionality;
+        $entry['service_levels'] = $request->service_levels;
+        $entry['interfaces'] = $request->interfaces;
+        $id = $this->entryRepository->create($entry);
 
-        // now redirect back to the index page
-        return redirect('/entries/' . $entry->id);
+        // now view the newly created entry
+        return redirect('/entries/' . $id);
     }
 
     /**
@@ -174,9 +127,10 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Entry $entry)
+    public function show($id)
     {
-        $labels = $this->labels;
+        $entry = $this->entryRepository->get($id);
+        $labels = $this->statusRepository->labels();
         return view('catalogue.view', compact('entry', 'labels'));
     }
 
@@ -188,8 +142,8 @@ class EntriesController extends Controller
      */
     public function edit(Entry $entry)
     {
-        $statuses = $this->statuses;
-        $categories = $this->categories;
+        $statuses = $this->statusRepository->all();
+        $categories = $this->categoriesRepository->all();
         return view('catalogue.edit', compact('entry', 'statuses', 'categories'));
     }
 
@@ -200,27 +154,27 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreEntry $request, Entry $entry)
+    public function update(StoreEntry $request, $id)
     {
         // need to split category_subcategory into its component parts which are separated by a '-'
         $parts = explode("-", $request->category_subcategory);
         // validate the two parts against the acceptable values
 
         // update the entry
-        $entry->name = $request->name;
-        $entry->version = $request->version;
-        $entry->description = $request->description;
-        $entry->href = $request->href;
-        $entry->category = $parts[0];
-        $entry->sub_category = $parts[1];
-        $entry->status = $request->status;
-        $entry->functionality = $request->functionality;
-        $entry->service_levels = $request->service_levels;
-        $entry->interfaces = $request->interfaces;
-        $entry->save();
+        $entry['name'] = $request->name;
+        $entry['version'] = $request->version;
+        $entry['description'] = $request->description;
+        $entry['href'] = $request->href;
+        $entry['category'] = $parts[0];
+        $entry['sub_category'] = $parts[1];
+        $entry['status'] = $request->status;
+        $entry['functionality'] = $request->functionality;
+        $entry['service_levels'] = $request->service_levels;
+        $entry['interfaces'] = $request->interfaces;
+        $this->entryRepository->update($id, $entry);
 
-        // now redirect back to the index page
-        return redirect('/entries/' . $entry->id);
+        // now view the updated entry
+        return redirect('/entries/' . $id);
     }
 
     /**
@@ -229,8 +183,9 @@ class EntriesController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function delete(Entry $entry)
+    public function delete($id)
     {
+        $entry = $this->entryRepository->get($id);
         return view('catalogue.delete', compact('entry'));
     }
 
@@ -240,9 +195,32 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Entry $entry)
+    public function destroy($id)
     {
-        $entry->delete();
+        $this->entryRepository->delete($id);
+        return redirect('/entries');
+    }
+
+    /**
+     * Copy a catalogue entry
+     *
+     * @param Integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function copy($id)
+    {
+        $newId = $this->entryRepository->copy($id);
+        return redirect('/entries/' . $newId);
+    }
+
+    /**
+     * Delete the entire catalogue
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCatalogue()
+    {
+        $this->entryRepository->deleteAll();
         return redirect('/entries');
     }
 
@@ -253,19 +231,49 @@ class EntriesController extends Controller
      */
     public function indexCatalogue()
     {
-        Entry::addAllToIndex();
+        $this->entryRepository->index();
         return redirect()->back()->with('status', 'successful');
     }
 
     /**
-     * Delete the entire catalogue
+     * Display the search page
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function deleteCatalogue()
+    public function search(Request $request)
     {
-        Entry::query()->delete();
-        return redirect('/entries');
+        $statuses = $this->statusRepository->all();
+        return view('catalogue.search', compact('statuses'));
+    }
+
+    /**
+     * Search the catalogue and return the results
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchCatalogue(Request $request)
+    {
+        // check that an index exists
+        if (!$this->entryRepository->indexExists()) {
+            abort(500);
+            // could fall back to a SQL search?
+        }
+        // validation
+        $request->validate([
+          'phrase' => 'required|min:3'
+        ], [
+          'phrase.required' => 'Enter a word or phrase',
+          'phrase.min' => 'Enter at least 3 characters'
+        ]);
+        $results = $this->entryRepository->search($request->phrase);
+        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
+        $labels = $this->statusRepository->labels();
+        $catalogue_size = count($this->entryRepository->all());
+        $page_size = $this->entryRepository->calculatePageSize($results->count());
+        $entries = $results->sortBy('name')->Paginate($page_size);
+        return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 
     /**
@@ -301,13 +309,13 @@ class EntriesController extends Controller
         // loop through all the entries and store in the database
         foreach ($json->technology_applications_catalogue->entries as $json_entry) {
             // store the entry
-            $entry = new Entry;
-            $entry->name = $json_entry->name;
-            $entry->description = $json_entry->description;
-            $entry->href = isset($json_entry->href) ? $json_entry->href : null;
-            $entry->category = $json_entry->category;
-            $entry->sub_category = $json_entry->sub_category;
-            $entry->save();
+            $entry = [];
+            $entry['name'] = $json_entry->name;
+            $entry['description'] = $json_entry->description;
+            $entry['href'] = isset($json_entry->href) ? $json_entry->href : null;
+            $entry['category'] = $json_entry->category;
+            $entry['sub_category'] = $json_entry->sub_category;
+            $this->entryRepository->create($entry);
         }
 
         return redirect('/entries');
@@ -322,106 +330,9 @@ class EntriesController extends Controller
     public function exportCatalogue(Request $request)
     {
         // need to name the array 'entries' to work with the architecture portal
-        $data = json_encode(array('entries' => Entry::all()));
+        $data = json_encode(array('entries' => $this->entryRepository->all()));
         $fileName = 'downloads/catalogue_' . time() . '.json';
         Storage::put($fileName, $data);
         return Storage::download($fileName, 'catalogue_' . time() . '.json');
-    }
-
-
-    /**
-     * Display the search page
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $statuses = $this->statuses;
-        return view('catalogue.search', compact('statuses'));
-    }
-
-
-    /**
-     * Search the catalogue and return the results
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function searchCatalogue(Request $request)
-    {
-        // check that an index exists
-        if (!Entry::indexExists()) {
-            abort(500);
-            // could fall back to a SQL search?
-        }
-
-        // validation
-        $request->validate([
-          'phrase' => 'required|min:3'
-        ], [
-          'phrase.required' => 'Enter a word or phrase',
-          'phrase.min' => 'Enter at least 3 characters'
-        ]);
-
-        // elastic search
-        $limit = 500;
-        $results = Entry::searchByQuery(
-            [
-                'multi_match' => [
-                    'query' => $request->phrase,
-                    'fields' => [
-                        'name',
-                        'description',
-                        'category',
-                        'sub_category',
-                        'functionality',
-                        'service_levels',
-                        'interfaces'
-                    ],
-                    'fuzziness' => 'auto',
-                ]
-            ],
-            null,
-            ['name', 'version', 'description', 'status'],
-            $limit
-        );
-        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
-        $labels = $this->labels;
-        $catalogue_size = Entry::count();
-        $page_size = $this->calculatePageSize($results->count());
-        $entries = $results->sortBy('name')->Paginate($page_size);
-        return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
-    }
-
-    /**
-     * Copy a catalogue entry
-     *
-     * @param Integer $id
-     * @return \Illuminate\Http\Response
-     */
-    public function copy(Entry $entry)
-    {
-        $copy = $entry->replicate();
-        $copy->name = $copy->name . ' - COPY';
-        $copy->status = 'prohibited';
-        $copy->save();
-        return redirect('/entries/' . $copy->id);
-    }
-
-    /**
-     *  Calculate page size to ensure there is a maximum of 5 pages
-     *
-     * @param Integer $num_rows
-     * @return Integer
-     */
-    private function calculatePageSize($num_rows)
-    {
-        $page_size = config('app.page_size');
-        $num_pages = ceil($num_rows / $page_size);
-        if ($num_pages > config('app.max_pages')) {
-            $page_size = ceil($num_rows / $num_pages);
-        }
-        return $page_size;
     }
 }

@@ -186,6 +186,11 @@ return [
         //
         Elasticquent\ElasticquentServiceProvider::class,
 
+        //
+        // custom provider to implement repository pattern
+        //
+        App\Providers\RepositoryServiceProvider::class,
+
     ],
 
     /*
