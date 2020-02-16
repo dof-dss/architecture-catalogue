@@ -11,6 +11,8 @@
 
     <h2 class="govuk-heading-m">Core information</h2>
 
+    <input type="hidden" name="id" value="{{ $entry->id }}"
+
     @component('components.text-input', [
         'name' => 'name',
         'label' => 'Name',

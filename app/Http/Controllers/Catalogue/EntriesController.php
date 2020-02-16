@@ -140,8 +140,9 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Entry $entry)
+    public function edit($id)
     {
+        $entry = $this->entryRepository->get($id);
         $statuses = $this->statusRepository->all();
         $categories = $this->categoriesRepository->all();
         return view('catalogue.edit', compact('entry', 'statuses', 'categories'));

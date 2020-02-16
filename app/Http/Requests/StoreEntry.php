@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// custom rules
+use App\Rules\UniqueComposite;
+
 class StoreEntry extends FormRequest
 {
     /**
@@ -24,8 +27,17 @@ class StoreEntry extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|between:3,40',
-            'version' => 'nullable|alpha_numeric_spaces_punctuation|between:1,20',
+            'name' => [
+                'required',
+                'between:3,40',
+                new UniqueComposite('entries', 'name', $this->name, 'version', $this->version, $this->id)
+            ],
+            'version' => [
+                'nullable',
+                'alpha_numeric_spaces_punctuation',
+                'between:1,20',
+                new UniqueComposite('entries', 'name', $this->name, 'version', $this->version, $this->id)
+            ],
             'href' => 'nullable|url|max:250',
             'description' => 'required|alpha_numeric_spaces_punctuation|between:3,100',
             'category_subcategory' => 'required|alpha_numeric_spaces_punctuation|between:8,80',
