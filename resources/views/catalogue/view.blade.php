@@ -143,6 +143,20 @@
             @endslot
         @endif
     @endcomponent
+    @component('components.summary-list-row')
+        @slot('attribute')
+          Used by
+        @endslot
+        @slot('value')
+          @foreach ($entry->parents as $item)
+              <p class="govuk-body">
+                  <a class="govuk-link" href="/entries/{{ $item->child->id}}">
+                      {{ $item->child->name }} {{ $item->child->version }}
+                  </a>
+              </p>
+          @endforeach
+        @endslot
+    @endcomponent
 </dl>
 
 <hr class="govuk-section-break govuk-section-break--m">

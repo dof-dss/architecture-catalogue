@@ -17,4 +17,9 @@ class Link extends Model
     {
         return $this->belongsTo('App\Entry', 'item2_id', 'id');
     }
+
+    public function child()
+    {
+        return $this->belongsTo('App\Entry', 'item1_id', 'id');
+    }
 }
