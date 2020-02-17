@@ -53,7 +53,7 @@ class EntryRepository implements EntryRepositoryInterface
             $query->where('sub_category', $criteria['sub_category']);
         }
         $page_size = $this->calculatePageSize($query->count());
-        return $query->orderBy('name', SORT_NATURAL|SORT_FLAG_CASE)->orderBy('version')->paginate($page_size);
+        return $query->orderBy('name')->orderBy('version')->paginate($page_size);
     }
 
     /**
