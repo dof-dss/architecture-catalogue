@@ -28,7 +28,7 @@ class EntryRepository implements EntryRepositoryInterface
         return array(
             'href' => url()->current(),
             'timestamp' => Carbon::now(),
-            'entries' => Entry::all()
+            'entries' => Entry::with('children')->get()
         );
     }
 
@@ -53,7 +53,7 @@ class EntryRepository implements EntryRepositoryInterface
             $query->where('sub_category', $criteria['sub_category']);
         }
         $page_size = $this->calculatePageSize($query->count());
-        return $query->orderBy('name')->paginate($page_size);
+        return $query->orderBy('name')->orderBy('version')->paginate($page_size);
     }
 
     /**
