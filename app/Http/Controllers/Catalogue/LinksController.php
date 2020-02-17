@@ -11,36 +11,33 @@ use Illuminate\Support\Str;
 
 // models
 use App\Link;
-use App\Entry;
+
+// repositories
+use App\Repositories\Interfaces\EntryRepositoryInterface as EntryRepository;
+use App\Repositories\Interfaces\StatusRepositoryInterface as StatusRepository;
 
 class LinksController extends Controller
 {
-    // this should be an include file
+    protected $entryRepository;
+    protected $statusRepository;
 
-    protected $statuses = [
-      'approved',
-      'unapproved',
-      'prohibited',
-      'retiring',
-      'evaluating'
-    ];
-
-    protected $labels = [
-      'approved' => 'label--green',
-      'unapproved' => 'label--black',
-      'prohibited'=> 'label--red',
-      'retiring' => 'label--orange',
-      'evaluating' => 'label--blue'
-    ];
+    public function __construct(
+        EntryRepository $entryRepository,
+        StatusRepository $statusRepository
+    ) {
+        $this->entryRepository = $entryRepository;
+        $this->statusRepository = $statusRepository;
+    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Entry $entry)
+    public function index($id)
     {
-        $labels = $this->labels;
+        $entry = $this->entryRepository->get($id);
+        $labels = $this->statusRepository->labels();
         return view('catalogue.links.index', compact('entry', 'labels'));
     }
 
@@ -49,9 +46,10 @@ class LinksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Entry $entry)
+    public function create($id)
     {
-        $statuses = $this->statuses;
+        $entry = $this->entryRepository->get($id);
+        $statuses = $this->statusRepository->all();
         return view('catalogue.links.search', compact('entry', 'statuses'));
     }
 
@@ -63,36 +61,29 @@ class LinksController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
-        //  validation ?
-
+        // check that an index exists
+        if (!$this->entryRepository->indexExists()) {
+            abort(500);
+            // could fall back to a SQL search?
+        }
+        // validation
         if (!$request->has('entry_id')) {
             abort(404);
         }
-        $entry = (new Entry)->newQuery();
-        // search for an entry based on its name
-        if ($request->has('name')) {
-            if ($request->input('name') != "") {
-                $entry->where('name', 'like', '%'. $request->input('name') . '%');
-            }
-        }
-        // search for an entry based on its description
-        if ($request->has('description')) {
-            if ($request->input('description') != "") {
-                $entry->where('description', 'like', '%'. $request->input('description') . '%');
-            }
-        }
-        // search for an entry based on its status
-        if ($request->has('status')) {
-            if ($request->input('status') != "") {
-                $entry->where('status', $request->input('status'));
-            }
-        }
+        $request->validate([
+          'phrase' => 'required|min:3'
+        ], [
+          'phrase.required' => 'Enter a word or phrase',
+          'phrase.min' => 'Enter at least 3 characters'
+        ]);
         $entry_id = $request->entry_id;
-
-        $page_size = $this->calculatePageSize($entry->count());
-        $entries = $entry->orderBy('name')->get();
-        Log::debug('Catalogue search returned ' . $entries->count() . ' ' . Str::plural('result', $entries->count()) . '.');
-        $labels = $this->labels;
+        $results = $this->entryRepository->search($request->phrase);
+        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
+        $labels = $this->statusRepository->labels();
+        $catalogue_size = count($this->entryRepository->all());
+        $page_size = $this->entryRepository->calculatePageSize($results->count());
+        $entries = $results->sortBy('name')->sortBy('version')->Paginate($page_size);
+        $labels = $this->statusRepository->labels();
         return view('catalogue.links.results', compact('entry_id', 'entries', 'labels'));
     }
 
@@ -130,10 +121,10 @@ class LinksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Entry $entry, Link $link)
+    public function destroy($id, Link $link)
     {
         $link->delete();
-        return redirect('/entries/' . $entry->id);
+        return redirect('/entries/' . $id);
     }
 
     /**

@@ -10,32 +10,15 @@
 <form action="/entries/{{ $entry->id }}/links/search" method="get">
     {{ csrf_field() }}
 
-    <input type="hidden" name="entry_id" value="{{ $entry->id }}"
+    <input type="hidden" name="entry_id" value="{{ $entry->id }}">
 
     @component('components.text-input', [
-        'name' => 'name',
-        'label' => 'Enter the name of an entry (e.g. GOV.UK Notify)',
+        'name' => 'phrase',
+        'label' => 'Enter a word or phrase to search for in the catalogue',
         'width' => 'govuk-!-width-two-thirds'
     ])
     @endcomponent
 
-    @component('components.text-input', [
-        'name' => 'description',
-        'label' => 'Enter the description of an entry (e.g. Notifications)',
-        'width' => 'govuk-!-width-two-thirds'
-    ])
-    @endcomponent
-
-    <!-- custom version of the component to include the blank entry -->
-    @component('components.select', [
-        'name' => 'status',
-        'label' => 'Status',
-        'width' => 'govuk-!-width-one-third',
-        'values' => $statuses,
-        'blank' => true
-    ])
-    @endcomponent
-
-    <button class="govuk-button" type="submit">Search</button>
+    <button class="govuk-button govuk-!-margin-right-2" type="submit">Continue</button>
 </form>
 @endsection
