@@ -31,7 +31,7 @@
     @endcomponent
     @component('components.summary-list-row')
         @slot('attribute')
-          Vendor URL
+          Product page URL
         @endslot
         @slot('value')
           @if ($entry->href)

@@ -39,7 +39,7 @@
 
     @component('components.text-input', [
         'name' => 'href',
-        'label' => 'Vendor URL',
+        'label' => 'Product page URL',
         'value' => $entry->href
     ])
     @endcomponent

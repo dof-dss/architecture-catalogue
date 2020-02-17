@@ -33,7 +33,7 @@
 
     @component('components.text-input', [
         'name' => 'href',
-        'label' => 'Associated URL'
+        'label' => 'Product page URL'
     ])
     @endcomponent
 
