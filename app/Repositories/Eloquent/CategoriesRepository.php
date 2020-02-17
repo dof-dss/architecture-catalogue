@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Eloquent;
 
 use App\Entry;
 use App\Repositories\Interfaces\CategoriesRepositoryInterface;
