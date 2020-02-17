@@ -51,11 +51,6 @@
                 </tbody>
             </table>
         </form>
-        @if ($entries->count() > 0)
-            <p class="govuk-body">
-                <a href="#" class="govuk-link">Download a spreadsheet of these entries</a>
-            </p>
-        @endif
     </div>
 </div>
 
