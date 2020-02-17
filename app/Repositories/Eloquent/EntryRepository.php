@@ -7,6 +7,8 @@ use App\Repositories\Interfaces\EntryRepositoryInterface;
 
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\DB;
+
 class EntryRepository implements EntryRepositoryInterface
 {
     /**
@@ -37,21 +39,21 @@ class EntryRepository implements EntryRepositoryInterface
      */
     public function filter(array $criteria): object
     {
-        $entry = (new Entry)->newQuery();
+        $query = DB::table('entries');
         // search for an entry based on its status
         if (array_key_exists('status', $criteria)) {
-            $entry->where('status', $criteria['status']);
+            $query->where('status', $criteria['status']);
         }
         // search for an entry based on its category
         if (array_key_exists('category', $criteria)) {
-            $entry->where('category', $criteria['category']);
+            $query->where('category', $criteria['category']);
         }
         // search for an entry based on its sub-category
-        if (array_key_exists('sub-category', $criteria)) {
-            $entry->where('sub_category', $criteria['sub_category']);
+        if (array_key_exists('sub_category', $criteria)) {
+            $query->where('sub_category', $criteria['sub_category']);
         }
-        $page_size = $this->calculatePageSize($entry->count());
-        return $entry->orderBy('name')->Paginate($page_size);
+        $page_size = $this->calculatePageSize($query->count());
+        return $query->orderBy('name')->paginate($page_size);
     }
 
     /**
