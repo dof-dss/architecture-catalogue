@@ -273,7 +273,7 @@ class EntriesController extends Controller
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
         $page_size = $this->entryRepository->calculatePageSize($results->count());
-        $entries = $results->sortBy('name')->Paginate($page_size);
+        $entries = $results->sortBy('name')->sortBy('version')->Paginate($page_size);
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 
