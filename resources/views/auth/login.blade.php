@@ -58,11 +58,11 @@
         </p>
         <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
 
-        <!-- <h3 class="govuk-heading-m">Microsoft</h3>
+        <h3 class="govuk-heading-m">Microsoft</h3>
         <p class="govuk-body">
             This option is open to anyone has has an account on the NIGOV domain.
         </p>
-        <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a> -->
+        <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a>
     </div>
 </div>
 
