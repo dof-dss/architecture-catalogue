@@ -55,9 +55,13 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('github')->redirect();
+        if ($provider == 'microsoft') {
+            // convert provider name to use custom Azure driver
+            $provider = 'azure';
+        }
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
@@ -65,13 +69,19 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
+        if ($provider == 'microsoft') {
+            // convert provider name to use custom Azure driver
+            $provider = 'azure';
+        }
         try {
-            $user = Socialite::driver('github')->user();
+            $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
             Log::error('handleProviderCallBack: ' . $e->getMessage());
-            return redirect('/login')->withErrors(['Unable to sign in using GitHub']);
+            // return redirect('/login')->withErrors(['Unable to sign in: ' . $e->getMessage()]);
+            return redirect('/login')->withErrors(['Unable to sign in using ' . $provider]);
+
         }
 
         // if no name found then use the nickname
@@ -80,7 +90,7 @@ class LoginController extends Controller
         }
 
         try {
-            $authUser = $this->findOrCreateUser($user);
+            $authUser = $this->findOrCreateUser($user, $provider);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 Log::info('handleProviderCallBack: ' . $e->getMessage());
@@ -97,9 +107,9 @@ class LoginController extends Controller
      * @param $guser
      * @return User
      */
-    private function findOrCreateUser($user)
+    private function findOrCreateUser($user, $provider)
     {
-        if ($authUser = User::where('provider_id', $user->id)->where('provider_name', 'GitHub')->first()) {
+        if ($authUser = User::where('provider_id', $user->id)->where('provider_name', $provider)->first()) {
             return $authUser;
         }
 
@@ -108,7 +118,7 @@ class LoginController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'email_verified_at' => Carbon::now(),
-            'provider_name' => 'GitHub',
+            'provider_name' => $provider,
             'provider_id' => $user->id
         ]);
         return $user;

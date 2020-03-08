@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c171960ba52ec4f244db4ef5c7beecba",
+    "content-hash": "f1e9d22ac0ffca64bf084125f25776ad",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -1738,51 +1738,6 @@
             "time": "2016-08-17T00:36:58+00:00"
         },
         {
-            "name": "metrogistics/laravel-azure-ad-oauth",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/metrogistics/laravel-azure-ad-oauth.git",
-                "reference": "6f6aa2db484fac0453ac646c5b3d0db5cda7dcad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/metrogistics/laravel-azure-ad-oauth/zipball/6f6aa2db484fac0453ac646c5b3d0db5cda7dcad",
-                "reference": "6f6aa2db484fac0453ac646c5b3d0db5cda7dcad",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3",
-                "laravel/framework": ">5.4",
-                "laravel/socialite": ">3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Metrogistics\\AzureSocialite\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "AzureUser": "Metrogistics\\AzureSocialite\\AzureUserFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Metrogistics\\AzureSocialite\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Patrick Stephan",
-                    "email": "patrick.stephan@metrogistics.com"
-                }
-            ],
-            "description": "Provides single-sign-on ability to Microsoft Azure Active Directory enabled apps.",
-            "time": "2018-01-19T17:09:16+00:00"
-        },
-        {
             "name": "monolog/monolog",
             "version": "2.0.2",
             "source": {
@@ -2805,6 +2760,100 @@
                 "promises"
             ],
             "time": "2019-01-07T21:25:54+00:00"
+        },
+        {
+            "name": "socialiteproviders/manager",
+            "version": "v3.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "09903d33429f9f6c0da32c545c036a3e18964bbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/09903d33429f9f6c0da32c545c036a3e18964bbf",
+                "reference": "09903d33429f9f6c0da32c545c036a3e18964bbf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.4|~5.7.0|~5.8.0|^6.0",
+                "laravel/socialite": "~3.0|~4.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SocialiteProviders\\Manager\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Manager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wendt",
+                    "email": "andy@awendt.com"
+                },
+                {
+                    "name": "Anton Komarev",
+                    "email": "a.komarev@cybercog.su"
+                },
+                {
+                    "name": "Miguel Piedrafita",
+                    "email": "soy@miguelpiedrafita.com"
+                }
+            ],
+            "description": "Easily add new or override built-in providers in Laravel Socialite.",
+            "time": "2019-09-25T06:06:35+00:00"
+        },
+        {
+            "name": "socialiteproviders/microsoft-azure",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Microsoft-Azure.git",
+                "reference": "d7a703a782eb9f7eae0db803beaa3ddec19ef372"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Microsoft-Azure/zipball/d7a703a782eb9f7eae0db803beaa3ddec19ef372",
+                "reference": "d7a703a782eb9f7eae0db803beaa3ddec19ef372",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Azure\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Hemmings",
+                    "email": "chris@hemmin.gs"
+                }
+            ],
+            "description": "Microsoft Azure OAuth2 Provider for Laravel Socialite",
+            "time": "2017-01-25T09:48:29+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -6394,7 +6443,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.3"
     },
     "platform-dev": []
 }

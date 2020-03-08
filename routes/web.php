@@ -34,10 +34,10 @@ Route::get('privacy-policy', function () {
 });
 
 //
-// GitHub authentication
+// Single Sign On authentication
 //
-Route::get('login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 //
 // email verification

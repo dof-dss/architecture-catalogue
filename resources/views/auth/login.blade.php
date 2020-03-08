@@ -60,7 +60,7 @@
 
         <h3 class="govuk-heading-m">Microsoft</h3>
         <p class="govuk-body">
-            This option is open to anyone has has an account on the NIGOV domain.
+            This option is open to anyone has has an Azure account on the NIGOV domain.
         </p>
         <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a>
     </div>

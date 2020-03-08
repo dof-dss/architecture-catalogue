@@ -8,16 +8,16 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "7.3",
+        "php": "^7.3",
         "alphagov/notifications-php-client": "^2.1",
         "doctrine/dbal": "^2.10",
+        "elasticquent/elasticquent": "dev-master",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
-        "metrogistics/laravel-azure-ad-oauth": "^1.2",
         "php-http/guzzle6-adapter": "^2.0",
-        "elasticquent/elasticquent": "dev-master"
+        "socialiteproviders/microsoft-azure": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
