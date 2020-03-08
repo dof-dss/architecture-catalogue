@@ -81,7 +81,6 @@ class LoginController extends Controller
             Log::error('handleProviderCallBack: ' . $e->getMessage());
             // return redirect('/login')->withErrors(['Unable to sign in: ' . $e->getMessage()]);
             return redirect('/login')->withErrors(['Unable to sign in using ' . $provider]);
-
         }
 
         // if no name found then use the nickname
