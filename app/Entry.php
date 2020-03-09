@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use Elasticquent\ElasticquentTrait;
 use App\Traits\ElasticquentExtension;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Entry extends Model
 {
     use ElasticquentTrait;
     use ElasticquentExtension;
+    use LogsActivity;
 
     // mass assignable attributes
     protected $fillable = [
@@ -24,8 +26,9 @@ class Entry extends Model
         'functionality',
         'service_levels',
         'interfaces',
-        'related_sbbs'
     ];
+
+    protected static $logFillable = true;
 
     protected $dates = [
         'created_at',
