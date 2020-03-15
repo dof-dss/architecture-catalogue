@@ -36,10 +36,6 @@ return [
         'redirect' => env('APP_URL') . env('GITHUB_CALLBACK_URL'),
     ],
 
-    'govuk_notify' => [
-        'api_key' => env('GOVUK_NOTIFY_API_KEY'),
-    ],
-
     'azure' => [
         'client_id' => env('AZURE_KEY'),
         'client_secret' => env('AZURE_SECRET'),

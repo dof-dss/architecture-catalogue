@@ -7,9 +7,6 @@ use App\Services\Notify as NotifyClient;
 
 class UserObserver
 {
-    // welecome email template id
-    protected $templateId = '44ef4346-37da-4733-b6f0-12e0f4c768f9';
-
     /**
      * Handle the user "created" event.
      *
@@ -18,12 +15,12 @@ class UserObserver
      */
     public function created(User $user)
     {
-      // send a welcome email to the user (ideally this should be a queued job)
-      $notifyClient = new NotifyClient();
-      $notifyClient->sendEmailUsingGovukNotify(
-          $user->email,
-          $this->templateId
-      );
+        // send a welcome email to the user (ideally this should be a queued job)
+        $notifyClient = new NotifyClient();
+        $notifyClient->sendEmailUsingGovukNotify(
+            $user->email,
+            config('govuknotify.user_welcome_template_id')
+        );
     }
 
     /**

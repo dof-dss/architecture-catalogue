@@ -22,7 +22,7 @@ class Notify
     public function __construct()
     {
         $this->notifyClient = new NotifyClient([
-            'apiKey' => config('app.govuk_notify_apikey'),
+            'apiKey' => config('govuknotify.govuk_notify_apikey'),
             'httpClient' => new GuzzleClient
         ]);
     }
