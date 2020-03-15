@@ -32,6 +32,7 @@ defaults: &defaults
     AZURE_KEY: ((AZURE_KEY))
     AZURE_SECRET: ((AZURE_SECRET))
     AZURE_REDIRECT_URI: ((AZURE_REDIRECT_URI))
+    GOVUK_NOTIFY_API_KEY: ((GOVUK_NOTIFY_API_KEY))
 
 applications:
 - name: ((APP_NAME))

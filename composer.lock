@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31c884e69c40fc56da2ce2b1bb1cf777",
+    "content-hash": "a5bdce51411959e83b2c3eaa087ecd34",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
-            "version": "2.1.2",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alphagov/notifications-php-client.git",
-                "reference": "da60e56f5bdba9f61697487879fa12bbf3534ae4"
+                "reference": "6031adb47d8eeee8839970132f2e2e1980277935"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alphagov/notifications-php-client/zipball/da60e56f5bdba9f61697487879fa12bbf3534ae4",
-                "reference": "da60e56f5bdba9f61697487879fa12bbf3534ae4",
+                "url": "https://api.github.com/repos/alphagov/notifications-php-client/zipball/6031adb47d8eeee8839970132f2e2e1980277935",
+                "reference": "6031adb47d8eeee8839970132f2e2e1980277935",
                 "shasum": ""
             },
             "require": {
@@ -30,7 +30,7 @@
                 "php-http/guzzle6-adapter": "*",
                 "php-http/message": "^1.1",
                 "php-http/mock-client": "*",
-                "php-http/socket-client": "*",
+                "php-http/socket-client": "2.0.0-beta1",
                 "phpspec/phpspec": "^5.0"
             },
             "suggest": {
@@ -57,7 +57,7 @@
                 }
             ],
             "description": "PHP client for GOV.UK Notifications",
-            "time": "2020-01-28T14:24:56+00:00"
+            "time": "2020-03-02T12:12:46+00:00"
         },
         {
             "name": "anahkiasen/underscore-php",

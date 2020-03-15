@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "alphagov/notifications-php-client": "^2.1",
+        "alphagov/notifications-php-client": "^3.0",
         "doctrine/dbal": "^2.10",
         "elasticquent/elasticquent": "dev-master",
         "fideloper/proxy": "^4.0",

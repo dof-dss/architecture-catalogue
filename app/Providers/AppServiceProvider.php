@@ -11,10 +11,12 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
 
 // models
+use App\User;
 use App\Entry;
 
 // observers
 use App\Observers\EntryObserver;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -66,5 +68,6 @@ class AppServiceProvider extends ServiceProvider
         // register our observers
         //
         Entry::observe(EntryObserver::class);
+        User::observe(UserObserver::class);
     }
 }
