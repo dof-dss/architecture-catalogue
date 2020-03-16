@@ -23,8 +23,6 @@ class Tracking
     * @author     Stephen Patterson <stephen.patterson@finance-ni.gov.uk>
     */
 
-    const USER_CREATED_ID = 10;
-
     private $client;
     private $tenantId;
 
