@@ -4,9 +4,26 @@ namespace App\Observers;
 
 use App\User;
 use App\Services\Notify as NotifyClient;
+use App\Services\Tracking as UsageTrackingClient;
+
+// used to generate GUID
+use Illuminate\Support\Str;
 
 class UserObserver
 {
+
+    /**
+     * Handle the user "creating" event.
+     *
+     * @param  \App\User  $user
+     * @return void
+     */
+    public function creating(User $user)
+    {
+        // generate the uuid
+        $user->uuid = $this->getUuid();
+    }
+
     /**
      * Handle the user "created" event.
      *
@@ -21,6 +38,9 @@ class UserObserver
             $user->email,
             config('govuknotify.user_welcome_template_id')
         );
+        // record a business event
+        $tracker = new UsageTrackingClient();
+        $tracker->recordEvent($user, (int) config('eausagetracking.account_created_event_id'));
     }
 
     /**
@@ -65,5 +85,15 @@ class UserObserver
     public function forceDeleted(User $user)
     {
         //
+    }
+
+    /**
+     * Generate a UUID.
+     *
+     * @return string
+     */
+    private function getUuid()
+    {
+        return str::uuid()->toString();
     }
 }
