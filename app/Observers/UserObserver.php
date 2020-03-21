@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\User;
-use App\Services\Notify as NotifyClient;
+use App\Notifications\AccountCreated;
 use App\Services\Tracking as UsageTrackingClient;
 
 class UserObserver
@@ -33,11 +33,7 @@ class UserObserver
         //
 
         // send a welcome email to the user (ideally this should be a queued job)
-        $notifyClient = new NotifyClient();
-        $notifyClient->sendEmailUsingGovukNotify(
-            $user->email,
-            config('govuknotify.user_welcome_template_id')
-        );
+        $user->notify(new AccountCreated($user));
 
         // record a business event
         $tracker = new UsageTrackingClient();

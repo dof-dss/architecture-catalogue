@@ -21,13 +21,6 @@ abstract class TestCase extends BaseTestCase
             $user = factory(User::class)->make();
         }
         $this->actingAs($user);
-
-        $line = __FUNCTION__ . ': ';
-        if (Auth::check()) {
-            $line = $line . 'User "' . $user->name . '" is authenticated';
-        } else {
-            $line = $line . 'User "' . $user->name . '" is not authenticated';
-        }
-        Log::debug($line);
+        return $user;
     }
 }
