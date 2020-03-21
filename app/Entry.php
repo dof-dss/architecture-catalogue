@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 use Elasticquent\ElasticquentTrait;
 use App\Traits\ElasticquentExtension;
-use Spatie\Activitylog\Traits\LogsActivity;
+// use Spatie\Activitylog\Traits\LogsActivity;
+use App\Traits\AuditsActivity;
 
 class Entry extends Model
 {
     use ElasticquentTrait;
     use ElasticquentExtension;
-    use LogsActivity;
+    // use LogsActivity;
+    use AuditsActivity;
 
     // mass assignable attributes
     protected $fillable = [

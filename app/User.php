@@ -5,12 +5,14 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Activitylog\Traits\LogsActivity;
+// use Spatie\Activitylog\Traits\LogsActivity;
+use App\Traits\AuditsActivity;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use LogsActivity;
+    // use LogsActivity;
+    use AuditsActivity;
 
     /**
      * The attributes that are mass assignable.

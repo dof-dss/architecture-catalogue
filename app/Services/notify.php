@@ -27,7 +27,7 @@ class Notify
         ]);
     }
 
-    public function sendEmailUsingGovukNotify($emailAddress, $templateId, $params=[])
+    public function sendEmailUsingGovukNotify($emailAddress, $templateId, $params = [])
     {
         try {
             $response = $this->notifyClient->sendEmail(
