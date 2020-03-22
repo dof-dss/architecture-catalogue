@@ -61,7 +61,8 @@ class PasswordReset extends Notification
                     ],
                     false
                 )
-            )
+            ),
+            'count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire'),
         ];
         return (new GovukNotifyMessage)
             ->to($this->user->email)
