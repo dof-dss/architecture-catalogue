@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordReset;
 // use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\AuditsActivity;
 
@@ -73,5 +74,16 @@ class User extends Authenticatable
     public function isContributor()
     {
         return $this->role == 'contributor';
+    }
+
+    /**
+     * Send the custom password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($this, $token));
     }
 }

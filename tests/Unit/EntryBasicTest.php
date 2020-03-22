@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -14,8 +13,6 @@ use Illuminate\Support\Facades\Log;
 
 class EntryBasicTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * Entry creation and audit.
      *

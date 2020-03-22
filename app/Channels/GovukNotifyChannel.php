@@ -35,7 +35,8 @@ class GovukNotifyChannel
 
         $this->sendEmailUsingGovukNotify(
             $message->to,
-            $message->templateId
+            $message->templateId,
+            $message->params
         );
     }
 

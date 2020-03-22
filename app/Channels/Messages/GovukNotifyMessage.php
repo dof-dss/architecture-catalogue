@@ -27,7 +27,7 @@ class GovukNotifyMessage extends SimpleMessage
      *
      * @var array
      */
-    public $parameters = [];
+    public $params = [];
 
     /**
      * Set the to email address for the mail message.
@@ -61,9 +61,9 @@ class GovukNotifyMessage extends SimpleMessage
      * @param  array  $params
      * @return $this
      */
-    public function parameters($params = [])
+    public function params($params = [])
     {
-        $this->parameters= $params;
+        $this->params = $params;
 
         return $this;
     }
