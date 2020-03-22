@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\AccountCreated;
 
-class SendWelcomeEmailTest extends TestCase
+class SendAccountCreatedNotificationsTest extends TestCase
 {
     use Notifiable;
 

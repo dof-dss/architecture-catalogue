@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notification;
 use App\Channels\GovukNotifyChannel;
 use App\Channels\Messages\GovukNotifyMessage;
 
+use Illuminate\Notifications\Messages\SlackMessage;
+
 class AccountCreated extends Notification
 {
     use Queueable;
@@ -38,20 +40,34 @@ class AccountCreated extends Notification
      */
     public function via($notifiable)
     {
-        return [GovukNotifyChannel::class];
+        return [GovukNotifyChannel::class, 'slack'];
     }
 
     /**
      * Get the GOV.UK Notify representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return \App\Messages\GovukNotifyMessage
      */
     public function toGovukNotify($notifiable)
     {
         return (new GovukNotifyMessage)
             ->to($this->user->email)
             ->templateId($this->templateId);
+    }
+
+    /**
+     * Get the Slack representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return
+     */
+    public function toSlack($notifiable)
+    {
+        return (new SlackMessage)
+            ->from('Architecture Catalogue')
+            ->to('#application_support_test')
+            ->content($this->user->email . ' has created an account.');
     }
 
     /**

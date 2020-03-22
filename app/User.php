@@ -86,4 +86,15 @@ class User extends Authenticatable
     {
         $this->notify(new PasswordReset($this, $token));
     }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return config('services.slack.webhook_url');
+    }
 }
