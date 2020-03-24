@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use Illuminate\Support\Facades\Notification;
 use App\User;
 
 class UserTest extends TestCase
@@ -15,21 +16,11 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_view_a_sign_up_form()
+    public function testUserCanViewASignupForm()
     {
-        $response = $this->get('/register');
+        $response = $this->get(route('register'));
         $response->assertSuccessful();
         $response->assertViewIs('auth.register');
-    }
-
-  /**
-     * Test description
-     *
-     * @return void
-     */
-    public function test_user_can_create_a_valid_account()
-    {
-        $this->assertTrue(true);
     }
 
     /**
@@ -37,7 +28,74 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_view_a_login_form()
+    public function testUserCanCreateAValidAccount()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->make();
+        $response = $this->post('/register', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ]);
+        $response->assertStatus(302);
+        $this->assertDatabaseHas('users', [
+            'name' => $user->name
+        ]);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCannotCreateAnInvalidAccount()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->make();
+        $response = $this->post('/register', [
+            'name' => 'inv@lidcharacter$',
+            'email' => 'bademailaddress',
+            'password' => 'password',
+            'password_confirmation' => 'passwordX'
+        ]);
+        $response->assertSessionHasErrors(['name', 'email', 'password']);
+        $this->assertDatabaseMissing('users', [
+            'name' => $user->name
+        ]);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCannotCreateADuplicateAccount()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        // now attempt to add the same user again
+        $response = $this->post('/register', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ]);
+        $response->assertSessionHasErrors(['email']);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCanViewALoginForm()
     {
         $response = $this->get('/login');
         $response->assertSuccessful();
@@ -49,7 +107,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_user_cannot_view_a_login_form_when_authenticated()
+    public function testUserCannotViewALoginFormWhenAuthenticated()
     {
         $user = factory(User::class)->make();
         $response = $this->actingAs($user)->get('/login');
@@ -61,17 +119,53 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_login_with_correct_credentials()
+    public function testUserCanLoginWithCorrectCredentials()
     {
-        $user = factory(User::class)->create([
-            'password' => bcrypt($passwrod = 'digital-development'),
-        ]);
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
         $response = $this->post('/login', [
-            'email' => '$user->email',
-            'password' => $password,
+            'email' => $user->email,
+            'password' => 'password'
         ]);
-        $response->assertRedirect('/home');
-        $this->assertAuthenticatedAsUser($user);
+        $response->assertStatus(302);
+        $this->assertAuthenticatedAs($user);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCannotLoginWithIncorrectCredentials()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'invalid'
+        ]);
+        $response->assertSessionHasErrors();
+        $this->assertGuest();
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testSignOut()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->post('/logout');
+        $response->assertStatus(302);
+        $this->assertGuest();
     }
 
     /**
@@ -100,16 +194,6 @@ class UserTest extends TestCase
      * @return void
      */
     public function testSingleSignOnWithAzure()
-    {
-        $this->assertTrue(true);
-    }
-
-    /**
-     * Test description
-     *
-     * @return void
-     */
-    public function testSignOut()
     {
         $this->assertTrue(true);
     }
