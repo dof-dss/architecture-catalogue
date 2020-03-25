@@ -91,17 +91,11 @@ class Audit
         $causer_type,
         $details
     ) {
-        try {
-            $token = $this->getAuthorisationToken();
-        } catch (Exception $e) {
-            throw new AuditException($e);
-        }
-        $url = 'audits';
         $headers = [
-            'Authorization' => 'Bearer ' . $token,
             'Content-Type' => 'application/json',
             'x-requestid' => $this->getUuid()
         ];
+        $headers = $this->injectAuthorisationToken($headers);
         $params = [
             'subjectId' => $subject_id,
             'subject' => $subject_type,
@@ -110,6 +104,7 @@ class Audit
             'description' => $description,
             'properties' => $details
         ];
+        $url = "audits";
         try {
             $result = $this->client->post($url, [
                 'headers' => $headers,
@@ -129,9 +124,13 @@ class Audit
      */
     public function getEvent($id)
     {
+        $headers = [];
+        $headers = $this->injectAuthorisationToken($headers);
         $url = 'audits/' . $id;
         try {
-            $response = $this->client->get($url);
+            $response = $this->client->get($url, [
+                'headers' => $headers
+            ]);
         } catch (Exception $e) {
             throw new AuditException($e);
         }
@@ -146,6 +145,23 @@ class Audit
     private function getUuid()
     {
         return str::uuid()->toString();
+    }
+
+    /**
+     * Inject authorisation token into headers.
+     *
+     * @param array $headers
+     * @return array
+     */
+    private function injectAuthorisationToken($headers)
+    {
+        try {
+            $token = $this->getAuthorisationToken();
+        } catch (Exception $e) {
+            throw new AuditException($e);
+        }
+        $headers += ['Authorization' => 'Bearer ' . $token];
+        return $headers;
     }
 
     /**

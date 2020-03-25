@@ -49,7 +49,7 @@ class AuditEventTest extends TestCase
      */
     public function testCanFetchAnAuditEvent()
     {
-        // create an audit entry
+        // assume there is an audit entry with this id
         $id = 1;
 
         // now check that it exists
