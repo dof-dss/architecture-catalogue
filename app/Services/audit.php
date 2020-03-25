@@ -16,7 +16,10 @@ use Exception;
 // specific exception handler
 use App\Exceptions\AuditException;
 
-use Illuminate\Support\Facades\Log;
+// used to debug Guzzle
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\MessageFormatter;
 
 class Audit
 {
@@ -32,6 +35,10 @@ class Audit
     * @author     Stephen Patterson <stephen.patterson@finance-ni.gov.uk>
     */
 
+    private $cognito_url;
+    private $cognito_user;
+    private $cognito_password;
+    private $client;
 
     /**
      * Build up a GuzzleHttp client to use the NICS EA Usage Tracking API.
@@ -39,9 +46,29 @@ class Audit
      */
     public function __construct()
     {
-        $this->client = new GuzzleClient([
-            'base_uri' => config('eaaudit.api')
-        ]);
+        $this->cognito_url = config('eaaudit.cognito_url');
+        $this->cognito_user = config('eaaudit.cognito_user');
+        $this->cognito_password = config('eaaudit.cognito_password');
+
+        // record Guzzle debug messages if we are running locally
+        if (config('app.env') == 'local') {
+            $stack = HandlerStack::create();
+            $logChannel = app()->get('log')->channel('daily');
+            $stack->push(
+                Middleware::log(
+                    $logChannel,
+                    new MessageFormatter('{req_body} -  {res_body}')
+                )
+            );
+            $this->client = new GuzzleClient([
+                'base_uri' => config('eaaudit.api'),
+                'handler' => $stack
+            ]);
+        } else {
+            $this->client = new GuzzleClient([
+                'base_uri' => config('eaaudit.api')
+            ]);
+        }
     }
 
     /**
@@ -64,9 +91,14 @@ class Audit
         $causer_type,
         $details
     ) {
-        // invoke the API
+        try {
+            $token = $this->getAuthorisationToken();
+        } catch (Exception $e) {
+            throw new AuditException($e);
+        }
         $url = 'audits';
         $headers = [
+            'Authorization' => 'Bearer ' . $token,
             'Content-Type' => 'application/json',
             'x-requestid' => $this->getUuid()
         ];
@@ -89,6 +121,24 @@ class Audit
     }
 
     /**
+     * Gets an audit entry from the NICS EA Audit Service.
+     *
+     * @param integer $id
+     * @return array
+     * @throws AuditException if call to API fails
+     */
+    public function getEvent($id)
+    {
+        $url = 'audits/' . $id;
+        try {
+            $response = $this->client->get($url);
+        } catch (Exception $e) {
+            throw new AuditException($e);
+        }
+        return json_decode($response->getBody());
+    }
+
+    /**
      * Generate a UUID.
      *
      * @return string
@@ -96,5 +146,32 @@ class Audit
     private function getUuid()
     {
         return str::uuid()->toString();
+    }
+
+    /**
+     * Generate a an authorisation token from Amazon Cognito.
+     *
+     * @return string
+     * @throws AuditException if call to API fails
+     */
+    public function getAuthorisationToken()
+    {
+        $credentials = base64_encode($this->cognito_user . ':' . $this->cognito_password);
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Basic ' . $credentials
+        ];
+        $authorisationClient = new GuzzleClient([
+            'base_uri' => $this->cognito_url,
+            'headers' => $headers
+        ]);
+        $url = 'oauth2/token?grant_type=client_credentials';
+        try {
+            $response = $authorisationClient->post($url);
+        } catch (Exception $e) {
+            throw new AuditException($e);
+        }
+        $data = json_decode($response->getBody());
+        return $data->access_token;
     }
 }
