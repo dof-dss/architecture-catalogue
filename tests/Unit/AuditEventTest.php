@@ -7,24 +7,13 @@ use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 use App\Services\Audit as AuditClient;
+use App\Services\Authorisation as AuthService;
 
 use App\User;
 use App\Entry;
 
 class AuditEventTest extends TestCase
 {
-    /**
-     * Authorisation token creation.
-     *
-     * @return void
-     */
-    public function testGetAuthorisationToken()
-    {
-        $auditClient = new AuditClient();
-        $token = $auditClient->getAuthorisationToken();
-        $this->assertTrue(is_string($token));
-    }
-
     /**
      * Audit an event.
      *

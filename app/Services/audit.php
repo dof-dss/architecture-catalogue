@@ -21,6 +21,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\MessageFormatter;
 
+use App\Services\Authorisation as AuthService;
+
 class Audit
 {
     /**
@@ -35,10 +37,8 @@ class Audit
     * @author     Stephen Patterson <stephen.patterson@finance-ni.gov.uk>
     */
 
-    private $cognito_url;
-    private $cognito_user;
-    private $cognito_password;
     private $client;
+    private $authService;
 
     /**
      * Build up a GuzzleHttp client to use the NICS EA Usage Tracking API.
@@ -46,10 +46,7 @@ class Audit
      */
     public function __construct()
     {
-        $this->cognito_url = config('eaaudit.cognito_url');
-        $this->cognito_user = config('eaaudit.cognito_user');
-        $this->cognito_password = config('eaaudit.cognito_password');
-
+        $this->authService = new AuthService;
         // record Guzzle debug messages if we are running locally
         if (config('app.env') == 'local') {
             $stack = HandlerStack::create();
@@ -156,38 +153,11 @@ class Audit
     private function injectAuthorisationToken($headers)
     {
         try {
-            $token = $this->getAuthorisationToken();
+            $token = $this->authService->getAuthorisationToken();
         } catch (Exception $e) {
             throw new AuditException($e);
         }
         $headers += ['Authorization' => 'Bearer ' . $token];
         return $headers;
-    }
-
-    /**
-     * Generate a an authorisation token from Amazon Cognito.
-     *
-     * @return string
-     * @throws AuditException if call to API fails
-     */
-    public function getAuthorisationToken()
-    {
-        $credentials = base64_encode($this->cognito_user . ':' . $this->cognito_password);
-        $headers = [
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'Authorization' => 'Basic ' . $credentials
-        ];
-        $authorisationClient = new GuzzleClient([
-            'base_uri' => $this->cognito_url,
-            'headers' => $headers
-        ]);
-        $url = 'oauth2/token?grant_type=client_credentials';
-        try {
-            $response = $authorisationClient->post($url);
-        } catch (Exception $e) {
-            throw new AuditException($e);
-        }
-        $data = json_decode($response->getBody());
-        return $data->access_token;
     }
 }
