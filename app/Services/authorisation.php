@@ -6,6 +6,8 @@ namespace App\Services;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as RequestException;
 
+use App\Exceptions\AuthException;
+
 class Authorisation
 {
     /**
@@ -40,7 +42,7 @@ class Authorisation
         try {
             $response = $authorisationClient->post($url);
         } catch (Exception $e) {
-            throw new AuditException($e);
+            throw new AuthException($e);
         }
         $data = json_decode($response->getBody());
         return $data->access_token;
