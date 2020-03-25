@@ -36,14 +36,14 @@ class AuditEventTest extends TestCase
      *
      * @return void
      */
-    public function testCanFetchAnAuditEvent()
-    {
-        // assume there is an audit entry with this id
-        $id = 1;
-
-        // now check that it exists
-        $auditClient = new AuditClient();
-        $event = $auditClient->getEvent($id);
-        $this->assertTrue($id == $event->id);
-    }
+    // public function testCanFetchAnAuditEvent()
+    // {
+    //     // assume there is an audit entry with this id
+    //     $id = 1;
+    //
+    //     // now check that it exists
+    //     $auditClient = new AuditClient();
+    //     $event = $auditClient->getEvent($id);
+    //     $this->assertTrue($id == $event->id);
+    // }
 }
