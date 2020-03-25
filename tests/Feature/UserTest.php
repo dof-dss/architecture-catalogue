@@ -7,7 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\PasswordReset;
+use Password;
+use Illuminate\Support\Str;
+
 use App\User;
+use Hash;
 
 class UserTest extends TestCase
 {
@@ -173,9 +178,84 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testForgotPassword()
+    public function testUserCanViewAPasswordResetForm()
     {
-        $this->assertTrue(true);
+        $response = $this->get(route('password.request'));
+        $response->assertSuccessful();
+        $response->assertViewIs('auth.passwords.email');
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCanRequestResetPassword()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+
+        $this->followingRedirects()
+            ->from(route('password.request'))
+            ->post(route('password.email'), [
+                'email' => $user->email
+            ])
+            ->assertSuccessful()
+            ->assertSee('Password reset request complete');
+
+        Notification::assertSentTo($user, PasswordReset::class);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCanViewPasswordResetForm()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        $token = Password::broker()->createToken($user);
+
+        $this->get(route('password.reset', [
+              'token' => $token,
+            ]))
+            ->assertSuccessful()
+            ->assertSee('Change your password');
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testUserCanResetPassword()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        $token = Password::broker()->createToken($user);
+        $password = Str::random(32);
+
+        $this->followingRedirects()
+            ->from(route('password.request'), [
+                'token' => $token,
+              ])->post(route('password.update'), [
+                  'token' => $token,
+                  'email' => $user->email,
+                  'password' => $password,
+                  'password_confirmation' => $password,
+              ])
+              ->assertSuccessful()
+              ->assertViewIs('home');
+
+        $user->refresh();
+        $this->assertTrue(Hash::check($password, $user->password));
     }
 
     /**
