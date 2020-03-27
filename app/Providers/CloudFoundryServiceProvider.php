@@ -28,10 +28,6 @@ class CloudFoundryServiceProvider extends ServiceProvider
             Config::set('database.connections.mysql.database', $mysqlConfig['name']);
             Config::set('database.connections.mysql.username', $mysqlConfig['username']);
             Config::set('database.connections.mysql.password', $mysqlConfig['password']);
-            // log settings
-            Log::debug('Database name: ' . $mysqlConfig['name']);
-            Log::debug('Database user: ' . $mysqlConfig['username']);
-            Log::debug('Database password: ' . $mysqlConfig['password']);
 
             // Set the elasticsearch config
             $esConfig = $config['elasticsearch'][0]['credentials'];
@@ -45,11 +41,6 @@ class CloudFoundryServiceProvider extends ServiceProvider
                 ]
             ];
             Config::set('elasticquent.config.hosts', $hosts);
-            //  log settings
-            Log::debug('Elasticsearch host: ' . $esConfig['hostname']);
-            Log::debug('Elasticsearch port: ' . $esConfig['port']);
-            Log::debug('Elasticsearch user: ' . $esConfig['username']);
-            Log::debug('Elasticsearch password: ' . $esConfig['password']);
         }
     }
 }
