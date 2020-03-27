@@ -30,3 +30,9 @@ class AuditException extends Exception
         return $this->getMessage();
     }
 }
+
+
+    // Log::alert('Exception raised: ', [
+    //     'class' => get_class($exception),
+    //     'message' => $exception->getMessage()
+    // ]);
