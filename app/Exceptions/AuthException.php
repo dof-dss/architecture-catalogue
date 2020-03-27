@@ -15,7 +15,7 @@ class AuthException extends Exception
     public function report($errorMessage = "Unhandled authorisation exception")
     {
         // log the exeption in the application log
-        Log::error($errorMessage . '. Authorisation service (AWS Cognito): ' . $this->getCustomMessage());
+        Log::alert($errorMessage . '. Authorisation service (AWS Cognito): ' . $this->getCustomMessage());
     }
 
     public function render($request)

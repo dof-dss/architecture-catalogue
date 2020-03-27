@@ -17,7 +17,7 @@ class GovukNotifyException extends Exception
     public function report($errorMessage = "Unhandled GOV.UK Notify exception")
     {
         // log the exeption in the application log
-        Log::error($errorMessage . '. GOVU.UK Notify service: ' . $this->getCustomMessage());
+        Log::alert($errorMessage . '. GOVU.UK Notify service: ' . $this->getCustomMessage());
     }
 
     public function render($request)

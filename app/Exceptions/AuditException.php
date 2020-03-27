@@ -17,7 +17,7 @@ class AuditException extends Exception
     public function report($errorMessage = "Unhandled audit exception")
     {
         // log the exeption in the application log
-        Log::error($errorMessage . '. NICS Audit Service: ' . $this->getCustomMessage());
+        Log::alert($errorMessage . '. NICS Audit Service: ' . $this->getCustomMessage());
     }
 
     public function render($request)
