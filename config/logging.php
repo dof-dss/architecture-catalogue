@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['stderr', 'slack'],
+            'channels' => [env('APP_ENV') == 'local' ? 'daily' : 'stderr', 'slack'],
             'ignore_exceptions' => false,
         ],
 
