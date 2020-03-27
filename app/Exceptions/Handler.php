@@ -36,7 +36,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        Log::alert('Exception raised: ' . get_class($exception));
+        Log::alert(
+            'Exception raised: ' . get_class($exception) .
+            ' - ' . $exception->getMessage()
+        );
         parent::report($exception);
     }
 
