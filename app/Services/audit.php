@@ -92,7 +92,7 @@ class Audit
             'Content-Type' => 'application/json',
             'x-requestid' => $this->getUuid()
         ];
-        $headers = $this->injectAuthorisationToken($headers);
+        $headers = $this->authService->injectAuthorisationToken($headers);
         $params = [
             'subjectId' => $subject_id,
             'subject' => $subject_type,
@@ -122,7 +122,7 @@ class Audit
     public function getEvent($id)
     {
         $headers = [];
-        $headers = $this->injectAuthorisationToken($headers);
+        $headers = $this->authService->injectAuthorisationToken($headers);
         $url = 'audits/' . $id;
         try {
             $response = $this->client->get($url, [
@@ -142,22 +142,5 @@ class Audit
     private function getUuid()
     {
         return str::uuid()->toString();
-    }
-
-    /**
-     * Inject authorisation token into headers.
-     *
-     * @param array $headers
-     * @return array
-     */
-    private function injectAuthorisationToken($headers)
-    {
-        try {
-            $token = $this->authService->getAuthorisationToken();
-        } catch (Exception $e) {
-            throw new AuditException($e);
-        }
-        $headers += ['Authorization' => 'Bearer ' . $token];
-        return $headers;
     }
 }

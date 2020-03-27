@@ -47,4 +47,22 @@ class Authorisation
         $data = json_decode($response->getBody());
         return $data->access_token;
     }
+
+
+    /**
+     * Inject authorisation token into headers.
+     *
+     * @param array $headers
+     * @return array
+     */
+    public function injectAuthorisationToken($headers)
+    {
+        try {
+            $token = $this->getAuthorisationToken();
+        } catch (Exception $e) {
+            throw new AuditException($e);
+        }
+        $headers += ['Authorization' => 'Bearer ' . $token];
+        return $headers;
+    }
 }

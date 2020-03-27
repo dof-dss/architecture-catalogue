@@ -9,6 +9,8 @@ use GuzzleHttp\Exception\RequestException as RequestException;
 //  models
 use App\User;
 
+use App\Services\Authorisation as AuthService;
+
 class Tracking
 {
     /**
@@ -25,6 +27,7 @@ class Tracking
 
     private $client;
     private $tenantId;
+    private $authService;
 
     /**
      * Build up a GuzzleHttp client to use the NICS EA Usage Tracking API.
@@ -32,13 +35,16 @@ class Tracking
      */
     public function __construct()
     {
+        $this->authService = new AuthService;
         $this->tenantId = config('eausagetracking.tenant_id');
+        $headers = [
+            'tenantId' => $this->tenantId,
+            'Content-Type' => 'application/json'
+        ];
+        $headers = $this->authService->injectAuthorisationToken($headers);
         $this->client = new GuzzleClient([
             'base_uri' => config('eausagetracking.api'),
-            'headers' => [
-                'tenantId' => $this->tenantId,
-                'Content-Type' => 'application/json'
-            ]
+            'headers' => $headers
         ]);
     }
 
