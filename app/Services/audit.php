@@ -17,9 +17,7 @@ use Exception;
 use App\Exceptions\AuditException;
 
 // used to debug Guzzle
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\MessageFormatter;
+use App\Services\GuzzleLogger;
 
 use App\Services\Authorisation as AuthService;
 
@@ -47,25 +45,12 @@ class Audit
     public function __construct()
     {
         $this->authService = new AuthService;
-        // record Guzzle debug messages if we are running locally
-        if (config('app.env') == 'local') {
-            $stack = HandlerStack::create();
-            $logChannel = app()->get('log')->channel('daily');
-            $stack->push(
-                Middleware::log(
-                    $logChannel,
-                    new MessageFormatter('{req_body} -  {res_body}')
-                )
-            );
-            $this->client = new GuzzleClient([
-                'base_uri' => config('eaaudit.api'),
-                'handler' => $stack
-            ]);
-        } else {
-            $this->client = new GuzzleClient([
-                'base_uri' => config('eaaudit.api')
-            ]);
-        }
+        $parameters = [
+            'base_uri' => config('eaaudit.api')
+        ];
+        $logger = new GuzzleLogger;
+        $parameters = $logger->injectLogger($parameters);
+        $this->client = new GuzzleClient($parameters);
     }
 
     /**

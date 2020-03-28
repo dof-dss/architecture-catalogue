@@ -8,6 +8,9 @@ use GuzzleHttp\Exception\RequestException as RequestException;
 
 use App\Exceptions\AuthException;
 
+// used to debug Guzzle
+use App\Services\GuzzleLogger;
+
 class Authorisation
 {
     /**
@@ -34,10 +37,14 @@ class Authorisation
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Authorization' => 'Basic ' . $credentials
         ];
-        $authorisationClient = new GuzzleClient([
+        $parameters = [
             'base_uri' => config('eaaudit.cognito_url'),
             'headers' => $headers
-        ]);
+        ];
+        $logger = new GuzzleLogger;
+        $parameters = $logger->injectLogger($parameters);
+        $authorisationClient = new GuzzleClient($parameters);
+
         $url = 'oauth2/token?grant_type=client_credentials';
         try {
             $response = $authorisationClient->post($url);
