@@ -6,6 +6,7 @@ namespace App\Services;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as RequestException;
 
+use Exception;
 use App\Exceptions\AuthException;
 
 // used to debug Guzzle
@@ -64,11 +65,7 @@ class Authorisation
      */
     public function injectAuthorisationToken($headers)
     {
-        try {
-            $token = $this->getAuthorisationToken();
-        } catch (Exception $e) {
-            throw new AuditException($e);
-        }
+        $token = $this->getAuthorisationToken();
         $headers += ['Authorization' => 'Bearer ' . $token];
         return $headers;
     }

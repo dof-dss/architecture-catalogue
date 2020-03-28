@@ -9,30 +9,28 @@ use Illuminate\Support\Facades\Log;
 class AuditException extends Exception
 {
     /**
-     * Report or log an exception.
-     *
-     * @return void
-     */
-    // pass in a parameter for a specific message???
-    public function report($errorMessage = "Unhandled audit exception")
+    * Report or log an exception.
+    *
+    * @return void
+    */
+    public function report($errorMessage = "Audit failure - unable to record data changes")
     {
-        // log the exeption in the application log
-        Log::alert($errorMessage . '. NICS Audit Service: ' . $this->getCustomMessage());
+        Log::alert($errorMessage, [
+           'class' => self::class,
+           'message' => $this->getShortMessage(),
+           'stack trace' => self::getTrace()
+        ]);
     }
 
     public function render($request)
     {
-        //
+       //
     }
 
-    public function getCustomMessage()
+    public function getShortMessage()
     {
-        return $this->getMessage();
+        // grab the first 2 lines of the message
+        $lines = explode("\n", self::getMessage());
+        return $lines[0] . $lines[1];
     }
 }
-
-
-    // Log::alert('Exception raised: ', [
-    //     'class' => get_class($exception),
-    //     'message' => $exception->getMessage()
-    // ]);

@@ -13,11 +13,13 @@ class AuthException extends Exception
      *
      * @return void
      */
-    // pass in a parameter for a specific message
-    public function report($errorMessage = "Unhandled authorisation exception")
+    public function report($errorMessage = "Authorisation failure - unable to get authorisation token")
     {
-        // log the exeption in the application log
-        Log::alert($errorMessage . '. Authorisation service (AWS Cognito): ' . $this->getCustomMessage());
+        Log::alert($errorMessage, [
+            'class' => self::class,
+            'message' => $this->getShortMessage(),
+            'stack trace' => self::getTrace()
+        ]);
     }
 
     public function render($request)
@@ -25,8 +27,10 @@ class AuthException extends Exception
         //
     }
 
-    public function getCustomMessage()
+    public function getShortMessage()
     {
-        return $this->getMessage();
+        // grab the first 2 lines of the message
+        $lines = explode("\n", self::getMessage());
+        return $lines[0] . $lines[1];
     }
 }
