@@ -17,6 +17,7 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         // *** think about what exceptions not to report on ***
         Illuminate\Auth\AuthenticationException::class,
+        Illuminate\Validation\ValidationException::class,
     ];
 
     /**

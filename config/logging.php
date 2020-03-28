@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => [env('APP_ENV') == 'local' ? 'daily' : 'stderr', 'slack'],
+            'channels' => [env('APP_ENV') == 'local' ? 'daily' : 'errorlog', 'slack'],
             'ignore_exceptions' => false,
         ],
 
@@ -77,8 +77,7 @@ return [
             'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
-                // as per twelve-factor app recommendation
-                'stream' => 'php://stdout',
+                'stream' => 'php://stderr',
             ],
         ],
 
@@ -89,7 +88,7 @@ return [
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => 'debug',
+            // 'level' => 'debug',
         ],
 
         'null' => [
