@@ -30,10 +30,8 @@ class GuzzleLogger
      */
     public function injectLogger($params)
     {
-        // *** change to custom config ***
-        if (config('app.env') == 'local' ||
-              config('app.env') == 'testing' ||
-              config('app.env') == 'sandbox') {
+        // debug HTTP traffic if in local development environment only
+        if (config('app.env') == 'local') {
             $stack = HandlerStack::create();
             $logChannel = app()->get('log')->channel('stack');
             $stack->push(
