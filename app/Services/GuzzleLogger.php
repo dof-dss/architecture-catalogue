@@ -20,6 +20,7 @@ class GuzzleLogger
     * @author     Stephen Patterson <stephen.patterson@finance-ni.gov.uk>
     */
 
+    public const DEBUG = "\n>>>>>>>>\n{request}\n<<<<<<<<\n{response}";
     /**
      * Build a stack to log Guzzle http requests and responses
      *
@@ -38,7 +39,7 @@ class GuzzleLogger
             $stack->push(
                 Middleware::log(
                     $logChannel,
-                    new MessageFormatter('HTTP request: {request} HTTP response: {response}')
+                    new MessageFormatter(self::DEBUG)
                 )
             );
             $params += ['handler' => $stack];
