@@ -15,9 +15,6 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        // *** think about what exceptions not to report on ***
-        Illuminate\Auth\AuthenticationException::class,
-        Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -38,10 +35,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        Log::alert('Exception raised: ', [
-            'class' => get_class($exception),
-            'message' => $exception->getMessage()
-        ]);
         parent::report($exception);
     }
 
