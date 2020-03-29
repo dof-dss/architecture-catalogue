@@ -42,4 +42,10 @@ return [
         'redirect' => env('AZURE_REDIRECT_URI')
     ],
 
+    'slack' => [
+        'client_id' => env('SLACK_CLIENT_ID'),
+        'client_secret' => env('SLACK_SECRET'),
+        'webhook_url' => env('SLACK_WEBHOOK_URL')
+    ],
+
 ];

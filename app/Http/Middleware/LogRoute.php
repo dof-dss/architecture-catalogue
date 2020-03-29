@@ -17,7 +17,9 @@ class LogRoute
      */
     public function handle($request, Closure $next)
     {
-        Log::info($request->method() . ": " . $request->fullUrl());
+        if (config('app.env') == 'local' || config('app.env') == 'sandbox') {
+            Log::debug($request->method() . ": " . $request->fullUrl());
+        }
 
         return $next($request);
     }

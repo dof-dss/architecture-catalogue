@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
+// specific exception handler
+use App\Exceptions\AuditException;
+
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -115,7 +118,14 @@ class EntriesController extends Controller
         $entry['functionality'] = $request->functionality;
         $entry['service_levels'] = $request->service_levels;
         $entry['interfaces'] = $request->interfaces;
-        $id = $this->entryRepository->create($entry);
+
+        // create may partially fail due to external service calls
+        try {
+            $id = $this->entryRepository->create($entry);
+        } catch (AuditException $ex) {
+            $ex->report(get_class($this) . ":" . __FUNCTION__);
+            return back()->withErrors('There was an error auditing your last action. Please contact support.');
+        }
 
         // now view the newly created entry
         return redirect('/entries/' . $id);
@@ -172,7 +182,14 @@ class EntriesController extends Controller
         $entry['functionality'] = $request->functionality;
         $entry['service_levels'] = $request->service_levels;
         $entry['interfaces'] = $request->interfaces;
-        $this->entryRepository->update($id, $entry);
+
+        // update may partially fail due to external service calls
+        try {
+            $this->entryRepository->update($id, $entry);
+        } catch (AuditException $ex) {
+            $ex->report(get_class($this) . ":" . __FUNCTION__);
+            return back()->withErrors('There was an error auditing your last action. Please contact support.');
+        }
 
         // now view the updated entry
         return redirect('/entries/' . $id);
@@ -198,7 +215,15 @@ class EntriesController extends Controller
      */
     public function destroy($id)
     {
-        $this->entryRepository->delete($id);
+
+        // delete may partially fail due to external service calls
+        try {
+            $this->entryRepository->delete($id);
+        } catch (AuditException $ex) {
+            $ex->report(get_class($this) . ":" . __FUNCTION__);
+            return redirect('/entries')->withErrors('There was an error auditing your last action. Please contact support.');
+        }
+
         return redirect('/entries');
     }
 
@@ -210,6 +235,7 @@ class EntriesController extends Controller
      */
     public function copy($id)
     {
+        // exceptions have not been handled
         $newId = $this->entryRepository->copy($id);
         return redirect('/entries/' . $newId);
     }
