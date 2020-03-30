@@ -11,6 +11,7 @@ defaults: &defaults
     APP_ENV: ((APP_ENV))
     APP_KEY: ((APP_KEY))
     APP_NAME: ((APP_NAME))
+    APP_PHASE: ((APP_PHASE))
     APP_URL: ((APP_URL))
     CACHE_DRIVER: file
     DB_CERT_PATH: /etc/ssl/certs
