@@ -9,5 +9,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 vars.yml
+vars.staging.yml
+vars.production.yml
 .env*
 *.sql
