@@ -1,7 +1,7 @@
 ---
 defaults: &defaults
   memory: 64M
-  instances: 2
+  instances: ((APP_INSTANCES))
   buildpack: php_buildpack
   services:
   - ea-mysql-service
@@ -13,6 +13,9 @@ defaults: &defaults
     APP_NAME: ((APP_NAME))
     APP_PHASE: ((APP_PHASE))
     APP_URL: ((APP_URL))
+    APP_PAGINATION_PAGE_SIZE: ((APP_PAGINATION_PAGE_SIZE))
+    APP_PAGINATION_MAX_PAGES: ((APP_PAGINATION_MAX_PAGES))
+    APP_INSTANCES: ((APP_INSTANCES))
     CACHE_DRIVER: file
     DB_CERT_PATH: /etc/ssl/certs
     DB_CONNECTION: mysql
