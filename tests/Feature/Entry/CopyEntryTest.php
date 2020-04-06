@@ -18,8 +18,23 @@ class CopyEntryTest extends TestCase
      *
      * @return void
      */
-    public function testCanCopyAnEntry()
+    public function testConributorCanCopyAnEntry()
     {
-        $this->assertTrue(true);
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // create an entry
+        $entry = factory(Entry::class)->create([
+            'name' => 'AWS S3'
+        ]);
+
+        // now copy it
+        $this->followingRedirects()
+            ->from('/entries/' . $entry->id)
+            ->get('/entries/' . $entry->id . '/copy')
+            ->assertSuccessful()
+            ->assertSee(' AWS S3 - COPY');
     }
 }
