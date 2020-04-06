@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 
 use App\User;
 use App\Entry;
@@ -24,6 +25,9 @@ class CopyEntryTest extends TestCase
         Notification::fake();
 
         $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // stops events being fired (i.e. will prevent audit)
+        Event::fake();
 
         // create an entry
         $entry = factory(Entry::class)->create([
