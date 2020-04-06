@@ -14,12 +14,62 @@ use App\Entry;
 class RemoveEntryTest extends TestCase
 {
     /**
+     * Check a contributor is challenged when removing an entry
+     *
+     * @return void
+     */
+    public function testConributorRemoveEntryConfirmationStep()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // create an entry
+        $entry = factory(Entry::class)->create([
+            'name' => 'AWS S3'
+        ]);
+        $this->assertDatabaseHas('entries', [
+            'name' => $entry->name
+        ]);
+
+        // now delete it
+        $this->followingRedirects()
+            ->from('/entries/' . $entry->id)
+            ->get('/entries/' . $entry->id . '/delete')
+            ->assertSuccessful()
+            ->assertSee('Are you sure');
+    }
+
+    /**
      * Check a contributor can remove an entry
      *
      * @return void
      */
-    public function testCanRemoveAnEntry()
+    public function testConributorCanRemoveAnEntry()
     {
-        $this->assertTrue(true);
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // create an entry
+        $entry = factory(Entry::class)->create([
+            'name' => 'AWS S3'
+        ]);
+        $this->assertDatabaseHas('entries', [
+            'name' => $entry->name
+        ]);
+
+        // now delete it
+        $this->followingRedirects()
+            ->from('/entries/' . $entry->id . '/delete')
+            ->post('/entries/' . $entry->id, [
+                '_method' => 'DELETE',
+            ])
+            ->assertSuccessful();
+        $this->assertDatabaseMissing('entries', [
+            'name' => 'AWS S3'
+        ]);
     }
 }
