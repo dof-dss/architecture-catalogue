@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 
 use App\User;
 use App\Entry;
@@ -18,8 +19,26 @@ class CopyEntryTest extends TestCase
      *
      * @return void
      */
-    public function testCanCopyAnEntry()
+    public function testConributorCanCopyAnEntry()
     {
-        $this->assertTrue(true);
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // stops events being fired (i.e. will prevent audit)
+        Event::fake();
+
+        // create an entry
+        $entry = factory(Entry::class)->create([
+            'name' => 'AWS S3'
+        ]);
+
+        // now copy it
+        $this->followingRedirects()
+            ->from('/entries/' . $entry->id)
+            ->get('/entries/' . $entry->id . '/copy')
+            ->assertSuccessful()
+            ->assertSee(' AWS S3 - COPY');
     }
 }

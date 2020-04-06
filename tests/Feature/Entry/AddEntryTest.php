@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 
 use App\User;
 use App\Entry;
@@ -59,7 +60,10 @@ class AddEntryTest extends TestCase
         // stops notification being physically sent when a user is created
         Notification::fake();
 
-        $user = $this->loginAsFakeUser(true, 'contributor');
+        $user = $this->loginAsFakeUser(false, 'contributor');
+
+        // stops events being fired
+        Event::fake();
 
         $entry = factory(Entry::class)->make();
         $response = $this->post(route('entry.store'), [
@@ -90,7 +94,10 @@ class AddEntryTest extends TestCase
         // stops notification being physically sent when a user is created
         Notification::fake();
 
-        $user = $this->loginAsFakeUser(true, 'contributor');
+        $user = $this->loginAsFakeUser(false, 'contributor');
+
+        // stops events being fired
+        Event::fake();
 
         $entry = factory(Entry::class)->create();
         $this->followingRedirects()
@@ -447,7 +454,10 @@ class AddEntryTest extends TestCase
         // stops notification being physically sent when a user is created
         Notification::fake();
 
-        $user = $this->loginAsFakeUser(true, 'contributor', $visualCheck = 'assertSee');
+        $user = $this->loginAsFakeUser(false, 'contributor', $visualCheck = 'assertSee');
+
+        // stops events being fired
+        Event::fake();
 
         // mock up an entry
         $entry = factory(Entry::class)->make();
