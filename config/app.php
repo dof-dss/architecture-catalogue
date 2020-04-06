@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'en_GB',
 
     /*
     |--------------------------------------------------------------------------
@@ -281,4 +281,15 @@ return [
     'architecture_portal_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://dss-architecture-portal.london.cloudapps.digital/'),
     'ea_principles_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://nics-ea-principles.london.cloudapps.digital'),
     'citizen_services_architecture_url' => env('APP_URL_CITIZEN_SERVICES_ARCHITECTURE', 'https://docs.ea.digitalni.gov.uk'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin account configuration
+    |--------------------------------------------------------------------------
+    |
+    | Admin account username and password
+    |
+    */
+    'admin_username' => env('ADMIN_USERNAME'),
+    'admin_password' => env('ADMIN_PASSWORD'),
 ];
