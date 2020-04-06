@@ -97,4 +97,17 @@ class User extends Authenticatable
     {
         return config('services.slack.webhook_url');
     }
+
+    /**
+     * Do not trigger events on saving a model.
+     *
+     * @param  array $options
+     * @return $this
+     */
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
+    }
 }
