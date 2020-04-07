@@ -6,10 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\PasswordReset;
+use App\Notifications\VerifyEmail;
 // use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\AuditsActivity;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
+
 {
     use Notifiable;
     // use LogsActivity;
@@ -85,6 +87,16 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($this, $token));
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail($this));
     }
 
     /**

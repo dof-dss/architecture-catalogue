@@ -42,13 +42,13 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 //
 // email verification
 //
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('user/request', 'Auth\UserController@request');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('entries/search', 'Catalogue\EntriesController@search')->name('entry.find');
     Route::get('catalogue/search', 'Catalogue\EntriesController@searchCatalogue');
 
