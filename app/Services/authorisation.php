@@ -12,6 +12,8 @@ use App\Exceptions\AuthException;
 // used to debug Guzzle
 use App\Services\GuzzleLogger;
 
+use Socialite;
+
 class Authorisation
 {
     /**

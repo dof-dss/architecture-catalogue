@@ -51,7 +51,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the provider's authentication page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -93,9 +93,13 @@ class LoginController extends Controller
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
                 Log::info('handleProviderCallBack: ' . $e->getMessage());
-                return redirect('/login')->withErrors(['A user already exists with this identity. Use another identity or create a new account.']);
+                return redirect('/login')->withErrors([
+                  'A user already exists with this identity. Use another identity or create a new account.'
+                ]);
             }
         }
+        // store the Cognito user token for use with Usage Tracking API
+        session(['user_token' => $user->token]);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
     }

@@ -49,20 +49,25 @@
           </p> -->
       @endif
 
+      <h2 class="govuk-heading-l">Use single sign-on</h2>
+      <h3 class="govuk-heading-m">NICS Identity Hub</h3>
+      <p class="govuk-body">
+          This option is open to anyone with an IT Assist Microsoft Active Directory account or an NICS Identity Hub account.
+      </p>
+      <a class="govuk-button govuk-button--secondary" href="/login/cognito">Continue</a>
 
+      <h3 class="govuk-heading-m">Microsoft</h3>
+      <p class="govuk-body">
+          This option is open to anyone has has an Azure account on the NIGOV domain.
+      </p>
+      <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a>
 
-        <h2 class="govuk-heading-l">Use single sign-on</h2>
-        <h3 class="govuk-heading-m">GitHub</h3>
-        <p class="govuk-body">
-            This option is open to anyone who has a GitHub account.
-        </p>
-        <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
+      <h3 class="govuk-heading-m">GitHub</h3>
+      <p class="govuk-body">
+          This option is open to anyone who has a GitHub account.
+      </p>
+      <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
 
-        <h3 class="govuk-heading-m">Microsoft</h3>
-        <p class="govuk-body">
-            This option is open to anyone has has an Azure account on the NIGOV domain.
-        </p>
-        <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a>
     </div>
 </div>
 
