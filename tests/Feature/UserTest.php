@@ -26,6 +26,9 @@ class UserTest extends TestCase
         $response = $this->get(route('register'));
         $response->assertSuccessful();
         $response->assertViewIs('auth.register');
+        $response->assertSee('AWS Cognito');
+        $response->assertSee('Microsoft');
+        $response->assertSee('GitHub')
     }
 
     /**
@@ -274,6 +277,16 @@ class UserTest extends TestCase
      * @return void
      */
     public function testSingleSignOnWithAzure()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    public function testSingleSignOnWithCognito()
     {
         $this->assertTrue(true);
     }

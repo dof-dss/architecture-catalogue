@@ -66,7 +66,7 @@ class Tracking
         $params = [
             'tenantId' => $this->tenantId,
             'applicationEventId' => $eventId,
-            'applicationUserId' => $user->uuid
+            'identityToken' => session('user_token')
         ];
         try {
             $result = $this->client->post($url, [

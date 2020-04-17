@@ -42,6 +42,13 @@ return [
         'redirect' => env('AZURE_REDIRECT_URI')
     ],
 
+    'cognito' => [
+        'auth_domain' => env('COGNITO_DOMAIN'),
+        'client_id' => env('COGNITO_CLIENT_ID'),
+        'client_secret' => env('COGNITO_CLIENT_SECRET'),
+        'redirect' => env('COGNITO_REDIRECT_URI'),
+    ],
+
     'slack' => [
         'client_id' => env('SLACK_CLIENT_ID'),
         'client_secret' => env('SLACK_SECRET'),
