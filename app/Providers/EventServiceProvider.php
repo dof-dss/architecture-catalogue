@@ -18,9 +18,22 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\\Azure\\AzureExtendSocialite@handle',
             'SocialiteProviders\\Cognito\\CognitoExtendSocialite@handle'
+        ],
+
+        'Illuminate\Auth\Events\Login' => [
+        'App\Listeners\LogSuccessfulLogin',
+        ],
+
+        'Illuminate\Auth\Events\Failed' => [
+            'App\Listeners\LogFailedLogin',
+        ],
+
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\LogSuccessfulLogout',
         ],
     ];
 
