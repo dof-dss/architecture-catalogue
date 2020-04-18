@@ -65,7 +65,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from the provider.
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,6 +83,11 @@ class LoginController extends Controller
             return redirect('/login')->withErrors(['Unable to sign in using ' . $provider]);
         }
 
+        // store the tokens for future use with the usage tracking service
+        session(['token' => $user->token]);
+        session(['refreshToken' => $user->refreshToken]);
+        session(['expiresIn' => $user->expiresIn]);
+
         // if no name found then use the nickname
         if (!$user->name) {
             $user->name = $user->nickname;
@@ -98,8 +103,6 @@ class LoginController extends Controller
                 ]);
             }
         }
-        // store the Cognito user token for use with Usage Tracking API
-        session(['user_token' => $user->token]);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
     }

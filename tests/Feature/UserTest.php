@@ -26,9 +26,6 @@ class UserTest extends TestCase
         $response = $this->get(route('register'));
         $response->assertSuccessful();
         $response->assertViewIs('auth.register');
-        $response->assertSee('AWS Cognito');
-        $response->assertSee('Microsoft');
-        $response->assertSee('GitHub')
     }
 
     /**
@@ -108,6 +105,9 @@ class UserTest extends TestCase
         $response = $this->get('/login');
         $response->assertSuccessful();
         $response->assertViewIs('auth.login');
+        $response->assertSee('NICS Identity Hub');
+        $response->assertSee('Microsoft');
+        $response->assertSee('GitHub');
     }
 
     /**
@@ -286,7 +286,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testSingleSignOnWithCognito()
+    public function testSingleSignOnWithNICSIdentityHub()
     {
         $this->assertTrue(true);
     }
