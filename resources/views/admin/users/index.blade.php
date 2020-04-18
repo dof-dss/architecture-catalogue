@@ -15,6 +15,7 @@
                     <thead class="govuk-table__head">
                         <tr class="govuk-table__row">
                             <th scope="col" class="govuk-table__header">E-mail</th>
+                            <th scope="col" class="govuk-table__header">Verified</th>
                             <th scope="col" class="govuk-table__header">Admin</th>
                             <th scope="col" class="govuk-table__header">Role</th>
                             <th scope="col" class="govuk-table__header">Action</th>
@@ -24,6 +25,9 @@
                         @foreach ($users as $user)
                             <tr scope="row" class="govuk-table__row">
                                 <td class="govuk-table__cell">{{ $user->email }}</td>
+                                <td class="govuk-table__cell">
+                                    @if ($user->email_verified_at)<i class="fa fa-check"></i>@endif
+                                </td>
                                 <td class="govuk-table__cell">@if ($user->admin)<i class="fa fa-check"></i>@endif</td>
                                 <td class="govuk-table__cell">{{ $user->role}}</td>
                                 <td class="govuk-table__cell">
