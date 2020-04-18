@@ -9,6 +9,11 @@ use GuzzleHttp\Exception\RequestException as RequestException;
 //  models
 use App\User;
 
+// used to debug Guzzle
+use App\Services\GuzzleLogger;
+
+use Illuminate\Support\Facades\Log;
+
 use App\Services\Authorisation as AuthService;
 
 class Tracking
@@ -35,17 +40,20 @@ class Tracking
      */
     public function __construct()
     {
-        $this->authService = new AuthService;
         $this->tenantId = config('eausagetracking.tenant_id');
+        $this->authService = new AuthService;
         $headers = [
             'tenantId' => $this->tenantId,
             'Content-Type' => 'application/json'
         ];
         $headers = $this->authService->injectAuthorisationToken($headers);
-        $this->client = new GuzzleClient([
+        $parameters = [
             'base_uri' => config('eausagetracking.api'),
             'headers' => $headers
-        ]);
+        ];
+        $logger = new GuzzleLogger;
+        $parameters = $logger->injectLogger($parameters);
+        $this->client = new GuzzleClient($parameters);
     }
 
     /**
@@ -58,15 +66,20 @@ class Tracking
      */
     public function recordEvent($user, $eventId)
     {
-        // setup parameters
-        $trackingUser = $this->findOrCreateUser($user);
+        // if we logged in using AWS Cognito we will have a user token
+        // otherwise we will need to create a tracking service user
+        if (session('token')) {
+            $identityToken = session('token');
+        } else {
+            $trackingUser = $this->findOrCreateUser($user);
+            $identityToken = $user->uuid;
+        }
 
         // invoke the API
         $url = 'ApplicationUsage';
         $params = [
-            'tenantId' => $this->tenantId,
             'applicationEventId' => $eventId,
-            'identityToken' => session('user_token')
+            'identityToken' => $identityToken
         ];
         try {
             $result = $this->client->post($url, [
