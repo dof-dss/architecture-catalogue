@@ -42,9 +42,9 @@ class StoreEntry extends FormRequest
             'description' => 'required|alpha_numeric_spaces_punctuation|between:3,100',
             'category_subcategory' => 'required|alpha_numeric_spaces_punctuation|between:8,80',
             'status' => 'required|alpha|max:10',
-            'functionality' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
-            'service_levels' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
-            'interfaces' => 'nullable|alpha_numeric_spaces_punctuation|max:300',
+            'functionality' => 'nullable|string|max:300',
+            'service_levels' => 'nullable|string|max:300',
+            'interfaces' => 'nullable|string|max:300',
         ];
     }
 
@@ -69,11 +69,11 @@ class StoreEntry extends FormRequest
             'status.required' => 'Enter a status.',
             'status.alpha' => 'Status must only include letters.',
             'status.max' => 'Status must be 10 characters or fewer.',
-            'functionality.alpha_numeric_spaces_punctuation' => 'Supported functionality must only include letters, digits, spaces and punctuation.',
+            'functionality.string' => 'Supported functionality must be string of characters.',
             'functionality.max' => 'Supported functionality must 300 characters or fewer.',
-            'service_levels.alpha_numeric_spaces_punctuation' => 'Service levels must only include letters, digits, spaces and punctuation.',
+            'service_levels.string' => 'Service levels must be string of characters.',
             'service_levels.max' => 'Service levels must be 300 characters or fewer.',
-            'interfaces.alpha_numeric_spaces_punctuation' => 'Interfaces must only include letters, digits, spaces and punctuation.',
+            'interfaces.string' => 'Interfaces must must be string of characters.',
             'interfaces.max' => 'Interfaces must be 300 characters or fewer.',
         ];
     }

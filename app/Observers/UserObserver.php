@@ -38,9 +38,6 @@ class UserObserver
         // record a business event
         $tracker = new UsageTrackingClient();
         $tracker->recordEvent($user, (int) config('eausagetracking.account_created_event_id'));
-
-        // audit user created
-        $user->auditEvent(__FUNCTION__);
     }
 
     /**
@@ -51,8 +48,6 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        // audit user update
-        $user->auditEvent(__FUNCTION__);
     }
 
     /**
@@ -63,8 +58,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        // audit user deleted
-        $user->auditEvent(__FUNCTION__);
     }
 
     /**

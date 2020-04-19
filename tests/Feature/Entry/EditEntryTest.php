@@ -403,6 +403,20 @@ class EditEntryTest extends TestCase
         );
     }
 
+    /**
+     * Check that a URL can be entered as a data
+     *
+     * @return void
+     */
+    public function testEntryValidationFunctionalityCanContainUrl()
+    {
+        $this->validationCheck(
+            ['functionality' => 'https://architecture-catalogue.test'],
+            'must only include',
+            'assertDontSee'
+        );
+    }
+
     // service levels
 
     /**
@@ -415,6 +429,20 @@ class EditEntryTest extends TestCase
         $this->validationCheck(
             ['service_levels' => Str::random(301)],
             'Service levels must be 300 characters or fewer.'
+        );
+    }
+
+    /**
+     * Check that a URL can be entered as a data
+     *
+     * @return void
+     */
+    public function testEntryValidationServiceLevelsCanContainUrl()
+    {
+        $this->validationCheck(
+            ['service_levels' => 'https://architecture-catalogue.test'],
+            'must only include',
+            'assertDontSee'
         );
     }
 
@@ -456,12 +484,12 @@ class EditEntryTest extends TestCase
      * @param string $message
      * @return response
      */
-    private function validationCheck($item, $message)
+    private function validationCheck($item, $message, $visualCheck = 'assertSee')
     {
         // stops notification being physically sent when a user is created
         Notification::fake();
 
-        $user = $this->loginAsFakeUser(false, 'contributor', $visualCheck = 'assertSee');
+        $user = $this->loginAsFakeUser(false, 'contributor', $visualCheck);
 
         // stops events being fired
         Event::fake();
