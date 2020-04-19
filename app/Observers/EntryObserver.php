@@ -16,9 +16,6 @@ class EntryObserver
     {
         // add to the elasticsearch index
         $entry->addToIndex();
-
-        // audit entry created
-        $entry->auditEvent(__FUNCTION__);
     }
 
     /**
@@ -31,9 +28,6 @@ class EntryObserver
     {
         // update the elasticsearch index
         $entry->updateIndex();
-
-        // audit entry updated
-        $entry->auditEvent(__FUNCTION__);
     }
 
     /**
@@ -46,9 +40,6 @@ class EntryObserver
     {
         // delete from the elasticsearch index
         $entry->removeFromIndex();
-
-        // audit entry deleted
-        $entry->auditEvent(__FUNCTION__);
     }
 
     /**
