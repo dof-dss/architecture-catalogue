@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 // used to generate GUID
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 use App\User;
-use App\Services\Audit as AuditClient;
+use App\Services\Audit as AuditLogger;
+
+use Illuminate\Support\Facades\Log;
 
 trait AuditsActivity
 {
@@ -24,9 +27,59 @@ trait AuditsActivity
     * @author     Stephen Patterson <stephen.patterson@finance-ni.gov.uk>
     */
 
-    protected $loggableEvents = [
-        'created', 'updated', 'deleted'
-    ];
+    /**
+     * Determine if auditing is enabled.
+     *
+     * @return void
+     */
+    protected function auditEnabled()
+    {
+        return config('eaaudit.enabled') == true;
+    }
+
+    /**
+     * Determine if auditing is disabled.
+     *
+     * @return void
+     */
+    protected function auditDisabled()
+    {
+        return config('eaaudit.enabled') == false;
+    }
+
+    /**
+     * Set up model listeners for each event
+     *
+     * @return void
+     */
+    public static function bootAuditsActivity()
+    {
+        static::eventsToBeRecorded()->each(function ($eventName) {
+            return static::$eventName(function (Model $model) use ($eventName) {
+                $model->auditEvent($eventName);
+            });
+        });
+    }
+
+    /**
+     * Determine events to be audited.
+     *
+     * @return Collection $events
+     */
+    protected static function eventsToBeRecorded(): Collection
+    {
+        if (isset(static::$recordEvents)) {
+            return collect(static::$recordEvents);
+        }
+
+        $events = collect([
+            'created',
+            'updated',
+            'deleted',
+        ]);
+
+        return $events;
+    }
 
     /**
      * Audit changes in a model.
@@ -36,6 +89,10 @@ trait AuditsActivity
      */
     public function auditEvent($event)
     {
+        if ($this->auditDisabled()) {
+            return;
+        }
+
         // check if this event should be audited [tbd]
 
         // determine who has triggered the event (check for anonymous user i.e. not logged in)
@@ -48,7 +105,7 @@ trait AuditsActivity
         }
 
         // audit the event on this model
-        $audit = new AuditClient();
+        $audit = new AuditLogger();
         $audit->recordEvent(
             $event,
             $this->id,
