@@ -68,8 +68,8 @@ class Tracking
     {
         // if we logged in using AWS Cognito we will have a user token
         // otherwise we will need to create a tracking service user
-        if (session('token')) {
-            $identityToken = session('token');
+        if (session('id_token')) {
+            $identityToken = session('id_token');
         } else {
             $trackingUser = $this->findOrCreateUser($user);
             $identityToken = $user->uuid;

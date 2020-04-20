@@ -84,9 +84,12 @@ class LoginController extends Controller
         }
 
         // store the tokens for future use with the usage tracking service
-        session(['token' => $user->token]);
-        session(['refreshToken' => $user->refreshToken]);
-        session(['expiresIn' => $user->expiresIn]);
+        session(['access_token' => $user->token]);
+        session(['refresh_token' => $user->refreshToken]);
+        session(['expires_in' => $user->expiresIn]);
+        if ($provider == 'cognito') {
+            session(['id_token' => $user->idToken]);
+        }
 
         // if no name found then use the nickname
         if (!$user->name) {
