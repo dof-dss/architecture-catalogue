@@ -2,7 +2,8 @@
 
 namespace SocialiteProviders\Cognito;
 
-use SocialiteProviders\Manager\OAuth2\User;
+use Illuminate\Support\Arr;
+use SocialiteProviders\Cognito\User;
 use Laravel\Socialite\Two\ProviderInterface;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 
@@ -82,7 +83,7 @@ class Provider extends AbstractProvider implements ProviderInterface
         return (new User())->setRaw($user)->map([
             'id'       => $user['sub'],
             'nickname' => $user['username'],
-            'name'     => $user['username'],
+            'name'     => $user['email'],
             'email'    => $user['email'],
         ]);
     }
@@ -98,5 +99,47 @@ class Provider extends AbstractProvider implements ProviderInterface
             'client_id' => config('services.cognito.client_id'),
             'redirect_uri' => config('app.url') . config('services.cognito.redirect')
         ]);
+    }
+
+    // ***
+    // * need to override the default code in order to extract id_token
+    // ***
+
+    /**
+     * @return \SocialiteProviders\Cognito\User;
+     */
+    public function user()
+    {
+        if ($this->hasInvalidState()) {
+            throw new InvalidStateException();
+        }
+
+        $response = $this->getAccessTokenResponse($this->getCode());
+        $this->credentialsResponseBody = $response;
+
+        $user = $this->mapUserToObject($this->getUserByToken(
+            $token = $this->parseAccessToken($response)
+        ));
+
+        if ($user instanceof User) {
+            $user->setAccessTokenResponseBody($this->credentialsResponseBody);
+        }
+
+        return $user->setToken($token)
+                    ->setRefreshToken($this->parseRefreshToken($response))
+                    ->setExpiresIn($this->parseExpiresIn($response))
+                    ->setIdToken($this->parseIdToken($response));
+    }
+
+    /**
+     * Get the access token from the token response body.
+     *
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function parseIdToken($body)
+    {
+        return Arr::get($body, 'id_token');
     }
 }
