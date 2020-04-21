@@ -24,11 +24,11 @@
         <details class="govuk-details" data-module="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
-                    Microsoft Corporate Identity
+                    Microsoft corporate identity
                 </span>
             </summary>
             <div class="govuk-details__text">
-                You use an existing NICS Active Directory account. This option is open to NICS staff on the <strong>nigov</strong> domain that are connected to the NICS network.
+                You use an existing NICS Active Directory account. This option is open to NICS staff on the nigov domain that are connected to the NICS network.
             </div>
         </details>
         <a class="govuk-button govuk-button--secondary" href="/login/cognito">Continue</a>
