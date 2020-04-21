@@ -14,6 +14,11 @@ use Illuminate\Support\Str;
 use App\User;
 use Hash;
 
+//
+// standard authentication related tests have been commented out
+// because of the sole use of the NICS Identity Hub
+//
+
 class UserTest extends TestCase
 {
     /**
@@ -21,58 +26,58 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanViewASignupForm()
-    {
-        $response = $this->get(route('register'));
-        $response->assertSuccessful();
-        $response->assertViewIs('auth.register');
-    }
+    // public function testUserCanViewASignupForm()
+    // {
+    //     $response = $this->get(route('register'));
+    //     $response->assertSuccessful();
+    //     $response->assertViewIs('auth.register');
+    // }
 
     /**
      * Test description
      *
      * @return void
      */
-    public function testUserCanCreateAValidAccount()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->make();
-        $response = $this->post('/register', [
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => 'password',
-            'password_confirmation' => 'password'
-        ]);
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('users', [
-            'name' => $user->name
-        ]);
-    }
+    // public function testUserCanCreateAValidAccount()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->make();
+    //     $response = $this->post('/register', [
+    //         'name' => $user->name,
+    //         'email' => $user->email,
+    //         'password' => 'password',
+    //         'password_confirmation' => 'password'
+    //     ]);
+    //     $response->assertStatus(302);
+    //     $this->assertDatabaseHas('users', [
+    //         'name' => $user->name
+    //     ]);
+    // }
 
     /**
      * Test description
      *
      * @return void
      */
-    public function testUserCannotCreateAnInvalidAccount()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->make();
-        $response = $this->post('/register', [
-            'name' => 'inv@lidcharacter$',
-            'email' => 'bademailaddress',
-            'password' => 'password',
-            'password_confirmation' => 'passwordX'
-        ]);
-        $response->assertSessionHasErrors(['name', 'email', 'password']);
-        $this->assertDatabaseMissing('users', [
-            'name' => $user->name
-        ]);
-    }
+    // public function testUserCannotCreateAnInvalidAccount()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->make();
+    //     $response = $this->post('/register', [
+    //         'name' => 'inv@lidcharacter$',
+    //         'email' => 'bademailaddress',
+    //         'password' => 'password',
+    //         'password_confirmation' => 'passwordX'
+    //     ]);
+    //     $response->assertSessionHasErrors(['name', 'email', 'password']);
+    //     $this->assertDatabaseMissing('users', [
+    //         'name' => $user->name
+    //     ]);
+    // }
 
     /**
      * Test description
@@ -106,8 +111,8 @@ class UserTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('auth.login');
         $response->assertSee('NICS Identity Hub');
+        $response->assertSee('Application');
         $response->assertSee('Microsoft');
-        $response->assertSee('GitHub');
     }
 
     /**
@@ -127,38 +132,38 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanLoginWithCorrectCredentials()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->create();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password'
-        ]);
-        $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
-    }
+    // public function testUserCanLoginWithCorrectCredentials()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->create();
+    //     $response = $this->post('/login', [
+    //         'email' => $user->email,
+    //         'password' => 'password'
+    //     ]);
+    //     $response->assertStatus(302);
+    //     $this->assertAuthenticatedAs($user);
+    // }
 
     /**
      * Test description
      *
      * @return void
      */
-    public function testUserCannotLoginWithIncorrectCredentials()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->create();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'invalid'
-        ]);
-        $response->assertSessionHasErrors();
-        $this->assertGuest();
-    }
+    // public function testUserCannotLoginWithIncorrectCredentials()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->create();
+    //     $response = $this->post('/login', [
+    //         'email' => $user->email,
+    //         'password' => 'invalid'
+    //     ]);
+    //     $response->assertSessionHasErrors();
+    //     $this->assertGuest();
+    // }
 
     /**
      * Test description
@@ -181,85 +186,85 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserCanViewAPasswordResetForm()
-    {
-        $response = $this->get(route('password.request'));
-        $response->assertSuccessful();
-        $response->assertViewIs('auth.passwords.email');
-    }
+    // public function testUserCanViewAPasswordResetForm()
+    // {
+    //     $response = $this->get(route('password.request'));
+    //     $response->assertSuccessful();
+    //     $response->assertViewIs('auth.passwords.email');
+    // }
 
     /**
      * Test description
      *
      * @return void
      */
-    public function testUserCanRequestResetPassword()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->create();
-
-        $this->followingRedirects()
-            ->from(route('password.request'))
-            ->post(route('password.email'), [
-                'email' => $user->email
-            ])
-            ->assertSuccessful()
-            ->assertSee('Password reset request complete');
-
-        Notification::assertSentTo($user, PasswordReset::class);
-    }
-
-    /**
-     * Test description
-     *
-     * @return void
-     */
-    public function testUserCanViewPasswordResetForm()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = factory(User::class)->create();
-        $token = Password::broker()->createToken($user);
-
-        $this->get(route('password.reset', [
-              'token' => $token,
-            ]))
-            ->assertSuccessful()
-            ->assertSee('Change your password');
-    }
+    // public function testUserCanRequestResetPassword()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->create();
+    //
+    //     $this->followingRedirects()
+    //         ->from(route('password.request'))
+    //         ->post(route('password.email'), [
+    //             'email' => $user->email
+    //         ])
+    //         ->assertSuccessful()
+    //         ->assertSee('Password reset request complete');
+    //
+    //     Notification::assertSentTo($user, PasswordReset::class);
+    // }
 
     /**
      * Test description
      *
      * @return void
      */
-    public function testUserCanResetPassword()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
+    // public function testUserCanViewPasswordResetForm()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->create();
+    //     $token = Password::broker()->createToken($user);
+    //
+    //     $this->get(route('password.reset', [
+    //           'token' => $token,
+    //         ]))
+    //         ->assertSuccessful()
+    //         ->assertSee('Change your password');
+    // }
 
-        $user = factory(User::class)->create();
-        $token = Password::broker()->createToken($user);
-        $password = Str::random(32);
-
-        $this->followingRedirects()
-            ->from(route('password.request'), [
-                'token' => $token,
-              ])->post(route('password.update'), [
-                  'token' => $token,
-                  'email' => $user->email,
-                  'password' => $password,
-                  'password_confirmation' => $password,
-              ])
-              ->assertSuccessful()
-              ->assertViewIs('home');
-
-        $user->refresh();
-        $this->assertTrue(Hash::check($password, $user->password));
-    }
+    /**
+     * Test description
+     *
+     * @return void
+     */
+    // public function testUserCanResetPassword()
+    // {
+    //     // stops notification being physically sent when a user is created
+    //     Notification::fake();
+    //
+    //     $user = factory(User::class)->create();
+    //     $token = Password::broker()->createToken($user);
+    //     $password = Str::random(32);
+    //
+    //     $this->followingRedirects()
+    //         ->from(route('password.request'), [
+    //             'token' => $token,
+    //           ])->post(route('password.update'), [
+    //               'token' => $token,
+    //               'email' => $user->email,
+    //               'password' => $password,
+    //               'password_confirmation' => $password,
+    //           ])
+    //           ->assertSuccessful()
+    //           ->assertViewIs('home');
+    //
+    //     $user->refresh();
+    //     $this->assertTrue(Hash::check($password, $user->password));
+    // }
 
     /**
      * Test description
