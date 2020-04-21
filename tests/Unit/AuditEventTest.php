@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 
 use Tests\TestCase;
 
@@ -23,6 +24,11 @@ class AuditEventTest extends TestCase
     {
         // stops notification being physically sent when a user is created
         Notification::fake();
+
+        // stop events being fired
+        Event::fake([
+            'App\Events\AccountCreated'
+        ]);
 
         $user = $this->loginAsFakeUser(true);
         // create a catalogue entry

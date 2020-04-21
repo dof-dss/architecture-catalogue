@@ -24,10 +24,12 @@ class RemoveEntryTest extends TestCase
         // stops notification being physically sent when a user is created
         Notification::fake();
 
-        $user = $this->loginAsFakeUser(true, 'contributor');
+        // stops events being fired
+        Event::fake([
+            'App\Events\AccountCreated'
+        ]);
 
-        // stops events being fired (i.e. will prevent audit)
-        Event::fake();
+        $user = $this->loginAsFakeUser(true, 'contributor');
 
         // create an entry
         $entry = factory(Entry::class)->create([
@@ -54,6 +56,11 @@ class RemoveEntryTest extends TestCase
     {
         // stops notification being physically sent when a user is created
         Notification::fake();
+
+        // stops events being fired
+        Event::fake([
+            'App\Events\AccountCreated'
+        ]);
 
         $user = $this->loginAsFakeUser(true, 'contributor');
 
