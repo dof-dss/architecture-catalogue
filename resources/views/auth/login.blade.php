@@ -6,68 +6,32 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
-        <h2 class="govuk-heading-l">Sign in</h2>
-
-    <form id="login" action="{{ route('login') }}" method="post">
-        {{ csrf_field() }}
-
-        @component('components.text-input', [
-            'type' => 'email',
-            'name' => 'email',
-            'label' => 'Email address',
-            'autocomplete' => 'username'
-        ])
-        @endcomponent
-
-        @component('components.text-input', [
-            'type' => 'password',
-            'name' => 'password',
-            'label' => 'Password',
-            'autocomplete' => 'off'
-        ])
-        @endcomponent
-
-        <button class="govuk-button" data-module="govuk-button" type="submit">Continue</button>
-      </form>
-
-      @if (Route::has('password.request'))
-          <p class="govuk-body">
-              <a class="govuk-link" href="{{ route('password.request') }}">
-                  Forgotten your password?
-              </a>
-          </p>
-
-          <p class="govuk-body">
-              <a class="govuk-link" href="/register">
-                  Create an account
-              </a>
-          </p>
-          <!-- <p class="govuk-body">
-              <a class="govuk-link" href="/user/request">
-                  Request an account
-              </a>
-          </p> -->
-      @endif
-
-      <h2 class="govuk-heading-l">Use single sign-on</h2>
-      <h3 class="govuk-heading-m">NICS Identity Hub</h3>
-      <p class="govuk-body">
-          This option is open to anyone with an IT Assist Microsoft Active Directory account or an NICS Identity Hub account.
-      </p>
-      <a class="govuk-button govuk-button--secondary" href="/login/cognito">Continue</a>
-
-      <h3 class="govuk-heading-m">Microsoft</h3>
-      <p class="govuk-body">
-          This option is open to anyone has has an Azure account on the NIGOV domain.
-      </p>
-      <a class="govuk-button govuk-button--secondary" href="/login/microsoft">Continue</a>
-
-      <h3 class="govuk-heading-m">GitHub</h3>
-      <p class="govuk-body">
-          This option is open to anyone who has a GitHub account.
-      </p>
-      <a class="govuk-button govuk-button--secondary" href="/login/github">Continue</a>
-
+        <h2 class="govuk-heading-l">Use single sign-on</h2>
+        <h3 class="govuk-heading-m">NICS Identity Hub</h3>
+        <p class="govuk-body">
+            The NICS Identity Hub supports the following identity providers:
+        </p>
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Application identity
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                You create and use an account specifically for this application.
+            </div>
+        </details>
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Microsoft corporate identity
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                You use an existing NICS Active Directory account. This option is open to NICS staff on the nigov domain that are connected to the NICS network.
+            </div>
+        </details>
+        <a class="govuk-button govuk-button--secondary" href="/login/cognito">Continue</a>
     </div>
 </div>
 

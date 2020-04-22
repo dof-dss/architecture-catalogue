@@ -3,8 +3,10 @@
 namespace App\Observers;
 
 use App\User;
-use App\Notifications\AccountCreated;
-use App\Services\Tracking as UsageTrackingClient;
+
+use App\Notifications\AccountCreated as AccountCreatedNotification;
+
+use App\Events\AccountCreated as AccountCreatedEvent;
 
 class UserObserver
 {
@@ -28,16 +30,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        // *** WARNING ***
-        // the following calls all have the potential to fail - what approach should be taken?
-        //
-
         // send a welcome email to the user (ideally this should be a queued job)
-        $user->notify(new AccountCreated($user));
+        $user->notify(new AccountCreatedNotification($user));
 
-        // record a business event
-        $tracker = new UsageTrackingClient();
-        $tracker->recordEvent($user, (int) config('eausagetracking.account_created_event_id'));
+        // record the account creation as an event with the Usage Tracking service
+        event(new AccountCreatedEvent($user));
     }
 
     /**

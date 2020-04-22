@@ -33,16 +33,17 @@ Route::get('privacy-policy', function () {
     return view('support.privacy-policy');
 });
 
+// don't use standard authentication routes
+// Auth::routes(['verify' => true]);
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 //
 // Single Sign On authentication
 //
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
-//
-// email verification
-//
-Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('user/request', 'Auth\UserController@request');

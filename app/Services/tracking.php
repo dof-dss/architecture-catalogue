@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
+
 // http driver
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as RequestException;
@@ -67,13 +69,8 @@ class Tracking
     public function recordEvent($user, $eventId)
     {
         // if we logged in using AWS Cognito we will have a user token
-        // otherwise we will need to create a tracking service user
-        if (session('id_token')) {
-            $identityToken = session('id_token');
-        } else {
-            $trackingUser = $this->findOrCreateUser($user);
-            $identityToken = $user->uuid;
-        }
+
+        $identityToken = session('id_token');
 
         // invoke the API
         $url = 'ApplicationUsage';
@@ -134,7 +131,9 @@ class Tracking
         $url = 'ApplicationUser';
         $params = [
             'id' => $user->uuid,
-            'name' => $user->name
+            'name' => $user->name,
+            'email' => $user->email,
+            'dateCreated' => Carbon::now()->toJSON()
         ];
         try {
             $result = $this->client->post($url, [

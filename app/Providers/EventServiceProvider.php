@@ -35,6 +35,10 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\LogSuccessfulLogout',
         ],
+
+        'App\Events\AccountCreated' => [
+            'App\Listeners\RecordUsageTrackingAccountCreatedEvent'
+        ],
     ];
 
     /**
