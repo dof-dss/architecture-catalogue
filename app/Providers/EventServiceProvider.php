@@ -39,6 +39,11 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\AccountCreated' => [
             'App\Listeners\RecordUsageTrackingAccountCreatedEvent'
         ],
+
+        'App\Events\ModelChanged' => [
+            'App\Listeners\AuditModelChanges'
+        ],
+
     ];
 
     /**

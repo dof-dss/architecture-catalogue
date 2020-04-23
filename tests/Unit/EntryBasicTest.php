@@ -9,6 +9,7 @@ use App\Entry;
 use App\Traits\AuditsActivity;
 use App\Exceptions\AuditException;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class EntryBasicTest extends TestCase
@@ -54,8 +55,14 @@ class EntryBasicTest extends TestCase
      */
     public function testCatalogueEntryDeleted()
     {
+        // stop events audit events firing
+        Event::fake();
+
         // create an entry
         $entry = factory(Entry::class)->create();
+        $this->assertDatabaseHas('entries', [
+            'id' => $entry->id
+        ]);
         // now delete it
         $entry->delete();
         $this->assertDatabaseMissing('entries', [

@@ -18,6 +18,7 @@
   ],
   "ADDITIONAL_PREPROCESS_CMDS": [
     "php artisan migrate --force",
-    "php artisan config:cache"
+    "php artisan config:cache",
+    "php artisan queue:work --tries=3 &"
   ]
 }

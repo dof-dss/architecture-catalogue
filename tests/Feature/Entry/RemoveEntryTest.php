@@ -25,9 +25,7 @@ class RemoveEntryTest extends TestCase
         Notification::fake();
 
         // stops events being fired
-        Event::fake([
-            'App\Events\AccountCreated'
-        ]);
+        Event::fake();
 
         $user = $this->loginAsFakeUser(true, 'contributor');
 
@@ -77,8 +75,7 @@ class RemoveEntryTest extends TestCase
             ->from('/entries/' . $entry->id . '/delete')
             ->post('/entries/' . $entry->id, [
                 '_method' => 'DELETE',
-            ])
-            ->assertSuccessful();
+            ]);
         $this->assertDatabaseMissing('entries', [
             'name' => 'AWS S3'
         ]);
