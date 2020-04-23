@@ -6,7 +6,9 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class LogSuccessfulLogin
+use App\Services\Audit as AuditLogger;
+
+class LogSuccessfulLogin implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -26,6 +28,15 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
-        $event->user->auditEvent('login');
+        $logger = new AuditLogger();
+
+        $logger->recordEvent(
+            'login',
+            0,
+            'Auth',
+            $event->user->id,
+            get_class($event->user),
+            'User log in'
+        );
     }
 }

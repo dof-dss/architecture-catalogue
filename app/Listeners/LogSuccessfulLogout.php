@@ -6,7 +6,9 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class LogSuccessfulLogout
+use App\Services\Audit as AuditLogger;
+
+class LogSuccessfulLogout implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -26,6 +28,15 @@ class LogSuccessfulLogout
      */
     public function handle(Logout $event)
     {
-        $event->user->auditEvent('logout');
+        $logger = new AuditLogger();
+
+        $logger->recordEvent(
+            'logout',
+            0,
+            'Auth',
+            $event->user->id,
+            get_class($event->user),
+            'User log out'
+        );
     }
 }

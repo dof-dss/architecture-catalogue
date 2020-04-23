@@ -6,7 +6,9 @@ use Illuminate\Auth\Events\Failed;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class LogFailedLogin
+use App\Services\Audit as AuditLogger;
+
+class LogFailedLogin implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -24,8 +26,17 @@ class LogFailedLogin
      * @param  Failed  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(Failed $event)
     {
-        $event->user->auditEvent('login failed');
+        $logger = new AuditLogger();
+
+        $logger->recordEvent(
+            'login failed',
+            0,
+            'Auth',
+            $event->user->id,
+            get_class($event->user),
+            'Login failed'
+        );
     }
 }

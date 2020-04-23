@@ -10,8 +10,10 @@ use App\Notifications\VerifyEmail;
 // use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\AuditsActivity;
 
-class User extends Authenticatable implements MustVerifyEmail
+// used to generate GUID
+use Illuminate\Support\Str;
 
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     // use LogsActivity;
@@ -121,5 +123,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+    /**
+     * Generate a UUID.
+     *
+     * @return string
+     */
+    public function getUuid()
+    {
+        return str::uuid()->toString();
     }
 }

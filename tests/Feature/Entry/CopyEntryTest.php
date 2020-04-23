@@ -25,9 +25,7 @@ class CopyEntryTest extends TestCase
         Notification::fake();
 
         // stops events being fired
-        Event::fake([
-            'App\Events\AccountCreated'
-        ]);
+        Event::fake();
 
         $user = $this->loginAsFakeUser(true, 'contributor');
 

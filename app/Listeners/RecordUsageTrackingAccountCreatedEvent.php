@@ -9,7 +9,7 @@ use App\Events\AccountCreated;
 
 use App\Services\Tracking as UsageTrackingClient;
 
-class RecordUsageTrackingAccountCreatedEvent
+class RecordUsageTrackingAccountCreatedEvent implements ShouldQueue
 {
     /**
      * Create the event listener.
