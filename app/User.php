@@ -50,6 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
                 'name', 'email', 'email_verified_at', 'provider_name', 'provider_id', 'admin', 'role',
     ];
 
+    protected static $hiddenFromAudit = [
+        'password', 'remember_token'
+    ];
+
     /**
      * Check if the user is an admin.
      *

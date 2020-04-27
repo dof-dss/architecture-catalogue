@@ -46,8 +46,8 @@ trait AuditsActivity
                 // check if this event should be audited [tbd]
 
                 // need to serialise the model
-                $before = $model->getOriginal();
-                $after = $model->getAttributes();
+                $before = static::removeHiddenAttributes($model->getOriginal());
+                $after = static::removeHiddenAttributes($model->getAttributes());
                 event(new ModelChanged(
                     $actor_id,
                     $actor,
@@ -78,5 +78,19 @@ trait AuditsActivity
         ]);
 
         return $events;
+    }
+
+    /**
+     * Remove hidden attributes.
+     *
+     * @param array $attributes
+     * @return array
+     */
+    protected static function removeHiddenAttributes($attributes): array
+    {
+        if (isset(static::$hiddenFromAudit)) {
+            $attributes = array_diff_key($attributes, array_flip(static::$hiddenFromAudit));
+        }
+        return $attributes;
     }
 }
