@@ -71,7 +71,7 @@ workflows:
   test-with-docker:
     jobs:
       - test-with-docker:
-          context: govuk-paas-staging
+          context: govuk-paas-sandbox
 
   deploy-to-govuk:
     jobs:
