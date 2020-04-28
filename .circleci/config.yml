@@ -62,12 +62,30 @@ executors:
         - image: elastic/elasticsearch:6.5.0
 
 jobs:
-  build-with-docker:
+  test-with-docker:
     executor: docker-executor
     steps:
       - build
 
 workflows:
-  build-test:
+  test-with-docker:
     jobs:
-      - build-with-docker
+      - test-with-docker:
+          context: 'GOVUK PaaS Sandbox'
+
+  deploy-to-govuk:
+    jobs:
+      - test-with-docker:
+          context: 'GOVUK PaaS Sandbox'
+      - cloudfoundry/push:
+          endpoint: 'https://api.london.cloud.service.gov.uk'
+          appname: architecture-catalogue
+          manifest: manifest.yml
+          org: DOF-DSS
+          space: sandbox
+          package: null
+          requires:
+            - test-with-docker
+          filters:
+            branches:
+              only: develop
