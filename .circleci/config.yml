@@ -71,12 +71,12 @@ workflows:
   test-with-docker:
     jobs:
       - test-with-docker:
-          context: govuk-paas-sandbox
+          context: build-test
 
   deploy-to-govuk:
     jobs:
       - test-with-docker:
-          context: 'GOVUK PaaS Sandbox'
+          context: govuk-paas-sandbox
       - cloudfoundry/push:
           endpoint: 'https://api.london.cloud.service.gov.uk'
           appname: architecture-catalogue
