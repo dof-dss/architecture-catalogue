@@ -58,10 +58,10 @@ jobs:
 
   deploy:
     steps:
-      context: "GOV.UK PaaS Sandbox"
       # setup the Cloud Foundry CLI and target organisation and space
       - run:
           name: Setup CF CLI
+          context: "GOV.UK PaaS Sandbox"
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
