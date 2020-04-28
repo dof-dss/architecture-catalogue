@@ -73,6 +73,7 @@ workflows:
       - test-with-docker:
           context: build-test
       - cloudfoundry/push:
+          context: govuk-paas-sandbox
           endpoint: 'https://api.london.cloud.service.gov.uk'
           appname: architecture-catalogue
           manifest: manifest.yml
