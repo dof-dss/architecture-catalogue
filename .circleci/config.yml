@@ -109,7 +109,7 @@ commands:
             cf set-env $APP_NAME LOG_CHANNEL $LOG_CHANNEL
             cf set-env $APP_NAME LOG_SLACK_WEBHOOK_URL $LOG_SLACK_WEBHOOK_URL
             cf set-env $APP_NAME MAIL_FROM_ADDRESS $MAIL_FROM_ADDRESS
-            cf set-env $APP_NAME MAIL_FROM_NAME $MAIL_FROM_NAME
+            cf set-env $APP_NAME MAIL_FROM_NAME "${MAIL_FROM_NAME}"
             cf set-env $APP_NAME NICS_EA_AUDIT_API $NICS_EA_AUDIT_API
             cf set-env $APP_NAME NICS_EA_AUDIT_ENABLED $NICS_EA_AUDIT_ENABLED
             cf set-env $APP_NAME NICS_EA_COGNITO_PASSWORD $NICS_EA_COGNITO_PASSWORD
