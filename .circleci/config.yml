@@ -53,7 +53,6 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
-      - test_cmd
 
   install_cmd:
     steps:
@@ -151,12 +150,13 @@ jobs:
     executor: docker-executor
     steps:
       - build_cmd
+      - test_cmd
 
   deploy-to-govuk:
-    executor: node-executor
+    executor: docker-executor
     steps:
-      # get the code - is this really needed?
-      # - checkout
+      # build the application
+      - build_cmd
 
       # install the CF CLI
       - install_cmd
@@ -171,5 +171,3 @@ workflows:
           context: build-test
       - deploy-to-govuk:
           context: govuk-paas-sandbox
-          requires:
-            - test-with-docker
