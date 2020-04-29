@@ -153,8 +153,10 @@ jobs:
   deploy-to-govuk:
     executor: node-executor
     steps:
-      # get the code
-      - checkout
+      command: echo $ADMIN_PASSWORD
+
+      # get the code - is this really needed?
+      # - checkout
 
       # install the CF CLI
       - install_cmd
