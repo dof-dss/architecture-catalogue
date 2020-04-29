@@ -84,7 +84,6 @@ commands:
             cf set-env architecture-catalogue ADMIN_USERNAME $ADMIN_USERNAME
             cf set-env architecture-catalogue APP_DEBUG $APP_DEBUG
             cf set-env architecture-catalogue APP_ENV $APP_ENV
-            cf set-env architecture-catalogue APP_INSTANCES $APP_INSTANCES
             cf set-env architecture-catalogue APP_KEY $APP_KEY
             cf set-env architecture-catalogue APP_NAME $APP_NAME
             cf set-env architecture-catalogue APP_PAGINATION_MAX_PAGES $APP_PAGINATION_MAX_PAGES
