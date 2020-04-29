@@ -168,7 +168,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - develop
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
