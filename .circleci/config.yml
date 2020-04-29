@@ -165,6 +165,10 @@ workflows:
       - test-with-docker:
           context: build-test
       - deploy-to-govuk:
+          filters:
+            branches:
+              only:
+                - master
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
