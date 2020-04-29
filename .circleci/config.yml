@@ -62,7 +62,7 @@ commands:
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
             cf api https://api.london.cloud.service.gov.uk
-            cf auth "$CF_USER" "$CF_PASSWORD"
+            cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
   push_cmd:
@@ -94,10 +94,6 @@ commands:
             cf set-env $APP_NAME AZURE_REDIRECT_URI $AZURE_REDIRECT_URI
             cf set-env $APP_NAME AZURE_SECRET $AZURE_SECRET
             cf set-env $APP_NAME CACHE_DRIVER $CACHE_DRIVER
-            cf set-env $APP_NAME CF_ORG $CF_ORG
-            cf set-env $APP_NAME CF_PASSWORD $CF_PASSWORD
-            cf set-env $APP_NAME CF_SPACE $CF_SPACE
-            cf set-env $APP_NAME CF_USER $CF_USER
             cf set-env $APP_NAME COGNITO_CLIENT_ID $COGNITO_CLIENT_ID
             cf set-env $APP_NAME COGNITO_DOMAIN $COGNITO_DOMAIN
             cf set-env $APP_NAME COGNITO_REDIRECT_URI $COGNITO_REDIRECT_URI
