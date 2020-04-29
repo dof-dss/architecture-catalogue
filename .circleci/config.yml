@@ -97,7 +97,7 @@ commands:
             cf set-env $APP_NAME COGNITO_CLIENT_ID $COGNITO_CLIENT_ID
             cf set-env $APP_NAME COGNITO_DOMAIN $COGNITO_DOMAIN
             cf set-env $APP_NAME COGNITO_REDIRECT_URI $COGNITO_REDIRECT_URI
-            cf set-env $APP_NAME DB_CERT_PATH $APP_DB_CERT_PATHENV
+            cf set-env $APP_NAME DB_CERT_PATH $DB_CERT_PATH
             cf set-env $APP_NAME DB_CONNECTION $DB_CONNECTION
             cf set-env $APP_NAME GITHUB_CALLBACK_URL $GITHUB_CALLBACK_URL
             cf set-env $APP_NAME GITHUB_CLIENT_ID $GITHUB_CLIENT_ID
