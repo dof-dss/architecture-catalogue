@@ -73,16 +73,14 @@ commands:
             cf push --no-start
 
             # CiricleCI environment varialbes
-            cf set-env architecture-catalogue CIRCLE_BUILD_NUM ${CIRCLE_BUILD_NUM}
+            cf set-env architecture-catalogue CIRCLE_BUILD_NUM $CIRCLE_BUILD_NUM
             cf set-env architecture-catalogue CIRCLE_SHA1 $CIRCLE_SHA1
             cf set-env architecture-catalogue CIRCLE_WORKFLOW_ID $CIRCLE_WORKFLOW_ID
             cf set-env architecture-catalogue CIRCLE_PROJECT_USERNAME $CIRCLE_PROJECT_USERNAME
             cf set-env architecture-catalogue CIRCLE_PROJECT_REPONAME $CIRCLE_PROJECT_REPONAME
 
             # application environment variables
-            echo $ADMIN_PASSWORD
-            echo ${ADMIN_PASSWORD}
-            cf set-env architecture-catalogue ADMIN_PASSWORD ${ADMIN_PASSWORD}
+            cf set-env architecture-catalogue ADMIN_PASSWORD $ADMIN_PASSWORD
             cf set-env architecture-catalogue ADMIN_USERNAME $ADMIN_USERNAME
             cf set-env architecture-catalogue APP_DEBUG $APP_DEBUG
             cf set-env architecture-catalogue APP_ENV $APP_ENV
@@ -170,4 +168,5 @@ workflows:
       - test-with-docker:
           context: build-test
       - deploy-to-govuk:
+          requires: test-with-docker
           context: govuk-paas-sandbox
