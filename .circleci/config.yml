@@ -81,6 +81,8 @@ commands:
             cf set-env architecture-catalogue CIRCLE_PROJECT_REPONAME $CIRCLE_PROJECT_REPONAME
 
             # application environment variables
+            echo $ADMIN_PASSWORD
+            echo ${ADMIN_PASSWORD}
             cf set-env architecture-catalogue ADMIN_PASSWORD ${ADMIN_PASSWORD}
             cf set-env architecture-catalogue ADMIN_USERNAME $ADMIN_USERNAME
             cf set-env architecture-catalogue APP_DEBUG $APP_DEBUG
@@ -153,8 +155,6 @@ jobs:
   deploy-to-govuk:
     executor: node-executor
     steps:
-      command: echo $ADMIN_PASSWORD
-
       # get the code - is this really needed?
       # - checkout
 
