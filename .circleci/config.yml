@@ -65,13 +65,10 @@ commands:
             cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
-  push_cmd:
+  set_env_cmd:
     steps:
       - run:
           command: |
-            # build the application but don't start it
-            cf push --no-start
-
             # CiricleCI environment varialbes
             cf set-env $APP_NAME CIRCLE_BUILD_NUM "${CIRCLE_BUILD_NUM}"
             cf set-env $APP_NAME CIRCLE_SHA1 "${CIRCLE_SHA1}"
@@ -80,7 +77,6 @@ commands:
             cf set-env $APP_NAME CIRCLE_PROJECT_REPONAME "${CIRCLE_PROJECT_REPONAME}"
             cf set-env $APP_NAME CIRCLE_BRANCH "${CIRCLE_BRANCH}"
             cf set-env $APP_NAME CIRCLE_PULL_REQUEST "${CIRCLE_PULL_REQUEST}"
-
             # application environment variables
             cf set-env $APP_NAME ADMIN_PASSWORD "${ADMIN_PASSWORD}"
             cf set-env $APP_NAME ADMIN_USERNAME "${ADMIN_USERNAME}"
@@ -127,6 +123,17 @@ commands:
             cf set-env $APP_NAME SESSION_LIFETIME "${SESSION_LIFETIME}"
             cf set-env $APP_NAME SLACK_WEBHOOK_URL "${SLACK_WEBHOOK_URL}"
 
+  push_cmd:
+    steps:
+      - run:
+          command: |
+            # build the application but don't start it
+            cf push --no-start
+
+      - set_env_cmd
+
+      - run:
+          command: |
             # start the application
             cf start $APP_NAME
 
@@ -160,9 +167,14 @@ jobs:
       - push_cmd
 
 workflows:
-  deploy-to-govuk:
+  # deploy to sandbox space from develop branch
+  deploy-to-govuk-sandbox:
     jobs:
       - test-with-docker:
+          filters:
+            branches:
+              only:
+                - develop
           context: build-test
       - deploy-to-govuk:
           filters:
@@ -170,5 +182,23 @@ workflows:
               only:
                 - develop
           context: govuk-paas-sandbox
+          requires:
+            - test-with-docker
+            
+  # deploy to production space from master branch
+  deploy-to-govuk-production:
+    jobs:
+      - test-with-docker:
+          filters:
+            branches:
+              only:
+                - master
+          context: build-test
+      - deploy-to-govuk:
+          filters:
+            branches:
+              only:
+                - master
+          context: govuk-paas-production
           requires:
             - test-with-docker
