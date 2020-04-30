@@ -137,6 +137,24 @@ commands:
             # start the application
             cf start $APP_NAME
 
+  push_zdt_cmd:
+    # zero downtime deployment
+    steps:
+      - run:
+          command: |
+            # create the application
+            cf v3-create-app $APP_NAME
+
+            # apply the manifest file to the application
+            cf v3-apply-manifest -f manifest.yml
+
+      - set_env_cmd
+
+      - run:
+          command: |
+            # push a zero downtime version of the application
+            cf v3-zdt-push $APP_NAME --wait-for-deploy-complete
+            
 executors:
     docker-executor:
       docker:
@@ -184,7 +202,7 @@ workflows:
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
-            
+
   # deploy to production space from master branch
   deploy-to-govuk-production:
     jobs:
