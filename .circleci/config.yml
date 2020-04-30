@@ -154,7 +154,7 @@ commands:
           command: |
             # push a zero downtime version of the application
             cf v3-zdt-push $APP_NAME --wait-for-deploy-complete
-            
+
 executors:
     docker-executor:
       docker:
@@ -182,7 +182,7 @@ jobs:
       - install_cmd
 
       # push the application to GOV.UK PaaS
-      - push_cmd
+      - push_zdt_cmd
 
 workflows:
   # deploy to sandbox space from develop branch
