@@ -116,7 +116,8 @@ class AddEntryTest extends TestCase
             ])
             ->assertSuccessful()
             ->assertSee('There is a problem')
-            ->assertSee('An entry with this name and version already exists.');
+            ->assertSee('An entry with this name and version already exists.')
+            ->assertSee('An entry with this version and name already exists.');
 
         $this->assertDatabaseMissing('entries', [
             'description' => 'duplicate entry test'
