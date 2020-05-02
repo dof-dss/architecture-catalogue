@@ -36,7 +36,7 @@ class StoreEntry extends FormRequest
                 'nullable',
                 'alpha_numeric_spaces_punctuation',
                 'between:1,20',
-                new UniqueComposite('entries', 'name', $this->name, 'version', $this->version, $this->id)
+                new UniqueComposite('entries', 'version', $this->version, 'name', $this->name, $this->id)
             ],
             'href' => 'nullable|url|max:250',
             'description' => 'required|alpha_numeric_spaces_punctuation|between:3,100',
