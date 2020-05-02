@@ -192,12 +192,12 @@ workflows:
           filters:
             branches:
               only:
-                - /feature-*/
+                - /feature-.*/
           context: build-test
       - deploy-to-govuk:
           filters:
             branches:
-              only: /feature-*/
+              only: /feature-.*/
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
