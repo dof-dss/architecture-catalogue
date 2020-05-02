@@ -201,3 +201,20 @@ workflows:
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
+
+    # deploy to staging space from msater branch
+    deploy-to-govuk-staging:
+      jobs:
+        - test-with-docker:
+            filters:
+              branches:
+                only:
+                  master
+            context: build-test
+        - deploy-to-govuk:
+            filters:
+              branches:
+                only: master
+            context: govuk-paas-staging
+            requires:
+              - test-with-docker
