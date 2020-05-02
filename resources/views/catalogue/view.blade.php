@@ -1,5 +1,19 @@
 @extends('layouts.base')
 
+{{ url()->previous() }}
+
+@if (Illuminate\Support\str::startsWith(url()->previous(), config('app.url') . '/entries'))
+    @section('back')
+    <a href="{{ url()->previous() }}" class="govuk-back-link">Back to browse catalogue</a>
+    @endsection
+@endif
+
+@if (Illuminate\Support\str::startsWith(url()->previous(), config('app.url') . '/catalogue/search'))
+    @section('back')
+    <a href="{{ url()->previous() }}" class="govuk-back-link">Back to search results</a>
+    @endsection
+@endif
+
 @section('content')
 <h1 class="govuk-heading-l">View catalogue entry</h1>
 
