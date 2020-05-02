@@ -202,7 +202,7 @@ workflows:
           requires:
             - test-with-docker
 
-    # deploy to staging space from msater branch
+    # deploy to staging space from master branch
     deploy-to-govuk-staging:
       jobs:
         - test-with-docker:
