@@ -18,4 +18,5 @@ interface EntryRepositoryInterface
     public function index(): void;
     public function indexExists(): int;
     public function search($query): object;
+    public function complexSearch($query): object;
 }

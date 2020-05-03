@@ -178,4 +178,32 @@ class EntryRepository implements EntryRepositoryInterface
             $limit
         );
     }
+
+    /**
+     *  wildcard search using eleasticsearch
+     *
+     *  @param string $query
+     */
+    public function complexSearch($query): object
+    {
+        $model = new Entry();
+        $params = $model->getBasicEsParams();
+        $params['body'] = [
+            'query' => [
+                'simple_query_string' => [
+                    'query' => $query,
+                    'fields' => [
+                        'name',
+                        'description',
+                        'category',
+                        'sub_category',
+                        'functionality',
+                        'service_levels',
+                        'interfaces'
+                    ]
+                ]
+            ]
+        ];
+        return $model->complexSearch($params);
+    }
 }
