@@ -159,7 +159,7 @@ executors:
     docker-executor:
       docker:
         - image: circleci/php:7.3-node-browsers
-        - image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+        - image: levlaz/elasticsearch-docker-ci
           environment:
             - cluster.name: test-elasticsearch
             - xpack.security.enabled: false
