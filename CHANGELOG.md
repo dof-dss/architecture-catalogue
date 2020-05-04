@@ -1,0 +1,320 @@
+## 0.1.0 (May 04, 2020)
+  - Create separate manifest files for each environment
+  - Use vars file not manifests
+  - Experimental use of vars files
+  - Add CircleCI elasticsearch configuration back in
+  - Try different manifest config
+  - Remove elasticsearch CircleCI config
+  - Remove elasticsearch test and elasticsearch CircleCI config
+  - Remove custom package
+  - Add version number to package
+  - Try different image for elasticsearch
+  - Rollback last CircleCI config change
+  - Elasticsearch CirlceCI config attempt 7
+  - Try new elasticsearch CircleCI config attempt 6
+  - Try new elasticsearch CircleCI config attempt 5
+  - Try new elasticsearch CircleCI config attempt 4
+  - Try new elasticsearch CircleCI config attempt 3
+  - Add hotfix branches to sandbox build on CircleCI
+  - Try different docker image for elasticsearch
+  - Hotifx CircleCI elasticsearch docker image #2
+  - Hotfix CircleCi elasticsearch docker image
+  - Create bump-version.sh
+  - Merge pull request #137 from dof-dss/feature-improved-circleci-config
+  - Merge pull request #139 from dof-dss/feature-improve-search
+  - Merge pull request #136 from dof-dss/feature-view-entry-back-link
+  - Merge pull request #141 from dof-dss/feature-prevent-duplicate-dependency
+  - Merge pull request #140 from dof-dss/feature-fix-eleasticsearch-config
+  - Try 1 of new config
+  - Relates to #119
+  - Closes #111
+  - Closes #135
+  - Improve CircleCI config
+  - Merge pull request #132 from dof-dss/feature-return-to-list-view
+  - Merge pull request #134 from dof-dss/feature-duplicate-error-message
+  - Closes #117
+  - Merge pull request #133 from dof-dss/feature-add-cicleci-config-for-staging
+  - Fix circleci syntax error
+  - Fix spelling mistake in comments
+  - Add circleci config for staging
+  - Insert missing regex character
+  - Fix CircleCI regex expression
+  - Closes #101
+  - Merge pull request #110 from dof-dss/develop
+  - Temporay change to deploy to sandbox on feature branches only
+  - Use zero downtime deployment command
+  - Test zero downtime deployment
+  - Refactor CircleCI config
+  - Fix incorrect branch filter
+  - Add filter for develop branch only
+  - Protect from env vars with spaces
+  - Test 20 of deployment workflow
+  - Test 19 of deployment workflow
+  - Test 18 of deployment workflow
+  - Test 17 of deployment workflow
+  - Test 15 of deployment workflow
+  - Test 14 of deployment workflow
+  - Test 13 of deployment workflow
+  - Test 12 of deployment workflow
+  - Test 11 of deployment workflow
+  - Test 10 of deployment workflow
+  - Test 9 of deployment workflow
+  - Test 8 of deployment workflow
+  - Test 7 of deployment workflow
+  - Test 6 of deployment workflow
+  - Test 5 of deployment workflow
+  - Test 4 of deployment workflow
+  - Test 3 of deployment workflow
+  - Test 2 of deployment workflow
+  - Add context to cloudfoundry/push
+  - Remove separate workflow for test-with-docker
+  - Configure build and test with different context to deploy
+  - Rename context on CircleCI
+  - Test issue with context not found
+  - Test 1 of deployment workflow
+  - Refactor CircleCI YAML
+  - Fix invalid CircleCI YAML
+  - Test initial Circle CI deploy step
+  - Merge pull request #109 from dof-dss/master
+  - Merge pull request #108 from dof-dss/develop
+  - Closes #79
+  - Closes #83
+  - Merge pull request #105 from dof-dss/circleci-project-setup
+  - Merge pull request #104 from dof-dss/develop
+  - Closes #78
+  - Add elasticsearch dependency
+  - Try different database path
+  - Merge pull request #98 from dof-dss/develop
+  - Fix psr-4 compliance issue
+  - Change sqlite database name
+  - Change database connection and use phpunit
+  - Remove all extensions apart form pdo and pdo_myaql
+  - Remove zlib
+  - Remove bz2
+  - Remove zip
+  - Remove mcrypt
+  - Add php extensions
+  - Update PHP version to 7.3
+  - Add .circleci/config.yml
+  - Update feature_request.md
+  - Update bug_report.md
+  - Update issue templates
+  - Merge pull request #80 from dof-dss/develop
+  - Closes 77
+  - Merge pull request #76 from dof-dss/develop
+  - Closes #75
+  - Refine login screen
+  - Closes #74
+  - Closes #73
+  - Related to #71. Cognito will be the only means of signing up.
+  - Merge pull request #72 from dof-dss/develop
+  - Closes #71.
+  - Closes #70
+  - Enhancements relating to #58
+  - Merge pull request #69 from dof-dss/develop
+  - Closes #68
+  - Merge pull request #61 from dof-dss/dependabot/composer/symfony/http-foundation-4.4.7
+  - Merge pull request #66 from dof-dss/develop
+  - Closes #43
+  - Closes #64
+  - Closes #57
+  - Merge pull request #62 from dof-dss/develop
+  - Closes #59
+  - Closes #58
+  - Bump symfony/http-foundation from 4.4.6 to 4.4.7
+  - Merge pull request #60 from dof-dss/develop
+  - Closes 30, contains some changes for #58
+  - Merge pull request #56 from dof-dss/develop
+  - Closes #4
+  - Merge pull request #55 from dof-dss/develop
+  - Closes #39
+  - Merge pull request #54 from dof-dss/develop
+  - Add event faking to improve test performance
+  - Closes #52.
+  - Closes #51
+  - Closes #50
+  - Relates to #48, partially complete.
+  - Merge pull request #53 from dof-dss/develop
+  - Closes #49
+  - Merge pull request #47 from dof-dss/develop
+  - This closes #34, #42, #43, #46.
+  - Merge pull request #38 from dof-dss/develop
+  - Closes #37
+  - Merge pull request #36 from dof-dss/develop
+  - Closes #35 and facilitates configuration for different GOV.UK PaaS environment
+  - Merge pull request #3 from dof-dss/dependabot/npm_and_yarn/acorn-6.4.1
+  - Bump acorn from 6.4.0 to 6.4.1
+  - Merge pull request #2 from dof-dss/develop
+  - Closes #23
+  - Remove generic handler message
+  - Closes #22
+  - Improve guzzle debug message format
+  - Closes #20. Add ignored exception.
+  - Configure logs as per 12-factor app recommendation
+  - Ignore authentication exceptions in generic handler
+  - Reinstate generic handler
+  - Add Guzzle debugger to auth and audit
+  - Backout change to generic handler
+  - Refine handler message. See #20.
+  - Choose logging approach depending upon environment. See #20.
+  - Composer update and add Log facade
+  - Increase exception message level of detail
+  - Closes #10
+  - Remove debug messages
+  - Closes #19
+  - Closes #17
+  - Lock php version to 7.3 < 7.4
+  - Closes #15
+  - Comment out get audit event for now
+  - Closes #12
+  - Closes #13
+  - Closes #6
+  - Closes #9
+  - Closes #5
+  - Closes #4
+  - Complete user feature tests
+  - Add basic login tests
+  - Close #3.
+  - Closes #2.
+  - Add Log facade
+  - Convert password reset link to Laravel notification
+  - Convert GOV.UK notification service to Laravel notification
+  - Integrate audit service and begin to add unit and feature tests
+  - Merge pull request #1 from dof-dss/develop
+  - Remove event id
+  - Record event using the NICS Usage Tracking Service on account creation
+  - Complete GOV.UK Notify integration
+  - Incomplete code for integration of GOV.UK Notify for email
+  - Add audit capability for entries and users
+  - Elasticquent requires PHP 7.3
+  - Fix linting error
+  - Add support for Microsoft Azure SSO
+  - Test Microsoft SSO
+  - Backout change to orderBy
+  - Backout change to all()
+  - Add version to orderBy clause on filter
+  - Remove link to download as a spreadsheet
+  - Fix bug in filter
+  - Test scaling with 2 instances
+  - Use elasticsearch for linking
+  - Tidy up folder structure for repositories
+  - Rename 'Vendor URL' to 'Product page URL'
+  - Sort by name and version
+  - Add 'used by' to view entry
+  - Add validation to check for duplicate name and version
+  - Add type declarations
+  - Implement repository pattern for entry model
+  - Enforce confirmation before entry is deleted
+  - Add last updated to view entry
+  - Remove default limit of 10 results on elasticsearch query results
+  - Change description to 2 line text area input
+  - Fix bug in select and multi-select components
+  - Use form request for validation
+  - Undo last change
+  - Fix elasticsearch index operation on update
+  - Fix linting errors
+  - Return version from elasticsearch
+  - Update cloudfoundry settings and ensure PHP 7.3 is used
+  - Fix linting errors
+  - Add basic elasticsearch functionality
+  - Customise message for entry description validation
+  - Update users index
+  - Add ability for remove a user
+  - Add basic user administration
+  - Remove email verification requirement
+  - Fix GitHub text and add components for GOV.UK Notify
+  - Remove outdated env example
+  - Align sign in style with GOV.UK pattern
+  - Provide Azure AD login - incomplete
+  - Add logging to GitHub auth functions and add session domain
+  - Update for GitHub credentials
+  - Add user roles for a reader and contributor
+  - Add admin user and admin menu
+  - Remove 'Request account' from login page
+  - Add paragraph on collection of personal data during ALPHA
+  - Add accessibility, cookies and privacy policy pages
+  - Improve validation on entry
+  - Remove password confirm middleware
+  - Continue to implement GitHub authentication
+  - Unfinished GitHub authentication
+  - Fix spelling mistake
+  - Improve validation
+  - Reduce password confirmation timeout to 10 minutes
+  - Show entry view page after copy
+  - Show entry view page after adding an entry
+  - Add route logging for debug purposes
+  - Ensure links and tags are deleted when an entry is deleted
+  - Protect entry deletion with password
+  - Protect catalogue import and delete with password check
+  - Add user defined tags
+  - Add email verification middleware and example password confirmation
+  - Fix mismatch in Google ids
+  - Add Google Analytics tracking
+  - Split view into core and additional data
+  - Simplify capture of category / subcategory and use on filter
+  - Merge branch 'master' of https://github.com/dof-dss/architecture-catalogue
+  - Attempt combined category and subcategory input
+  - Delete .DS_Store
+  - Change size of status select on searches
+  - Add temporary link for account registration and add custom 419 error
+  - Add catalogue entry download link
+  - Align all page heading sizes
+  - Fix error in select component
+  - Add basic filtering to Browse
+  - Add ability to maintain dependency links
+  - Add basic dependency functionality
+  - Add email link for feedback and set status to alpha
+  - Remove crown from header and update footer
+  - Change font to Inter and add example vars.yml
+  - Add example vars.yml file
+  - Merge branch 'master' of https://github.com/dof-dss/architecture-catalogue
+  - Fix additional layout duplication and add initial account request
+  - Delete vars.yml
+  - Fix missed layout duplication
+  - Fix layout duplication
+  - Move section break inside if statement
+  - Add search to allowable routes
+  - Debug added to search
+  - Improve logic in search to ignore empty parameters
+  - Move session storage to the database
+  - Configure for use with Cloud Foundry
+  - Fix bug in display of user when not signed in
+  - Fix cancel on edit entry
+  - Display user name in header
+  - Style password reset views
+  - Change button text to continue
+  - Add autocomplete to text-input component
+  - Fix bug where float right was applied to all nav items
+  - Fix bug with password confirmation
+  - Fix bug where old values not displayed on validation error
+  - Style registration page
+  - Add user authentication
+  - Fix bug in textarea component
+  - Add custom error pages
+  - Fix bug in select component
+  - Capture new data for each entry and refactor views to use components
+  - Add status to search criteria
+  - Add view entry with functionality moved from list
+  - Add copy entry functionality
+  - Refactor code for display of tables and errors
+  - Revert to original label styling
+  - Add version number
+  - Rename 'Catalogue' menu option in header to 'Browse'
+  - Add 'status' to each entry
+  - Merge branch 'master' of https://github.com/dof-dss/architecture-catalogue
+  - Add validation to import catalogue
+  - Add payload metadata to JSON for API
+  - Add API endpoint, fix Javascript errors and add missing resources
+  - Add screenshot to readme
+  - Add search functionality
+  - Fix html for icon in pagination
+  - Add custom pagination
+  - Add Export option for Architecture Portal data file
+  - Fix linting errors
+  - Use random file name for upload
+  - Add major functionality
+  - Add env and application key generation sections
+  - Update readme
+  - Basic skeleton for readme
+  - Initial commit
+
