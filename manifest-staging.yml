@@ -1,9 +1,9 @@
 ---
 applications:
-  -name: architecture-catalogue-staging
-  memory: 64M
-  instances: 2
-  buildpack: php_buildpack
-  services:
-  - ea-mysql-service
-  - ea-es-service
+  - name: architecture-catalogue-staging
+    memory: 64M
+    instances: 2
+    buildpack: php_buildpack
+    services:
+    - ea-mysql-service
+    - ea-es-service
