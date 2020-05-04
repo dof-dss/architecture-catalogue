@@ -128,7 +128,7 @@ commands:
       - run:
           command: |
             # build the application but don't start it
-            cf push --no-start -f "${CF_MANIFEST}"
+            cf push --no-start --vars-file "${CF_VARS_FILE}"
 
       - set_env_cmd
 
@@ -146,7 +146,7 @@ commands:
             cf v3-create-app $APP_NAME
 
             # apply the manifest file to the application
-            cf v3-apply-manifest -f "${CF_MANIFEST}"
+            cf v3-apply-manifest --vars-file "${CF_VARS_FILE}"
 
       - set_env_cmd
 
