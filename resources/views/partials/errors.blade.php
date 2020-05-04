@@ -6,9 +6,9 @@
     <div class="govuk-error-summary__body">
       <ul class="govuk-list govuk-error-summary__list">
         @foreach ($errors->keys() as $key)
-          <li>
-            <a href="#{{ $key }}">{{ $errors->first($key) }}</a>
-          </li>
+            <li>
+                <a href="#{{ $key }}">{{ $errors->first($key) }}</a>
+            </li>
         @endforeach
       </ul>
     </div>

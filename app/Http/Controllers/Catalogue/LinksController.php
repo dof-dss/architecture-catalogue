@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Str;
 
+use App\Http\Requests\StoreLinks;
+use App\Entry;
+
 // models
 use App\Link;
 
@@ -77,6 +80,8 @@ class LinksController extends Controller
           'phrase.min' => 'Enter at least 3 characters'
         ]);
         $entry_id = $request->entry_id;
+        $entry = Entry::findOrFail($entry_id);
+        $entry_description = $entry->name . ($entry->version ? '(' . $entry->version . ')' : '');
         $results = $this->entryRepository->search($request->phrase);
         Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->statusRepository->labels();
@@ -84,7 +89,7 @@ class LinksController extends Controller
         $page_size = $this->entryRepository->calculatePageSize($results->count());
         $entries = $results->sortBy('name')->sortBy('version')->Paginate($page_size);
         $labels = $this->statusRepository->labels();
-        return view('catalogue.links.results', compact('entry_id', 'entries', 'labels'));
+        return view('catalogue.links.results', compact('entry_id', 'entry_description', 'entries', 'labels'));
     }
 
     /**
@@ -93,22 +98,26 @@ class LinksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLinks $request)
     {
-        // perform validation (should change to a form request)
         if (!$request->has('entry_id')) {
             abort(500);
         }
-        // check that at least one of the checkboxes is selected
-        $request->validate([
-          'link' => 'required'
-        ], [
-          'link.required' => 'You must select at least one dependency.'
-        ]);
+
+        // we need to return an error if nothing was selected
+        $links = [];
+        foreach ($request->all() as $key => $value) {
+            if (Str::startsWith($key, 'link-')) {
+                $links[$key] = $value;
+            }
+        }
+        if (empty($links)) {
+            return redirect()->back()->withErrors(['You must select at least one entry as a dependency']);
+        }
 
         // store the links
-        foreach ($request->link as $link) {
-            Link::create(['item1_id' => $request->entry_id, 'item2_id' => $link, 'relationship' => 'composed_of']);
+        foreach ($links as $key => $value) {
+            Link::create(['item1_id' => $request->entry_id, 'item2_id' => $value, 'relationship' => 'composed_of']);
         }
 
         // now redirect back to the index page
