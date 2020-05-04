@@ -178,7 +178,6 @@ jobs:
     steps:
       - build_cmd
       - test_cmd
-        - requires: build_cmd
 
   deploy-to-govuk:
     executor: docker-executor
