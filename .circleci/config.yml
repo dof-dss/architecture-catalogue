@@ -191,14 +191,9 @@ jobs:
       - push_zdt_cmd
 
 workflows:
-  # deploy to sandbox space from feature branches branch
-  deploy-to-govuk-sandbox:
+  deploy-to-govuk:
     jobs:
       - test-with-docker:
-          filters:
-            branches:
-              only:
-                - /feature-.*/
           context: build-test
       - deploy-to-govuk:
           filters:
@@ -207,16 +202,6 @@ workflows:
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
-
-  # deploy to staging space from master branch
-  deploy-to-govuk-staging:
-    jobs:
-      - test-with-docker:
-          filters:
-            branches:
-              only:
-                master
-          context: build-test
       - deploy-to-govuk:
           filters:
             branches:
