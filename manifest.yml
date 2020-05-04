@@ -1,9 +1,12 @@
 ---
-applications:
-- name: architecture-catalogue
+defaults: &defaults
   memory: 64M
-  instances: 1
+  instances: ((APP_INSTANCES))
   buildpack: php_buildpack
   services:
   - ea-mysql-service
   - ea-es-service
+
+applications:
+  - name: ((APP_NAME))
+    <<: *defaults
