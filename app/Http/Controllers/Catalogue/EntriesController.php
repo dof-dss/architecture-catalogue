@@ -294,7 +294,7 @@ class EntriesController extends Controller
           'phrase.required' => 'Enter a word or phrase',
           'phrase.min' => 'Enter at least 3 characters'
         ]);
-        $results = $this->entryRepository->search($request->phrase);
+        $results = $this->entryRepository->complexSearch($request->phrase);
         Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
