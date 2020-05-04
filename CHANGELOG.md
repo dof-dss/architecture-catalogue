@@ -1,3 +1,6 @@
+## 0.3.1 (May 04, 2020)
+  - Fix error in manifest files
+
 ## 0.3.0 (May 04, 2020)
   - Add VERSION and CHANGELOG.md files, Bump version to v0.1.0.
   - Create separate manifest files for each environment
