@@ -198,7 +198,9 @@ workflows:
       - deploy-to-govuk:
           filters:
             branches:
-              only: /feature-.*/
+              only:
+                - /feature-.*/
+                - /hotfix-.*/
           context: govuk-paas-sandbox
           requires:
             - test-with-docker
