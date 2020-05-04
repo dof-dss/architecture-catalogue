@@ -1,8 +1,6 @@
 @extends('layouts.base')
 
-{{ url()->previous() }}
-
-@if (Illuminate\Support\str::startsWith(url()->previous(), config('app.url') . '/entries'))
+@if (url()->previous() == config('app.url') . '/entries'))
     @section('back')
     <a href="{{ url()->previous() }}" class="govuk-back-link">Back to browse catalogue</a>
     @endsection
