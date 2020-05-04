@@ -8,6 +8,8 @@
 
 @include ('partials.errors')
 
+<h1 class="govuk-heading-m">Add {{ $entry_description }} dependency</h1>
+
 @if ($entries->count() > 0)
     <form action="/entries/{{ $entry_id }}/links" method="post">
         {{ csrf_field() }}
@@ -22,14 +24,16 @@
               <span id="dependency-hint" class="govuk-hint">
                   Select all entries that are dependencies.
               </span>
-              <div class="govuk-checkboxes">
+              <div class="govuk-checkboxes govuk-checkboxes--small">
                   @foreach ($entries as $entry)
-                  <div class="govuk-checkboxes__item">
-                      <input class="govuk-checkboxes__input" id="link-{{ $loop->iteration }}" name="link[]" type="checkbox" value="{{ $entry->id }}">
-                      <label class="govuk-label govuk-checkboxes__label" for="link-{{ $loop->iteration }}">
-                          {{ $entry->name }} {{ $entry->version ? '(' . $entry->version . ')' : '' }}
-                      </label>
-                  </div>
+                      @component('components.checkbox', [
+                          'name' => 'link-' . $entry->id,
+                          'id' => 'link-' . $entry->id,
+                          'value' => $entry->id,
+                          'label' => $entry->name . ($entry->version ? ' (' . $entry->version . ')' : ''),
+                          'width' => 'govuk-!-width-one-half'
+                      ])
+                      @endcomponent
                   @endforeach
               </div>
             </fieldset>
