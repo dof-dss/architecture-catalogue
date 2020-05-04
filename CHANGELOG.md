@@ -1,3 +1,127 @@
+## 0.3.0 (May 04, 2020)
+  - Add VERSION and CHANGELOG.md files, Bump version to v0.1.0.
+  - Create separate manifest files for each environment
+  - Use vars file not manifests
+  - Experimental use of vars files
+  - Add CircleCI elasticsearch configuration back in
+  - Try different manifest config
+  - Remove elasticsearch CircleCI config
+  - Remove elasticsearch test and elasticsearch CircleCI config
+  - Remove custom package
+  - Add version number to package
+  - Try different image for elasticsearch
+  - Rollback last CircleCI config change
+  - Elasticsearch CirlceCI config attempt 7
+  - Try new elasticsearch CircleCI config attempt 6
+  - Try new elasticsearch CircleCI config attempt 5
+  - Try new elasticsearch CircleCI config attempt 4
+  - Try new elasticsearch CircleCI config attempt 3
+  - Add hotfix branches to sandbox build on CircleCI
+  - Try different docker image for elasticsearch
+  - Hotifx CircleCI elasticsearch docker image #2
+  - Hotfix CircleCi elasticsearch docker image
+  - Create bump-version.sh
+  - Merge pull request #137 from dof-dss/feature-improved-circleci-config
+  - Merge pull request #139 from dof-dss/feature-improve-search
+  - Merge pull request #136 from dof-dss/feature-view-entry-back-link
+  - Merge pull request #141 from dof-dss/feature-prevent-duplicate-dependency
+  - Merge pull request #140 from dof-dss/feature-fix-eleasticsearch-config
+  - Try 1 of new config
+  - Relates to #119
+  - Closes #111
+  - Closes #135
+  - Improve CircleCI config
+  - Merge pull request #132 from dof-dss/feature-return-to-list-view
+  - Merge pull request #134 from dof-dss/feature-duplicate-error-message
+  - Closes #117
+  - Merge pull request #133 from dof-dss/feature-add-cicleci-config-for-staging
+  - Fix circleci syntax error
+  - Fix spelling mistake in comments
+  - Add circleci config for staging
+  - Insert missing regex character
+  - Fix CircleCI regex expression
+  - Closes #101
+  - Merge pull request #110 from dof-dss/develop
+  - Temporay change to deploy to sandbox on feature branches only
+  - Use zero downtime deployment command
+  - Test zero downtime deployment
+  - Refactor CircleCI config
+  - Fix incorrect branch filter
+  - Add filter for develop branch only
+  - Protect from env vars with spaces
+  - Test 20 of deployment workflow
+  - Test 19 of deployment workflow
+  - Test 18 of deployment workflow
+  - Test 17 of deployment workflow
+  - Test 15 of deployment workflow
+  - Test 14 of deployment workflow
+  - Test 13 of deployment workflow
+  - Test 12 of deployment workflow
+  - Test 11 of deployment workflow
+  - Test 10 of deployment workflow
+  - Test 9 of deployment workflow
+  - Test 8 of deployment workflow
+  - Test 7 of deployment workflow
+  - Test 6 of deployment workflow
+  - Test 5 of deployment workflow
+  - Test 4 of deployment workflow
+  - Test 3 of deployment workflow
+  - Test 2 of deployment workflow
+  - Add context to cloudfoundry/push
+  - Remove separate workflow for test-with-docker
+  - Configure build and test with different context to deploy
+  - Rename context on CircleCI
+  - Test issue with context not found
+  - Test 1 of deployment workflow
+  - Refactor CircleCI YAML
+  - Fix invalid CircleCI YAML
+  - Test initial Circle CI deploy step
+  - Merge pull request #109 from dof-dss/master
+  - Merge pull request #108 from dof-dss/develop
+  - Closes #79
+  - Closes #83
+  - Merge pull request #105 from dof-dss/circleci-project-setup
+  - Merge pull request #104 from dof-dss/develop
+  - Closes #78
+  - Add elasticsearch dependency
+  - Try different database path
+  - Merge pull request #98 from dof-dss/develop
+  - Fix psr-4 compliance issue
+  - Change sqlite database name
+  - Change database connection and use phpunit
+  - Remove all extensions apart form pdo and pdo_myaql
+  - Remove zlib
+  - Remove bz2
+  - Remove zip
+  - Remove mcrypt
+  - Add php extensions
+  - Update PHP version to 7.3
+  - Add .circleci/config.yml
+  - Update feature_request.md
+  - Update bug_report.md
+  - Update issue templates
+  - Merge pull request #80 from dof-dss/develop
+  - Closes 77
+  - Merge pull request #76 from dof-dss/develop
+  - Merge pull request #72 from dof-dss/develop
+  - Merge pull request #69 from dof-dss/develop
+  - Merge pull request #61 from dof-dss/dependabot/composer/symfony/http-foundation-4.4.7
+  - Merge pull request #66 from dof-dss/develop
+  - Merge pull request #62 from dof-dss/develop
+  - Bump symfony/http-foundation from 4.4.6 to 4.4.7
+  - Merge pull request #60 from dof-dss/develop
+  - Merge pull request #56 from dof-dss/develop
+  - Merge pull request #55 from dof-dss/develop
+  - Merge pull request #54 from dof-dss/develop
+  - Merge pull request #53 from dof-dss/develop
+  - Merge pull request #47 from dof-dss/develop
+  - Merge pull request #38 from dof-dss/develop
+  - Merge pull request #36 from dof-dss/develop
+  - Merge pull request #3 from dof-dss/dependabot/npm_and_yarn/acorn-6.4.1
+  - Bump acorn from 6.4.0 to 6.4.1
+  - Merge pull request #2 from dof-dss/develop
+  - Merge pull request #1 from dof-dss/develop
+
 ## 0.1.0 (May 04, 2020)
   - Create separate manifest files for each environment
   - Use vars file not manifests
