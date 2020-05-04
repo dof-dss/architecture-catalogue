@@ -201,6 +201,7 @@ workflows:
             branches:
               only:
                 - /feature-.*/
+                - /bugfix-.*/
                 - /hotfix-.*/
           context: govuk-paas-sandbox
           requires:
