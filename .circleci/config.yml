@@ -159,7 +159,7 @@ executors:
     docker-executor:
       docker:
         - image: circleci/php:7.3-node-browsers
-        - image: elastic/elasticsearch:7.6.2
+        - image: elastic/elasticsearch:6.5.0
           environment:
             - cluster.name: elasticsearch
             - xpack.security.enabled: false
