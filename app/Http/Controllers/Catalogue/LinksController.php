@@ -115,6 +115,17 @@ class LinksController extends Controller
             return redirect()->back()->withErrors(['You must select at least one entry as a dependency']);
         }
 
+        // we need to return an error if we try to link the entry to itself
+        foreach ($request->all() as $key => $value) {
+            if (Str::startsWith($key, 'link-')) {
+                if ($value == $request->entry_id) {
+                    return redirect()->back()->withErrors([
+                        $key => 'You cannot make an entry dependent upon itself.'
+                    ]);
+                }
+            }
+        }
+
         // store the links
         foreach ($links as $key => $value) {
             Link::create(['item1_id' => $request->entry_id, 'item2_id' => $value, 'relationship' => 'composed_of']);

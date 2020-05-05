@@ -160,6 +160,36 @@ class ChangeDependenciesTest extends TestCase
             ])
             ->assertSee('There is a problem')
             ->assertSee('already exists');
+    }
 
+    /**
+     * Check a contributor cannot add the same dependency twice.
+     *
+     * @return void
+     */
+    public function testContributorCannotMakeAnEntryADependencyOfItself()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        $user = $this->loginAsFakeUser(false, 'contributor', $visualCheck = 'assertSee');
+
+        // stops events being fired (i.e. will prevent audit)
+        Event::fake();
+
+        // mock up a link between two entries
+        $link = factory(Link::class)->create();
+        $entry1 = $link->child;
+        $entry2 = $link->parent;
+
+        // try to link the two entries again
+        $this->followingRedirects()
+            ->from('/entries/' . $entry1->id. '/links/search?entry_id=' . $entry1->id . '&phrase=' .  $entry1->name)
+            ->post('/entries/' . $entry1->id . '/links', [
+                'entry_id' => $entry1->id,
+                'link-' . $entry1->id => $entry1->id
+            ])
+            ->assertSee('There is a problem')
+            ->assertSee('You cannot make an entry dependent upon itself');
     }
 }
