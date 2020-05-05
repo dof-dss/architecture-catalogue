@@ -186,6 +186,7 @@ class EntryRepository implements EntryRepositoryInterface
      */
     public function complexSearch($query): object
     {
+        $limit = 500;
         $model = new Entry();
         $params = $model->getBasicEsParams();
         $params['body'] = [
@@ -202,7 +203,8 @@ class EntryRepository implements EntryRepositoryInterface
                         'interfaces'
                     ]
                 ]
-            ]
+            ],
+            'size' => $limit
         ];
         return $model->complexSearch($params);
     }
