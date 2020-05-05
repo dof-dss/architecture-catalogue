@@ -1,3 +1,6 @@
+## 0.3.3 (May 05, 2020)
+  - Relates to #118
+
 ## 0.3.2 (May 05, 2020)
   - Merge pull request #146 from dof-dss/bugfix-search-limit
   - Relates to #145
