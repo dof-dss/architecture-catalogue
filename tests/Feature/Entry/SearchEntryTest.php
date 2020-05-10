@@ -48,6 +48,9 @@ class SearchEntryTest extends TestCase
     /**
      * Check a reader can see the results of a valid search
      *
+     * NOTE: there is no way of testing with a separate Elasticsearch instance
+     *       at the minute - needs investigated
+     *
      * @return void
      */
     public function testReaderCanFindExistingEntries()
