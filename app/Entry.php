@@ -13,7 +13,6 @@ class Entry extends Model
 {
     use ElasticquentTrait;
     use ElasticquentExtension;
-    // use LogsActivity;
     use AuditsActivity;
 
     // mass assignable attributes
@@ -30,11 +29,16 @@ class Entry extends Model
         'interfaces',
     ];
 
-    protected static $logFillable = true;
-
     protected $dates = [
         'created_at',
         'updated_at'
+    ];
+
+    // model events to be recorded by AuditsActivity
+    protected static $recordEvents = [
+        'created',
+        'updated',
+        'deleted',
     ];
 
     // elasticquent mappings

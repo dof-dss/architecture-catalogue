@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\User;
 use App\Entry;
 use App\Repositories\Interfaces\EntryRepositoryInterface;
 use App\Link;
@@ -11,6 +12,8 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Events\ModelChanged;
+
 class EntryRepository implements EntryRepositoryInterface
 {
     /**
@@ -19,7 +22,24 @@ class EntryRepository implements EntryRepositoryInterface
      */
     public function get($id): object
     {
-        return Entry::findOrFail($id);
+        $entry = Entry::findOrFail($id);
+
+        // audit the viewing of the entry
+        $actor_id = auth()->user()->id;
+        $actor = User::class;
+        // need to serialise the model
+        $before = Entry::removeHiddenAttributes($entry->getOriginal());
+        $after = Entry::removeHiddenAttributes($entry->getAttributes());
+        event(new ModelChanged(
+            $actor_id,
+            $actor,
+            Entry::class,
+            $before,
+            $after,
+            'viewed'
+        ));
+
+        return $entry;
     }
 
     /**
