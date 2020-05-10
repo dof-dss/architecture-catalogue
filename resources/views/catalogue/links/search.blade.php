@@ -15,7 +15,8 @@
     @component('components.text-input', [
         'name' => 'phrase',
         'label' => 'Enter a word or phrase to search for in the catalogue',
-        'width' => 'govuk-!-width-two-thirds'
+        'width' => 'govuk-!-width-two-thirds',
+        'autofocus' => true
     ])
     @endcomponent
 
