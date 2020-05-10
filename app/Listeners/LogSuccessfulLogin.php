@@ -30,13 +30,18 @@ class LogSuccessfulLogin implements ShouldQueue
     {
         $logger = new AuditLogger();
 
+        $payload = ["auth" => [
+            "event" => "login",
+            "id" => $event->user->id
+        ]];
+
         $logger->recordEvent(
             'login',
             0,
             'Auth',
             $event->user->id,
             get_class($event->user),
-            'User log in'
+            json_encode($payload)
         );
     }
 }

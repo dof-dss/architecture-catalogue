@@ -30,13 +30,19 @@ class LogFailedLogin implements ShouldQueue
     {
         $logger = new AuditLogger();
 
+
+        $payload = ["auth" => [
+            "event" => "login failed",
+            "id" => $event->user->id
+        ]];
+
         $logger->recordEvent(
             'login failed',
             0,
             'Auth',
             $event->user->id,
             get_class($event->user),
-            'Login failed'
+            json_encode($payload)
         );
     }
 }

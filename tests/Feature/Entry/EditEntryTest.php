@@ -76,10 +76,8 @@ class EditEntryTest extends TestCase
               'service_levels' => $entry->service_levels,
               'interfaces' => $entry->interfaces
           ])
-          ->assertSuccessful();
-        $this->assertDatabaseHas('entries', [
-            'name' => 'AWS S3 UPDATED'
-        ]);
+          ->assertSuccessful()
+          ->assertSee('AWS S3 UPDATED');
     }
 
     /**

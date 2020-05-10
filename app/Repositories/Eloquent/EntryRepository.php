@@ -2,12 +2,17 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\User;
 use App\Entry;
 use App\Repositories\Interfaces\EntryRepositoryInterface;
+use App\Link;
+use App\EntryTag;
 
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
+
+use App\Events\ModelChanged;
 
 class EntryRepository implements EntryRepositoryInterface
 {
@@ -17,7 +22,24 @@ class EntryRepository implements EntryRepositoryInterface
      */
     public function get($id): object
     {
-        return Entry::findOrFail($id);
+        $entry = Entry::findOrFail($id);
+
+        // audit the viewing of the entry
+        $actor_id = auth()->user()->id;
+        $actor = User::class;
+        // need to serialise the model
+        $before = Entry::removeHiddenAttributes($entry->getOriginal());
+        $after = Entry::removeHiddenAttributes($entry->getAttributes());
+        event(new ModelChanged(
+            $actor_id,
+            $actor,
+            Entry::class,
+            $before,
+            $after,
+            'viewed'
+        ));
+
+        return $entry;
     }
 
     /**
@@ -118,11 +140,32 @@ class EntryRepository implements EntryRepositoryInterface
     public function copy($id): int
     {
         $entry = Entry::findOrFail($id);
-        $copy = $entry->replicate();
-        $copy->name = $copy->name . ' - COPY';
-        $copy->status = 'prohibited';
-        $copy->save();
-        return $copy->id;
+        $dependencies = $entry->children;
+        $tags = $entry->tags;
+        $newEntry = DB::transaction(function () use ($entry, $dependencies, $tags) {
+            // copy the entry
+            $copy = $entry->replicate();
+            $copy->name = $copy->name . ' - COPY';
+            $copy->status = 'prohibited';
+            $copy->save();
+            $id = $copy->id;
+            // copy the dependencies
+            foreach ($dependencies as $dependency) {
+                $link = new Link;
+                $link->item1_id = $id;
+                $link->item2_id = $dependency->item2_id;
+                $link->save();
+            }
+            // copy the user defined tags
+            foreach ($tags as $tag) {
+                $entryTag = new EntryTag;
+                $entryTag->entry_id = $id;
+                $entryTag->tag_id = $tag->id;
+                $entryTag->save();
+            }
+            return $copy;
+        });
+        return $newEntry->id;
     }
 
     /**

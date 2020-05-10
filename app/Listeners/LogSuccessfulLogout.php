@@ -30,13 +30,18 @@ class LogSuccessfulLogout implements ShouldQueue
     {
         $logger = new AuditLogger();
 
+        $payload = ["auth" => [
+            "event" => "logout",
+            "id" => $event->user->id
+        ]];
+
         $logger->recordEvent(
             'logout',
             0,
             'Auth',
             $event->user->id,
             get_class($event->user),
-            'User log out'
+            json_encode($payload)
         );
     }
 }
