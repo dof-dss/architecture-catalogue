@@ -204,6 +204,13 @@ class EntriesController extends Controller
     public function delete($id)
     {
         $entry = $this->entryRepository->get($id);
+
+        // validation - prevent deletion of an entry that is a dependency of another
+        if ($entry->parents->count() > 0) {
+            return view('catalogue.delete', compact('entry'))
+                ->withErrors('This entry cannot be deleted. Other entries are dependent upon it.');
+        }
+        // confirm delete
         return view('catalogue.delete', compact('entry'));
     }
 
