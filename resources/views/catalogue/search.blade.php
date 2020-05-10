@@ -10,6 +10,7 @@
         'name' => 'phrase',
         'label' => 'Enter a word or phrase to search for in the catalogue',
         'width' => 'govuk-!-width-three-quarters',
+        'autofocus' => true
     ])
     @endcomponent
 

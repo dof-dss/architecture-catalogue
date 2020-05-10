@@ -11,7 +11,7 @@
         <span id="{{ $name }}-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ $message }}
         </span>
-        <input class="govuk-input {{ $width ?? '' }} govuk-input--error" id="{{ $name }}" name="{{ $name }}" type="{{ $type ?? 'text' }}" value="{{ old($name) }}" autocomplete="{{ $autocomplete ?? '' }}">
+        <input class="govuk-input {{ $width ?? '' }} govuk-input--error" id="{{ $name }}" name="{{ $name }}" type="{{ $type ?? 'text' }}" value="{{ old($name) }}" autocomplete="{{ $autocomplete ?? '' }}" {{ $autofocus ?? '' ? 'autofocus' : '' }}>
     </div>
 @else
     <div class="govuk-form-group">
@@ -24,6 +24,6 @@
             </span>
         @endif
         <input class="govuk-input {{ $width ?? '' }}" id="{{ $name }}" name="{{ $name }}" type="{{ $type ?? 'text' }}"
-          value="{{ $value ?? old($name) }}" autocomplete="{{ $autocomplete ?? '' }}">
+          value="{{ $value ?? old($name) }}" autocomplete="{{ $autocomplete ?? '' }}" {{ $autofocus ?? '' ? 'autofocus' : '' }}>
     </div>
 @enderror
