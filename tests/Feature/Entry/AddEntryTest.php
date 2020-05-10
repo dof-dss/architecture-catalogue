@@ -66,7 +66,9 @@ class AddEntryTest extends TestCase
         Event::fake();
 
         $entry = factory(Entry::class)->make();
-        $response = $this->post(route('entry.store'), [
+        $this->followingRedirects()
+            ->from(route('entry.create'))
+            ->post(route('entry.store'), [
             'name' =>  $entry->name,
             'version' => $entry->version,
             'description' => $entry->description,
@@ -77,11 +79,8 @@ class AddEntryTest extends TestCase
             'functionality' => $entry->functionality,
             'service_levels' => $entry->service_levels,
             'interfaces' => $entry->interfaces
-        ]);
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('entries', [
-            'name' => $entry->name
-        ]);
+            ])
+            ->assertSee($entry->name);
     }
 
     /**
