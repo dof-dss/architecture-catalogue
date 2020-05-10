@@ -8,7 +8,8 @@ $factory->define(Entry::class, function (Faker $faker) {
     return [
       'name' => $faker->sentence(2),
       'version' => (string) $faker->randomDigit(),
-      'description' => $faker->sentence(10),
+      // ensure we limit the size of the description
+      'description' => substr($faker->sentence(10), 0, 100),
       'href' => $faker->url,
       'sub_category' => 'Other',
       'category' => 'Not categorised',
