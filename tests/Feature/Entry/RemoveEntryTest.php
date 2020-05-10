@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Event;
 
 use App\User;
 use App\Entry;
+use App\Link;
 
 class RemoveEntryTest extends TestCase
 {
@@ -43,6 +44,44 @@ class RemoveEntryTest extends TestCase
             ->get('/entries/' . $entry->id . '/delete')
             ->assertSuccessful()
             ->assertSee('Are you sure');
+    }
+
+    /**
+     * Check a contributor cannot remove an entry with dependencies
+     *
+     * @return void
+     */
+    public function testConributorCannotRemoveEntryWithDependencies()
+    {
+        // stops notification being physically sent when a user is created
+        Notification::fake();
+
+        // stops events being fired
+        Event::fake();
+
+        $user = $this->loginAsFakeUser(true, 'contributor');
+
+        // create an entry
+        $entry1 = factory(Entry::class)->create([
+            'name' => 'Architecture Catalogue'
+        ]);
+        // create a second entry
+        $entry2 = factory(Entry::class)->create([
+            'name' => 'GOV.UK PaaS'
+        ]);
+        // make entry1 dependent upon entry2
+        Link::create([
+            'item1_id' => $entry1->id,
+            'item2_id' => $entry2->id,
+            'relationship' => 'composed_of'
+        ]);
+
+        // now try to delete it
+        $this->followingRedirects()
+            ->from('/entries/' . $entry2->id)
+            ->get('/entries/' . $entry2->id . '/delete')
+            ->assertSuccessful()
+            ->assertSee('This entry cannot be deleted');
     }
 
     /**
