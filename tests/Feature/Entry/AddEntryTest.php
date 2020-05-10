@@ -31,7 +31,7 @@ class AddEntryTest extends TestCase
         $user = $this->loginAsFakeUser(false, 'contributor');
         $response = $this->get(route('home'));
         $response->assertSuccessful();
-        $response->assertSee('Add a new catalogue entry');
+        $response->assertSee('Add a new entry');
     }
 
     /**
@@ -47,7 +47,7 @@ class AddEntryTest extends TestCase
         $user = $this->loginAsFakeUser(false, 'reader');
         $response = $this->get(route('home'));
         $response->assertSuccessful();
-        $response->assertDontSee('Add a new catalogue entry');
+        $response->assertDontSee('Add a new entry');
     }
 
     /**

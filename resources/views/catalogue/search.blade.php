@@ -10,7 +10,6 @@
         'name' => 'phrase',
         'label' => 'Enter a word or phrase to search for in the catalogue',
         'width' => 'govuk-!-width-three-quarters',
-        'hint' => 'Use ? to match any single character and * to match zero or more characters'
     ])
     @endcomponent
 
