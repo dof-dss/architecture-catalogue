@@ -196,14 +196,16 @@ workflows:
     jobs:
       - test-with-docker:
           context: build-test
-          filters:
+          filters:    # all tags and all branches
             tags:
               only: /.*/
 
       - deploy-to-govuk:
           requires:
             - test-with-docker
-          filters:
+          filters:    # all tags and selected branches
+            tags:
+              only: /.*/
             branches:
               only:
                 - /feature-.*/
@@ -214,7 +216,7 @@ workflows:
       - deploy-to-govuk:
           requires:
             - test-with-docker
-          filters:
+          filters:    # selected tags and no branches
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)\-(alpha|beta).*/
             branches:
