@@ -1,5 +1,16 @@
 @extends('layouts.base')
 
+@section('breadcrumbs')
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item" aria-current="page">Search</li>
+    </ol>
+</div>
+@endsection
+
 @section('content')
 <h1 class="govuk-heading-l">Search catalogue</h1>
 

@@ -1,20 +1,42 @@
 @extends('layouts.base')
 
-@if (url()->previous() == config('app.url') . '/entries'))
-    @section('back')
-    <a href="{{ url()->previous() }}" class="govuk-back-link">Back to browse catalogue</a>
-    @endsection
+@section('breadcrumbs')
+@if (Illuminate\Support\str::startsWith(request()->query('path'), (config('app.url') . '/entries')))
+    <div class="govuk-breadcrumbs">
+        <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="{{ request()->query('path') }}">Entries</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item" aria-current="page">View entry</li>
+        </ol>
+    </div>
 @endif
-
-@if (Illuminate\Support\str::startsWith(url()->previous(), config('app.url') . '/catalogue/search'))
-    @section('back')
-    <a href="{{ url()->previous() }}" class="govuk-back-link">Back to search results</a>
-    @endsection
+@if (Illuminate\Support\str::contains(request()->query('path'), config('app.url') . '/catalogue/search'))
+    <div class="govuk-breadcrumbs">
+        <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="/entries/search">Search</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="{{ request()->query('path') }}">Results</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item" aria-current="page">View entry</li>
+        </ol>
+    </div>
 @endif
+@endsection
 
 @section('content')
-<h1 class="govuk-heading-l">View catalogue entry</h1>
-
+<h1 class="govuk-heading-l">
+  <span class="govuk-caption-l">Catalogue entry</span>
+  {{ $entry->name }} {{ $entry->version }}
+</h1>
 <h2 class="govuk-heading-m">Core information</h2>
 <dl class="govuk-summary-list">
     @component('components.summary-list-row')
@@ -174,8 +196,16 @@
 <hr class="govuk-section-break govuk-section-break--m">
 
 @if (auth()->user()->isContributor())
-        <a class="govuk-button govuk-!-margin-right-1" href="/entries/{{ $entry->id }}/edit">Edit</a>
-        <a class="govuk-button govuk-button--secondary govuk-!-margin-right-1" href="/entries/{{ $entry->id }}/copy">Make a copy</a>
+        <a
+            class="govuk-button govuk-!-margin-right-1"
+            href="/entries/{{ $entry->id }}/edit?path={{ urlencode(request()->query('path')) }}">
+            Edit
+        </a>
+        <a
+            class="govuk-button govuk-button--secondary govuk-!-margin-right-1"
+            href="/entries/{{ $entry->id }}/copy">
+            Make a copy
+        </a>
         <p class="govuk-body">
             <a class="govuk-link" href="/entries/{{ $entry->id }}/delete">Remove this entry</a>
         </p>

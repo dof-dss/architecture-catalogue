@@ -17,7 +17,11 @@
                   <span class="{{ $labels[$entry->status] }}">{{ $entry->status }}</span>
               </td>
               <td class="govuk-table__cell">
-                  <a class="govuk-link" href="/entries/{{ $entry->id }}">View</a>
+                  <a
+                      class="govuk-link"
+                      href="/entries/{{ $entry->id }}?path={{ urlencode(url()->full()) }}">
+                      View
+                  </a>
               </td>
           </tr>
       @endforeach

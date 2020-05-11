@@ -1,17 +1,58 @@
 @extends('layouts.base')
 
+@section('breadcrumbs')
+@if (request()->query('path') == (config('app.url') . '/entries'))
+    <div class="govuk-breadcrumbs">
+        <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{ request()->query('path') }}">Entries</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/entries/{{ $entry->id }}?path={{ request()->query('path') }}">View entry</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item" aria-current="page">Change entry</li>
+        </ol>
+    </div>
+@endif
+@if (Illuminate\Support\str::contains(request()->query('path'), config('app.url') . '/catalogue/search'))
+    <div class="govuk-breadcrumbs">
+        <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/entries/search">Search</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{ request()->query('path') }}">Results</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{ url()->previous() }}">View entry</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item" aria-current="page">Change entry</li>
+        </ol>
+    </div>
+@endif
+@endsection
+
 @section('content')
-<h1 class="govuk-heading-l">Edit catalogue entry</h1>
+<h1 class="govuk-heading-l">
+  <span class="govuk-caption-l">Catalogue entry</span>
+  {{ $entry->name }} {{ $entry->version }}
+</h1>
 
 @include ('partials.errors')
 
-<form action="/entries/{{ $entry->id }}" method="post">
+<form action="/entries/{{ $entry->id }}?path={{ urlencode(request()->query('path')) }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
 
     <h2 class="govuk-heading-m">Core information</h2>
 
-    <input type="hidden" name="id" value="{{ $entry->id }}"
+    <input type="hidden" name="id" value="{{ $entry->id }}">
 
     @component('components.text-input', [
         'name' => 'name',
@@ -90,8 +131,5 @@
   <button class="govuk-button govuk-!-margin-right-1" data-module="govuk-button" type="submit">
     Save changes
   </button>
-  <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="/entries/{{ $entry->id }}">
-    Cancel
-  </a>
 </form>
 @endsection
