@@ -208,8 +208,8 @@ workflows:
             - test-with-docker
       - deploy-to-govuk:
           filters:
-            branches:
-              only: master
+            tags:
+              only: /^v(?P<major>0|[0-9]\d*)\.(?P<minor>0|[0-9]\d*)\.(?P<patch>0|[0-9]\d*)\-(?P<stage>alpha|beta)/
           context: govuk-paas-staging
           requires:
             - test-with-docker
