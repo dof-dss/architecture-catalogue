@@ -1,3 +1,6 @@
+## 0.4.0-beta.3 (May 11, 2020)
+  - Try additional filters
+
 ## 0.4.0-beta.2 (May 11, 2020)
   - Match all tags starting with the pattern
   - Tidy commit and tag messages
