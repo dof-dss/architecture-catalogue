@@ -196,7 +196,13 @@ workflows:
     jobs:
       - test-with-docker:
           context: build-test
+          filters:
+            tags:
+              only: /.*/
+
       - deploy-to-govuk:
+          requires:
+            - test-with-docker
           filters:
             branches:
               only:
@@ -204,14 +210,13 @@ workflows:
                 - /bugfix-.*/
                 - /hotfix-.*/
           context: govuk-paas-sandbox
+
+      - deploy-to-govuk:
           requires:
             - test-with-docker
-      - deploy-to-govuk:
           filters:
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)\-(alpha|beta).*/
             branches:
               ignore: /.*/
           context: govuk-paas-staging
-          requires:
-            - test-with-docker
