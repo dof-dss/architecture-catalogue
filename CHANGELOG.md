@@ -1,3 +1,17 @@
+## 0.4.0 (May 11, 2020)
+  - Relates to #101
+  - Relates to #143
+  - Relates to #143
+  - Relates to #152
+  - Relates to #138
+  - Relates to #143
+  - Relates to #143
+  - Relates to #130
+  - Relates to #81 and #82
+  - Relates to #126
+  - Relates to #125
+  - Relates to #103
+
 ## 0.3.3 (May 05, 2020)
   - Relates to #118
 

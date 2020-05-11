@@ -98,7 +98,7 @@ class ChangeDependenciesTest extends TestCase
                 'entry_id' => $entry1->id,
                 'link-' . $entry2->id => $entry2->id
             ])
-            ->assertSee('View catalogue entry')
+            ->assertSee('Catalogue entry')
             ->assertSee($entry1->name)
             ->assertSee($entry2->name);
     }
@@ -127,7 +127,7 @@ class ChangeDependenciesTest extends TestCase
             ->post('/entries/' . $link->item1_id . '/links/' . $link->id, [
                 '_method' => 'DELETE'
             ])
-            ->assertSee('View catalogue entry')
+            ->assertSee('Catalogue entry')
             ->assertDontSee($link->parent->name);
     }
 

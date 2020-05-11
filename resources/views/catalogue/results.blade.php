@@ -1,5 +1,19 @@
 @extends('layouts.base')
 
+@section('breadcrumbs')
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="/home">Home</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="/entries/search">Search</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item" aria-current="page">Results</li>
+    </ol>
+</div>
+@endsection
+
 @section('content')
 <h1 class="govuk-heading-l govuk-!-margin-bottom-1">Search results</h1>
 <span class="govuk-caption-m govuk-!-margin-bottom-2">Your search returned {{ $entries->count() . ' catalogue '. Str::plural('entry', $entries->count()) }}.</span>

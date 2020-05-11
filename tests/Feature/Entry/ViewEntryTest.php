@@ -19,7 +19,7 @@ class ViewEntryTest extends TestCase
      *
      * @return void
      */
-    public function testContributorCanSeeBackLinkWhenViewingAnEntryAfterBrowsing()
+    public function testContributorCanSeeBreadcrumbsViewingAnEntryAfterBrowsing()
     {
         // stops notification being physically sent when a user is created
         Notification::fake();
@@ -34,8 +34,9 @@ class ViewEntryTest extends TestCase
 
         $this->followingRedirects()
             ->from('/entries')
-            ->get('/entries/1')
-            ->assertSee('Back to browse catalogue');
+            ->get('/entries/1?path=' . config('app.url') . '/entries')
+            ->assertSee('Entries')
+            ->assertSee('View entry');
     }
 
     /**
@@ -43,7 +44,7 @@ class ViewEntryTest extends TestCase
      *
      * @return void
      */
-    public function testContributorCanSeeBackLinkWhenViewingAnEntryAfterSearching()
+    public function testContributorCanSeeBreadcrumbsWhenViewingAnEntryAfterSearching()
     {
         // stops notification being physically sent when a user is created
         Notification::fake();
@@ -59,49 +60,9 @@ class ViewEntryTest extends TestCase
         // perform the search
         $this->followingRedirects()
             ->from('/catalogue/search?phrase=other')
-            ->get('/entries/1')
-            ->assertSee('Back to search results');
-    }
-
-
-    /**
-     * Check a contributor can't see a back link when viewing an entry editing
-     *
-     * @return void
-     */
-    public function testContributorCantSeeBackLinkWhenViewingAnEntryAfterEditing()
-    {
-        // stops notification being physically sent when a user is created
-        Notification::fake();
-
-        $user = $this->loginAsFakeUser(false, 'contributor', $visualCheck = 'assertSee');
-
-        // stops events being fired (i.e. will prevent audit)
-        Event::fake();
-
-        // mock up an a number of entries
-        factory(Entry::class, 125)->create();
-        // fetch the entry with an id of 1
-        $entry = Entry::find(1);
-
-        $this->followingRedirects()
-          ->from('/entries/' . $entry->id . '/edit')
-          ->post('/entries/' . $entry->id, [
-              '_method' => 'PUT',
-              'id' => $entry->id,
-              'name' => 'UPDATED',
-              'version' => $entry->version,
-              'description' => $entry->description,
-              'href' => $entry->href,
-              // category and sub_category are sent through from the UI like this
-              'category_subcategory' => $entry->category . "-" . $entry->sub_category,
-              'status' => $entry->status,
-              'functionality' => $entry->functionality,
-              'service_levels' => $entry->service_levels,
-              'interfaces' => $entry->interfaces
-          ])
-          ->assertSuccessful()
-          ->assertDontSee('Back to browse catalogue')
-          ->assertDontSee('Back to search results');
+            ->get('/entries/1?path=' . config('app.url') . '/catalogue/search')
+            ->assertSee('Search')
+            ->assertSee('Results')
+            ->assertSee('View entry');
     }
 }

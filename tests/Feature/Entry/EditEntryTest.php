@@ -36,8 +36,8 @@ class EditEntryTest extends TestCase
             'name' => 'AWS S3'
         ]);
 
-        $response = $this->get('entries/' . $entry->id . '/edit');
-        $response->assertSee('Edit catalogue entry')
+        $response = $this->get('entries/' . $entry->id . '/edit?path=' . config('app.url') . '/entries');
+        $response->assertSee('Change entry')
             ->assertSee('AWS S3');
     }
 

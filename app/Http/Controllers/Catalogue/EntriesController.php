@@ -192,7 +192,7 @@ class EntriesController extends Controller
         }
 
         // now view the updated entry
-        return redirect('/entries/' . $id);
+        return redirect('/entries/' . $id . '?path=' . urlencode(request()->query('path')));
     }
 
     /**
