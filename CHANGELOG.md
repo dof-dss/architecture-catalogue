@@ -1,3 +1,7 @@
+## 0.4.0-beta (May 11, 2020)
+  - Use semantic versioning
+  - Merge pull request #164 from dof-dss/bugfix-back-arrow
+
 ## 0.4.0 (May 11, 2020)
   - Relates to #101
   - Relates to #143
