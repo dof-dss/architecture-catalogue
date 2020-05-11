@@ -1,3 +1,7 @@
+## 0.4.0-beta.2 (May 11, 2020)
+  - Match all tags starting with the pattern
+  - Tidy commit and tag messages
+
 ## 0.4.0-beta.1 (May 11, 2020)
   - Deploy to staging on tags only
   - Merge branch 'master' of https://github.com/dof-dss/architecture-catalogue
