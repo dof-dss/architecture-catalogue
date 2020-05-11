@@ -1,3 +1,9 @@
+## 0.4.0-beta.1 (May 11, 2020)
+  - Deploy to staging on tags only
+  - Merge branch 'master' of https://github.com/dof-dss/architecture-catalogue
+  - Remove group labels
+  - Change trigger to deploy to staging using tags
+
 ## 0.4.0-beta (May 11, 2020)
   - Use semantic versioning
   - Merge pull request #164 from dof-dss/bugfix-back-arrow
