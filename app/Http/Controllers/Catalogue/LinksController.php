@@ -83,7 +83,6 @@ class LinksController extends Controller
         $entry = Entry::findOrFail($entry_id);
         $entry_description = $entry->name . ($entry->version ? '(' . $entry->version . ')' : '');
         $results = $this->entryRepository->search($request->phrase);
-        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
         $page_size = $this->entryRepository->calculatePageSize($results->count());

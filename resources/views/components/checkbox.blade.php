@@ -12,6 +12,7 @@
             <input class="govuk-checkboxes__input" id="{{ $id }}" name="{{ $name }}" type="checkbox" value="{{ $value ?? old($name) }}" checked>
             <label class="govuk-label govuk-checkboxes__label" for="{{ $name }}">
                 {{ $label }}
+                <span class="{{ $secondary_label_class ?? '' }}">{{ $secondary_label ?? '' }}</span>
             </label>
         </div>
     </div>
@@ -20,6 +21,7 @@
         <input class="govuk-checkboxes__input" id="{{ $id }}" name="{{ $name }}" type="checkbox" value="{{ $value ?? old($name) }}">
         <label class="govuk-label govuk-checkboxes__label" for="{{ $name }}">
             {{ $label }}
+            <span class="{{ $secondary_label_class ?? '' }}">{{ $secondary_label ?? '' }}</span>
         </label>
     </div>
 @enderror
