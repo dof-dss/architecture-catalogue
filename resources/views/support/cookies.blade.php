@@ -70,7 +70,7 @@
             </li>
         </ul>
         <p class="govuk-body">
-            We do not collect or store your personal information, so this data cannot be used to identify who you are. For more information visit our [privacy policy](/privacy-policy) page.
+            We do not collect or store your personal information, so this data cannot be used to identify who you are. For more information visit our <a class="govuk-link" href="/privacy-policy">privacy policy</a> page.
         </p>
         <p class="govuk-body">
             We do not allow Google to use or share our analytics data.
