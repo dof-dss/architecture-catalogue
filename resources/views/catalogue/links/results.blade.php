@@ -22,7 +22,7 @@
                   </h2>
               </legend>
               <span id="dependency-hint" class="govuk-hint">
-                  Select all entries that are dependencies.
+                  Select all entries that are dependencies
               </span>
               <div class="govuk-checkboxes govuk-checkboxes--small">
                   @foreach ($entries as $entry)
@@ -31,6 +31,8 @@
                           'id' => 'link-' . $entry->id,
                           'value' => $entry->id,
                           'label' => $entry->name . ($entry->version ? ' (' . $entry->version . ')' : ''),
+                          'secondary_label' => $entry->status != 'approved' ? 'WARNING: ' . $entry->status : $entry->status,
+                          'secondary_label_class' => $entry->status == 'approved' ? 'label--green' : 'label--orange',
                           'width' => 'govuk-!-width-one-half'
                       ])
                       @endcomponent
