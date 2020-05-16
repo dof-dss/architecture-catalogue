@@ -270,6 +270,28 @@ class EntriesController extends Controller
     }
 
     /**
+     * Reindex the entire catalogue using elasticsearch
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reindexCatalogue()
+    {
+        $this->entryRepository->reindex();
+        return redirect()->back()->with('status', 'successful');
+    }
+
+    /**
+     * Rebuild the catalogue index using elasticsearch
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function rebuildIndex()
+    {
+        $this->entryRepository->rebuildIndex();
+        return redirect()->back()->with('status', 'successful');
+    }
+
+    /**
      * Display the search page
      *
      * @param Request $request
@@ -302,11 +324,10 @@ class EntriesController extends Controller
           'phrase.min' => 'Enter at least 3 characters'
         ]);
         $results = $this->entryRepository->complexSearch($request->phrase);
-        Log::debug('Catalogue search returned ' . $results->count() . ' ' . Str::plural('result', $results->count()) . '.');
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
         $page_size = $this->entryRepository->calculatePageSize($results->count());
-        $entries = $results->sortBy('name')->sortBy('version')->Paginate($page_size);
+        $entries = $results->sortBy('_score')->Paginate($page_size);
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
     }
 

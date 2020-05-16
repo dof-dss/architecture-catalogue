@@ -34,6 +34,10 @@ class Entry extends Model
         'updated_at'
     ];
 
+    protected $appends = [
+        'name_version'
+    ];
+
     // model events to be recorded by AuditsActivity
     protected static $recordEvents = [
         'created',
@@ -44,6 +48,14 @@ class Entry extends Model
     // elasticquent mappings
     protected $mappingProperties = array (
         'name' => [
+            'type' => 'text',
+            'analyzer' => 'standard'
+        ],
+        'version' => [
+            'type' => 'text',
+            'analyzer' => 'standard'
+        ],
+        'name_version' => [
             'type' => 'text',
             'analyzer' => 'standard'
         ],
@@ -72,6 +84,11 @@ class Entry extends Model
             'analyzer' => 'standard'
         ],
     );
+
+    public function getNameVersionAttribute()
+    {
+        return $this->name . ' ' . $this->version;
+    }
 
     public function children()
     {
