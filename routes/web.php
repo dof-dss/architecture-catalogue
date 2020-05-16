@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::delete('/users/{user}', 'UserController@destroy');
         // catalogues
         Route::get('/catalogue/index', 'Catalogue\EntriesController@indexCatalogue');
+        Route::get('/catalogue/reindex', 'Catalogue\EntriesController@rebuildIndex');
         if (App::environment('local')) {
             Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
             Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');

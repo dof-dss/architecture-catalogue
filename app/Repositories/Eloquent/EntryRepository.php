@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Events\ModelChanged;
 
+use ElasticquentClientTrait;
+
 class EntryRepository implements EntryRepositoryInterface
 {
     /**
@@ -176,8 +178,10 @@ class EntryRepository implements EntryRepositoryInterface
         Entry::query()->delete();
     }
 
+    // ********** Elasticsearch functions **********
+
     /**
-     *  Index using eleasticsearch
+     *  Index all entries
      */
     public function index(): void
     {
@@ -185,11 +189,48 @@ class EntryRepository implements EntryRepositoryInterface
     }
 
     /**
-     *  Index using eleasticsearch
+     *  Re-index all entries
+     */
+    public function reindex(): void
+    {
+        Entry::reindex();
+    }
+
+    /**
+     *  Delete the index
+     */
+    public function deleteIndex()
+    {
+        Entry::deleteIndex();
+    }
+
+    /**
+     *  Rebuild the index
+     */
+    public function rebuildIndex(): void
+    {
+        $this->deleteIndex();
+        $this->index();
+    }
+
+
+    /**
+     *  Check if an index exists
      */
     public function indexExists(): int
     {
         return Entry::indexExists();
+    }
+
+
+    /**
+     *  simple search using eleasticsearch
+     *
+     *  @param string $query
+     */
+    public function search($query): object
+    {
+        return Entry::search($query);
     }
 
     /**
@@ -197,7 +238,7 @@ class EntryRepository implements EntryRepositoryInterface
      *
      *  @param string $query
      */
-    public function search($query): object
+    public function multiMatchSearch($query): object
     {
         $limit = 500;
         return Entry::searchByQuery(
@@ -205,8 +246,10 @@ class EntryRepository implements EntryRepositoryInterface
                 'multi_match' => [
                     'query' => $query,
                     'fields' => [
-                        'name',
-                        'description',
+                        // 'name',
+                        // 'version',
+                        'name_version^3',
+                        'description^2',
                         'category',
                         'sub_category',
                         'functionality',
@@ -237,8 +280,10 @@ class EntryRepository implements EntryRepositoryInterface
                 'simple_query_string' => [
                     'query' => $query,
                     'fields' => [
-                        'name',
-                        'description',
+                        // 'name',
+                        // 'version',
+                        'name_version^3',
+                        'description^2',
                         'category',
                         'sub_category',
                         'functionality',

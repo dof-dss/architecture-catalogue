@@ -22,10 +22,10 @@
 <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
 
 <h2 class="govuk-heading-l">Catalogue administation</h2>
-<a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/index">
-    Index catalogue
-</a>
-<a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/export">
+
+<h3 class="govuk-heading-m">Catalogue data</h3>
+<p class="govuk-body">Catalogue data will be exported in JSON format.</p>
+<a class="govuk-button govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/export">
     Export catalogue
 </a>
 <!-- only show features in local development -->
@@ -34,7 +34,22 @@
         Import catalogue
     </a>
     <a class="govuk-button govuk-button--warning govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/delete">
-        Delete catalogue
+        Delete all entries
     </a>
 @endif
+
+<h3 class="govuk-heading-m">Indexing</h3>
+<div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <span class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+        Building and re-building indexes may take some time and will depend on the size of the catalogue.
+    </span>
+</div>
+<a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/index">
+    Build index
+</a>
+<a class="govuk-button govuk-button--warning govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/reindex">
+    Re-build index
+</a>
 @endsection
