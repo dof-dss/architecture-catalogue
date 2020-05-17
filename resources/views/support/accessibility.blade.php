@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('back')
+<a href="{{ url()->previous() }}" class="govuk-back-link">Back</a>
+@endsection
+
 @section('content')
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
@@ -44,7 +48,7 @@
 
         <h2 class="govuk-heading-l">Enforcement procedure</h2>
         <p class="govuk-body">
-          If you contact us with a complaint and you’re not happy with our response contact the <a class="govuk-link" href="https://www.equalityadvisoryservice.com">Equality Advisory and Support Service (EASS).</a>
+          If you contact us with a complaint and you’re not happy with our response contact the <a class="govuk-link" href="https://www.equalityadvisoryservice.com">Equality Advisory and Support Service (EASS)</a>
         </p>
         <p class="govuk-body">
           The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’).
@@ -57,7 +61,7 @@
             Digital Shared Services is committed to making its websites accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
         </p>
         <p class="govuk-body">
-            This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21">Web Content Accessibility Guidelines version 2.1 AA standard.</a>
+            This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21">Web Content Accessibility Guidelines version 2.1 AA standard</a>
         </p>
 
         <h2 class="govuk-heading-l">Non accessible content</h2>

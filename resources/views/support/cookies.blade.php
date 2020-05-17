@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('back')
+<a href="{{ url()->previous() }}" class="govuk-back-link">Back</a>
+@endsection
+
 @section('content')
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
@@ -22,7 +26,7 @@
             You’ll see a message on the site before we store a cookie on your computer.
         </p>
         <p class="govuk-body">
-            <a class="govuk-link" href="https://ico.org.uk/for-the-public/online/cookie">Find out how to manage cookies.</a>
+            <a class="govuk-link" href="https://ico.org.uk/for-the-public/online/cookie">Find out how to manage cookies</a>
         </p>
 
         <h2 class="govuk-heading-l">Our cookie message</h2>

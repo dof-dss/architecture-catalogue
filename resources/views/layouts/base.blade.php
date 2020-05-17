@@ -146,17 +146,17 @@
               <h2 class="govuk-footer__heading govuk-heading-m">Related resources</h2>
               <ul class="govuk-footer__list govuk-footer__list--columns-1">
                   <li class="govuk-footer__list-item">
-                      <a class="govuk-footer__link" href="{{ config('app.architecture_portal_url') }}">
+                      <a class="govuk-footer__link" href="{{ config('app.architecture_portal_url') }}" target="_blank"  title="(external link opens in new window / tab)">
                           Architecture Portal
                       </a>
                   </li>
                   <li class="govuk-footer__list-item">
-                      <a class="govuk-footer__link" href="{{ config('app.ea_principles_url') }}">
+                      <a class="govuk-footer__link" href="{{ config('app.ea_principles_url') }}" target="_blank" title="(external link opens in new window / tab)">
                           Enterprise Architecture Principles
                       </a>
                   </li>
                   <li class="govuk-footer__list-item">
-                      <a class="govuk-footer__link" href="{{ config('app.citizen_services_architecture_url') }}">
+                      <a class="govuk-footer__link" href="{{ config('app.citizen_services_architecture_url') }}" target="_blank">
                           Citizen Services Architecture
                       </a>
                   </li>
@@ -184,7 +184,7 @@
                     </a>
                   </li>
                   <li class="govuk-footer__inline-list-item">
-                    <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">
+                    <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/" target="_blank" title="(external link opens in new window / tab)">
                       © Crown copyright
                     </a>
                   </li>
@@ -194,11 +194,18 @@
               </svg>
               <span class="govuk-footer__licence-description">
                 All content is available under the
-                <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+                <a
+                  class="govuk-footer__link"
+                  href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                  rel="license"
+                  target="_blank"
+                  title="(external link opens in new window / tab)">
+                    Open Government Licence v3.0
+                </a> except where otherwise stated
               </span>
           </div>
           <!-- <div class="govuk-footer__meta-item">
-            <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
+            <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/" target="_blank" title="(external link opens in new window / tab)">© Crown copyright</a>
           </div> -->
       </div>
     </div>

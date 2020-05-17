@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('back')
+<a href="{{ url()->previous() }}" class="govuk-back-link">Back</a>
+@endsection
+
 @section('content')
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
@@ -11,10 +15,10 @@
             <li>questions, queries or feedback you leave</li>
             <li>your email address, if you contact us</li>
             <li>your Internet Protocol (IP) address, and which version of web browser you used</li>
-            <li>information on how you use the site, using <a href="/cookies">cookies</a> and page-tagging techniques</li>
+            <li>information on how you use the site, using <a class="govuk-link" href="/cookies">cookies</a> and page-tagging techniques</li>
         </ul>
         <p class="govuk-body">
-            This data can be viewed by authorised people in the <a href="https://www.finance-ni.gov.uk/topics/digital-and-communication-services/digital-shared-services">Digital Shared Services</a> (DSS) and our suppliers, to:
+            This data can be viewed by authorised people in the <a class="govuk-link" href="https://www.finance-ni.gov.uk/topics/digital-and-communication-services/digital-shared-services" title="(external link opens in new window / tab)">Digital Shared Services</a> and our suppliers, to:
         </p>
         <ul class="govuk-list govuk-list--bullet">
             <li>improve the site by monitoring how you use it</li>
@@ -23,8 +27,9 @@
         </ul>
         <h2 class="govuk-heading-l">Where your data is stored</h2>
         <p class="govuk-body">
-            We store your data on secure servers in the <a href="https://www.gov.uk/eu-eea">European Economic Area</a> (EEA).
+            We store your data on secure servers in the <a class="govuk-link" href="https://www.gov.uk/eu-eea" title="(external link opens in new window / tab)">European Economic Area.</a>
         </p>
+
         <h2  class="govuk-heading-l">Keeping your data secure</h2>
         <p class="govuk-body">
             Sending information over the internet is generally not completely secure, and we cannot guarantee the security of your data while it’s in transit.
@@ -37,15 +42,17 @@
         </p>
         <h2 class="govuk-heading-l">Disclosing your information</h2>
         <p class="govuk-body">
-            We may pass on your personal information if we have a legal obligation to do so, or if we have to enforce or apply our <a href="https://www.gov.uk/help/terms-conditions">terms of use</a> and other agreements. This includes exchanging information with other government departments for legal reasons.
+            We may pass on your personal information if we have a legal obligation to do so, or if we have to enforce or apply our <a class="govuk-link" href="https://www.gov.uk/help/terms-conditions" title="(external link opens in new window / tab)">terms of use</a> and other agreements. This includes exchanging information with other government departments for legal reasons.
         </p>
         <p class="govuk-body">
             We will not share your information with any other organisations for marketing, market research or commercial purposes, and we do not pass on your details to other websites.
         </p>
+
         <h2 class="govuk-heading-l">Your rights</h2>
         <p class="govuk-body">
-            You can <a href="https://www.gov.uk/data-protection">find out what information we hold about you</a>, and <a href="https://www.gov.uk/contact">ask us not to use any of the information we collect</a>.
+            You can <a class="govuk-link" href="https://www.gov.uk/data-protection" title="(external link opens in new window / tab)">find out what information we hold about you </a>, and <a class="govuk-link" href="https://www.gov.uk/contact" title="(external link opens in new window / tab)">ask us not to use any of the information we collect</a>.
         </p>
+
         <h2 class="govuk-heading-l">Links to other websites</h2>
         <p class="govuk-body">
             The NICS Architecture Catalogue contains links to other websites.
