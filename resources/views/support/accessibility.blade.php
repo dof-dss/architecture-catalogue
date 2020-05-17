@@ -5,7 +5,7 @@
     <div class="govuk-grid-column-three-quarters">
         <h1 class="govuk-heading-xl">Accessbility statement</h1>
         <p class="govuk-body">
-            This statement applies to content published on the ea.digitalni.gov.uk domain. It does not apply to content on any other digitalni.gov.uk sub-domains.
+            This statement applies to content published on the <strong>ea.digitalni.gov.uk</strong> domain. It does not apply to content on any other digitalni.gov.uk sub-domains.
         </p>
         <p class="govuk-body">
             This website is run by Digital Shared Services. It is designed to be used by as many people as possible. The text should be clear and simple to understand. You should be able to:
@@ -23,7 +23,7 @@
 
         <h2 class="govuk-heading-l">How to request content in an accessible format</h2>
         <p class="govuk-body">
-            If you need information in a different format contact us and tell us:
+            If you need information in a different format <a class="govuk-link" href="mailto:ea-team@ea.finance-ni.gov.uk">contact us</a> and tell us:
             <ul class="govuk-list govuk-list--bullet">
                 <li>
                     the web address (URL) of the content
@@ -39,7 +39,7 @@
 
         <h2 class="govuk-heading-l">Reporting accessibility problems with this site</h2>
         <p class="govuk-body">
-            If you find any problems that are not listed on this page or you think we're not meeting the accessibility requirements, contact us.
+            If you find any problems that are not listed on this page or you think we're not meeting the accessibility requirements, <a class="govuk-link" href="mailto:ea-team@ea.finance-ni.gov.uk">contact us</a>.
         </p>
 
         <h2 class="govuk-heading-l">Enforcement procedure</h2>
@@ -57,7 +57,7 @@
             Digital Shared Services is committed to making its websites accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
         </p>
         <p class="govuk-body">
-            This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21">Web Content Accessibility Guidelines version 2.1] AA standard.</a>
+            This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21">Web Content Accessibility Guidelines version 2.1 AA standard.</a>
         </p>
 
         <h2 class="govuk-heading-l">Non accessible content</h2>

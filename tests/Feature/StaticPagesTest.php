@@ -41,7 +41,7 @@ class StaticPagesTest extends TestCase
     {
         // if we have not logged in we should be redirected to the login page
         $response = $this->get('/accessibility');
-        $response->assertSeeText('Accessbility statement');
+        $response->assertSee('Accessbility statement');
     }
 
     /**
@@ -53,7 +53,9 @@ class StaticPagesTest extends TestCase
     {
         // if we have not logged in we should be redirected to the login page
         $response = $this->get('/cookies');
-        $response->assertSeeText('Cookies');
+        $response->assertSee('Cookies');
+        $response->assertSee('privacy policy');
+        $response->assertSee('/privacy-policy');
     }
 
     /**
@@ -65,6 +67,8 @@ class StaticPagesTest extends TestCase
     {
         // if we have not logged in we should be redirected to the login page
         $response = $this->get('/privacy-policy');
-        $response->assertSeeText('Privacy policy');
+        $response->assertSee('Privacy policy');
+        $response->assertSee('contact us');
+        $response->assertSee('ea-team@ea.finance-ni.gov.uk');
     }
 }
