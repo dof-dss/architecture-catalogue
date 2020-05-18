@@ -1,3 +1,6 @@
+## 0.5.5 (May 18, 2020)
+  - Make alpha and beta tag suffix optional
+
 ## 0.5.4-beta (May 18, 2020)
 
 
