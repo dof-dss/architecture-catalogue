@@ -126,7 +126,7 @@ commands:
             cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID}"
             cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_API "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_API}"
             cf set-env $APP_NAME SESSION_DOMAIN "${<< parameters.environment >>_SESSION_DOMAIN}"
-            cf set-env $APP_NAME SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
+            # cf set-env $APP_NAME SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
 
   push_cmd:
     description: "Standard deployment"
