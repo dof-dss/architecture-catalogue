@@ -70,20 +70,12 @@ commands:
             cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
-  set_app_name_cmd:
-    description: "Set the name of the application based on the environment"
-    parameters:
-      environment:
-        type: string
-    steps:
-      - run:
-          command: |
-            export APP_NAME="${<< parameters.environment >>_APP_NAME}"
-
   set_env_cmd:
     description: "Set environment variables"
     parameters:
       environment:
+        type: string
+      application:
         type: string
     steps:
       - run:
@@ -151,11 +143,12 @@ commands:
 
       - set_env_cmd:
           environment:  << parameters.environment >>
+          name: << parameters.environment >>
 
       - run:
           command: |
             # start the application
-            cf start $APP_NAME
+            cf start $"{<< parameters.environment >>_APP_NAME}"
 
   push_zdt_cmd:
     description: "Zero downtime deployment"
@@ -166,13 +159,14 @@ commands:
       - run:
           command: |
             # create the application
-            cf v3-create-app $APP_NAME
+            cf v3-create-app $"{<< parameters.environment >>_APP_NAME}"
 
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
 
       - set_env_cmd:
           environment:  << parameters.environment >>
+          application: "<< parameters.environment >>_APP_NAME"
 
       - run:
           command: |
@@ -213,10 +207,6 @@ jobs:
     steps:
       # build the application
       - build_cmd
-
-      # set the application name
-      - set_app_name_cmd:
-          environment: << parameters.target >>
 
       # install the CF CLI
       - install_cmd
