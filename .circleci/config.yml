@@ -74,7 +74,7 @@ commands:
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
             # set the application name
-            APP_NAME = "${<< parameters.environment >>_APP_NAME}"
+            export APP_NAME = "${<< parameters.environment >>_APP_NAME}"
 
   set_env_cmd:
     description: "Set environment variables"
