@@ -1,3 +1,23 @@
+## 0.5.1 (May 18, 2020)
+  - Merge pull request #174 from dof-dss/feature-circleci-update
+  - Fix typo in push commands
+  - Fix bug in application name
+  - Set application name again
+  - Set application name
+  - Set application name separately
+  - Further fix
+  - Fix incorrect syntax
+  - Fix incorrect syntax
+  - Fix missing param
+  - Set APP_NAME as part of install_cmd
+  - Debug env
+  - Locate error
+  - Fix typo
+  - Fix missing env in push_zdt create app cmd
+  - Fix missing parameters in set-env
+  - Add remaining environment specific names
+  - Try using environment specific names for variables
+
 ## 0.5.0-beta (May 18, 2020)
   - Merge pull request #173 from dof-dss/feature-toggle-usage-tracking
   - Relates to #65
