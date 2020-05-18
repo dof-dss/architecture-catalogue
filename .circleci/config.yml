@@ -59,9 +59,6 @@ commands:
       - install_node_components_cmd
 
   install_cmd:
-    parameters:
-      environment:
-        type: string
     description: "Install Cloud Foundry CLI"
     steps:
       - run:
@@ -73,7 +70,14 @@ commands:
             cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
-            # set the application name
+  set_app_name_cmd:
+    description: "Set the name of the application based on the environment"
+    parameters:
+      environment:
+        type: string
+    steps:
+      - run:
+          command: |
             export APP_NAME="${<< parameters.environment >>_APP_NAME}"
 
   set_env_cmd:
@@ -210,9 +214,12 @@ jobs:
       # build the application
       - build_cmd
 
-      # install the CF CLI
-      - install_cmd:
+      # set the application name
+      - set_app_name_cmd:
           environment: << parameters.target >>
+
+      # install the CF CLI
+      - install_cmd
 
       # push the application to GOV.UK PaaS
       - push_zdt_cmd:
