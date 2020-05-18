@@ -148,7 +148,7 @@ commands:
       - run:
           command: |
             # start the application
-            cf start $"{<< parameters.environment >>_APP_NAME}"
+            cf start "${<< parameters.environment >>_APP_NAME}"
 
   push_zdt_cmd:
     description: "Zero downtime deployment"
@@ -171,7 +171,7 @@ commands:
       - run:
           command: |
             # push a zero downtime version of the application
-            cf v3-zdt-push $"{<< parameters.environment >>_APP_NAME}" --wait-for-deploy-complete
+            cf v3-zdt-push "${<< parameters.environment >>_APP_NAME}" --wait-for-deploy-complete
 
 executors:
     docker-executor:
