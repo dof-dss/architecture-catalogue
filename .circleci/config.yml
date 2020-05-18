@@ -143,7 +143,7 @@ commands:
 
       - set_env_cmd:
           environment:  << parameters.environment >>
-          name: << parameters.environment >>
+          application: << parameters.environment >>
 
       - run:
           command: |
