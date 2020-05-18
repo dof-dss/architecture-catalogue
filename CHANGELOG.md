@@ -1,3 +1,20 @@
+## 0.5.0-beta (May 18, 2020)
+  - Merge pull request #173 from dof-dss/feature-toggle-usage-tracking
+  - Relates to #65
+  - Merge pull request #172 from dof-dss/bugfix-external-links
+  - Relates to #89
+  - Merge pull request #171 from dof-dss/feature-accessibility-statement
+  - Relates to #124
+  - Merge pull request #170 from dof-dss/bugfix-footer-links
+  - Relates to #120, #122, #102
+  - Merge pull request #169 from dof-dss/bugfix-cookies-privacy-policy-link
+  - Relates to #116
+  - Merge pull request #168 from dof-dss/feature-search-by-version
+  - Relates to #149, #153
+  - Merge pull request #167 from dof-dss/feature-dependency-status-warning
+  - Relates to #151
+  - Tidy filters
+
 ## 0.4.0-beta.3 (May 11, 2020)
   - Try additional filters
 
