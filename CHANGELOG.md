@@ -1,3 +1,6 @@
+## 0.5.2 (May 18, 2020)
+  - Remove default value
+
 ## 0.5.1 (May 18, 2020)
   - Merge pull request #174 from dof-dss/feature-circleci-update
   - Fix typo in push commands
