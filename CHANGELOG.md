@@ -1,3 +1,6 @@
+## 0.5.4-beta (May 18, 2020)
+
+
 ## 0.5.3 (May 18, 2020)
   - Fix parameter again
   - Fix parameter sent to set_env_cmd
