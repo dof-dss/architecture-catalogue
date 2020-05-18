@@ -5,11 +5,13 @@ orbs:
 
 commands:
   install_php_extensions_cmd:
+    description: "Install PHP extensions"
     steps:
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0
       - run: sudo docker-php-ext-install pdo pdo_mysql
 
   install_laravel_application_cmd:
+    description: "Install Laravel application"
     steps:
       # Download and cache dependencies
       - restore_cache:
@@ -27,6 +29,7 @@ commands:
             - ./vendor
 
   install_node_components_cmd:
+    description: "Install Node components"
     steps:
       - restore_cache:
           keys:
@@ -39,8 +42,8 @@ commands:
             - node_modules
 
   test_cmd:
+    description: "Run unit tests"
     steps:
-      # prepare the database
       - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
@@ -48,6 +51,7 @@ commands:
       - run: ./vendor/bin/phpunit
 
   build_cmd:
+    description: "Install application"
     steps:
       - checkout
       - install_php_extensions_cmd
@@ -55,6 +59,7 @@ commands:
       - install_node_components_cmd
 
   install_cmd:
+    description: "Install Cloud Foundry CLI"
     steps:
       - run:
           command: |
@@ -66,94 +71,107 @@ commands:
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
   set_env_cmd:
+    description: "Set environment variables"
+    parameters:
+      environment:
+        type: string
+      application:
+        type: string
     steps:
       - run:
           command: |
             # CiricleCI environment varialbes
-            cf set-env $APP_NAME CIRCLE_BUILD_NUM "${CIRCLE_BUILD_NUM}"
-            cf set-env $APP_NAME CIRCLE_SHA1 "${CIRCLE_SHA1}"
-            cf set-env $APP_NAME CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID}"
-            cf set-env $APP_NAME CIRCLE_PROJECT_USERNAME "${CIRCLE_PROJECT_USERNAME}"
-            cf set-env $APP_NAME CIRCLE_PROJECT_REPONAME "${CIRCLE_PROJECT_REPONAME}"
-            cf set-env $APP_NAME CIRCLE_BRANCH "${CIRCLE_BRANCH}"
-            cf set-env $APP_NAME CIRCLE_PULL_REQUEST "${CIRCLE_PULL_REQUEST}"
-            # application environment variables
-            cf set-env $APP_NAME ADMIN_PASSWORD "${ADMIN_PASSWORD}"
-            cf set-env $APP_NAME ADMIN_USERNAME "${ADMIN_USERNAME}"
-            cf set-env $APP_NAME APP_DEBUG "${APP_DEBUG}"
-            cf set-env $APP_NAME APP_ENV "${APP_ENV}"
-            cf set-env $APP_NAME APP_KEY "${APP_KEY}"
-            cf set-env $APP_NAME APP_NAME "${APP_NAME}"
-            cf set-env $APP_NAME APP_PAGINATION_MAX_PAGES "${APP_PAGINATION_MAX_PAGES}"
-            cf set-env $APP_NAME APP_PAGINATION_PAGE_SIZE "${APP_PAGINATION_PAGE_SIZE}"
-            cf set-env $APP_NAME APP_PHASE "${APP_PHASE}"
-            cf set-env $APP_NAME APP_URL "${APP_URL}"
-            cf set-env $APP_NAME AZURE_KEY "${AZURE_KEY}"
-            cf set-env $APP_NAME AZURE_REDIRECT_URI "${AZURE_REDIRECT_URI}"
-            cf set-env $APP_NAME AZURE_SECRET "${AZURE_SECRET}"
-            cf set-env $APP_NAME CACHE_DRIVER "${CACHE_DRIVER}"
-            cf set-env $APP_NAME COGNITO_CLIENT_ID "${COGNITO_CLIENT_ID}"
-            cf set-env $APP_NAME COGNITO_DOMAIN "${COGNITO_DOMAIN}"
-            cf set-env $APP_NAME COGNITO_REDIRECT_URI "${COGNITO_REDIRECT_URI}"
-            cf set-env $APP_NAME DB_CERT_PATH "${DB_CERT_PATH}"
-            cf set-env $APP_NAME DB_CONNECTION "${DB_CONNECTION}"
-            cf set-env $APP_NAME GITHUB_CALLBACK_URL "${GITHUB_CALLBACK_URL}"
-            cf set-env $APP_NAME GITHUB_CLIENT_ID "${GITHUB_CLIENT_ID}"
-            cf set-env $APP_NAME GITHUB_CLIENT_SECRET "${GITHUB_CLIENT_SECRET}"
-            cf set-env $APP_NAME GOVUK_NOTIFY_API_KEY "${GOVUK_NOTIFY_API_KEY}"
-            cf set-env $APP_NAME GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID "${GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID}"
-            cf set-env $APP_NAME GOVUK_NOTIFY_USER_WELCOM_TEMPLATE_ID "${GOVUK_NOTIFY_USER_WELCOME_TEMPLATE_ID}"
-            cf set-env $APP_NAME GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID "${GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID}"
-            cf set-env $APP_NAME LOG_CHANNEL "${LOG_CHANNEL}"
-            cf set-env $APP_NAME LOG_SLACK_WEBHOOK_URL "${LOG_SLACK_WEBHOOK_URL}"
-            cf set-env $APP_NAME MAIL_FROM_ADDRESS "${MAIL_FROM_ADDRESS}"
-            cf set-env $APP_NAME MAIL_FROM_NAME "${MAIL_FROM_NAME}"
-            cf set-env $APP_NAME NICS_EA_AUDIT_API "${NICS_EA_AUDIT_API}"
-            cf set-env $APP_NAME NICS_EA_AUDIT_ENABLED "${NICS_EA_AUDIT_ENABLED}"
-            cf set-env $APP_NAME NICS_EA_COGNITO_PASSWORD "${NICS_EA_COGNITO_PASSWORD}"
-            cf set-env $APP_NAME NICS_EA_COGNITO_URL "${NICS_EA_COGNITO_URL}"
-            cf set-env $APP_NAME NICS_EA_COGNITO_USER "${NICS_EA_COGNITO_USER}"
-            cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID "${NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID}"
-            cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_API "${NICS_EA_USAGE_TRACKING_API}"
-            cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_TENANT_ID "${NICS_EA_USAGE_TRACKING_TENANT_ID}"
-            cf set-env $APP_NAME NICS_EA_USAGE_TRACKING_TENANT_NAME "${NICS_EA_USAGE_TRACKING_TENANT_NAME}"
-            cf set-env $APP_NAME QUEUE_CONNECTION "${QUEUE_CONNECTION}"
-            cf set-env $APP_NAME SESSION_DOMAIN "${SESSION_DOMAIN}"
-            cf set-env $APP_NAME SESSION_DRIVER "${SESSION_DRIVER}"
-            cf set-env $APP_NAME SESSION_LIFETIME "${SESSION_LIFETIME}"
-            cf set-env $APP_NAME SLACK_WEBHOOK_URL "${SLACK_WEBHOOK_URL}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_BUILD_NUM "${CIRCLE_BUILD_NUM}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_SHA1 "${CIRCLE_SHA1}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_PROJECT_USERNAME "${CIRCLE_PROJECT_USERNAME}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_PROJECT_REPONAME "${CIRCLE_PROJECT_REPONAME}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_BRANCH "${CIRCLE_BRANCH}"
+            cf set-env "${<< parameters.application >>}" CIRCLE_PULL_REQUEST "${CIRCLE_PULL_REQUEST}"
+
+            # application environment variables (static)
+            cf set-env "${<< parameters.application >>}" ADMIN_PASSWORD "${ADMIN_PASSWORD}"
+            cf set-env "${<< parameters.application >>}" ADMIN_USERNAME "${ADMIN_USERNAME}"
+            cf set-env "${<< parameters.application >>}" APP_KEY "${APP_KEY}"
+            cf set-env "${<< parameters.application >>}" APP_PAGINATION_MAX_PAGES "${APP_PAGINATION_MAX_PAGES}"
+            cf set-env "${<< parameters.application >>}" APP_PAGINATION_PAGE_SIZE "${APP_PAGINATION_PAGE_SIZE}"
+            cf set-env "${<< parameters.application >>}" AZURE_REDIRECT_URI "${AZURE_REDIRECT_URI}"
+            cf set-env "${<< parameters.application >>}" CACHE_DRIVER "${CACHE_DRIVER}"
+            cf set-env "${<< parameters.application >>}" COGNITO_REDIRECT_URI "${COGNITO_REDIRECT_URI}"
+            cf set-env "${<< parameters.application >>}" DB_CERT_PATH "${DB_CERT_PATH}"
+            cf set-env "${<< parameters.application >>}" DB_CONNECTION "${DB_CONNECTION}"
+            cf set-env "${<< parameters.application >>}" GITHUB_CALLBACK_URL "${GITHUB_CALLBACK_URL}"
+            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID "${GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID}"
+            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_USER_WELCOM_TEMPLATE_ID "${GOVUK_NOTIFY_USER_WELCOME_TEMPLATE_ID}"
+            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID "${GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID}"
+            cf set-env "${<< parameters.application >>}" LOG_CHANNEL "${LOG_CHANNEL}"
+            cf set-env "${<< parameters.application >>}" QUEUE_CONNECTION "${QUEUE_CONNECTION}"
+            cf set-env "${<< parameters.application >>}" SESSION_DRIVER "${SESSION_DRIVER}"
+            cf set-env "${<< parameters.application >>}" SESSION_LIFETIME "${SESSION_LIFETIME}"
+
+            # application environment variables (environment specific)
+            cf set-env "${<< parameters.application >>}" APP_DEBUG "${<< parameters.environment >>_APP_DEBUG}"
+            cf set-env "${<< parameters.application >>}" APP_ENV "${<< parameters.environment >>_APP_ENV}"
+            cf set-env "${<< parameters.application >>}" APP_NAME "${<< parameters.environment >>_APP_NAME}"
+            cf set-env "${<< parameters.application >>}" APP_PHASE "${<< parameters.environment >>_APP_PHASE}"
+            cf set-env "${<< parameters.application >>}" APP_URL "${<< parameters.environment >>_APP_URL}"
+            cf set-env "${<< parameters.application >>}" COGNITO_CLIENT_ID "${<< parameters.environment >>_COGNITO_CLIENT_ID}"
+            cf set-env "${<< parameters.application >>}" COGNITO_DOMAIN "${<< parameters.environment >>_COGNITO_DOMAIN}"
+            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_API_KEY "${<< parameters.environment >>_GOVUK_NOTIFY_API_KEY}"
+            cf set-env "${<< parameters.application >>}" LOG_SLACK_WEBHOOK_URL "${<< parameters.environment >>_LOG_SLACK_WEBHOOK_URL}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_AUDIT_API "${<< parameters.environment >>_NICS_EA_AUDIT_API}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_AUDIT_ENABLED "${<< parameters.environment >>_NICS_EA_AUDIT_ENABLED}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_COGNITO_PASSWORD "${<< parameters.environment >>_NICS_EA_COGNITO_PASSWORD}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_COGNITO_URL "${<< parameters.environment >>_NICS_EA_COGNITO_URL}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_COGNITO_USER "${<< parameters.environment >>_NICS_EA_COGNITO_USER}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_USAGE_TRACKING_ENABLED "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_ENABLED}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_ACCOUNT_CREATED_EVENT_ID}"
+            cf set-env "${<< parameters.application >>}" NICS_EA_USAGE_TRACKING_API "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_API}"
+            cf set-env "${<< parameters.application >>}" SESSION_DOMAIN "${<< parameters.environment >>_SESSION_DOMAIN}"
+            cf set-env "${<< parameters.application >>}" SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
 
   push_cmd:
+    description: "Standard deployment"
+    parameters:
+      environment:
+        type: string
     steps:
       - run:
           command: |
             # build the application but don't start it
             cf push --no-start -f "${CF_MANIFEST_FILE}"
 
-      - set_env_cmd
+      - set_env_cmd:
+          environment:  << parameters.environment >>
+          name: << parameters.environment >>
 
       - run:
           command: |
             # start the application
-            cf start $APP_NAME
+            cf start "${<< parameters.environment >>_APP_NAME}"
 
   push_zdt_cmd:
-    # zero downtime deployment
+    description: "Zero downtime deployment"
+    parameters:
+      environment:
+        type: string
     steps:
       - run:
           command: |
             # create the application
-            cf v3-create-app $APP_NAME
+            cf v3-create-app $"{<< parameters.environment >>_APP_NAME}"
 
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
 
-      - set_env_cmd
+      - set_env_cmd:
+          environment:  << parameters.environment >>
+          application: "<< parameters.environment >>_APP_NAME"
 
       - run:
           command: |
             # push a zero downtime version of the application
-            cf v3-zdt-push $APP_NAME --wait-for-deploy-complete
+            cf v3-zdt-push "${<< parameters.environment >>_APP_NAME}" --wait-for-deploy-complete
 
 executors:
     docker-executor:
@@ -179,7 +197,12 @@ jobs:
       - build_cmd
       - test_cmd
 
-  deploy-to-govuk:
+  deploy-to-govuk-space:
+    description: "Deploy to GOV.UK PaaS"
+    parameters:
+      target:
+        type: string
+        default: "SANDBOX"
     executor: docker-executor
     steps:
       # build the application
@@ -189,7 +212,8 @@ jobs:
       - install_cmd
 
       # push the application to GOV.UK PaaS
-      - push_zdt_cmd
+      - push_zdt_cmd:
+          environment: << parameters.target >>
 
 workflows:
   deploy-to-govuk:
@@ -200,7 +224,8 @@ workflows:
             tags:
               only: /.*/
 
-      - deploy-to-govuk:
+      - deploy-to-govuk-space:
+          target: "SANDBOX"
           requires:
             - test-with-docker
           filters:    # all tags and selected branches
@@ -213,7 +238,8 @@ workflows:
                 - /hotfix-.*/
           context: govuk-paas-sandbox
 
-      - deploy-to-govuk:
+      - deploy-to-govuk-space:
+          target: "STAGING"
           requires:
             - test-with-docker
           filters:    # selected tags and no branches
