@@ -1,3 +1,7 @@
+## 0.5.3 (May 18, 2020)
+  - Fix parameter again
+  - Fix parameter sent to set_env_cmd
+
 ## 0.5.2 (May 18, 2020)
   - Remove default value
 
