@@ -1,3 +1,6 @@
+## 0.5.6 (May 18, 2020)
+  - Fix tags regex
+
 ## 0.5.5 (May 18, 2020)
   - Make alpha and beta tag suffix optional
 
