@@ -5,11 +5,13 @@ orbs:
 
 commands:
   install_php_extensions_cmd:
+    description: "Install PHP extensions"
     steps:
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0
       - run: sudo docker-php-ext-install pdo pdo_mysql
 
   install_laravel_application_cmd:
+    description: "Install Laravel application"
     steps:
       # Download and cache dependencies
       - restore_cache:
@@ -27,6 +29,7 @@ commands:
             - ./vendor
 
   install_node_components_cmd:
+    description: "Install Node components"
     steps:
       - restore_cache:
           keys:
@@ -39,8 +42,8 @@ commands:
             - node_modules
 
   test_cmd:
+    description: "Run unit tests"
     steps:
-      # prepare the database
       - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
@@ -48,6 +51,7 @@ commands:
       - run: ./vendor/bin/phpunit
 
   build_cmd:
+    description: "Install application"
     steps:
       - checkout
       - install_php_extensions_cmd
@@ -55,6 +59,7 @@ commands:
       - install_node_components_cmd
 
   install_cmd:
+    description: "Install Cloud Foundry CLI"
     steps:
       - run:
           command: |
@@ -66,6 +71,10 @@ commands:
             cf target -o "$CF_ORG" -s "$CF_SPACE"
 
   set_env_cmd:
+    description: "Set environment variables"
+    parameters:
+      environment:
+        type: string
     steps:
       - run:
           command: |
@@ -80,7 +89,7 @@ commands:
             # application environment variables
             cf set-env $APP_NAME ADMIN_PASSWORD "${ADMIN_PASSWORD}"
             cf set-env $APP_NAME ADMIN_USERNAME "${ADMIN_USERNAME}"
-            cf set-env $APP_NAME APP_DEBUG "${APP_DEBUG}"
+            cf set-env $APP_NAME APP_DEBUG "${<< parameters.environment >>_APP_DEBUG}"
             cf set-env $APP_NAME APP_ENV "${APP_ENV}"
             cf set-env $APP_NAME APP_KEY "${APP_KEY}"
             cf set-env $APP_NAME APP_NAME "${APP_NAME}"
@@ -124,13 +133,18 @@ commands:
             cf set-env $APP_NAME SLACK_WEBHOOK_URL "${SLACK_WEBHOOK_URL}"
 
   push_cmd:
+    description: "Standard deployment"
+    parameters:
+      environment:
+        type: string
     steps:
       - run:
           command: |
             # build the application but don't start it
             cf push --no-start -f "${CF_MANIFEST_FILE}"
 
-      - set_env_cmd
+      - set_env_cmd:
+          environment:  << parameters.environment >>
 
       - run:
           command: |
@@ -138,7 +152,10 @@ commands:
             cf start $APP_NAME
 
   push_zdt_cmd:
-    # zero downtime deployment
+    description: "Zero downtime deployment"
+    parameters:
+      environment:
+        type: string
     steps:
       - run:
           command: |
@@ -148,7 +165,8 @@ commands:
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
 
-      - set_env_cmd
+      - set_env_cmd:
+          environment:  << parameters.environment >>
 
       - run:
           command: |
@@ -180,6 +198,11 @@ jobs:
       - test_cmd
 
   deploy-to-govuk:
+    description: "Deploy to GOV.UK PaaS"
+    parameters:
+      target:
+        type: string
+        default: "SANDBOX"
     executor: docker-executor
     steps:
       # build the application
@@ -189,7 +212,8 @@ jobs:
       - install_cmd
 
       # push the application to GOV.UK PaaS
-      - push_zdt_cmd
+      - push_zdt_cmd:
+          environment: << parameters.target >>
 
 workflows:
   deploy-to-govuk:
@@ -201,6 +225,7 @@ workflows:
               only: /.*/
 
       - deploy-to-govuk:
+          target: "SANDOBX"
           requires:
             - test-with-docker
           filters:    # all tags and selected branches
@@ -214,6 +239,7 @@ workflows:
           context: govuk-paas-sandbox
 
       - deploy-to-govuk:
+          target: "STAGING"
           requires:
             - test-with-docker
           filters:    # selected tags and no branches
