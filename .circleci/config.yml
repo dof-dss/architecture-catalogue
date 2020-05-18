@@ -243,7 +243,7 @@ workflows:
             - test-with-docker
           filters:    # selected tags and no branches
             tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)\-?(alpha|beta)/
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
             branches:
               ignore: /.*/
           context: govuk-paas-staging
