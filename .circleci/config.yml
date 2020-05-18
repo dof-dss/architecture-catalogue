@@ -59,6 +59,9 @@ commands:
       - install_node_components_cmd
 
   install_cmd:
+    parameters:
+      environment:
+        type: string
     description: "Install Cloud Foundry CLI"
     steps:
       - run:
@@ -69,7 +72,7 @@ commands:
             cf api https://api.london.cloud.service.gov.uk
             cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
-            
+
             # set the application name
             $APP_NAME = "${<< parameters.environment >>_APP_NAME}"
 
@@ -208,7 +211,8 @@ jobs:
       - build_cmd
 
       # install the CF CLI
-      - install_cmd
+      - install_cmd:
+          environment: << parameters.target >>
 
       # push the application to GOV.UK PaaS
       - push_zdt_cmd:
