@@ -202,7 +202,6 @@ jobs:
     parameters:
       target:
         type: string
-        default: "SANDBOX"
     executor: docker-executor
     steps:
       # build the application
