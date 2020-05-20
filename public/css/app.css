@@ -6526,6 +6526,62 @@ h2.govuk-heading-s {
   }
 }
 
+.govuk-header {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  border-bottom: 10px solid #ffffff;
+  color: #ffffff;
+  background: #0b0c0c;
+}
+
+@media print {
+  .govuk-header {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-header {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .govuk-header {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.govuk-header__container--full-width {
+  padding: 0 15px;
+  border-color: #f47738;
+}
+
+.govuk-header__container--full-width .govuk-header__menu-button {
+  right: 15px;
+}
+
+.govuk-header__container {
+  position: relative;
+  margin-bottom: -10px;
+  padding-top: 10px;
+  border-bottom: 10px solid #f47738;
+}
+
+.govuk-header__container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 /* GOV.UK Architecture-Catalogue is too long */
 
 .govuk-header__logo {
