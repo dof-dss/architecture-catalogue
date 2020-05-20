@@ -1,4 +1,3 @@
-
 // push last navigation item to the right of the navigation (for sign out)
 // header nav {
 //   ul li:last-child { float: right; }
@@ -9,6 +8,40 @@
 //   padding-top: 8px;
 //   float: right;
 // }
+
+$govuk-header-background: govuk-colour("black");
+$govuk-header-border-color: govuk-colour("orange");
+$govuk-header-border-width: govuk-spacing(2);
+$govuk-header-text: govuk-colour("white");
+$govuk-header-link: govuk-colour("white");
+$govuk-header-link-hover: govuk-colour("white");
+$govuk-header-link-active: #1d8feb;
+$govuk-header-nav-item-border-color: #2e3133;
+
+.govuk-header {
+  @include govuk-font($size: 16);
+
+  border-bottom: govuk-spacing(2) solid govuk-colour("white");
+  color: $govuk-header-text;
+  background: $govuk-header-background;
+}
+
+.govuk-header__container--full-width {
+  padding: 0 govuk-spacing(3);
+  border-color: $govuk-header-border-color;
+
+  .govuk-header__menu-button {
+    right: govuk-spacing(3);
+  }
+}
+
+.govuk-header__container {
+  @include govuk-clearfix;
+  position: relative;
+  margin-bottom: -$govuk-header-border-width;
+  padding-top: govuk-spacing(2);
+  border-bottom: $govuk-header-border-width solid $govuk-header-border-color;
+}
 
 /* GOV.UK Architecture-Catalogue is too long */
 .govuk-header__logo {
