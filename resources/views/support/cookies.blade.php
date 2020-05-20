@@ -1,9 +1,5 @@
 @extends('layouts.base')
 
-@section('back')
-<a href="{{ url()->previous() }}" class="govuk-back-link">Back</a>
-@endsection
-
 @section('content')
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
