@@ -76,7 +76,9 @@
         </strong>
     </div>
 @endif
-<a class="govuk-button" data-module="govuk-button" href="/entries/create">
-    Add a new catalogue entry
-</a>
+@if ( auth()->user()->isContributor())
+    <a class="govuk-button" data-module="govuk-button" href="/entries/create">
+        Add a new catalogue entry
+    </a>
+@endif
 @endsection

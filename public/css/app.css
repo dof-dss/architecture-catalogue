@@ -6775,6 +6775,88 @@ table.user-list img.tick {
   margin-top: 8px;
 }
 
+.search-results {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+}
+
+@media print {
+  .search-results {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .search-results {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .search-results {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.search-results button[name=sort] {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #1d70b8;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.1428571429;
+  margin: 0;
+  padding: 0;
+}
+
+@media print {
+  .search-results button[name=sort] {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .search-results button[name=sort] {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .search-results button[name=sort] {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.search-results button[name=sort]::after {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.search-results button[name=sort].asc::after {
+  content: "\25B2";
+}
+
+.search-results button[name=sort].desc::after {
+  content: "\25BC";
+}
+
 @font-face {
   font-family: "Inter";
   font-style: normal;

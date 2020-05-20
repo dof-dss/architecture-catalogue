@@ -323,12 +323,22 @@ class EntriesController extends Controller
           'phrase.required' => 'Enter a word or phrase',
           'phrase.min' => 'Enter at least 3 characters'
         ]);
-        $results = $this->entryRepository->complexSearch($request->phrase);
+
+        // pick up the sort parameters (should validate these at some point)
+        $phrase = $request->phrase;
+        $sort = $request->has('sort') ? $request->sort : 'name_version';
+        $order = $request->has('order') ? $request->order : 'asc';
+        // search using Elasticsearch
+        $results = $this->entryRepository->complexSearch($phrase);
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
         $page_size = $this->entryRepository->calculatePageSize($results->count());
-        $entries = $results->sortBy('_score')->Paginate($page_size);
-        return view('catalogue.results', compact('entries', 'labels', 'catalogue_size'));
+        if ($order == 'desc') {
+            $entries = $results->sortByDesc($sort, SORT_NATURAL|SORT_FLAG_CASE)->Paginate($page_size);
+        } else {
+            $entries = $results->sortBy($sort, SORT_NATURAL|SORT_FLAG_CASE)->Paginate($page_size);
+        }
+        return view('catalogue.results', compact('entries', 'labels', 'catalogue_size', 'phrase', 'sort', 'order'));
     }
 
     /**
