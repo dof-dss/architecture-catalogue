@@ -324,10 +324,15 @@ class EntriesController extends Controller
           'phrase.min' => 'Enter at least 3 characters'
         ]);
 
-        // pick up the sort parameters (should validate these at some point)
         $phrase = $request->phrase;
+        // pick up the sort parameters (should validate these at some point)
+        $last_sort = $request->has('last_sort') ? $request->last_sort : 'none';
         $sort = $request->has('sort') ? $request->sort : 'name_version';
-        $order = $request->has('order') ? $request->order : 'asc';
+        if ($sort == $last_sort) { // toggle the sort order
+            $order = $request->order == 'asc' ? 'desc' : 'asc';
+        } else {
+            $order = $request->has('order') ? $request->order : 'asc';
+        }
         // search using Elasticsearch
         $results = $this->entryRepository->complexSearch($phrase);
         $labels = $this->statusRepository->labels();

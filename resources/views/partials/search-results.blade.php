@@ -1,7 +1,7 @@
 <form method="get" action="{{ url()->current() }}">
     <input type="hidden" name="phrase" value="{{ $phrase }}">
-    <input type="hidden" name="sort" value="{{ $sort }}">
-    <input type="hidden" name="order" value="{{ $order == 'asc' ? 'desc' : 'asc' }}">
+    <input type="hidden" name="last_sort" value="{{ $sort }}">
+    <input type="hidden" name="order" value="{{ $order }}">
     <table class="govuk-table search-results">
         <!-- <caption class="govuk-table__caption govuk-!-margin-bottom-2">This catalogue contains {{ $catalogue_size }} entries.</caption> -->
         <thead class="govuk-table__head">
