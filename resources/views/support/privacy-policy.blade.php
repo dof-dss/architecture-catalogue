@@ -38,7 +38,7 @@
         </p>
         <h2 class="govuk-heading-l">Disclosing your information</h2>
         <p class="govuk-body">
-            We may pass on your personal information if we have a legal obligation to do so, or if we have to enforce or apply our <a class="govuk-link" href="https://www.gov.uk/help/terms-conditions" title="(external link opens in new window / tab)">terms of use</a> and other agreements. This includes exchanging information with other government departments for legal reasons.
+            We may pass on your personal information if we have a legal obligation to do so. This includes exchanging information with other government departments for legal reasons.
         </p>
         <p class="govuk-body">
             We will not share your information with any other organisations for marketing, market research or commercial purposes, and we do not pass on your details to other websites.
@@ -46,7 +46,7 @@
 
         <h2 class="govuk-heading-l">Your rights</h2>
         <p class="govuk-body">
-            You can <a class="govuk-link" href="https://www.gov.uk/data-protection" title="(external link opens in new window / tab)">find out what information we hold about you </a>, and <a class="govuk-link" href="https://www.gov.uk/contact" title="(external link opens in new window / tab)">ask us not to use any of the information we collect</a>.
+            You can <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/freedom-information-and-data-protection" title="(external link opens in new window / tab)">find out what information we hold about you </a>, and <a class="govuk-link" href="mailto:ea-team@ea.finance-ni.gov.uk?subject=Architecture%20Catalogue&body=ACTION:%20Stop%20using%20my%20information" title="(external link opens in new window / tab)">ask us not to use any of the information we collect</a>.
         </p>
 
         <h2 class="govuk-heading-l">Links to other websites</h2>
