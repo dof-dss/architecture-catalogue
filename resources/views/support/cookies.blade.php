@@ -22,7 +22,7 @@
             You’ll see a message on the site before we store a cookie on your computer.
         </p>
         <p class="govuk-body">
-            <a class="govuk-link" href="https://ico.org.uk/for-the-public/online/cookie">Find out how to manage cookies</a>
+            <a class="govuk-link" href="https://ico.org.uk/your-data-matters/online/cookies">Find out how to manage cookies</a>
         </p>
 
         <h2 class="govuk-heading-l">Our cookie message</h2>
