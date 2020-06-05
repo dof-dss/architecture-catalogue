@@ -82,7 +82,11 @@ class LinksController extends Controller
         $entry_id = $request->entry_id;
         $entry = Entry::findOrFail($entry_id);
         $entry_description = $entry->name . ($entry->version ? '(' . $entry->version . ')' : '');
-        $results = $this->entryRepository->complexSearch($request->phrase);
+        $hits = $this->entryRepository->complexSearch($request->phrase);
+        // remove the current entry if it is present in the search results
+        $results = $hits->filter(function ($value, $key) use ($entry) {
+            return $value->name_version != $entry->name_version;
+        });
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
         $page_size = $this->entryRepository->calculatePageSize($results->count());
