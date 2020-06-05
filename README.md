@@ -2,6 +2,10 @@
 
 ![screen shot of application home page](screenshot.png)
 
+## Application architecture
+
+![screen shot of application architecture](architecture-layered-view.png)
+
 ## Installation
 
 ### Pre-requisites (Mac)
