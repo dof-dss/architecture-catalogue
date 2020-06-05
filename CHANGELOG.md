@@ -1,3 +1,21 @@
+## 1.0.0 (June 05, 2020)
+  - Add files via upload
+  - Delete screenshot.png
+  - Add files via upload
+  - Add files via upload
+  - Add elasticsearch to installation instructions
+  - Merge pull request #214 from dof-dss/bugfix-privacy-links
+  - Merge pull request #213 from dof-dss/bugfix-cookies-link
+  - Relates to #123
+  - Relates to #121
+  - Merge pull request #180 from dof-dss/bugfix-sort-results
+  - Relates to #148 bugfix
+  - Relates to #148
+  - Merge pull request #179 from dof-dss/feature-remove-ext-links
+  - Relates to #176
+  - Merge pull request #178 from dof-dss/feature-header-style
+  - Relates to #177
+
 ## 0.5.6 (May 18, 2020)
   - Fix tags regex
 
