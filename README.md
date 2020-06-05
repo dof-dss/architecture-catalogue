@@ -20,6 +20,13 @@ brew install php
 brew install mysql
 ```
 
+#### Install eleasticsearch
+
+```
+brew tap elastic/tap
+brew install elastic/tap/elasticsearch-full
+```
+
 #### Install Laravel Installer
 
 ```
