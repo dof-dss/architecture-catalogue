@@ -13,7 +13,7 @@
             <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <th scope="row" class="govuk-table__header">Email</th>
-                    <td class="govuk-table__cell">stephen.patterson@finance-ni.gov.uk</td>
+                    <td class="govuk-table__cell">{{ $user->email }}</td>
                 </tr>
             </tbody>
         </table>
