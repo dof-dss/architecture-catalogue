@@ -5,7 +5,7 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Authorisation required</h1>
         <p class="govuk-body">
-            Your are not permitted to perform the requested action.
+            You are not permitted to perform the requested action.
         </p>
         <p class="govuk-body">
             If you typed the web address, check it is correct.
