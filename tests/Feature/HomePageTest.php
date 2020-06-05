@@ -23,6 +23,9 @@ class HomePageTest extends TestCase
         $user = $this->loginAsFakeUser(false, 'contributor');
         $response = $this->get(route('home'));
         $response->assertSuccessful();
+        $response->assertSee('Each entry has a status associated with it');
+        $response->assertSee('Status');
+        $response->assertSee('Description');
         $response->assertSee('Find an entry');
         $response->assertSee('Add a new entry');
     }
