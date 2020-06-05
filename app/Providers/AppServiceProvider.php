@@ -57,6 +57,11 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[\pL0-9\s.,;:!?\'\"-]+$/u', $value);
         });
 
+        Validator::extend('custom_url', function ($attribute, $value) {
+            $expression = "/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&\'\(\)\*\+,;=.]+$/im";
+            return preg_match($expression, $value);
+        });
+
         //
         // use custom pagination view
         //

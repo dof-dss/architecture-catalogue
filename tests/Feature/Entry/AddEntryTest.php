@@ -65,7 +65,9 @@ class AddEntryTest extends TestCase
         // stops events being fired
         Event::fake();
 
-        $entry = factory(Entry::class)->make();
+        $entry = factory(Entry::class)->make([
+            'href' => 'www.hp.com'
+        ]);
         $this->followingRedirects()
             ->from(route('entry.create'))
             ->post(route('entry.store'), [
@@ -262,7 +264,11 @@ class AddEntryTest extends TestCase
     {
         $this->validationCheck(
             ['href' => 'invalid@url'],
-            'The associated URL is invalid.'
+            'The URL is invalid.'
+        );
+        $this->validationCheck(
+            ['href' => 'http://thistestsite'],
+            'The URL is invalid.'
         );
     }
 

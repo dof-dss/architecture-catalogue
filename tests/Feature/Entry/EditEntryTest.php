@@ -267,7 +267,7 @@ class EditEntryTest extends TestCase
     {
         $this->validationCheck(
             ['href' => 'invalid@url'],
-            'The associated URL is invalid.'
+            'The URL is invalid.'
         );
     }
 

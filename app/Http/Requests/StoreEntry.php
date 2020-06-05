@@ -38,7 +38,7 @@ class StoreEntry extends FormRequest
                 'between:1,20',
                 new UniqueComposite('entries', 'version', $this->version, 'name', $this->name, $this->id)
             ],
-            'href' => 'nullable|url|max:250',
+            'href' => 'nullable|custom_url|max:250',
             'description' => 'required|alpha_numeric_spaces_punctuation|between:3,100',
             'category_subcategory' => 'required|alpha_numeric_spaces_punctuation|between:8,80',
             'status' => 'required|alpha|max:10',
@@ -57,7 +57,8 @@ class StoreEntry extends FormRequest
             'version.required' => 'Enter a version.',
             'version.alpha_numeric_spaces_punctuation' => 'Version must only include letters, digits, spaces and punctuation.',
             'version.between' => 'Version must be between 1 and 20 characters.',
-            'href.url' => 'The associated URL is invalid.',
+            'href.url' => 'The URL is invalid.',
+            'href.custom_url' => 'The URL is invalid.',
             'href.max' => 'The associated URL must be 250 characters or fewer.',
             'description.required' => 'Enter a description.',
             'description.alpha_numeric_spaces' => 'Description must only include letters, digits and spaces.',
