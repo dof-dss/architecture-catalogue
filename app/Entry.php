@@ -45,6 +45,11 @@ class Entry extends Model
         'deleted',
     ];
 
+    // attributes to be excluded from audit
+    protected static $hiddenFromAudit = [
+        'related_sbbs'
+    ];
+
     // elasticquent mappings
     protected $mappingProperties = array (
         'name' => [
