@@ -1,3 +1,19 @@
+## 1.0.0-alpha (June 07, 2020)
+  - Merge pull request #221 from dof-dss/feature-remove-self-dependency
+  - Relates to #181
+  - Add files via upload
+  - Add application architecture section
+  - Merge pull request #220 from dof-dss/bugfix-url-validation
+  - Relates to #127
+  - Merge pull request #219 from dof-dss/bugfix-spelling-grammar
+  - Relates to #187
+  - Merge pull request #218 from dof-dss/feature-status-description
+  - Relates to #215
+  - Merge pull request #217 from dof-dss/bugfix-user-email
+  - Relates to #189
+  - Merge pull request #216 from dof-dss/bugfix-remove-sbbs
+  - Relates to #204
+
 ## 1.0.0 (June 05, 2020)
   - Add files via upload
   - Delete screenshot.png
