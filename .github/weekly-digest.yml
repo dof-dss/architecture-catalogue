@@ -3,5 +3,5 @@ publishDay: sun
 canPublishIssues: true
 canPublishPullRequests: true
 canPublishContributors: true
-canPublishStargazers: false
+canPublishStargazers: true
 canPublishCommits: true
