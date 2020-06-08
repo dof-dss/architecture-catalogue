@@ -101,3 +101,7 @@ You can run a full suite of tests using phpunit
 ```
 ./vendor/bin/phpunit
 ```
+
+## Roadmap
+
+[Architecture Catalogue Roadmap](https://github.com/dof-dss/catalogue-roadmap
