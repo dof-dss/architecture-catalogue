@@ -21,6 +21,27 @@ class LogSuccessfulLogout implements ShouldQueue
     }
 
     /**
+     * Determine if auditing is enabled.
+     *
+     * @return void
+     */
+    protected function auditEnabled()
+    {
+        return config('eaaudit.enabled') == true;
+    }
+
+    /**
+     * Determine if auditing is disabled.
+     *
+     * @return void
+     */
+    protected function auditDisabled()
+    {
+        return config('eaaudit.enabled') == false;
+    }
+
+
+    /**
      * Handle the event.
      *
      * @param  Logout  $event
@@ -28,6 +49,10 @@ class LogSuccessfulLogout implements ShouldQueue
      */
     public function handle(Logout $event)
     {
+        if ($this->auditDisabled()) {
+            return;
+        }
+      
         $logger = new AuditLogger();
 
         $payload = ["auth" => [
