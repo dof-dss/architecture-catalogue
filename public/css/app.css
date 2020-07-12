@@ -6536,7 +6536,7 @@ h2.govuk-heading-s {
   line-height: 1.1428571429;
   border-bottom: 10px solid #ffffff;
   color: #ffffff;
-  background: #0b0c0c;
+  background: #0D1925;
 }
 
 @media print {
@@ -6562,7 +6562,7 @@ h2.govuk-heading-s {
 
 .govuk-header__container--full-width {
   padding: 0 15px;
-  border-color: #f47738;
+  border-color: #b1b4b6;
 }
 
 .govuk-header__container--full-width .govuk-header__menu-button {
@@ -6573,7 +6573,7 @@ h2.govuk-heading-s {
   position: relative;
   margin-bottom: -10px;
   padding-top: 10px;
-  border-bottom: 10px solid #f47738;
+  border-bottom: 10px solid #b1b4b6;
 }
 
 .govuk-header__container:after {
