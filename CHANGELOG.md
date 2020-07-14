@@ -1,3 +1,6 @@
+## 1.0.3-beta (July 14, 2020)
+  - Try set-env before applying manifest
+
 ## 1.0.2-beta (July 14, 2020)
   - Fix error in CircleCI config
 
