@@ -1,3 +1,6 @@
+## 1.0.2-beta (July 14, 2020)
+  - Fix error in CircleCI config
+
 ## 1.0.1-beta (July 14, 2020)
   - Relates to #106
   - Merge pull request #228 from dof-dss/bugfix-user-sign-out-test-fails
