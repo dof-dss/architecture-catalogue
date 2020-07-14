@@ -1,3 +1,25 @@
+## 1.0.3-beta (July 14, 2020)
+  - Try set-env before applying manifest
+
+## 1.0.2-beta (July 14, 2020)
+  - Fix error in CircleCI config
+
+## 1.0.1-beta (July 14, 2020)
+  - Relates to #106
+  - Merge pull request #228 from dof-dss/bugfix-user-sign-out-test-fails
+  - Merge pull request #227 from dof-dss/bugfix-branding-alignment
+  - Closes #226
+  - Closes #225
+  - Delete weekly-digest.yml
+  - Update link to roadmap
+  - Create stale.yml
+  - Fix roadmap link
+  - Add a link to the roadmap
+  - Update weekly-digest.yml
+  - Create weekly-digest.yml
+  - Merge pull request #222 from dof-dss/dependabot/npm_and_yarn/websocket-extensions-0.1.4
+  - Bump websocket-extensions from 0.1.3 to 0.1.4
+
 ## 1.0.0-alpha (June 07, 2020)
   - Merge pull request #221 from dof-dss/feature-remove-self-dependency
   - Relates to #181

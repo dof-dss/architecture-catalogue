@@ -159,7 +159,7 @@ commands:
       - run:
           command: |
             # create the application
-            cf v3-create-app $"{<< parameters.environment >>_APP_NAME}"
+            cf v3-create-app "${<< parameters.environment >>_APP_NAME}"
 
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
@@ -243,7 +243,18 @@ workflows:
             - test-with-docker
           filters:    # selected tags and no branches
             tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha)?$/
             branches:
               ignore: /.*/
           context: govuk-paas-staging
+
+      - deploy-to-govuk-space:
+          target: "PROD"
+          requires:
+            - test-with-docker
+          filters:    # selected tags and no branches
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(beta|prod))?$/
+            branches:
+              ignore: /.*/
+          context: govuk-paas-production
