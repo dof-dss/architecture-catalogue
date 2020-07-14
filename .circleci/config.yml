@@ -161,14 +161,12 @@ commands:
             # create the application
             cf v3-create-app "${<< parameters.environment >>_APP_NAME}"
 
+            # apply the manifest file to the application
+            cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
+
       - set_env_cmd:
           environment:  << parameters.environment >>
           application: "<< parameters.environment >>_APP_NAME"
-
-      - run:
-          command: |
-            # apply the manifest file to the application
-            cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
 
       - run:
           command: |
