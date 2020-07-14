@@ -243,7 +243,18 @@ workflows:
             - test-with-docker
           filters:    # selected tags and no branches
             tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha)?$/
             branches:
               ignore: /.*/
           context: govuk-paas-staging
+
+      - deploy-to-govuk-space:
+          target: "PROD"
+          requires:
+            - test-with-docker
+          filters:    # selected tags and no branches
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(beta|prod))?$/
+            branches:
+              ignore: /.*/
+          context: govuk-paas-production
