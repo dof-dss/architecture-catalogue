@@ -1,3 +1,8 @@
+## 1.0.4-beta (July 15, 2020)
+  - Fix error in CircleCI config for welecome email template id
+  - Merge pull request #229 from dof-dss/bugfix-update-circleci-prod
+  - Revert "Try set-env before applying manifest"
+
 ## 1.0.3-beta (July 14, 2020)
   - Try set-env before applying manifest
 
