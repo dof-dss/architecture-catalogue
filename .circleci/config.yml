@@ -102,7 +102,7 @@ commands:
             cf set-env "${<< parameters.application >>}" DB_CONNECTION "${DB_CONNECTION}"
             cf set-env "${<< parameters.application >>}" GITHUB_CALLBACK_URL "${GITHUB_CALLBACK_URL}"
             cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID "${GOVUK_NOTIFY_PASSWORD_RESET_TEMPLATE_ID}"
-            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_USER_WELCOM_TEMPLATE_ID "${GOVUK_NOTIFY_USER_WELCOME_TEMPLATE_ID}"
+            cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_USER_WELCOME_TEMPLATE_ID "${GOVUK_NOTIFY_USER_WELCOME_TEMPLATE_ID}"
             cf set-env "${<< parameters.application >>}" GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID "${GOVUK_NOTIFY_VERIFY_EMAIL_TEMPLATE_ID}"
             cf set-env "${<< parameters.application >>}" LOG_CHANNEL "${LOG_CHANNEL}"
             cf set-env "${<< parameters.application >>}" QUEUE_CONNECTION "${QUEUE_CONNECTION}"
