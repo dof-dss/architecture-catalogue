@@ -1,3 +1,7 @@
+## 1.0.5-beta (July 16, 2020)
+  - Merge pull request #231 from dof-dss/feature-number-of-entries
+  - Relates to #230
+
 ## 1.0.4-beta (July 15, 2020)
   - Fix error in CircleCI config for welecome email template id
   - Merge pull request #229 from dof-dss/bugfix-update-circleci-prod
