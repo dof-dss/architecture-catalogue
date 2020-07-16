@@ -2,12 +2,20 @@
 
 @section('content')
 <div class="">
-    <h1 class="govuk-heading-xl">Architecture Catalogue</h1>
-    <p class="govuk-body">
-        This architecture catalogue contains all of the solution building blocks (physical components) used by the NICS. This list is used to populate the NICS Architecture Portal which provides a publicly accessible reference for architects designing solutions for the NICS.
+    <h1 class="govuk-heading-xl">
+      Architecture Catalogue
+    </h1>
+    <p class="govuk-body-l">
+        The architecture catalogue is a register of the technical components used by the NICS to build digital services. The catalogue should be used by architects and developers when designing digital solutions for the NICS.
     </p>
     <p class="govuk-body">
-        Each entry has a status associated with it, which will determine whether or not it should form part of your solution architecture. If a component is not listed in the catalogue then it is not considered suitable for use in NICS solutions. If you believe the component should form part of the catalogue then please ask a user with the <i>contributor</i> role to add it for you or <a href="mailto:ea-team@ea.finance-ni.gov.uk" class = "govuk-link">contact the EA Team</a>.
+        The catalouge currently contains <span class="govuk-!-font-size-24">{{ $entry_count }}</span> entries.
+    </p>
+    <p class="govuk-body">
+      If a component is not listed in the catalogue then it is not considered suitable for use in NICS solutions. If you believe the component should be included in the catalogue then please ask a user with the <i>contributor</i> role to add it for you or <a href="mailto:ea-team@ea.finance-ni.gov.uk" class = "govuk-link">contact the EA Team</a>. In this way the catalogue will grow to provide a comprehensive technology reference for the NICS.
+    </p>
+    <p class="govuk-body">
+        Each entry has a status associated with it, which will determine whether or not it should form part of your solution architecture.
     </p>
     <table class="govuk-table">
         <thead class="govuk-table__head">
