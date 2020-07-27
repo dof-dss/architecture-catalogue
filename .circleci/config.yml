@@ -51,6 +51,7 @@ commands:
 
   test_cmd:
     description: "Run unit tests"
+    steps:
       - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
       - run: ./vendor/bin/phpunit
