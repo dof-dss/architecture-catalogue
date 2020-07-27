@@ -195,7 +195,7 @@ jobs:
     executor: docker-executor
     working_directory: ~/repo
     steps:
-      -run: echo Build step
+      - run: echo Build step
       - build_cmd
       - run: mkdir build_output
       - run: touch build_output/compiled_output.txt
@@ -208,7 +208,7 @@ jobs:
     executor: docker-executor
     working_directory: ~/repo
     steps:
-      - run echo Test step
+      - run: echo Test step
       - attach_workspace:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
@@ -221,7 +221,7 @@ jobs:
       space:
         type: string
     steps:
-      - run echo Deploy step
+      - run: echo Deploy step
       - attach_workspace:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
@@ -230,7 +230,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build:
-      -test:
+      - build
+      - test:
           requires:
             - build
