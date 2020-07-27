@@ -1,3 +1,9 @@
+## 1.0.6-alpha (July 27, 2020)
+  - Merge pull request #232 from dof-dss/hotfix-disable-api
+  - Disable API
+  - Create pr-review.yml
+  - npm update
+
 ## 1.0.5-beta (July 16, 2020)
   - Merge pull request #231 from dof-dss/feature-number-of-entries
   - Relates to #230
