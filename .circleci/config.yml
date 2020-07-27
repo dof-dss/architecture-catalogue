@@ -214,6 +214,7 @@ jobs:
     executor: docker-executor
     steps:
       - run: echo sandbox-environment step
+      - install_php_extensions_cmd
       # reuse the workspace from the build job
       - attach_workspace:
           at: .
