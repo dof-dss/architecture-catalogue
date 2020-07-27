@@ -190,9 +190,14 @@ jobs:
     steps:
       - run: echo Build step
       - build_cmd
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
   test:
-    executor: docker-executor
+    docker:
+      - image: cimg/node:current
     steps:
       - run: echo Test step
       - run: ./vendor/bin/phpunit
@@ -210,7 +215,7 @@ jobs:
   deploy:
     executor: docker-executor
     steps:
-      - run: echo peploy step
+      - run: echo deploy step
 
 workflows:
   build-and-test:
@@ -241,7 +246,7 @@ workflows:
               ignore:
                 - master
 
-      - staging-environment:
+      - deploy:
           context: govuk-paas-prod
           requires:
             - test
