@@ -211,7 +211,7 @@ jobs:
       - run echo Test step
       - attach_workspace:
           at: ~/repo/workspace
-      -run: ls ~/repo/workspace/compiled_output.txt
+      - run: ls ~/repo/workspace/compiled_output.txt
       - test_cmd
 
   deploy:
@@ -224,7 +224,7 @@ jobs:
       - run echo Deploy step
       - attach_workspace:
           at: ~/repo/workspace
-      -run: ls ~/repo/workspace/compiled_output.txt
+      - run: ls ~/repo/workspace/compiled_output.txt
 
 
 workflows:
