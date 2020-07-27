@@ -41,12 +41,6 @@ commands:
           paths:
             - node_modules
 
-  test_cmd:
-    description: "Run unit tests"
-    steps:
-      # run tests with phpunit
-      - run: ./vendor/bin/phpunit
-
   build_cmd:
     description: "Install application"
     steps:
@@ -212,7 +206,8 @@ jobs:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
       # run tests with phpunit
-      - run: ./vendor/bin/phpunit
+      - run: ls
+      - run: ~
 
   deploy:
     executor: docker-executor
