@@ -48,6 +48,9 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
+
+  test_cmd:
+    description: "Run unit tests"
       - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
       - run: ./vendor/bin/phpunit
@@ -202,7 +205,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: echo Test step
-      - run: ./vendor/bin/phpunit
+      - test_cmd
 
   sandbox-environment:
     executor: docker-executor
@@ -220,7 +223,7 @@ jobs:
       - run: echo deploy step
 
 workflows:
-  build-and-test:
+  build-test-deploy:
     jobs:
       - build:
           context: build-test
