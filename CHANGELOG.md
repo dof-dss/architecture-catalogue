@@ -1,3 +1,6 @@
+## 1.0.6-beta (July 27, 2020)
+
+
 ## 1.0.6-alpha (July 27, 2020)
   - Merge pull request #232 from dof-dss/hotfix-disable-api
   - Disable API
