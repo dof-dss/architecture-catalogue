@@ -196,7 +196,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - '*'
+            - .
 
   test:
     executor: docker-executor
@@ -204,7 +204,7 @@ jobs:
     steps:
       - run: echo Test step
       - attach_workspace:
-          at: ~/repo/workspace
+          at: .
       - run: ls ~/repo/workspace/compiled_output.txt
       # run tests with phpunit
       - run: ./vendor/bin/phpunit
