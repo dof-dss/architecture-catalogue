@@ -187,7 +187,6 @@ executors:
 jobs:
   build:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo Build step
       - build_cmd
