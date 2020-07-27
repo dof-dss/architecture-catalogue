@@ -44,9 +44,6 @@ commands:
   test_cmd:
     description: "Run unit tests"
     steps:
-      - run: touch ~/repo/database/database.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite --force
-
       # run tests with phpunit
       - run: ./vendor/bin/phpunit
 
@@ -57,6 +54,8 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
+      - run: database/database.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite --force
 
   install_cmd:
     description: "Install Cloud Foundry CLI"
