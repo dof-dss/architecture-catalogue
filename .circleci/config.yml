@@ -199,6 +199,9 @@ jobs:
     docker:
       - image: cimg/node:current
     steps:
+      # reuse the workspace from the build job
+      - attach_workspace:
+          at: .
       - run: echo Test step
       - run: ./vendor/bin/phpunit
 
