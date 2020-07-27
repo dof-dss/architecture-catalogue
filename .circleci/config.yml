@@ -187,7 +187,6 @@ executors:
 jobs:
   build:
     executor: docker-executor
-    context: build-test
     steps:
       - run: echo Build step
       - build_cmd
@@ -225,3 +224,4 @@ workflows:
   build-and-test:
     jobs:
       - build
+          context: build-test
