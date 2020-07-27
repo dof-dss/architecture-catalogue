@@ -247,17 +247,17 @@ workflows:
       - sandbox-environment:
           context: govuk-paas-sandbox
           requires:
-            -test
+            - test
           filters:
-            branch:
+            branches:
               ignore:
                 - master
 
       - staging-environment:
           context: govuk-paas-staging
           requires:
-            -test
+            - test
           filters:
-            branch:
+            branches:
               ignore:
                 - master
