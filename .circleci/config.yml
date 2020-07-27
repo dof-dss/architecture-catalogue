@@ -194,9 +194,9 @@ jobs:
       - run: mkdir build_output
       - run: touch build_output/compiled_output.txt
       - persist_to_workspace:
-          root: build_output
+          root: .
           paths:
-            - '*'
+            - .
 
   test:
     executor: docker-executor
@@ -207,7 +207,7 @@ jobs:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
       # run tests with phpunit
-      - run: ~/vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit
 
   sandbox-environment:
     executor: docker-executor
@@ -243,3 +243,21 @@ workflows:
           context: build-test
           requires:
             - build
+
+      - sandbox-environment:
+          context: govuk-paas-sandbox
+          requires:
+            -test
+          filters:
+            branch:
+              ignore:
+                - master
+
+      - staging-environment:
+          context: govuk-paas-staging
+          requires:
+            -test
+          filters:
+            branch:
+              ignore:
+                - master
