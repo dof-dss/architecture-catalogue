@@ -65,6 +65,12 @@ commands:
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
+
+  connect_to_cf_api_cmd:
+    description: "Connect to Clouf Foundry API"
+    steps:
+      - run:
+          command: |
             cf api https://api.london.cloud.service.gov.uk
             cf auth "$CF_USERNAME" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
@@ -154,23 +160,25 @@ commands:
     parameters:
       environment:
         type: string
+      application:
+        type: string
     steps:
       - run:
           command: |
             # create the application
-            cf v3-create-app "${<< parameters.environment >>_APP_NAME}"
+            cf v3-create-app << parameters.application >>}
 
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
 
       - set_env_cmd:
-          environment:  << parameters.environment >>
-          application: "<< parameters.environment >>_APP_NAME"
+          environment: << parameters.environment >>
+          application: << parameters.application >>
 
       - run:
           command: |
             # push a zero downtime version of the application
-            cf v3-zdt-push "${<< parameters.environment >>_APP_NAME}" --wait-for-deploy-complete
+            cf v3-zdt-push << parameters.application >> --wait-for-deploy-complete
 
 executors:
     docker-executor:
@@ -219,6 +227,10 @@ jobs:
       - attach_workspace:
           at: .
       - install_cf_cli_cmd
+      - connect_to_cf_api_cmd
+      - push_zdt_cmd:
+          environment: "SANDBOX"
+          application: "pr-${CIRCLE_PULL_REQUEST}-architecture-catalogue-sandbox"
 
   staging-environment:
     executor: docker-executor
@@ -231,6 +243,7 @@ jobs:
       - run: echo deploy step
 
 workflows:
+  # only branches with pull requests will trigger workflows
   build-test-deploy:
     jobs:
       - build:
