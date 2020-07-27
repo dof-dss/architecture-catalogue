@@ -196,8 +196,7 @@ jobs:
             - .
 
   test:
-    docker:
-      - image: docker-executor
+    executor: docker-executor
     steps:
       # reuse the workspace from the build job
       - attach_workspace:
