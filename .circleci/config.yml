@@ -48,6 +48,7 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
+      - test_cmd
 
   test_cmd:
     description: "Run unit tests"
