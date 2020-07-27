@@ -45,7 +45,7 @@ commands:
     description: "Run unit tests"
     steps:
       # run tests with phpunit
-      - run: ./vendor/bin/phpunit
+      - run: ~/repo/vendor/bin/phpunit
 
   build_cmd:
     description: "Install application"
