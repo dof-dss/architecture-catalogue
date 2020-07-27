@@ -223,5 +223,5 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build
+      - build:
           context: build-test
