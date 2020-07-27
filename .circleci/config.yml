@@ -187,51 +187,30 @@ executors:
 jobs:
   build:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo Build step
       - build_cmd
-      - run: mkdir build_output
-      - run: touch build_output/compiled_output.txt
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
 
   test:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo Test step
-      - attach_workspace:
-          at: .
-      - run: ls ~/repo/workspace/compiled_output.txt
-      # run tests with phpunit
       - run: ./vendor/bin/phpunit
 
   sandbox-environment:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo sandbox-environment step
 
   staging-environment:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo staging-environment step
 
   deploy:
     executor: docker-executor
-    working_directory: ~/repo
-    parameters:
-      space:
-        type: string
     steps:
-      - run: echo Deploy step
-      - attach_workspace:
-          at: ~/repo/workspace
-      - run: ls ~/repo/workspace/compiled_output.txt
+      - run: echo peploy step
 
 workflows:
   build-and-test:
@@ -260,4 +239,13 @@ workflows:
           filters:
             branches:
               ignore:
+                - master
+
+      - staging-environment:
+          context: govuk-paas-prod
+          requires:
+            - test
+          filters:
+            branches:
+              only:
                 - master
