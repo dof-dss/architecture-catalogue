@@ -44,7 +44,7 @@ commands:
   test_cmd:
     description: "Run unit tests"
     steps:
-      - run: touch database/database.sqlite
+      - run: touch ~/repo/database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
       # run tests with phpunit
@@ -225,7 +225,6 @@ jobs:
       - attach_workspace:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
-
 
 workflows:
   build-and-test:
