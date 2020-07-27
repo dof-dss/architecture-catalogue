@@ -48,9 +48,9 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
-      - test_cmd
 
   test_cmd:
+    # can only be run after build_cmd
     description: "Run unit tests"
     steps:
       - run: touch database/database.sqlite
