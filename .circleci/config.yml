@@ -203,6 +203,7 @@ jobs:
   test:
     executor: docker-executor
     steps:
+      - install_php_extensions_cmd
       # reuse the workspace from the build job
       - attach_workspace:
           at: .
