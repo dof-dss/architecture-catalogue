@@ -207,7 +207,19 @@ jobs:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
       # run tests with phpunit
-      - run: ~/./vendor/bin/phpunit
+      - run: ~/vendor/bin/phpunit
+
+  sandbox-environment:
+    executor: docker-executor
+    working_directory: ~/repo
+    steps:
+      - run: echo sandbox-environment step
+
+  staging-environment:
+    executor: docker-executor
+    working_directory: ~/repo
+    steps:
+      - run: echo staging-environment step
 
   deploy:
     executor: docker-executor
