@@ -206,7 +206,7 @@ jobs:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
       # run tests with phpunit
-      - run: ls
+      - run: ls ~/.
 
   deploy:
     executor: docker-executor
