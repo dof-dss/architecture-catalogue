@@ -47,7 +47,8 @@ class EntriesController extends Controller
     {
         $catalogue_size = count($this->entryRepository->all());
         if ($request->is('api/*')) {
-            return $this->entryRepository->all();
+            return response()->json(['error' => 'You are not authorised to access this API'], 403);
+            // return $this->entryRepository->all();
         } else {
             // build up the filter criteria
             $criteria = [];
