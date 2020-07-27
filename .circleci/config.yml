@@ -54,7 +54,7 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
-      - run: database/database.sqlite
+      - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
   install_cmd:
