@@ -57,7 +57,7 @@ commands:
       - run: php artisan migrate --env=testing --database=sqlite --force
       - run: ./vendor/bin/phpunit
 
-  install_cmd:
+  install_cf_cli_cmd:
     description: "Install Cloud Foundry CLI"
     steps:
       - run:
@@ -214,6 +214,10 @@ jobs:
     executor: docker-executor
     steps:
       - run: echo sandbox-environment step
+      # reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - install_cf_cli_cmd
 
   staging-environment:
     executor: docker-executor
