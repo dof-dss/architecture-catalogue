@@ -166,7 +166,7 @@ commands:
       - run:
           command: |
             # create the application
-            cf v3-create-app << parameters.application >>}
+            cf v3-create-app << parameters.application >>
 
             # apply the manifest file to the application
             cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
@@ -230,7 +230,7 @@ jobs:
       - connect_to_cf_api_cmd
       - push_zdt_cmd:
           environment: "SANDBOX"
-          application: "pr-${CIRCLE_PULL_REQUEST}-architecture-catalogue-sandbox"
+          application: "architecture-catalogue-sandbox--${CIRCLE_BRANCH}"
 
   staging-environment:
     executor: docker-executor
