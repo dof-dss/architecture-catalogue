@@ -45,7 +45,6 @@ commands:
     description: "Run unit tests"
     steps:
       # run tests with phpunit
-      - run: ls workspace
       - run: ./vendor/bin/phpunit
 
   build_cmd:
@@ -212,7 +211,8 @@ jobs:
       - attach_workspace:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/compiled_output.txt
-      - test_cmd
+      # run tests with phpunit
+      - run: ./vendor/bin/phpunit
 
   deploy:
     executor: docker-executor
