@@ -45,7 +45,7 @@ commands:
     description: "Run unit tests"
     steps:
       # run tests with phpunit
-      - run: ls
+      - run: ls workspace
       - run: ./vendor/bin/phpunit
 
   build_cmd:
