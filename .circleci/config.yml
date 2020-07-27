@@ -50,6 +50,7 @@ commands:
       - install_node_components_cmd
       - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
+      - run: ./vendor/phpunit
 
   install_cmd:
     description: "Install Cloud Foundry CLI"
@@ -224,6 +225,3 @@ workflows:
   build-and-test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
