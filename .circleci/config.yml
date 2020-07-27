@@ -199,14 +199,13 @@ jobs:
 
   test:
     executor: docker-executor
-    working_directory: ~/repo
     steps:
       - run: echo Test step
       - attach_workspace:
           at: ~/repo/workspace
-      - run: ls ~/repo/workspace/compiled_output.txt
+      - run: ls ~/workspace/compiled_output.txt
       # run tests with phpunit
-      - run: ls ~/repo
+      - run: ./vendor/bin/phpunit
 
   deploy:
     executor: docker-executor
@@ -225,3 +224,8 @@ workflows:
     jobs:
       - build:
           context: build-test
+
+      - test:
+          context: build-test
+          requires:
+            - build
