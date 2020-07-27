@@ -1,4 +1,4 @@
-# NICS Architecture Catalogue
+# NICS Architecture Catalogue [![CircleCI](https://circleci.com/gh/dof-dss/architecture-catalogue.svg?style=svg)](https://circleci.com/gh/dof-dss/architecture-catalogue)
 
 ![screen shot of application home page](screenshot.png)
 
