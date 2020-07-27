@@ -191,70 +191,46 @@ executors:
         - image: 'circleci/node:10'
 
 jobs:
-  test-with-docker:
+  build:
     executor: docker-executor
+    working_directory: ~/repo
     steps:
+      -run: echo Build step
       - build_cmd
+      - run: mkdir build_output
+      - run: touch build_output/compiled_output.txt
+      - persist_to_workspace:
+          root: build_output
+          paths:
+            - '*'
+
+  test:
+    executor: docker-executor
+    working_directory: ~/repo
+    steps:
+      - run echo Test step
+      - attach_workspace:
+          at: ~/repo/workspace
+      -run: ls ~/repo/workspace/compiled_output.txt
       - test_cmd
 
-  deploy-to-govuk-space:
-    description: "Deploy to GOV.UK PaaS"
-    parameters:
-      target:
-        type: string
+  deploy:
     executor: docker-executor
+    working_directory: ~/repo
+    parameters:
+      space:
+        type: string
     steps:
-      # build the application
-      - build_cmd
+      - run echo Deploy step
+      - attach_workspace:
+          at: ~/repo/workspace
+      -run: ls ~/repo/workspace/compiled_output.txt
 
-      # install the CF CLI
-      - install_cmd
-
-      # push the application to GOV.UK PaaS
-      - push_zdt_cmd:
-          environment: << parameters.target >>
 
 workflows:
-  deploy-to-govuk:
+  build-and-test:
     jobs:
-      - test-with-docker:
-          context: build-test
-          filters:    # all tags and all branches
-            tags:
-              only: /.*/
-
-      - deploy-to-govuk-space:
-          target: "SANDBOX"
+      - build:
+      -test:
           requires:
-            - test-with-docker
-          filters:    # all tags and selected branches
-            tags:
-              only: /.*/
-            branches:
-              only:
-                - /feature-.*/
-                - /bugfix-.*/
-                - /hotfix-.*/
-          context: govuk-paas-sandbox
-
-      - deploy-to-govuk-space:
-          target: "STAGING"
-          requires:
-            - test-with-docker
-          filters:    # selected tags and no branches
-            tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha)?$/
-            branches:
-              ignore: /.*/
-          context: govuk-paas-staging
-
-      - deploy-to-govuk-space:
-          target: "PROD"
-          requires:
-            - test-with-docker
-          filters:    # selected tags and no branches
-            tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(beta|prod))?$/
-            branches:
-              ignore: /.*/
-          context: govuk-paas-production
+            - build
