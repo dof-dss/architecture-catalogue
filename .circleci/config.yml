@@ -266,7 +266,7 @@ workflows:
               ignore:
                 - master
             tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha|beta)?$/
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
 
       - deploy:
           context: govuk-paas-prod
