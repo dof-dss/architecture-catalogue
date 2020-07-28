@@ -216,11 +216,23 @@ jobs:
     executor: php-executor
     steps:
       - run: echo staging-environment step
+      - build_cmd
+      - install_cf_cli_cmd
+      - connect_to_cf_api_cmd
+      - push_cmd:
+          environment: "STAGING"
+          application: "architecture-catalogue-staging--${CIRCLE_BRANCH}"
 
   deploy:
     executor: php-executor
     steps:
       - run: echo deploy step
+      - build_cmd
+      - install_cf_cli_cmd
+      - connect_to_cf_api_cmd
+      - push_cmd:
+          environment: "PROD"
+          application: "architecture-catalogue-prod"
 
 workflows:
   # only branches with pull requests will trigger workflows
@@ -252,7 +264,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - /.*/
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha|beta)?$/
 
