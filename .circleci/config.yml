@@ -136,24 +136,29 @@ commands:
             cf set-env "<< parameters.application >>" SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
 
   push_cmd:
+    #
+    # needs to be updated
+    #
     description: "Standard deployment"
     parameters:
       environment:
+        type: string
+      application:
         type: string
     steps:
       - run:
           command: |
             # build the application but don't start it
-            cf push --no-start -f "${CF_MANIFEST_FILE}"
+            cf push << parameters.application >> --no-start -f "${CF_MANIFEST_FILE}"
 
       - set_env_cmd:
           environment:  << parameters.environment >>
-          application: "<< parameters.environment >>_APP_NAME"
+          application: << parameters.application >>
 
       - run:
           command: |
             # start the application
-            cf start "${<< parameters.environment >>_APP_NAME}"
+            cf start << parameters.application >>
 
   push_zdt_cmd:
     description: "Zero downtime deployment"
@@ -181,7 +186,10 @@ commands:
             cf v3-zdt-push << parameters.application >> --wait-for-deploy-complete
 
 executors:
-    docker-executor:
+    php-executor:
+      docker:
+        - image: circleci/php:7.3-node-browsers
+    test-executor:
       docker:
         - image: circleci/php:7.3-node-browsers
         - image: elastic/elasticsearch:7.6.2
@@ -199,7 +207,7 @@ executors:
 
 jobs:
   build:
-    executor: docker-executor
+    executor: test-executor
     steps:
       - run: echo Build step
       - build_cmd
@@ -209,7 +217,7 @@ jobs:
             - .
 
   test:
-    executor: docker-executor
+    executor: test-executor
     steps:
       - install_php_extensions_cmd
       # reuse the workspace from the build job
@@ -219,23 +227,23 @@ jobs:
       - test_cmd
 
   sandbox-environment:
-    executor: docker-executor
+    executor: php-executor
     steps:
       - run: echo sandbox-environment step
       - build_cmd
       - install_cf_cli_cmd
       - connect_to_cf_api_cmd
-      - push_zdt_cmd:
+      - push_cmd:
           environment: "SANDBOX"
           application: "architecture-catalogue-sandbox--${CIRCLE_BRANCH}"
 
   staging-environment:
-    executor: docker-executor
+    executor: php-executor
     steps:
       - run: echo staging-environment step
 
   deploy:
-    executor: docker-executor
+    executor: php-executor
     steps:
       - run: echo deploy step
 
@@ -259,6 +267,8 @@ workflows:
             branches:
               ignore:
                 - master
+            tags:
+              only: /.*/
 
       - staging-environment:
           context: govuk-paas-staging
@@ -268,6 +278,8 @@ workflows:
             branches:
               ignore:
                 - master
+            tags:
+              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-alpha|beta)?$/
 
       - deploy:
           context: govuk-paas-prod
@@ -277,3 +289,5 @@ workflows:
             branches:
               only:
                 - master
+            tags:
+              only: /.*/
