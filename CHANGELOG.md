@@ -1,3 +1,8 @@
+## 1.0.9-alpha (July 28, 2020)
+  - Refine filters
+  - Fix incorrect regex
+  - Change to ignore master on deployment to staging
+
 ## 1.0.8-beta (July 28, 2020)
   - Deploy to staging on specific tags
 
