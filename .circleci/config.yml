@@ -160,31 +160,6 @@ commands:
             # start the application
             cf start << parameters.application >>
 
-  push_zdt_cmd:
-    description: "Zero downtime deployment"
-    parameters:
-      environment:
-        type: string
-      application:
-        type: string
-    steps:
-      - run:
-          command: |
-            # create the application
-            cf v3-create-app << parameters.application >>
-
-            # apply the manifest file to the application
-            cf v3-apply-manifest -f "${CF_MANIFEST_FILE}"
-
-      - set_env_cmd:
-          environment: << parameters.environment >>
-          application: << parameters.application >>
-
-      - run:
-          command: |
-            # push a zero downtime version of the application
-            cf v3-zdt-push << parameters.application >> --wait-for-deploy-complete
-
 executors:
     php-executor:
       docker:
