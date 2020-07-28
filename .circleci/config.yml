@@ -251,6 +251,7 @@ workflows:
           requires:
             - test
           filters:
+            # run on all branches except master and all tags
             branches:
               ignore:
                 - master
@@ -262,9 +263,10 @@ workflows:
           requires:
             - test
           filters:
+            # run on tags only
             branches:
               ignore:
-                - master
+                - /.*/
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
 
@@ -273,6 +275,7 @@ workflows:
           requires:
             - test
           filters:
+            # run on master branch only with any tag
             branches:
               only:
                 - master
