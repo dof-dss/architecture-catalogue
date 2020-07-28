@@ -1,3 +1,6 @@
+## 1.0.10-alpha (July 28, 2020)
+
+
 ## 1.0.9-alpha (July 28, 2020)
   - Refine filters
   - Fix incorrect regex
