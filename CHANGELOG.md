@@ -1,3 +1,6 @@
+## 1.0.8-beta (July 28, 2020)
+  - Deploy to staging on specific tags
+
 ## 1.0.7-beta (July 28, 2020)
   - Remove white space
   - Add pull requests link and conditional rendering
