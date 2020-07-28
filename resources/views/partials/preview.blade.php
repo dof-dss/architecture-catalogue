@@ -1,4 +1,4 @@
-@if (config ('circleci.branch') != 'master')
+@if (config('circleci.branch') != 'master')
 <div class="govuk-phase-banner">
     <p class="govuk-phase-banner__content">
         <strong class="govuk-tag govuk-tag--red" style="margin: 5px 10px;">Preview</strong>
