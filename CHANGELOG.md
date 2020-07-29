@@ -1,3 +1,6 @@
+## 1.0.11-alpha (July 29, 2020)
+  - Prevent CI being triggered on commit of changes to CHANGELOG and VERSION
+
 ## 1.0.10-alpha (July 28, 2020)
 
 
