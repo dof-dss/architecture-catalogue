@@ -1,3 +1,73 @@
+## 1.0.11-alpha (July 29, 2020)
+  - Prevent CI being triggered on commit of changes to CHANGELOG and VERSION
+
+## 1.0.10-alpha (July 28, 2020)
+
+
+## 1.0.9-alpha (July 28, 2020)
+  - Refine filters
+  - Fix incorrect regex
+  - Change to ignore master on deployment to staging
+
+## 1.0.8-beta (July 28, 2020)
+  - Deploy to staging on specific tags
+
+## 1.0.7-beta (July 28, 2020)
+  - Remove white space
+  - Add pull requests link and conditional rendering
+  - Add preview banner
+  - Remove experimental zero downtime push command [skip ci]
+  - Update push_cmd
+  - Run fresh build
+  - Update set_env_cmd
+  - Snadbox config 4
+  - Sandbox config 3
+  - Build sandbox config 2
+  - Merge branch 'circleci-enhancements' of https://github.com/dof-dss/architecture-catalogue into circleci-enhancements
+  - Build sandbox config
+  - Merge branch 'master' into circleci-enhancements
+  - Remove unit tests from build_cmd
+  - Install pdo on test
+  - Test on build
+  - fix syntax error
+  - Remove tests from build command
+  - Fix executor
+  - Revert to docker-executor
+  - Add attach cmd
+  - Experimental use of image
+  - Simplify
+  - Experimental path
+  - Try different paths parameter
+  - Fix syntax errors
+  - Try alternate paths
+  - Try another path
+  - Experiment with different path
+  - Try different path
+  - Add in working directory
+  - Fix syntx errors
+  - Fix syntax
+  - Move context into workflow
+  - Add in context to pickup environment variables
+  - Remove working directory
+  - Fix phpunit path
+  - Experiment remove test
+  - View repo directory
+  - View home directory
+  - test ls command
+  - Experimental ls commands
+  - Remove test command and move to job
+  - Add ls on workspace directory
+  - Add ls command to determine current path
+  - Update phpunit path
+  - Update path to phpunit
+  - Add missing touch command
+  - Add database migrations to build command
+  - Update database path
+  - Fix more syntax errors
+  - Fix syntax error
+  - First test of using workspaces in CircleCI
+  - Add CircleCI status badge
+
 ## 1.0.6-beta (July 27, 2020)
 
 

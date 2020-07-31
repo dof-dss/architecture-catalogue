@@ -177,6 +177,16 @@
   }
 }
 
+.govuk-list--spaced > li {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-list--spaced > li {
+    margin-bottom: 15px;
+  }
+}
+
 .govuk-template {
   background-color: #f3f2f1;
   -webkit-text-size-adjust: 100%;
@@ -1017,7 +1027,8 @@
 
 .govuk-width-container {
   max-width: 960px;
-  margin: 0 15px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 @supports (margin: max(calc(0px))) {
@@ -1029,7 +1040,8 @@
 
 @media (min-width: 40.0625em) {
   .govuk-width-container {
-    margin: 0 30px;
+    margin-right: 30px;
+    margin-left: 30px;
   }
 
 @supports (margin: max(calc(0px))) {
@@ -1042,12 +1054,14 @@
 
 @media (min-width: 1020px) {
   .govuk-width-container {
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
   }
 
 @supports (margin: max(calc(0px))) {
     .govuk-width-container {
-      margin: 0 auto;
+      margin-right: auto;
+      margin-left: auto;
     }
 }
 }
@@ -1072,8 +1086,36 @@
 }
 
 .govuk-accordion__section-heading {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.1111111111;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+@media print {
+  .govuk-accordion__section-heading {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-accordion__section-heading {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .govuk-accordion__section-heading {
+    font-size: 18pt;
+    line-height: 1.15;
+  }
 }
 
 .govuk-accordion__section-button {
@@ -1404,30 +1446,41 @@
 }
 
 .govuk-back-link[href] {
-  border-bottom: 1px solid #0b0c0c;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .govuk-back-link[href]:focus {
-  border-bottom-color: transparent;
+  text-decoration: none;
+}
+
+.govuk-back-link[href]:focus:before {
+  border-color: #0b0c0c;
 }
 
 .govuk-back-link:before {
-  display: block;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  -webkit-clip-path: polygon(0% 50%, 100% 100%, 100% 0%);
-  clip-path: polygon(0% 50%, 100% 100%, 100% 0%);
-  border-width: 5px 6px 5px 0;
-  border-right-color: inherit;
   content: "";
+  display: block;
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 3px;
+  width: 7px;
+  height: 7px;
+  margin: auto 0;
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  border: solid;
+  border-width: 1px 1px 0 0;
+  border-color: #626a6e;
+}
+
+.govuk-back-link:after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  right: 0;
+  bottom: -14px;
   left: 0;
-  margin: auto;
 }
 
 .govuk-breadcrumbs {
@@ -1553,6 +1606,27 @@
   .govuk-breadcrumbs__link:active,
   .govuk-breadcrumbs__link:focus {
     color: #000000;
+  }
+}
+
+@media (max-width: 40.0525em) {
+  .govuk-breadcrumbs--collapse-on-mobile .govuk-breadcrumbs__list-item {
+    display: none;
+  }
+
+  .govuk-breadcrumbs--collapse-on-mobile .govuk-breadcrumbs__list-item:first-child,
+  .govuk-breadcrumbs--collapse-on-mobile .govuk-breadcrumbs__list-item:last-child {
+    display: inline-block;
+  }
+
+  .govuk-breadcrumbs--collapse-on-mobile .govuk-breadcrumbs__list-item:before {
+    top: 6px;
+    margin: 0;
+  }
+
+  .govuk-breadcrumbs--collapse-on-mobile .govuk-breadcrumbs__list {
+    display: -webkit-box;
+    display: flex;
   }
 }
 
@@ -1763,7 +1837,6 @@
   margin-left: 5px;
   vertical-align: middle;
   flex-shrink: 0;
-  -webkit-align-self: center;
   align-self: center;
 }
 
@@ -2428,6 +2501,68 @@
   .govuk-checkboxes--small .govuk-checkboxes__item:hover .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
     box-shadow: 0 0 0 3px #ffdd00;
   }
+}
+
+.govuk-textarea {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  margin-bottom: 20px;
+  padding: 5px;
+  resize: vertical;
+  border: 2px solid #0b0c0c;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+@media print {
+  .govuk-textarea {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-textarea {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .govuk-textarea {
+    font-size: 14pt;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-textarea {
+    margin-bottom: 30px;
+  }
+}
+
+.govuk-textarea:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px;
+}
+
+.govuk-textarea--error {
+  border: 4px solid #d4351c;
+}
+
+.govuk-textarea--error:focus {
+  border-color: #0b0c0c;
+  box-shadow: none;
 }
 
 .govuk-character-count {
@@ -3171,18 +3306,6 @@
   background-color: #ffdd00;
   box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
   text-decoration: none;
-}
-
-.govuk-footer__inline-list .govuk-footer__link,
-.govuk-footer__list .govuk-footer__link {
-  text-decoration: none;
-}
-
-.govuk-footer__inline-list .govuk-footer__link:hover:not(:focus),
-.govuk-footer__inline-list .govuk-footer__link:active:not(:focus),
-.govuk-footer__list .govuk-footer__link:hover:not(:focus),
-.govuk-footer__list .govuk-footer__link:active:not(:focus) {
-  text-decoration: underline;
 }
 
 .govuk-footer__section-break {
@@ -4034,6 +4157,51 @@
   background-color: #626a6e;
 }
 
+.govuk-tag--grey {
+  color: #454a4d;
+  background: #eff0f1;
+}
+
+.govuk-tag--purple {
+  color: #3d2375;
+  background: #dbd5e9;
+}
+
+.govuk-tag--turquoise {
+  color: #10403c;
+  background: #bfe3e0;
+}
+
+.govuk-tag--blue {
+  color: #144e81;
+  background: #d2e2f1;
+}
+
+.govuk-tag--yellow {
+  color: #594d00;
+  background: #fff7bf;
+}
+
+.govuk-tag--orange {
+  color: #6e3619;
+  background: #fcd6c3;
+}
+
+.govuk-tag--red {
+  color: #942514;
+  background: #f6d7d2;
+}
+
+.govuk-tag--pink {
+  color: #80224d;
+  background: #f7d7e6;
+}
+
+.govuk-tag--green {
+  color: #005a30;
+  background: #cce2d8;
+}
+
 .govuk-phase-banner {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4864,68 +5032,6 @@
   text-align: left;
 }
 
-.govuk-textarea {
-  font-family: "Inter", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.25;
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  min-height: 40px;
-  margin-bottom: 20px;
-  padding: 5px;
-  resize: vertical;
-  border: 2px solid #0b0c0c;
-  border-radius: 0;
-  -webkit-appearance: none;
-}
-
-@media print {
-  .govuk-textarea {
-    font-family: sans-serif;
-  }
-}
-
-@media (min-width: 40.0625em) {
-  .govuk-textarea {
-    font-size: 19px;
-    font-size: 1.1875rem;
-    line-height: 1.25;
-  }
-}
-
-@media print {
-  .govuk-textarea {
-    font-size: 14pt;
-    line-height: 1.25;
-  }
-}
-
-@media (min-width: 40.0625em) {
-  .govuk-textarea {
-    margin-bottom: 30px;
-  }
-}
-
-.govuk-textarea:focus {
-  outline: 3px solid #ffdd00;
-  outline-offset: 0;
-  box-shadow: inset 0 0 0 2px;
-}
-
-.govuk-textarea--error {
-  border: 4px solid #d4351c;
-}
-
-.govuk-textarea--error:focus {
-  border-color: #0b0c0c;
-  box-shadow: none;
-}
-
 .govuk-warning-text {
   position: relative;
   margin-bottom: 20px;
@@ -5087,6 +5193,12 @@
 
 .govuk-\!-display-none {
   display: none !important;
+}
+
+@media print {
+  .govuk-\!-display-none-print {
+    display: none !important;
+  }
 }
 
 .govuk-\!-margin-0 {
@@ -6862,7 +6974,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Thin-BETA.woff2?be75564b3b35a82591e995ffdfa47408") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Thin-BETA.woff?a493fa52cdfc2741c36e6c8f984ee229") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Thin.woff2?850febbe5e8a7625c5603061d2e7c0ce") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Thin.woff?ead42837911f0b55b0877c12b50d9157") format("woff");
 }
 
 @font-face {
@@ -6870,7 +6982,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 100;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ThinItalic-BETA.woff2?3c5ed4d1fb43043ca25100ff59482c6c") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ThinItalic-BETA.woff?6ec9551d14f9ab7e95826f425af16f83") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ThinItalic.woff2?e08d9b2a5079b81cc39804c2a7406254") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ThinItalic.woff?a76db06556290ed3bd198a72b24d8006") format("woff");
 }
 
 @font-face {
@@ -6878,7 +6990,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLight-BETA.woff2?9c975ca07fb46a3c901c99d44bd87e96") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLight-BETA.woff?caa9496d52ea322f62f31d110cc40ff3") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLight.woff2?4d9f96f8504cd034ef7e5f25434ca550") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLight.woff?4bd040df09ea4765148b5743b8493e5f") format("woff");
 }
 
 @font-face {
@@ -6886,7 +6998,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 200;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLightItalic-BETA.woff2?29e85e0f2ebb185a7905e73e185dfec3") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLightItalic-BETA.woff?d5ea7660e8597280b21d6f106e69117b") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLightItalic.woff2?54d3d9a59ea904ebd11c3ac308893bfb") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraLightItalic.woff?84c26656e02913a54131fc64431212ae") format("woff");
 }
 
 @font-face {
@@ -6894,7 +7006,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Light-BETA.woff2?5f9d6b274506c531a7a4f3576b9028f5") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Light-BETA.woff?8a49915cef00ba4fbf0965e434cf7302") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Light.woff2?5baca21acf845c8e746f08675f40300b") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Light.woff?b9920de0749addeb5a53462fb5bbe070") format("woff");
 }
 
 @font-face {
@@ -6902,7 +7014,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 300;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-LightItalic-BETA.woff2?de358027eca6521e6238cc786f9794cb") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-LightItalic-BETA.woff?faed8782a08ab785d5955077fac81c9c") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-LightItalic.woff2?adc70179a9e60e14f2a4f7d106166004") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-LightItalic.woff?0555a46cda7fc3406a875d6bacf8fcff") format("woff");
 }
 
 @font-face {
@@ -6910,7 +7022,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Regular.woff2?77812e2fead777db0dc806b1eaabc7fd") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Regular.woff?41cd7069d7f578a69690178b818c0a2c") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Regular.woff2?4dd66a113d54a7f9a1ae913049610617") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Regular.woff?7c539936c4c8c822b59a1bcc6c08a6ec") format("woff");
 }
 
 @font-face {
@@ -6918,7 +7030,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Italic.woff2?449b5a389ef8e2a922fe903429f9bce3") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Italic.woff?c4d61b7aaa09d1f0cc71690530e06db2") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Italic.woff2?9528384cf7aebfa81a198626cb05f5e8") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Italic.woff?e4ad3666e223c64e4df963cec740bf09") format("woff");
 }
 
 @font-face {
@@ -6926,7 +7038,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Medium.woff2?900f31022873fa16552980d331bebfcc") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Medium.woff?592a30dc78f8586ad4149dfdc3f73312") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Medium.woff2?f6cf0a0bc5fce3307e2c426eb14eb752") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Medium.woff?7a8cc7241f766a142e15b2948804e547") format("woff");
 }
 
 @font-face {
@@ -6934,7 +7046,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 500;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-MediumItalic.woff2?1895fa296b41b175c1e0b6f16d8c11b1") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-MediumItalic.woff?afed191b3f657f213dc43df41b66ae37") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-MediumItalic.woff2?565a7104c497ccb1bf12832d8b341861") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-MediumItalic.woff?417907d2be56d39b2a9c0b52fc8a00e8") format("woff");
 }
 
 @font-face {
@@ -6942,7 +7054,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBold.woff2?3d011804596fb2ccde4af51830a9a7d5") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBold.woff?8a12c702fa5c5e3ceed33f78e72b9bee") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBold.woff2?dd8a55ef7058cdaeb96ef9fc65344726") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBold.woff?1db6c55ca0f2a97fbce3b0b3903a7bb7") format("woff");
 }
 
 @font-face {
@@ -6950,7 +7062,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 600;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBoldItalic.woff2?3d40b592122308268eae07459ebc75c3") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBoldItalic.woff?7e16c473347f1acd6221eaec489c5238") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBoldItalic.woff2?ac201e30486307c75c5038f61df9fd9f") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-SemiBoldItalic.woff?81678d1a50a895cc1232f3e287976083") format("woff");
 }
 
 @font-face {
@@ -6958,7 +7070,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Bold.woff2?741dc4163a97ffa354979f18802f6ca8") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Bold.woff?895ddea987172f5a34a727cb0b559c9d") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Bold.woff2?aed27700d84e327fda56b4a427b03061") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Bold.woff?79260e5b693fac2ee373b659f01a2bdf") format("woff");
 }
 
 @font-face {
@@ -6966,7 +7078,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 700;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-BoldItalic.woff2?54b68217be5ce710122515b508fd6ef4") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-BoldItalic.woff?86bc220a2b878b20bb7606811c4d10e0") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-BoldItalic.woff2?8ef77a031c5b96e53f2eeeb009232181") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-BoldItalic.woff?e0879d64763e509f309940120e7d1f5a") format("woff");
 }
 
 @font-face {
@@ -6974,7 +7086,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBold.woff2?3f65bd10dd37478e619a59dfd8014224") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBold.woff?568245cc11b37221aa856cad876b519c") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBold.woff2?92d16aee8fb5f5c5cfd660b2d07e1148") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBold.woff?38bc51bccb7dd07b2752c11888cbdc89") format("woff");
 }
 
 @font-face {
@@ -6982,7 +7094,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 800;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBoldItalic.woff2?0d568aaced11b81c3da287915625bb4a") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBoldItalic.woff?a7bb2060212befe6f0bc954cecdde11e") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBoldItalic.woff2?57ea76d011f6fff8cb7013b783bad58e") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-ExtraBoldItalic.woff?0e4b21ebad8d568078450713ee9339cf") format("woff");
 }
 
 @font-face {
@@ -6990,7 +7102,7 @@ table.user-list img.tick {
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Black.woff2?15c8274cf46185351ba7dfd8ae7aa934") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Black.woff?bfea424aef977f75612fdbaeb03ab5ee") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-Black.woff2?09f4068bb74fc78ffbce74f5596d6aa5") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-Black.woff?e37354838bf8078ac0d296217613533f") format("woff");
 }
 
 @font-face {
@@ -6998,7 +7110,7 @@ table.user-list img.tick {
   font-style: italic;
   font-weight: 900;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-BlackItalic.woff2?158fd1fdf9093a1763099184cc8a1686") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-BlackItalic.woff?20baa29a950b30d8d6dc1e89ab0741d9") format("woff");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-BlackItalic.woff2?daa1ca3cebd42cf5ebd53d9a6942b2cf") format("woff2"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-BlackItalic.woff?07e69b53f8cf91da94096d1abf484302") format("woff");
 }
 
 /* -------------------------------------------------------
@@ -7017,7 +7129,7 @@ Usage:
   font-style: normal;
   font-named-instance: "Regular";
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-upright.var.woff2?25582679cf3e50017fda8af7f39ef3f2") format("woff2 supports variations(gvar)"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-upright.var.woff2?25582679cf3e50017fda8af7f39ef3f2") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-upright.var.woff2?25582679cf3e50017fda8af7f39ef3f2") format("woff2");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-roman.var.woff2?90e8f61d26f65b5ff0acc45ddf6740ea") format("woff2 supports variations(gvar)"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-roman.var.woff2?90e8f61d26f65b5ff0acc45ddf6740ea") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-roman.var.woff2?90e8f61d26f65b5ff0acc45ddf6740ea") format("woff2");
 }
 
 @font-face {
@@ -7026,7 +7138,7 @@ Usage:
   font-style: italic;
   font-named-instance: "Italic";
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?f86d3fe239f6928e1584f3dd124cf1f8") format("woff2 supports variations(gvar)"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?f86d3fe239f6928e1584f3dd124cf1f8") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?f86d3fe239f6928e1584f3dd124cf1f8") format("woff2");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?2690e3c25733fb852b55b3f8d651a431") format("woff2 supports variations(gvar)"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?2690e3c25733fb852b55b3f8d651a431") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter-italic.var.woff2?2690e3c25733fb852b55b3f8d651a431") format("woff2");
 }
 
 /* --------------------------------------------------------------------------
@@ -7048,7 +7160,7 @@ explicitly, e.g.
   font-weight: 100 900;
   font-style: oblique 0deg 10deg;
   font-display: swap;
-  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter.var.woff2?feca908dc7ebf8f72dd124b1ca8c689f") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter.var.woff2?feca908dc7ebf8f72dd124b1ca8c689f") format("woff2");
+  src: url("/fonts/vendor/inter-ui/Inter (web)/Inter.var.woff2?4b976905f2be1cb9201f5d94afd9edd2") format("woff2-variations"), url("/fonts/vendor/inter-ui/Inter (web)/Inter.var.woff2?4b976905f2be1cb9201f5d94afd9edd2") format("woff2");
 }
 
 /*!
