@@ -146,8 +146,8 @@
               <h2 class="govuk-footer__heading govuk-heading-m">Related resources</h2>
               <ul class="govuk-footer__list govuk-footer__list--columns-1">
                   <li class="govuk-footer__list-item">
-                      <a class="govuk-footer__link" href="{{ config('app.architecture_portal_url') }}" target="_blank"  title="(external link opens in new window / tab)">
-                          Architecture Portal
+                      <a class="govuk-footer__link" href="{{ config('app.developer_portal_url') }}" target="_blank"  title="(external link opens in new window / tab)">
+                          Developer Portal
                       </a>
                   </li>
                   <li class="govuk-footer__list-item">
