@@ -278,7 +278,7 @@ return [
     | Links to other resources
     |
     */
-    'architecture_portal_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://portal.ea.digitlani.gov.uk'),
+    'developer_portal_url' => env('APP_URL_DEVELOPER_PORTAL', 'https://developer-portal.digitalni.gov.uk'),
     'ea_principles_url' => env('APP_URL_ARCHITECTURE_PORTAL', 'https://principles.ea.digitalni.gov.uk'),
     'citizen_services_architecture_url' => env('APP_URL_CITIZEN_SERVICES_ARCHITECTURE', 'https://docs.ea.digitalni.gov.uk'),
 
