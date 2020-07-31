@@ -232,7 +232,7 @@ jobs:
       - connect_to_cf_api_cmd
       - push_cmd:
           environment: "PROD"
-          application: "architecture-catalogue-prod"
+          application: "architecture-catalogue-production"
 
 workflows:
   # only branches with pull requests will trigger workflows
