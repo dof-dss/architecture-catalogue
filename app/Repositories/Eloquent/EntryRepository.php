@@ -22,38 +22,34 @@ class EntryRepository implements EntryRepositoryInterface
      *  Return a specific entry
      *  @param $id
      */
-    public function get($id): object
+    public function get($id): ?object
     {
-        $entry = Entry::findOrFail($id);
-
-        // audit the viewing of the entry
-        $actor_id = auth()->user()->id;
-        $actor = User::class;
-        // need to serialise the model
-        $before = Entry::removeHiddenAttributes($entry->getOriginal());
-        $after = Entry::removeHiddenAttributes($entry->getAttributes());
-        event(new ModelChanged(
-            $actor_id,
-            $actor,
-            Entry::class,
-            $before,
-            $after,
-            'viewed'
-        ));
-
+        $entry = Entry::find($id);
+        if ($entry) {
+            // audit the viewing of the entry
+            $actor_id = auth()->user()->id;
+            $actor = User::class;
+            // need to serialise the model
+            $before = Entry::removeHiddenAttributes($entry->getOriginal());
+            $after = Entry::removeHiddenAttributes($entry->getAttributes());
+            event(new ModelChanged(
+                $actor_id,
+                $actor,
+                Entry::class,
+                $before,
+                $after,
+                'viewed'
+            ));
+        }
         return $entry;
     }
 
     /**
      *
      */
-    public function all(): array
+    public function all(): object
     {
-        return array(
-            'href' => url()->current(),
-            'timestamp' => Carbon::now(),
-            'entries' => Entry::all()
-        );
+        return Entry::all();
     }
 
     /**

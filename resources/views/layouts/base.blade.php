@@ -98,6 +98,11 @@
                         Browse
                       </a>
                     </li>
+                    <li class="govuk-header__navigation-item {{ url()->current() == url('/api') ? 'govuk-header__navigation-item--active' : '' }}">
+                      <a class="govuk-header__link" href="/tokens">
+                        API
+                      </a>
+                    </li>
                     @if (auth()->user()->isAdmin())
                     <li class="govuk-header__navigation-item {{ url()->current() == url('/admin') ? 'govuk-header__navigation-item--active' : '' }}">
                       <a class="govuk-header__link" href="/admin">
@@ -216,6 +221,7 @@
   <script>
     window.GOVUKFrontend.initAll()
   </script>
+  @yield('javascript')
 </body>
 
 </html>

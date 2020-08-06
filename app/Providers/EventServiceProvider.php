@@ -44,6 +44,14 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\AuditModelChanges'
         ],
 
+        'App\Events\TokenAdded' => [
+            'App\Listeners\AuditModelChanges'
+        ],
+
+        'App\Events\TokenRevoked' => [
+            'App\Listeners\AuditModelChanges'
+        ]
+
     ];
 
     /**

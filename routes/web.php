@@ -94,16 +94,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //
     Route::group(['middleware' => ['is_admin']], function () {
         // menu
-        Route::get('/admin', 'AdminController@menu');
+        Route::get('admin', 'AdminController@menu');
         // users
-        Route::get('/users', 'UserController@index');
-        Route::get('/users/{user}/edit', 'UserController@edit');
-        Route::put('/users/{user}', 'UserController@update');
-        Route::get('/users/{user}/delete', 'UserController@delete');
-        Route::delete('/users/{user}', 'UserController@destroy');
+        Route::get('users', 'UserController@index');
+        Route::get('users/{user}/edit', 'UserController@edit');
+        Route::put('users/{user}', 'UserController@update');
+        Route::get('users/{user}/delete', 'UserController@delete');
+        Route::delete('users/{user}', 'UserController@destroy');
         // catalogues
-        Route::get('/catalogue/index', 'Catalogue\EntriesController@indexCatalogue');
-        Route::get('/catalogue/reindex', 'Catalogue\EntriesController@rebuildIndex');
+        Route::get('/atalogue/index', 'Catalogue\EntriesController@indexCatalogue');
+        Route::get('catalogue/reindex', 'Catalogue\EntriesController@rebuildIndex');
         if (App::environment('local')) {
             Route::get('catalogue/export', 'Catalogue\EntriesController@exportCatalogue');
             Route::post('catalogue/import', 'Catalogue\EntriesController@importCatalogue');
@@ -111,6 +111,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('catalogue/upload', 'Catalogue\EntriesController@uploadCatalogue');
         }
     });
+    //
+    // api tokens
+    //
+    Route::get('tokens', 'TokensController@index');
+    Route::get('tokens/create', 'TokensController@create');
+    Route::post('tokens', 'TokensController@store');
+    Route::get('tokens/{token}/revoke', 'TokensController@delete');
+    Route::delete('tokens/{token}', 'TokensController@destroy');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('home', 'HomeController@index')->name('home');
 });
