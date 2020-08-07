@@ -17,6 +17,6 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => ['api']], function () {
-    Route::resource('v1/entries', 'Catalogue\EntriesController', ['only' => ['index']]);
+Route::group(['middleware' => ['api', 'auth:sanctum']], function () {
+    Route::resource('v1/entries', 'Catalogue\EntriesController', ['only' => ['index', 'show']]);
 });

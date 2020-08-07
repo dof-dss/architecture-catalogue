@@ -45,10 +45,17 @@ class EntriesController extends Controller
      */
     public function index(Request $request)
     {
-        $catalogue_size = count($this->entryRepository->all());
         if ($request->is('api/*')) {
-            return response()->json(['error' => 'You are not authorised to access this API'], 403);
-            // return $this->entryRepository->all();
+            if ($request->user()->tokenCan('entry:index')) {
+                return array(
+                    'href' => url()->current(),
+                    'timestamp' => Carbon::now(),
+                    'entry_count' => $this->entryRepository->all()->count(),
+                    'entries' => $this->entryRepository->all()
+                );
+            } else {
+                return response()->json(['error' => 'You are not authorised to access this API'], 403);
+            }
         } else {
             // build up the filter criteria
             $criteria = [];
@@ -59,6 +66,7 @@ class EntriesController extends Controller
                     $criteria['status'] = $status;
                 }
             }
+            $catalogue_size = count($this->entryRepository->all());
             // search for an entry based on its category / sub-category
             $category_subcategory = null;
             if ($request->has('category_subcategory')) {
@@ -138,11 +146,30 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $entry = $this->entryRepository->get($id);
-        $labels = $this->statusRepository->labels();
-        return view('catalogue.view', compact('entry', 'labels'));
+        if ($request->is('api/*')) {
+            if ($request->user()->tokenCan('entry:view')) {
+                if ($entry = $this->entryRepository->get($id)) {
+                    return array(
+                        'href' => url()->current(),
+                        'timestamp' => Carbon::now(),
+                        'entry' => $entry
+                    );
+                } else {
+                    return response()->json(['error' => 'Entry does not exist'], 404);
+                }
+            } else {
+                return response()->json(['error' => 'You are not authorised to access this API'], 403);
+            }
+        } else {
+            if ($entry = $this->entryRepository->get($id)) {
+                $labels = $this->statusRepository->labels();
+                return view('catalogue.view', compact('entry', 'labels'));
+            } else {
+                abort(404);
+            }
+        }
     }
 
     /**
@@ -378,7 +405,7 @@ class EntriesController extends Controller
         $json = json_decode(Storage::disk('local')->get($path));
 
         // loop through all the entries and store in the database
-        foreach ($json->technology_applications_catalogue->entries as $json_entry) {
+        foreach ($json->entries as $json_entry) {
             // store the entry
             $entry = [];
             $entry['name'] = $json_entry->name;
@@ -400,8 +427,14 @@ class EntriesController extends Controller
      */
     public function exportCatalogue(Request $request)
     {
-        // need to name the array 'entries' to work with the architecture portal
-        $data = json_encode(array('entries' => $this->entryRepository->all()));
+        $data = json_encode(
+            array(
+              'href' => url()->current(),
+              'timestamp' => Carbon::now(),
+              'entry_count' => $this->entryRepository->all()->count(),
+              'entries' => $this->entryRepository->all()
+            )
+        );
         $fileName = 'downloads/catalogue_' . time() . '.json';
         Storage::put($fileName, $data);
         return Storage::download($fileName, 'catalogue_' . time() . '.json');

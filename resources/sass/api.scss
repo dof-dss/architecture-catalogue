@@ -1,0 +1,53 @@
+.api-key {
+  position: relative;
+  padding-bottom: 75px;
+  display: flex
+}
+
+@media (min-width:641px)
+{
+  .api-key__name {
+    font-size: 19px;
+    line-height: 1.31579
+  }
+}
+
+.api-key__name {
+  font-family: $govuk-font-family;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1.25;
+  margin-bottom: 5px;
+}
+
+@media (min-width:641px)
+{
+  .api-key__name {
+    font-size: 19px;
+    line-height: 1.31579
+  }
+}
+
+.api-key__key {
+  font-family: monospace;
+  font-size: 1.25em;
+  display: block;
+  padding: 0 0 10px 0;
+  margin: auto 0;
+  word-break: break-all;
+}
+
+.api-key__button--copy,
+.api-key__button--show {
+  position: absolute;
+  bottom: 2px;
+}
+.api-key__button--copy:active,
+.api-key__button--show:active {
+  top: auto
+}
+
+.bottom-gutter-2 {
+  margin-bottom: 60px
+}
