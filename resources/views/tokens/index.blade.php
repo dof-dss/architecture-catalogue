@@ -18,10 +18,13 @@
     <div class="govuk-grid-column-three-quarters">
         <h1 class="govuk-heading-l filter-heading">API integration</h1>
         <p class="govuk-body">
-            You can also access this catalogue using the API published on our <a class="govuk-link" href="https://developer-portal.ea.digitalni.gov.uk">developer portal</a>.
+            You can also get read only access to this catalogue using the API published on our <a class="govuk-link" href="https://developer-portal.ea.digitalni.gov.uk">developer portal</a>.
         </p>
         <p class="govuk-body">
            When you make an API request to the catalogue you must pass a personal access token in the Authorization header as a Bearer token. When you create a  token you will have one opportunity only to note its value, the value you see subsequently is a hashed value.
+        </p>
+        <p class="govuk-body">
+            To find out more about this API by please view the <a href="/api/documentation" class="govuk-link">OpenApi documentation</a>.
         </p>
         <h2 class="govuk-heading-m filter-heading">Personal Access Tokens</h2>
         @if ($user->tokens->count() > 0)

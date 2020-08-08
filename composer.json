@@ -10,6 +10,7 @@
     "require": {
         "php": "~7.3",
         "alphagov/notifications-php-client": "^3.0",
+        "darkaonline/l5-swagger": "^7.0",
         "doctrine/dbal": "^2.10",
         "elasticquent/elasticquent": "dev-master",
         "fideloper/proxy": "^4.0",

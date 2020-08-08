@@ -1,0 +1,278 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Architecture Catalogue API Documentation",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "ea-team@ea.finance-ni.gov.uk"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.11"
+    },
+    "servers": [
+        {
+            "url": "https://architecture-catalogue.test/api/v1",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/entries": {
+            "get": {
+                "tags": [
+                    "Entries"
+                ],
+                "summary": "Returns a list of catalogue entries",
+                "description": "Returns a list of catalogue entries",
+                "operationId": "getEntriesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntryResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            }
+        },
+        "/entries/{id}": {
+            "get": {
+                "tags": [
+                    "Entries"
+                ],
+                "summary": "Returns a catalogue entry",
+                "description": "Returns catalogue entry data",
+                "operationId": "getEntryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Entry id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntriesResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Entry does not exist"
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "EntriesResource": {
+                "title": "EntriesResource",
+                "description": "Entries resource",
+                "properties": {
+                    "href": {
+                        "title": "href",
+                        "description": "Resource URL",
+                        "type": "string",
+                        "example": "https://arhitecture-catalogue.test/api/v1/entries"
+                    },
+                    "timestamp": {
+                        "title": "TimeStamp",
+                        "description": "TimeStamp",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "entries": {
+                        "title": "Entries",
+                        "description": "Architecture Catalogue entries",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Entry"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EntriesResource"
+                }
+            },
+            "EntryResource": {
+                "title": "EntryResource",
+                "description": "Entry resource",
+                "properties": {
+                    "href": {
+                        "title": "href",
+                        "description": "Resource URL",
+                        "type": "string",
+                        "example": "https://arhitecture-catalogue.test/api/v1/entries/1"
+                    },
+                    "timestamp": {
+                        "title": "TimeStamp",
+                        "description": "TimeStamp",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "entry": {
+                        "title": "Entry",
+                        "description": "Architecture Catalogue Entry",
+                        "$ref": "#/components/schemas/Entry"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EntryResource"
+                }
+            },
+            "Entry": {
+                "title": "Entry",
+                "description": "Entry model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Unique identifier",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "href": {
+                        "title": "href",
+                        "description": "Product page URL",
+                        "type": "string",
+                        "example": "https://php.net"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the catalogue entry",
+                        "type": "string",
+                        "example": "PHP"
+                    },
+                    "version": {
+                        "title": "Version",
+                        "description": "Version of the catalogue entry",
+                        "type": "string",
+                        "example": "7.3.13"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Description of the catalogue entry",
+                        "type": "string",
+                        "example": "PHP is a popular general-purpose scripting language that is especially suited to web development"
+                    },
+                    "category": {
+                        "title": "Category",
+                        "description": "Catalogue entry category",
+                        "type": "string",
+                        "example": "Infrastructure Applications"
+                    },
+                    "sub_category": {
+                        "title": "Sub-category",
+                        "description": "Catalogue entry sub-category",
+                        "type": "string",
+                        "example": "Development Tools"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "description": "Catalogue entry status",
+                        "type": "string",
+                        "example": "Approved"
+                    },
+                    "functionality": {
+                        "title": "Functionality",
+                        "description": "Catalogue entry functionality",
+                        "type": "string",
+                        "example": "See https://www.php.net/docs.php"
+                    },
+                    "service_levels": {
+                        "title": "Service levels",
+                        "description": "Catalogue entry service levels",
+                        "type": "string",
+                        "example": "n/a"
+                    },
+                    "interfaces": {
+                        "title": "Interfaces",
+                        "description": "Catalogue entry interfaces",
+                        "type": "string",
+                        "example": "CLI"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "name_version": {
+                        "title": "Name and version",
+                        "description": "Catalogue entry name and version",
+                        "type": "string",
+                        "example": "PHP v7.3.13"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Entry"
+                }
+            }
+        },
+        "securitySchemes": {
+            "apiToken": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Architecture Catalogue",
+            "description": "API Endpoints of Architecture Catalogue"
+        }
+    ]
+}
