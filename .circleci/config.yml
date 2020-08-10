@@ -42,6 +42,11 @@ commands:
           paths:
             - node_modules
 
+  generate_swagger_documentation_cmd:
+    description: "Generate Swagger documentation pages"
+    steps:
+      - run: php artisan l5-swagger:generate
+
   build_cmd:
     description: "Install application"
     steps:
@@ -161,6 +166,8 @@ commands:
           command: |
             # start the application
             cf start << parameters.application >>
+
+      - generate_swagger_documentation_cmd
 
 executors:
     php-executor:

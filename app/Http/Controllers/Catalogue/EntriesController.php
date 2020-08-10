@@ -40,13 +40,8 @@ use App\Repositories\Interfaces\CategoriesRepositoryInterface as CategoriesRepos
  * )
  *
  * @OA\Server(
- *      url=L5_SWAGGER_CONST_HOST_LOCAL,
- *      description="Local API Server"
- * )
- *
- * @OA\Server(
- *      url=L5_SWAGGER_CONST_HOST_SANDBOX,
- *      description="Sandbox API Server"
+ *      url=L5_SWAGGER_CONST_HOST,
+ *      description="Demo API Server"
  * )
  *
  * @OA\Tag(
