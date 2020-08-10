@@ -50,7 +50,7 @@ use App\Repositories\Interfaces\CategoriesRepositoryInterface as CategoriesRepos
  * )
  *
  * @OA\SecurityScheme(
- *      securityScheme="apiToken",
+ *      securityScheme="Personal Access Token",
  *      scheme="bearer",
  *      type="http"
  * )
@@ -79,7 +79,7 @@ class EntriesController extends Controller
      *      tags={"Entries"},
      *      summary="Returns a list of catalogue entries",
      *      description="Returns a list of catalogue entries",
-     *      security={{"apiToken" : {}}},
+     *      security={{"Personal Access Token" : {}}},
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -212,7 +212,7 @@ class EntriesController extends Controller
       *      tags={"Entries"},
       *      summary="Returns a catalogue entry",
       *      description="Returns catalogue entry data",
-      *      security={{"apiToken" : {}}},
+      *      security={{"Personal Access Token" : {}}},
       *      @OA\Parameter(
       *          name="id",
       *          description="Entry id",

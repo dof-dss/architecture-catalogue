@@ -47,7 +47,7 @@
                 },
                 "security": [
                     {
-                        "apiToken": []
+                        "Personal Access Token": []
                     }
                 ]
             }
@@ -97,7 +97,7 @@
                 },
                 "security": [
                     {
-                        "apiToken": []
+                        "Personal Access Token": []
                     }
                 ]
             }
@@ -263,7 +263,7 @@
             }
         },
         "securitySchemes": {
-            "apiToken": {
+            "Personal Access Token": {
                 "type": "http",
                 "scheme": "bearer"
             }
