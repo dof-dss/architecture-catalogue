@@ -42,6 +42,11 @@ commands:
           paths:
             - node_modules
 
+  generate_swagger_documentation_cmd:
+    description: "Generate Swagger documentation pages"
+    steps:
+      - run: php artisan l5-swagger:generate
+
   build_cmd:
     description: "Install application"
     steps:
@@ -49,6 +54,7 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
+      - generate_swagger_documentation_cmd
 
   test_cmd:
     # can only be run after build_cmd
