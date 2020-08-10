@@ -14,6 +14,9 @@ use App\Exceptions\AuditException;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
+// needed for Swagger definition
+use App\Entry;
+
 // form requests
 use App\Http\Requests\StoreEntry;
 
@@ -21,6 +24,37 @@ use App\Http\Requests\StoreEntry;
 use App\Repositories\Interfaces\EntryRepositoryInterface as EntryRepository;
 use App\Repositories\Interfaces\StatusRepositoryInterface as StatusRepository;
 use App\Repositories\Interfaces\CategoriesRepositoryInterface as CategoriesRepository;
+
+/**
+ * @OA\Info(
+ *      version="1.0.11",
+ *      title="Architecture Catalogue API Documentation",
+ *      description="L5 Swagger OpenApi description",
+ *      @OA\Contact(
+ *          email="ea-team@ea.finance-ni.gov.uk"
+ *      ),
+ *      @OA\License(
+ *          name="Apache 2.0",
+ *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
+ *      )
+ * )
+ *
+ * @OA\Server(
+ *      url=L5_SWAGGER_CONST_HOST,
+ *      description="Demo API Server"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Architecture Catalogue",
+ *     description="API Endpoints of Architecture Catalogue"
+ * )
+ *
+ * @OA\SecurityScheme(
+ *      securityScheme="apiToken",
+ *      scheme="bearer",
+ *      type="http"
+ * )
+ */
 
 class EntriesController extends Controller
 {
@@ -37,6 +71,30 @@ class EntriesController extends Controller
         $this->statusRepository = $statusRepository;
         $this->categoriesRepository = $categoriesRepository;
     }
+
+    /**
+     * @OA\Get(
+     *      path="/entries",
+     *      operationId="getEntriesList",
+     *      tags={"Entries"},
+     *      summary="Returns a list of catalogue entries",
+     *      description="Returns a list of catalogue entries",
+     *      security={{"apiToken" : {}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/EntryResource")
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
 
     /**
      * Display a listing of the resource.
@@ -146,6 +204,48 @@ class EntriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     /**
+      * @OA\Get(
+      *      path="/entries/{id}",
+      *      operationId="getEntryById",
+      *      tags={"Entries"},
+      *      summary="Returns a catalogue entry",
+      *      description="Returns catalogue entry data",
+      *      security={{"apiToken" : {}}},
+      *      @OA\Parameter(
+      *          name="id",
+      *          description="Entry id",
+      *          required=true,
+      *          in="path",
+      *          @OA\Schema(
+      *              type="integer"
+      *          )
+      *      ),
+      *      @OA\Response(
+      *          response=200,
+      *          description="Successful operation",
+      *          @OA\JsonContent(ref="#/components/schemas/EntriesResource")
+      *       ),
+      *      @OA\Response(
+      *          response=400,
+      *          description="Bad Request"
+      *      ),
+      *      @OA\Response(
+      *          response=401,
+      *          description="Unauthenticated",
+      *      ),
+      *      @OA\Response(
+      *          response=403,
+      *          description="Forbidden"
+      *      ),
+      *      @OA\Response(
+      *          response=404,
+      *          description="Entry does not exist"
+      *      )
+      * )
+      */
+
     public function show(Request $request, $id)
     {
         if ($request->is('api/*')) {
