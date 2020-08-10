@@ -135,6 +135,7 @@ commands:
             cf set-env "<< parameters.application >>" NICS_EA_USAGE_TRACKING_API "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_API}"
             cf set-env "<< parameters.application >>" SESSION_DOMAIN "${<< parameters.environment >>_SESSION_DOMAIN}"
             cf set-env "<< parameters.application >>" SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
+            cf set-env "<< parameters.application >>" L5_SWAGGER_CONST_HOST "${<< parameters.environment >>_L5_SWAGGER_CONST_HOST}"
 
   push_cmd:
     #
