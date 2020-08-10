@@ -54,7 +54,6 @@ commands:
       - install_php_extensions_cmd
       - install_laravel_application_cmd
       - install_node_components_cmd
-      - generate_swagger_documentation_cmd
 
   test_cmd:
     # can only be run after build_cmd
@@ -163,6 +162,8 @@ commands:
           environment:  << parameters.environment >>
           application: << parameters.application >>
 
+      - generate_swagger_documentation_cmd
+      
       - run:
           command: |
             # start the application
