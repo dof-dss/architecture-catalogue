@@ -232,6 +232,7 @@ return [
     |--------------------------------------------------------------------------
      */
     'constants' => [
-        'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'https://architecture-catalogue-sandbox.london.cloudapps.digital/api/v1'),
+        'L5_SWAGGER_CONST_HOST_LOCAL' => env('L5_SWAGGER_CONST_HOST_LOCAL', 'https://architecture-catalogue.test/api/v1'),
+        'L5_SWAGGER_CONST_HOST_SANDBOX' => env('L5_SWAGGER_CONST_HOST_SANDBOX'),
     ],
 ];

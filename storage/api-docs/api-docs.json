@@ -15,7 +15,11 @@
     "servers": [
         {
             "url": "https://architecture-catalogue.test/api/v1",
-            "description": "Demo API Server"
+            "description": "Local API Server"
+        },
+        {
+            "url": "https://architecture-catalogue-sandbox.london.cloudapps.digital/api/v1",
+            "description": "Sandbox API Server"
         }
     ],
     "paths": {
