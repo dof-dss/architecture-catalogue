@@ -232,6 +232,8 @@ return [
     |--------------------------------------------------------------------------
      */
     'constants' => [
-        'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST'),
+        'L5_SWAGGER_LOCAL_HOST' => env('L5_SWAGGER_LOCAL_HOST', null),
+        'L5_SWAGGER_SANDBOX_HOST' => env('L5_SWAGGER_SANDBOX_HOST', null),
+        'L5_SWAGGER_PRODUCTION_HOST' => env('L5_SWAGGER_PRODUCTION_HOST', null),
     ],
 ];
