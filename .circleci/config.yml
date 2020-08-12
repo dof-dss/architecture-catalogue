@@ -274,8 +274,8 @@ workflows:
           filters:
             # run on all branches tags only
             branches:
-              only:
-                - /.*/
+              ignore:
+                - master
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
 
