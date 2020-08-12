@@ -9,7 +9,7 @@ namespace App\Swagger\Resources;
  *      tags={"Entries"},
  *      summary="Returns a list of catalogue entries",
  *      description="Returns a list of catalogue entries",
- *      security={{"API Token" : {}}},
+ *      security={{"Personal Access Token" : {}}},
  *      @OA\Response(
  *          response=200,
  *          description="Successful operation",
@@ -33,7 +33,7 @@ namespace App\Swagger\Resources;
   *      tags={"Entries"},
   *      summary="Returns a catalogue entry",
   *      description="Returns catalogue entry data",
-  *      security={{"API Token" : {}}},
+  *      security={{"Personal Access Token" : {}}},
   *      @OA\Parameter(
   *          name="id",
   *          description="Entry id",

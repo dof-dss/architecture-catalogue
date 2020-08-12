@@ -23,7 +23,7 @@ class EntriesResource
      *
      * @var string
      */
-    public $href;
+    private $href;
 
     /**
      * @OA\Property(

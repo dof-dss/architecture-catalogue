@@ -14,7 +14,11 @@
     },
     "servers": [
         {
-            "url": "https://architecture-catalogue-sandbox.london.cloudapps.digital/api/v1",
+            "url": "https://architecture-catalogue.test/api/v1",
+            "description": "Local development server (uses test data)"
+        },
+        {
+            "url": "https://catalogue-test.api.digitalni.gov.uk/v1",
             "description": "Sandbox server (uses test data)"
         }
     ],
@@ -47,7 +51,7 @@
                 },
                 "security": [
                     {
-                        "API Token": []
+                        "Personal Access Token": []
                     }
                 ]
             }
@@ -97,7 +101,7 @@
                 },
                 "security": [
                     {
-                        "API Token": []
+                        "Personal Access Token": []
                     }
                 ]
             }
@@ -263,10 +267,9 @@
             }
         },
         "securitySchemes": {
-            "API Token": {
-                "type": "apiKey",
-                "name": "x-api-key",
-                "in": "header"
+            "Personal Access Token": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     },

@@ -16,6 +16,10 @@ namespace App\Swagger\Resources;
  *      )
  * )
  *
+ * @OA\Server(
+ *      url=L5_SWAGGER_LOCAL_HOST,
+ *      description="Local development server (uses test data)"
+ * )
  *
  * @OA\Server(
  *      url=L5_SWAGGER_SANDBOX_HOST,
@@ -28,10 +32,11 @@ namespace App\Swagger\Resources;
  * )
  *
  *
+ * )
+ *
  * @OA\SecurityScheme(
- *      securityScheme="API Token",
- *      type="apiKey",
- *      in="header",
- *      name="x-api-key"
+ *      securityScheme="Personal Access Token",
+ *      type="http",
+ *      scheme="bearer"
  * )
  */
