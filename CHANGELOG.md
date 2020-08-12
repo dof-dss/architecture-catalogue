@@ -1,3 +1,7 @@
+## 1.1.1-alpha (August 12, 2020)
+  - Default to sandbox api server
+  - Remove skip ci directive
+
 ## 1.1.0-alpha (August 12, 2020)
   - Update server definitions for local and sandbox Swagger servers
   - Extract Swagger definitions to separate files
