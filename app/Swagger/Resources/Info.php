@@ -17,14 +17,16 @@ namespace App\Swagger\Resources;
  * )
  *
  * @OA\Server(
- *      url=L5_SWAGGER_LOCAL_HOST,
- *      description="Local development server (uses test data)"
- * )
- *
- * @OA\Server(
  *      url=L5_SWAGGER_SANDBOX_HOST,
  *      description="Sandbox server (uses test data)"
  * )
+ *
+ * @OA\Server(
+ *      url=L5_SWAGGER_LOCAL_HOST,
+ *      description="Local development required"
+ * )
+ *
+
  *
  * @OA\Tag(
  *     name="Architecture Catalogue",

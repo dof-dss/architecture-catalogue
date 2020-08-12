@@ -14,12 +14,12 @@
     },
     "servers": [
         {
-            "url": "https://architecture-catalogue.test/api/v1",
-            "description": "Local development server (uses test data)"
-        },
-        {
             "url": "https://catalogue-test.api.digitalni.gov.uk/v1",
             "description": "Sandbox server (uses test data)"
+        },
+        {
+            "url": "https://architecture-catalogue.test/api/v1",
+            "description": "Local development required (uses test data)"
         }
     ],
     "paths": {
