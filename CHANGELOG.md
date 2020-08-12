@@ -1,3 +1,34 @@
+## 1.1.0-alpha (August 12, 2020)
+  - Update server definitions for local and sandbox Swagger servers
+  - Extract Swagger definitions to separate files
+  - Add Swagger generation back into CircleCI config
+  - Remove generation of Swagger documentation
+  - Change apiToken to Personal Access Token
+  - Default Swagger server to sandbox
+  - Move swagger command in build_cmd
+  - Move generate_swagger_documentation_cmd into push_cmd
+  - Add command to generate Swagger documentation
+  - Add Swagger env to CircleCi config
+  - Add OpenApi documentation
+  - Merge pull request #243 from dof-dss/hotfix-npm-build
+  - Add npm build command
+  - Merge pull request #242 from dof-dss/hotfix-update-css
+  - Update CSS
+  - Merge pull request #241 from dof-dss/feature-secure-api
+  - Relates to #67
+  - Merge pull request #239 from dof-dss/feature-laravel-upgrade
+  - Missing upgrade to UI
+  - Merge pull request #238 from dof-dss/feature-laravel-upgrade
+  - Relates to #223
+  - Merge pull request #237 from dof-dss/bugfix-circleci-prod-app-name
+  - Merge branch 'master' into bugfix-circleci-prod-app-name
+  - Fix production application name
+  - Merge pull request #236 from dof-dss/bugfix-circleci-config
+  - Fix CircleCi context name
+  - Merge pull request #235 from dof-dss/bugfix-footer-links
+  - Update footer links
+  - Merge pull request #233 from dof-dss/circleci-enhancements
+
 ## 1.0.11-alpha (July 29, 2020)
   - Prevent CI being triggered on commit of changes to CHANGELOG and VERSION
 
