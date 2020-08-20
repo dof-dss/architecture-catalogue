@@ -232,6 +232,8 @@ return [
     |--------------------------------------------------------------------------
      */
     'constants' => [
-        'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+        'L5_SWAGGER_LOCAL_HOST' => env('L5_SWAGGER_LOCAL_HOST', 'https://architecture-catalogue.test/api/v1'),
+        'L5_SWAGGER_SANDBOX_HOST' => env('L5_SWAGGER_SANDBOX_HOST', 'https://catalogue-test.api.digitalni.gov.uk/v1'),
+        'L5_SWAGGER_PRODUCTION_HOST' => env('L5_SWAGGER_PRODUCTION_HOST', null),
     ],
 ];

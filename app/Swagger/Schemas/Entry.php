@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Schemas;
+namespace App\Swagger\Schemas;
 
 /**
  * @OA\Schema(

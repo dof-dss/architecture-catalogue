@@ -42,6 +42,11 @@ commands:
           paths:
             - node_modules
 
+  generate_swagger_documentation_cmd:
+    description: "Generate Swagger documentation pages"
+    steps:
+      - run: php artisan l5-swagger:generate
+
   build_cmd:
     description: "Install application"
     steps:
@@ -135,6 +140,7 @@ commands:
             cf set-env "<< parameters.application >>" NICS_EA_USAGE_TRACKING_API "${<< parameters.environment >>_NICS_EA_USAGE_TRACKING_API}"
             cf set-env "<< parameters.application >>" SESSION_DOMAIN "${<< parameters.environment >>_SESSION_DOMAIN}"
             cf set-env "<< parameters.application >>" SLACK_WEBHOOK_URL "${<< parameters.environment >>_SLACK_WEBHOOK_URL}"
+            cf set-env "<< parameters.application >>" L5_SWAGGER_CONST_HOST "${<< parameters.environment >>_L5_SWAGGER_CONST_HOST}"
 
   push_cmd:
     #
@@ -160,6 +166,8 @@ commands:
           command: |
             # start the application
             cf start << parameters.application >>
+
+      - generate_swagger_documentation_cmd
 
 executors:
     php-executor:
@@ -264,10 +272,10 @@ workflows:
           requires:
             - test
           filters:
-            # run on tags only
+            # run on all branches tags only
             branches:
               ignore:
-                - /.*/
+                - master
             tags:
               only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
 

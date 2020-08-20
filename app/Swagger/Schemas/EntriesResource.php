@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Resources;
+namespace App\Swagger\Schemas;
 
 /**
  * @OA\Schema(
@@ -23,7 +23,7 @@ class EntriesResource
      *
      * @var string
      */
-    public $href;
+    private $href;
 
     /**
      * @OA\Property(
@@ -45,7 +45,7 @@ class EntriesResource
      *
      * )
      *
-     * @var \App\Api\Schemas\Entry[]
+     * @var \App\Swagger\Schemas\Entry[]
      */
     private $entries;
 }
