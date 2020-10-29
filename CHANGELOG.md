@@ -1,3 +1,13 @@
+## 1.2.0 (October 29, 2020)
+  - Merge pull request #250 from dof-dss/whitesource/configure
+  - Add .whitesource configuration file
+  - Create codacy-analysis.yml
+  - Merge pull request #245 from dof-dss/feature-swagger-documentation
+  - Relates to #247
+  - Ensure master is ignored on tag based builds
+  - Fix build config for staging
+  - Merge pull request #244 from dof-dss/feature-swagger-documentation
+
 ## 1.1.1-alpha (August 12, 2020)
   - Default to sandbox api server
   - Remove skip ci directive
