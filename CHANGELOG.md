@@ -1,3 +1,6 @@
+## 1.2.1 (October 29, 2020)
+  - Update dependencies
+
 ## 1.2.0 (October 29, 2020)
   - Merge pull request #250 from dof-dss/whitesource/configure
   - Add .whitesource configuration file
