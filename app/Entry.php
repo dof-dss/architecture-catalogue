@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Elasticquent\ElasticquentTrait;
-use App\Traits\ElasticquentExtension;
+// use Elasticquent\ElasticquentTrait;
+// use App\Traits\ElasticquentExtension;
 // use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\AuditsActivity;
 
 class Entry extends Model
 {
-    use ElasticquentTrait;
-    use ElasticquentExtension;
+    // use ElasticquentTrait;
+    // use ElasticquentExtension;
     use AuditsActivity;
 
     // mass assignable attributes

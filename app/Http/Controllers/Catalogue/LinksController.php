@@ -64,11 +64,6 @@ class LinksController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
-        // check that an index exists
-        if (!$this->entryRepository->indexExists()) {
-            abort(500);
-            // could fall back to a SQL search?
-        }
         // validation
         if (!$request->has('entry_id')) {
             abort(404);
@@ -82,15 +77,11 @@ class LinksController extends Controller
         $entry_id = $request->entry_id;
         $entry = Entry::findOrFail($entry_id);
         $entry_description = $entry->name . ($entry->version ? '(' . $entry->version . ')' : '');
-        $hits = $this->entryRepository->complexSearch($request->phrase);
+        $hits = $this->entryRepository->find($request->phrase);
         // remove the current entry if it is present in the search results
-        $results = $hits->filter(function ($value, $key) use ($entry) {
+        $entries = $hits->filter(function ($value, $key) use ($entry) {
             return $value->name_version != $entry->name_version;
         });
-        $labels = $this->statusRepository->labels();
-        $catalogue_size = count($this->entryRepository->all());
-        $page_size = $this->entryRepository->calculatePageSize($results->count());
-        $entries = $results->sortBy('_score')->Paginate($page_size);
         $labels = $this->statusRepository->labels();
         return view('catalogue.links.results', compact('entry_id', 'entry_description', 'entries', 'labels'));
     }

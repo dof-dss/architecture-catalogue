@@ -39,7 +39,7 @@ class EntryObserver
     public function created(Entry $entry)
     {
         // add to the elasticsearch index
-        $entry->addToIndex();
+        // $entry->addToIndex();
     }
 
     /**
@@ -51,7 +51,7 @@ class EntryObserver
     public function updated(Entry $entry)
     {
         // update the elasticsearch index
-        $entry->updateIndex();
+        // $entry->updateIndex();
     }
 
     /**
@@ -63,7 +63,7 @@ class EntryObserver
     public function deleted(Entry $entry)
     {
         // delete from the elasticsearch index
-        $entry->removeFromIndex();
+        // $entry->removeFromIndex();
     }
 
     /**

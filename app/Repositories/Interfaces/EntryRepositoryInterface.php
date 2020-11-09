@@ -9,6 +9,7 @@ interface EntryRepositoryInterface
     public function all(): object;
     public function get($id): ?object;
     public function filter(array $criteria): object;
+    public function find($query, $sort, $order): object;
     public function create(array $data): int;
     public function update($id, array $data): void;
     public function delete($id): void;
