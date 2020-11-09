@@ -5,7 +5,6 @@ defaults: &defaults
   buildpack: php_buildpack
   services:
   - ea-mysql-service
-  - ea-es-service
   env:
     APP_DEBUG: ((APP_DEBUG))
     APP_ENV: ((APP_ENV))

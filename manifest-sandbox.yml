@@ -6,4 +6,3 @@ applications:
     buildpack: php_buildpack
     services:
     - ea-mysql-service
-    - ea-es-service
