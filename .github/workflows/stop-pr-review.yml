@@ -1,0 +1,33 @@
+name: Stop PR Review App
+env:
+  PR_SOURCE: ${{ github.head_ref }}
+on:
+  pull_request:
+    branches: main
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Get the source code from the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    # Deploy review app
+    - name: Delete review app
+      uses: citizen-of-planet-earth/cf-cli-action@master 
+      with:
+        cf_api: https://api.london.cloud.service.gov.uk
+        cf_username: ${{ secrets.SANDBOX_CF_USERNAME }}
+        cf_password: ${{ secrets.SANDBOX_CF_PASSWORD }}
+        cf_org: dof-dss
+        cf_space: Sandbox
+        command: delete -f architecture-catalogue-sandbox--$PR_SOURCE
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@master
+      with:
+        message: 'Review app: https://architecture-catalogue-sandbox--${{ github.head_ref }}.london.cloudapps.digital, has been removed. Reopen this pull request to redeploy review app'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
+      
