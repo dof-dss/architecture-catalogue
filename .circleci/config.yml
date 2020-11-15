@@ -264,20 +264,20 @@ workflows:
             branches:
               ignore:
                 - master
-            tags:
-              only: /.*/
+            # tags:
+            #   only: /.*/
 
-      - staging-environment:
-          context: govuk-paas-staging
-          requires:
-            - test
-          filters:
-            # run on all branches tags only
-            branches:
-              ignore:
-                - master
-            tags:
-              only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
+      # - staging-environment:
+      #     context: govuk-paas-staging
+      #     requires:
+      #       - test
+      #     filters:
+      #       # run on all branches tags only
+      #       branches:
+      #         ignore:
+      #           - master
+      #       tags:
+      #         only: /^v(0|[0-9]\d*)\.(0|[0-9]\d*)\.(0|[0-9]\d*)(?:-(alpha|beta))?$/
 
       - deploy:
           context: govuk-paas-production
@@ -288,5 +288,5 @@ workflows:
             branches:
               only:
                 - master
-            tags:
-              only: /.*/
+            # tags:
+            #   only: /.*/
