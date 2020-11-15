@@ -38,18 +38,4 @@
     </a>
 @endif
 
-<h3 class="govuk-heading-m">Indexing</h3>
-<div class="govuk-warning-text">
-    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-    <span class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Warning</span>
-        Building and re-building indexes may take some time and will depend on the size of the catalogue.
-    </span>
-</div>
-<a class="govuk-button govuk-button--secondary govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/index">
-    Build index
-</a>
-<a class="govuk-button govuk-button--warning govuk-!-margin-right-2" data-module="govuk-button" href="/catalogue/reindex">
-    Re-build index
-</a>
 @endsection

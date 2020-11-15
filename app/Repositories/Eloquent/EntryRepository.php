@@ -77,6 +77,32 @@ class EntryRepository implements EntryRepositoryInterface
     }
 
     /**
+     *  Search the catalogue using the search phrase provided
+     *  @param String $phrase
+     *  @return Collection
+     */
+    public function find($phrase, $sort = 'name_version', $order = 'asc'): object
+    {
+        //  try to match against the main attributes
+        $builder = Entry::where('name', 'like', '%' . $phrase . '%')
+                    ->orWhere('description', 'like', '%' . $phrase . '%')
+                    ->orWhere('category', 'like', '%' . $phrase . '%')
+                    ->orWhere('sub_category', 'like', '%' . $phrase . '%')
+                    ->orWhere('functionality', 'like', '%' . $phrase . '%')
+                    ->orWhere('service_levels', 'like', '%' . $phrase . '%')
+                    ->orWhere('interfaces', 'like', '%' . $phrase . '%');
+        $page_size = $this->calculatePageSize($builder->count());
+        if ($sort == 'name_version') {
+            return $builder->orderBy('name', $order, SORT_NATURAL|SORT_FLAG_CASE)
+                            ->orderBy('version', $order, SORT_NATURAL|SORT_FLAG_CASE)
+                            ->paginate($page_size);
+        } else {
+            return $builder->orderBy($sort, $order, SORT_NATURAL|SORT_FLAG_CASE)
+                            ->paginate($page_size);
+        }
+    }
+
+    /**
      *  Calculate page size to ensure there is a maximum of 5 pages
      *
      *  @param Integer $num_rows

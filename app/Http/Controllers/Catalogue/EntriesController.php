@@ -343,11 +343,6 @@ class EntriesController extends Controller
      */
     public function searchCatalogue(Request $request)
     {
-        // check that an index exists
-        if (!$this->entryRepository->indexExists()) {
-            abort(500);
-            // could fall back to a SQL search?
-        }
         // validation
         $request->validate([
           'phrase' => 'required|min:3'
@@ -365,16 +360,10 @@ class EntriesController extends Controller
         } else {
             $order = $request->has('order') ? $request->order : 'asc';
         }
-        // search using Elasticsearch
-        $results = $this->entryRepository->complexSearch($phrase);
+        $entries = $this->entryRepository->find($phrase, $sort, $order);
         $labels = $this->statusRepository->labels();
         $catalogue_size = count($this->entryRepository->all());
-        $page_size = $this->entryRepository->calculatePageSize($results->count());
-        if ($order == 'desc') {
-            $entries = $results->sortByDesc($sort, SORT_NATURAL|SORT_FLAG_CASE)->Paginate($page_size);
-        } else {
-            $entries = $results->sortBy($sort, SORT_NATURAL|SORT_FLAG_CASE)->Paginate($page_size);
-        }
+
         return view('catalogue.results', compact('entries', 'labels', 'catalogue_size', 'phrase', 'sort', 'order'));
     }
 

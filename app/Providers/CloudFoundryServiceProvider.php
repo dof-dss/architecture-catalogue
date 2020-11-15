@@ -30,17 +30,17 @@ class CloudFoundryServiceProvider extends ServiceProvider
             Config::set('database.connections.mysql.password', $mysqlConfig['password']);
 
             // Set the elasticsearch config
-            $esConfig = $config['elasticsearch'][0]['credentials'];
-            $hosts = [
-                [
-                    'host' => $esConfig['hostname'],
-                    'port' => $esConfig['port'],
-                    'scheme' => 'https',
-                    'user' => $esConfig['username'],
-                    'pass' => $esConfig['password']
-                ]
-            ];
-            Config::set('elasticquent.config.hosts', $hosts);
+            // $esConfig = $config['elasticsearch'][0]['credentials'];
+            // $hosts = [
+            //     [
+            //         'host' => $esConfig['hostname'],
+            //         'port' => $esConfig['port'],
+            //         'scheme' => 'https',
+            //         'user' => $esConfig['username'],
+            //         'pass' => $esConfig['password']
+            //     ]
+            // ];
+            // Config::set('elasticquent.config.hosts', $hosts);
         }
     }
 }
