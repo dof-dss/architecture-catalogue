@@ -36,7 +36,7 @@ commands:
             - node-v1-{{ checksum "package.json" }}
             - node-v1-
       - run: npm install
-      - run: npm run prod
+      - run: npm run production
       - save_cache:
           key: node-v1-{{ checksum "package.json" }}
           paths:
